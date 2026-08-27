@@ -1113,7 +1113,7 @@ function syncMedPrefs(){
   var comm=function(v){var e=document.querySelector('#comm_prefs input[value='+v+']');return !!(e&&e.checked);};
   var pref=function(v){var e=document.querySelector('#prefs_prefs input[value="'+v+'"]');return !!(e&&e.checked);};
   var setf=function(id,on){var e=document.getElementById(id); if(e) e.style.display=on?'block':'none';};
-  setf('p2_email', show&&pref('Email')&&!comm('Email'));
+  setf('p2_email', false);   /* email address is always collected in step 1 (mandatory) — never ask again */
   setf('p2_whatsapp', show&&pref('Whatsapp')&&!comm('Whatsapp'));
   setf('p2_phone', show&&pref('Phone')&&!comm('Phone'));
   setf('p2_sms', show&&pref('SMS')&&!comm('SMS'));
