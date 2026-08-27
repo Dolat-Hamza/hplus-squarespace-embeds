@@ -603,11 +603,26 @@
               </span>
             </label>
 
+            <label class="pharma-mini" id="pharmaMini">
+              <input type="radio" name="pharmacy_choice" value="no">
+              <span class="ctxt" data-i18n="pharmacy_other"></span>
+            </label>
             <div class="err-msg" id="pharmacyErr" data-i18n="err_pharmacy"></div>
 
-            <div id="deliveryPrefs" style="display:none">
+            <div id="altPharmacy" style="display:none;margin-top:14px">
+              <h4 class="section-head" data-i18n="alt_pharmacy_h"></h4>
+              <div class="field"><label data-i18n="pharm_name"></label><input type="text" id="chosen_pharmacy_name"></div>
+              <div class="field"><label data-i18n="pharm_street"></label><input type="text" id="chosen_pharmacy_street"></div>
+              <div class="two-col">
+                <div class="field"><label data-i18n="pharm_city"></label><input type="text" id="chosen_pharmacy_city"></div>
+                <div class="field"><label data-i18n="pharm_postcode"></label><input type="text" id="chosen_pharmacy_postcode"></div>
+              </div>
+            </div>
+
+            <div id="deliveryPrefs" style="display:none;margin-top:24px;padding-top:20px;border-top:1px solid var(--hair)">
               <h4 class="section-head" data-i18n="delivery_prefs_h"></h4>
               <div class="field"><label data-i18n="dp_street"></label><input type="text" id="delivery_street"></div>
+              <div class="field"><label data-i18n="dp_street2"></label><input type="text" id="delivery_street2"></div>
               <div class="two-col">
                 <div class="field"><label data-i18n="dp_postcode"></label><input type="text" id="delivery_postcode"></div>
                 <div class="field"><label data-i18n="dp_city"></label><input type="text" id="delivery_city"></div>
@@ -882,7 +897,7 @@ const I18N = {
     freechoice_p:"Sie haben das Recht, Ihre Apotheke frei zu wählen (§ 31 Abs. 1 SGB V). Die unten genannte Partnerapotheke ist lediglich ein unverbindliches Angebot. Sie sind nicht verpflichtet, diese zu nutzen, und können jederzeit eine andere Apotheke benennen oder die Apotheke wechseln – ohne Nachteile.",
     freechoice_h_at:"Freie Apothekenwahl in Österreich",
     freechoice_p_at:"Sie können Ihre Apotheke frei wählen. Die unten genannte Partnerapotheke ist ein unverbindliches Angebot. Sie können jederzeit eine andere Apotheke für den Abhol- und Lieferservice angeben – ohne Nachteile.",
-    pharmacy_q:"Ich bitte darum, dass mein Rezept zur Abgabe an eine der H+ Apotheken weitergeleitet wird bzw. eine solche Weiterleitung veranlasst wird.", pharmacy_hplus_generic:"H+ Partner Pharmacy Pick Up & Delivery Service", stock_tmpl:"%m auf Lager", pharma_list_link:"Hier finden Sie eine Liste der Partnerapotheken.", pharma_list_title:"Unsere Partnerapotheken", close_btn:"Schließen", delivery_prefs_h:"Lieferpräferenzen", dp_street:"Straße und Hausnummer", dp_postcode:"Postleitzahl", dp_city:"Ort", fc_agree:"Ich verstehe und möchte fortfahren.", fc_continue:"Weiter",
+    pharmacy_q:"Ich bitte darum, dass mein Rezept zur Abgabe an eine der H+ Apotheken weitergeleitet wird bzw. eine solche Weiterleitung veranlasst wird.", pharmacy_hplus_generic:"H+ Partner Pharmacy Pick Up & Delivery Service", stock_tmpl:"%m auf Lager", pharma_list_link:"Hier finden Sie eine Liste der Partnerapotheken.", pharma_list_title:"Unsere Partnerapotheken", close_btn:"Schließen", delivery_prefs_h:"Lieferadresse", dp_street:"Straße und Hausnummer", dp_street2:"Adresszusatz (optional)", dp_postcode:"Postleitzahl", dp_city:"Ort", fc_agree:"Ich verstehe und möchte fortfahren.", fc_continue:"Weiter",
     pharmacy_hplus:"H+ Apotheke – Abhol- und Lieferservice",
     pharma_badge:"Empfohlen",
     pharma_feat_delivery:"Abhol- und Lieferservice innerhalb von 48 Stunden",
@@ -1023,7 +1038,7 @@ const I18N = {
     freechoice_p:"You have the right to choose your pharmacy freely (§ 31 (1) SGB V). The partner pharmacy named below is merely a non-binding offer. You are not obliged to use it and may name a different pharmacy or switch pharmacies at any time – without any disadvantage.",
     freechoice_h_at:"Free choice of pharmacy in Austria",
     freechoice_p_at:"You may choose your pharmacy freely. The partner pharmacy below is a non-binding option. You may select a different pharmacy for the Pick Up and Delivery Service at any time, without disadvantage.",
-    pharmacy_q:"I request that my prescription be forwarded to one of the H+ pharmacies for dispensing, or that such forwarding be arranged.", pharmacy_hplus_generic:"H+ Partner Pharmacy Pick Up & Delivery Service", stock_tmpl:"%m in stock", pharma_list_link:"Here is a list of the partner pharmacies.", pharma_list_title:"Our partner pharmacies", close_btn:"Close", delivery_prefs_h:"Delivery preferences", dp_street:"Street and house number", dp_postcode:"Post code", dp_city:"City", fc_agree:"I understand and want to continue.", fc_continue:"Continue",
+    pharmacy_q:"I request that my prescription be forwarded to one of the H+ pharmacies for dispensing, or that such forwarding be arranged.", pharmacy_hplus_generic:"H+ Partner Pharmacy Pick Up & Delivery Service", stock_tmpl:"%m in stock", pharma_list_link:"Here is a list of the partner pharmacies.", pharma_list_title:"Our partner pharmacies", close_btn:"Close", delivery_prefs_h:"Delivery address", dp_street:"Street and house number", dp_street2:"Address line 2 (optional)", dp_postcode:"Post code", dp_city:"City", fc_agree:"I understand and want to continue.", fc_continue:"Continue",
     pharmacy_hplus:"H+ pharmacy – Pick Up and Delivery Service",
     pharma_badge:"Recommended",
     pharma_feat_delivery:"Pick Up and Delivery Service within 48 hours",
@@ -1209,6 +1224,8 @@ function updateConsentTexts(){
   $('pharmHplusTxt').textContent=t('pharmacy_hplus_generic');
   $('pharmStock').textContent=t('stock_tmpl').replace('%m',(HS.med&&HS.med.medicine)||'');
   $('deliveryPrefs').style.display=(showPharm && radio('pharmacy_choice')==='yes')?'block':'none';
+  { const alt=$('altPharmacy'); if(alt) alt.style.display=(showPharm && radio('pharmacy_choice')==='no')?'block':'none'; }
+  { const mini=$('pharmaMini'); if(mini) mini.classList.toggle('is-selected', radio('pharmacy_choice')==='no'); }
 }
 ['delivery_management','prescription_management','no_support','country'].forEach(id=>$(id).addEventListener('change',()=>{ syncOptions(); syncConsentVisibility(); }));
 $('delivery_consent').addEventListener('change',updateConsentTexts);
@@ -1219,6 +1236,17 @@ document.querySelectorAll('input[name=pharmacy_choice]').forEach(r=>r.addEventLi
   if(!yes) return;
   const paint=()=>{ $('pharmaHero').classList.toggle('is-selected',yes.checked); updateConsentTexts(); };
   yes.addEventListener('change',paint);
+  const no=document.querySelector('input[name="pharmacy_choice"][value="no"]');
+  const altM=$('altPharmacyModal');
+  if(no){
+    no.addEventListener('change',()=>{ paint(); if(no.checked && altM) altM.classList.add('open'); });
+    $('pharmaMini').addEventListener('click',()=>setTimeout(()=>{ if(no.checked && altM) altM.classList.add('open'); },0));
+  }
+  if(altM){
+    $('altpmYes').addEventListener('click',()=>{ yes.checked=true; yes.dispatchEvent(new Event('change',{bubbles:true})); altM.classList.remove('open'); });
+    $('altpmNo').addEventListener('click',()=>altM.classList.remove('open'));
+    altM.addEventListener('click',e=>{ if(e.target===altM) altM.classList.remove('open'); });
+  }
   const listM=$('pharmaListModal');
   $('pharmListLink').addEventListener('click',e=>{ e.preventDefault(); listM.classList.add('open'); });
   $('pharmListClose').addEventListener('click',()=>listM.classList.remove('open'));
@@ -1470,9 +1498,13 @@ function validateSub3(n){
     const bad=!checked('delivery_consent'); markInvalid($('deliveryConsentWrap'),bad); if(bad) ok=false;
     if((val('country')==='Deutschland'||val('country')==='Österreich') && checked('delivery_consent')){
       const ph=radio('pharmacy_choice');
-      showErr('pharmacyErr', ph!=='yes'); if(ph!=='yes') ok=false;
+      showErr('pharmacyErr', ph===''); if(ph==='') ok=false;
       if(ph==='yes'){
         ['delivery_street','delivery_postcode','delivery_city'].forEach(id=>{
+          if(val(id)===''){ const f=$(id).closest('.field'); f.classList.add('invalid'); ensureFmtErr(f,t('err_required')); ok=false; }
+        });
+      } else if(ph==='no'){
+        ['chosen_pharmacy_name','chosen_pharmacy_street','chosen_pharmacy_city','chosen_pharmacy_postcode'].forEach(id=>{
           if(val(id)===''){ const f=$(id).closest('.field'); f.classList.add('invalid'); ensureFmtErr(f,t('err_required')); ok=false; }
         });
       }
