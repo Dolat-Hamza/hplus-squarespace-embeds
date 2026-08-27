@@ -636,20 +636,6 @@
         </div>
 
         <!-- SUB 3.3 : PRESCRIPTION consent (own page) -->
-        <div class="sub3" id="sub33">
-          <h3 class="step-title" data-i18n="consent_page_h"></h3>
-          <p class="step-sub" data-i18n="consent_page_intro"></p>
-          <h5 class="consent-title" data-i18n="consent_hcp_title"></h5>
-          <a class="consent-link" href="/therapy-companion/terms-and-conditions" target="_blank" rel="noopener" data-i18n="hcp_terms_link"></a>
-          <div class="field" id="hcpConsentWrap">
-            <label class="choice"><input type="checkbox" id="hcp_consent"><span class="ctxt" data-i18n="agree_hcp"></span></label>
-            <div class="err-msg" data-i18n="err_hcp_consent"></div>
-          </div>
-          <div class="nav">
-            <button type="button" class="btn btn-ghost" id="s3back3" data-i18n="back"></button>
-            <button type="button" class="btn btn-primary" id="s3next3" data-i18n="next_generic"></button>
-          </div>
-        </div>
 
         <!-- SUB 3.4 : collect info (doctor) + callback fallback -->
         <div class="sub3" id="sub34">
@@ -945,7 +931,7 @@ const I18N = {
     success_p2:"Sie erhalten in Kürze eine Bestätigung an Ihre E-Mail-Adresse.",
     rv_about:"Über Sie", rv_edit:"Bearbeiten", rv_name:"Name", rv_role:"Rolle", rv_email:"E-Mail", rv_contact:"Kontakt via", rv_second:"Zweite Person", rv_no:"Nein",
     rv_med:"Ihre Medikation", rv_medication:"Medikament", rv_firstdose:"Erste Einnahme", rv_freq:"Check-in-Häufigkeit",
-    rv_delivery:"Abhol- und Lieferservice", rv_country:"Land", rv_support:"Unterstützung", rv_dash:"—",
+    rv_delivery:"Abhol- und Lieferservice", rv_country:"Land", rv_support:"Unterstützung", rv_address:"Lieferadresse", rv_dash:"—",
     sup_delivery:"Abhol- und Lieferservice", sup_rx:"Folge-Rezepte", sup_checkup:"Terminplanung", sup_none:"Aktuell keine", sup_callback:"Rückruf vereinbart"
   },
   en:{
@@ -1084,7 +1070,7 @@ const I18N = {
     success_p2:"You'll receive a confirmation at your email address shortly.",
     rv_about:"About you", rv_edit:"Edit", rv_name:"Name", rv_role:"Role", rv_email:"Email", rv_contact:"Contact via", rv_second:"Second person", rv_no:"No",
     rv_med:"Your medication", rv_medication:"Medication", rv_firstdose:"First dose", rv_freq:"Check-in frequency",
-    rv_delivery:"Pick Up and Delivery Service", rv_country:"Country", rv_support:"Support", rv_dash:"—",
+    rv_delivery:"Pick Up and Delivery Service", rv_country:"Country", rv_support:"Support", rv_address:"Delivery address", rv_dash:"—",
     sup_delivery:"Pick Up and Delivery Service", sup_rx:"Repeat prescriptions", sup_checkup:"Scheduling", sup_none:"None right now", sup_callback:"Callback arranged"
   }
 };
@@ -1257,7 +1243,7 @@ document.querySelectorAll('input[name=pharmacy_choice]').forEach(r=>r.addEventLi
   $('fcContinue').addEventListener('click',async ()=>{
     if(!$('fc_agree').checked){ markInvalid($('fcWrap'),true); return; }
     markInvalid($('fcWrap'),false); fc.classList.remove('open');
-    if(checked('prescription_management')){ showSub3(3); } else { await finishStep3(); }
+    await finishStep3();
   });
   paint();
 })();
@@ -1553,18 +1539,15 @@ async function step3Next(from){
   step3Log('Continue clicked',{section:from,delivery,prescription:rx,noSupport:none});
   if(from===1){ if(!validateSub3(1)){showStep3Blocker(1);return;} if(checked('delivery_management') && !validateSub3(4)){ showStep3Blocker(4); return; } if(none){step3Log('Opening no-support confirmation');openNoSupportModal();} else if(!delivery&&!rx){await finishStep3();} else {step3Log('Opening delivery consent');showSub3(2);} return; }
   if(from===2){ if(!validateSub3(2)){showStep3Blocker(2);return;} $('freeChoiceModal').classList.add('open'); return; }  // delivery consent → hcp consent (if rx) else review
-  if(from===3){ if(!validateSub3(3)){showStep3Blocker(3);return;} await finishStep3();return; }                                          // hcp consent → doctor
   if(from===4){ if(!validateSub3(4)){showStep3Blocker(4);return;} await finishStep3();return; }                                  // doctor → review
 }
 function step3Back(from){ if(from===1){ showStep(2); } else if(from===2){ showSub3(1); } else if(from===3){ showSub3(2); } else if(from===4){ showSub3(3); } }
 function runStep3Next(n){ step3Next(n).catch(e=>console.error('[H+ Step 3] Navigation error in section '+n,e)); }
 $('s3next1').addEventListener('click',()=>runStep3Next(1));
 $('s3next2').addEventListener('click',()=>runStep3Next(2));
-$('s3next3').addEventListener('click',()=>runStep3Next(3));
 $('s3next4').addEventListener('click',()=>runStep3Next(4));
 $('s3back1').addEventListener('click',()=>step3Back(1));
 $('s3back2').addEventListener('click',()=>step3Back(2));
-$('s3back3').addEventListener('click',()=>step3Back(3));
 $('s3back4').addEventListener('click',()=>step3Back(4));
 
 /* full step-3 validation for final submit */
@@ -1573,7 +1556,6 @@ function validateStep3All(){
   const delivery=checked('delivery_management'), rx=checked('prescription_management'), none=checked('no_support');
   if(!none && (delivery||rx)){ if(!validateSub3(2)){ showStep(3); showSub3(2); return false; } }
   if(rx){
-    if(!validateSub3(3)){ showStep(3); showSub3(3); return false; }
     if(!validateSub3(4)){ showStep(3); showSub3(1); return false; }
   }
   return true;
@@ -1602,6 +1584,9 @@ function buildReview(){
   if(checked('no_support'))support.push(t('sup_none'));
   if(checked('arrange_call')&&val('callback_date'))support.push(t('sup_callback'));
   const countryLabel=val('country')==='Deutschland'?t('country_de'):val('country')==='Österreich'?t('country_at'):'';
+  const deliveryAddr = radio('pharmacy_choice')==='yes'
+    ? [val('delivery_street'),val('delivery_street2'),[val('delivery_postcode'),val('delivery_city')].filter(Boolean).join(' ')].filter(Boolean).join(', ')
+    : '';
   /* doctor details entered by the user (collected when prescription management is chosen) */
   const docRows=[];
   const addDoc=(label,value)=>{ if(value) docRows.push(`<div class="row"><span>${label}</span><span class="rv-right">${esc(value)}</span></div>`); };
@@ -1637,6 +1622,7 @@ function buildReview(){
       <h4>${t('rv_delivery')} <a data-goto="3">${t('rv_edit')}</a></h4>
       <div class="row"><span>${t('rv_country')}</span><span>${esc(countryLabel)||t('rv_dash')}</span></div>
       <div class="row"><span>${t('rv_support')}</span><span class="rv-right">${support.join(', ')||t('rv_dash')}</span></div>
+      ${deliveryAddr?`<div class="row"><span>${t('rv_address')}</span><span class="rv-right">${esc(deliveryAddr)}</span></div>`:''}
     </div>${docBlock}`;
   document.querySelectorAll('#reviewArea a[data-goto]').forEach(a=>a.addEventListener('click',()=>showStep(+a.dataset.goto)));
 }
