@@ -1123,7 +1123,7 @@ document.querySelectorAll('.langswitch button').forEach(b=>b.addEventListener('c
 /* ---- Step 2: received-medication date label + prescription-reminder preferences ---- */
 function syncFirstDateLabel(){ var el=document.getElementById('firstDateLabel'); if(!el) return; var r=radio('received_medication'); el.textContent=t(r==='No'?'firstdate_will':'firstdate_label'); }
 function syncMedPrefs(){
-  var show = radio('reminder_freq')!=='' && radio('prescription_reminders_low')==='Yes';
+  var show = radio('reminder_freq')!=='' || radio('prescription_reminders_low')==='Yes';
   var cp=document.getElementById('card_prefs'); if(cp) cp.style.display=show?'block':'none';
   var comm=function(v){var e=document.querySelector('#comm_prefs input[value='+v+']');return !!(e&&e.checked);};
   var pref=function(v){var e=document.querySelector('#prefs_prefs input[value="'+v+'"]');return !!(e&&e.checked);};
