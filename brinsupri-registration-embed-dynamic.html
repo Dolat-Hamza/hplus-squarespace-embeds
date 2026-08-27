@@ -816,8 +816,8 @@ const I18N = {
     nxt3_t:"Sie erhalten Benachrichtigungen von uns", nxt3_d:"In der Zwischenzeit erhalten Sie weiterhin Benachrichtigungen – ganz nach den von Ihnen gewählten Einstellungen.",
     trust1:"✓ Kostenlos nutzbar", trust2:"✓ DSGVO-konform", trust3:"✓ Jederzeit kündbar", trust4:"✓ Expertenbetreuung",
     step1_name:"Allgemeine Informationen", step2_name:"Ihre Medikation", step3_name:"Ihre Servicemodule", step4_name:"Bestätigung",
-    s1_title:"Erzählen Sie uns von sich", s1_sub:"Diese Angaben helfen uns, Ihren H+ Therapy Companion persönlich für Sie einzurichten.",
-    role_label:"Sind Sie der Patient oder der Betreuer?", opt_select:"Bitte auswählen…", opt_patient:"Patient", opt_caregiver:"Betreuer",
+    s1_title:"Willkommen{name} 👋", s1_sub:"Richten wir Ihren Companion ein – in nur ~2 Minuten kümmern wir uns um Erinnerungen, Nachschub und Lieferung.",
+    role_label:"Zuerst: Machen Sie das für sich selbst oder für jemanden, den Sie betreuen?", opt_select:"Bitte auswählen…", opt_patient:"Patient", opt_caregiver:"Betreuer",
     firstname_label:"Vorname", lastname_label:"Nachname", email_label:"E-Mail-Adresse",
     email_reassure:"Wir nutzen Ihre E-Mail nur für Ihren H+ Therapy Companion – niemals für Werbung Dritter.",
     comm_label:"Wie möchten Sie, dass wir Sie kontaktieren, um unsere Leistungen zu erbringen?",
@@ -959,8 +959,8 @@ const I18N = {
     nxt3_t:"You will receive notifications from us", nxt3_d:"In the meantime, you'll keep receiving notifications — based on the preferences you selected.",
     trust1:"✓ Free to use", trust2:"✓ GDPR-compliant", trust3:"✓ Can be cancelled at any time", trust4:"✓ Expert support",
     step1_name:"General information", step2_name:"Your medication", step3_name:"Your service modules", step4_name:"Confirm",
-    s1_title:"Tell us about yourself", s1_sub:"This helps us set up your H+ Therapy Companion just for you.",
-    role_label:"Are you the patient or the caregiver?", opt_select:"Please select…", opt_patient:"Patient", opt_caregiver:"Caregiver",
+    s1_title:"Welcome{name} 👋", s1_sub:"Let’s set up your Companion – in ~2 minutes we’ll handle reminders, refills and delivery for you.",
+    role_label:"First up – is this for you, or for someone you care for?", opt_select:"Please select…", opt_patient:"Patient", opt_caregiver:"Caregiver",
     firstname_label:"First name", lastname_label:"Last name", email_label:"Email address",
     email_reassure:"We use your email only for your H+ Therapy Companion — never for third-party marketing.",
     comm_label:"How would you like us to contact you to perform our services?",
@@ -1080,8 +1080,8 @@ let currentLang = (function(){ try{ return localStorage.getItem('hplus_lang')||'
    second-person wording ("you/your") becomes patient-perspective ("the patient"). */
 const CG = {
   de:{
-    s1_title:"Erzählen Sie uns von der Patientin / dem Patienten",
-    s1_sub:"Diese Angaben helfen uns, den H+ Therapy Companion persönlich für die Patientin / den Patienten einzurichten.",
+    s1_title:"Willkommen{name} \ud83d\udc4b",
+    s1_sub:"Richten wir den Companion f\u00fcr Ihre:n Patient:in ein \u2013 in ~2 Minuten sind Sie startklar.",
     email_reassure:"Wir nutzen die E-Mail nur für den H+ Therapy Companion der Patientin / des Patienten – niemals für Werbung Dritter.",
     comm_label:"Wie sollen wir die Patientin / den Patienten kontaktieren, um unsere Leistungen zu erbringen?",
     s2_sub:"Bitte prüfen Sie die Angaben zum Rezept der Patientin / des Patienten.",
@@ -1093,8 +1093,8 @@ const CG = {
     prefs_q:"Welche Präferenzen bestehen für diese automatisierten Dienste?"
   },
   en:{
-    s1_title:"Tell us about the patient",
-    s1_sub:"This helps us set up the patient's H+ Therapy Companion.",
+    s1_title:"Welcome{name} \ud83d\udc4b",
+    s1_sub:"Let\u2019s set up your patient\u2019s Companion \u2013 you\u2019ll be ready in ~2 minutes.",
     email_reassure:"We use the email only for the patient's H+ Therapy Companion — never for third-party marketing.",
     comm_label:"How should we contact the patient to perform our services?",
     s2_sub:"Please check the details of the patient's prescription.",
@@ -1109,7 +1109,12 @@ const CG = {
 const t = k => {
   const isCg = ((document.getElementById('customer_type')||{}).value === 'Caregiver');
   const o = isCg ? (CG[currentLang]||{})[k] : undefined;
-  return (o ?? I18N[currentLang][k] ?? I18N.de[k] ?? k);
+  let str = (o ?? I18N[currentLang][k] ?? I18N.de[k] ?? k);
+  if(typeof str==='string' && str.indexOf('{name}')>=0){
+    const nm=((document.getElementById('firstname')||{}).value||'').trim().split(/\s+/)[0]||'';
+    str = str.replace(/\{name\}/g, nm ? (' '+nm) : '');
+  }
+  return str;
 };
 
 const MEDS={
@@ -1203,6 +1208,7 @@ function syncSecondPerson(){ $('caregiverBlock').style.display = (val('customer_
 document.querySelectorAll('input[name=second_person]').forEach(r=>r.addEventListener('change',syncSecondPerson));
 $('customer_type').addEventListener('change',syncSecondPerson);
 $('customer_type').addEventListener('change',()=>applyLang(currentLang));
+$('firstname').addEventListener('input',()=>applyLang(currentLang));
 document.querySelectorAll('.choice input').forEach(inp=>{
   const paint=()=>{ const c=inp.closest('.choice'); if(inp.type==='radio'){document.querySelectorAll(`input[name="${inp.name}"]`).forEach(o=>o.closest('.choice').classList.remove('selected'));} c.classList.toggle('selected',inp.checked); };
   inp.addEventListener('change',paint); paint();
@@ -1880,6 +1886,9 @@ restoreState();                                            // autofill from a pr
       var q=(p.get('country')||p.get('market')||p.get('c')||'').toLowerCase();
       if(/^(at|aut|austria|osterreich|oesterreich|österreich)$/.test(q)) return 'Österreich';
       if(/^(de|deu|germany|deutschland)$/.test(q)) return 'Deutschland';
+      var path=(location.pathname||'').toLowerCase();
+      if(/(^|\/)(at|austria|oesterreich|osterreich)(\/|$)/.test(path)) return 'Österreich';
+      if(/(^|\/)(de|germany|deutschland)(\/|$)/.test(path)) return 'Deutschland';
       if(/\.at$/.test(location.hostname)) return 'Österreich';
     }catch(e){}
     return 'Deutschland';
