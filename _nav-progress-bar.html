@@ -1,0 +1,42 @@
+<!-- ============================================================
+     H+ page-transition progress bar + fade-in
+     WHERE TO PASTE: Squarespace → Settings → Advanced →
+     Code Injection → FOOTER.  Site-wide. One time.
+     Shows a top loading bar the moment a link is clicked and
+     while the next page loads (works for normal loads AND
+     Squarespace's Ajax "mercury" navigation), then fades the
+     new page in so it never looks frozen.
+     ============================================================ -->
+<style>
+  #hplus-nprog{position:fixed;top:0;left:0;height:3px;width:0;z-index:2147483647;
+    background:linear-gradient(90deg,#007EC6,#0FB5A5);
+    box-shadow:0 0 10px rgba(0,126,198,.7);opacity:0;
+    transition:width .2s ease,opacity .35s ease;pointer-events:none}
+  #hplus-nprog.on{opacity:1}
+  /* gentle page fade-in so content never "pops" in */
+  body.hplus-fading #content, body.hplus-fading .sqs-layout{opacity:0;transition:none}
+  #content, .sqs-layout{transition:opacity .35s ease}
+</style>
+<div id="hplus-nprog" aria-hidden="true"></div>
+<script>
+(function(){
+  var bar=document.getElementById('hplus-nprog'), timer, w=0;
+  function start(){ if(bar.classList.contains('on'))return; bar.classList.add('on'); w=8; bar.style.width='8%';
+    clearInterval(timer); timer=setInterval(function(){ w+=(92-w)*0.12; bar.style.width=w.toFixed(1)+'%'; },220); }
+  function done(){ clearInterval(timer); bar.style.width='100%';
+    setTimeout(function(){ bar.classList.remove('on'); bar.style.width='0'; },380);
+    document.body.classList.remove('hplus-fading'); }
+  // start bar the instant an internal link is clicked
+  document.addEventListener('click',function(e){
+    var a=e.target.closest && e.target.closest('a'); if(!a) return;
+    if(a.origin===location.origin && !a.target && !a.hasAttribute('download')
+       && (a.getAttribute('href')||'').charAt(0)!=='#'){ document.body.classList.add('hplus-fading'); start(); }
+  },true);
+  window.addEventListener('beforeunload',start);
+  window.addEventListener('pageshow',done);
+  document.addEventListener('DOMContentLoaded',done);
+  // Squarespace Ajax (mercury) navigation
+  window.addEventListener('mercury:unload',start);
+  window.addEventListener('mercury:load',done);
+})();
+</script>

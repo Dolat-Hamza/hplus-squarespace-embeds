@@ -1,0 +1,446 @@
+<!-- ===========================================================
+     H+ Therapy Companion — Benefits ("Companion Path") ONLY
+     (registration form + backend removed)
+     Paste this WHOLE block into ONE Squarespace Code Block.
+     =========================================================== -->
+
+<!-- Reusable United Healthcare Partners logo mark (fill follows CSS color) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="uhp-mark" viewBox="56 51 947 585"><g transform="translate(0.000000,686.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none"><path d="M640 3425 l0 -2845 1035 0 1035 0 0 905 0
+905 775 0 775 0 0 -905 0 -905 1295 0 1295 0 0 255 0 255 -257 2 -258 3 0 255
+0 255 258 3 257 2 0 260 0 260 -257 2 -258 3 0 255 0 255 258 3 257 2 0 260 0
+260 -260 0 -259 0 0 255 0 255 259 0 260 0 0 260 0 260 -257 2 -258 3 0 255 0
+255 258 3 257 2 0 260 0 260 -257 2 -258 3 0 255 0 255 258 3 257 2 0 255 0
+255 -1295 0 -1295 0 0 -905 0 -905 -775 0 -775 0 0 905 0 905 -1035 0 -1035 0
+0 -2845z
+m4138 518 l-3 -258 -255 0 -255 0 -3 258 -2 257 260 0 260 0 -2 -257z
+m1032 -3 l0 -260 -255 0 -255 0 0 260 0 260 255 0 255 0 0 -260z
+m-1030 -1030
+l0 -260 -260 0 -260 0 0 253 c0 140 3 257 7 260 3 4 120 7 260 7 l253 0 0
+-260z
+m1030 0 l0 -260 -255 0 -255 0 0 260 0 260 255 0 255 0 0 -260z
+M7365
+6015 l0 -255 258 0 257 0 0 255 0 255 -257 0 -258 0 0 -255z
+M7370 5235 c0 -3 0 -119 -1 -257 l0 -253 256 -3
+255 -2 0 260 0 260 -255 0 c-140 0 -255 -2 -255 -5z
+M7367 3943 l2 -258 256 -3 255 -2 0 260 0 260 -257 0 -258 0 2
+-257z
+M8400 3940 l0 -260 258 2 257 3 3 258 2 257 -260 0 -260 0 0 -260z
+M9432 3943 l3 -258 258 -3 257 -2 0 260 0 260 -260 0 -260 0 2 -257z
+M7369 3166 c-2
+-2 -3 -119 -1 -260 l3 -256 254 0 255 0 0 260 0 260 -253 0 c-140 0 -256 -2
+-258 -4z
+M8400 2910 l0 -260 260 0 260 0 -2 258 -3 257 -257 3 -258 2 0 -260z
+M9430 2910 l0 -260 260 0 260 0 0 260 0 260 -260 0 -260 0 0 -260z
+M7370 2125
+c0 -3 0 -119 -1 -257 l0 -253 256 -3 255 -2 0 260 0 260 -255 0 c-140 0 -255
+-2 -255 -5z
+M7365 835 l0 -255 258 0 257 0 0 255 0 255 -257 0 -258 0 0 -255z"/></g></symbol>
+</defs></svg>
+
+<!-- ============ COMPANION PATH / BENEFITS ============ -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+
+.hplus-usp{
+  --navy:#064B73;
+  --navy-deep:#06324C;
+  --teal:#007EC6;
+  --teal-bright:#0FB5A5;
+  --ink:#24272A; --muted:#71777C;
+  --wash:#F6F8F9; --wash-2:#E6F3FB; --line:#DCE2E6; --white:#ffffff;
+  --shadow:0 18px 44px -22px rgba(6,50,76,.35);
+  --shadow-soft:0 10px 30px -18px rgba(6,50,76,.28);
+  --r:16px;
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif !important;
+  color:var(--ink) !important;
+  background:var(--wash);
+  border:0 !important;
+  padding:clamp(2px,.6vw,6px) clamp(10px,2vw,18px) 0 !important;
+  position:relative; overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.5;
+  height:100%;            /* fill the Squarespace Fluid-Engine cell so shorter EN content top-aligns instead of centering */
+  box-sizing:border-box;
+}
+.hplus-usp *{box-sizing:border-box; margin:0; padding:0}
+.hplus-usp::before{
+  content:""; position:absolute; top:-120px; right:-130px;
+  width:420px; height:420px;
+  background:linear-gradient(135deg,var(--teal-bright),var(--navy));
+  transform:rotate(45deg); opacity:.05; pointer-events:none;
+}
+.hplus-usp__inner{max-width:1080px; margin:0 auto; position:relative}
+.hplus-usp__logo{position:absolute; top:0; right:0; width:88px; height:54px; color:var(--teal); z-index:3}
+.hplus-usp__free-logo{position:absolute; top:clamp(22px,3.4vw,30px); right:clamp(24px,3.4vw,36px); width:100px; height:62px; color:#fff; opacity:.92; z-index:3}
+@media(max-width:640px){
+  .hplus-usp__logo{width:58px; height:36px}
+  .hplus-usp__free-logo{width:72px; height:44px; top:18px; right:20px}
+}
+.hplus-usp__eyebrow{
+  font-family:'Inter',sans-serif !important;
+  font-weight:600 !important; font-size:.75rem !important;
+  letter-spacing:.15em !important; text-transform:uppercase !important;
+  color:var(--teal) !important;
+  display:inline-flex; align-items:center; gap:10px;
+  margin:0 0 18px 0 !important;
+}
+.hplus-usp__eyebrow::before{
+  content:""; width:26px; height:2px; background:var(--teal); border-radius:2px; display:inline-block;
+}
+.hplus-usp__heading{
+  font-family:'Poppins',sans-serif !important;
+  font-weight:700 !important;
+  color:var(--navy) !important;
+  font-size:clamp(1.6rem,3.6vw,2.55rem) !important;
+  line-height:1.15 !important;
+  letter-spacing:-.01em !important;
+  text-transform:none !important;
+  margin:0 0 18px 0 !important;
+  max-width:16ch;
+}
+.hplus-usp__heading span{color:var(--teal) !important}
+.hplus-usp__desc{
+  font-family:'Inter',sans-serif !important;
+  font-weight:400 !important;
+  font-size:clamp(1rem,1.6vw,1.15rem) !important;
+  line-height:1.62 !important;
+  letter-spacing:normal !important;
+  color:var(--muted) !important;
+  margin:0 0 clamp(30px,4vw,46px) 0 !important;
+  max-width:620px;
+}
+.hplus-usp__desc strong{color:var(--ink) !important; font-weight:600 !important}
+.hplus-usp__path{position:relative}
+.hplus-usp__stages{
+  list-style:none;
+  display:grid;
+  gap:22px;
+  position:relative;
+}
+.hplus-usp__stage{
+  position:relative;
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  padding:26px 26px 26px 78px;
+  box-shadow:var(--shadow-soft);
+  transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+.hplus-usp__stage:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow);
+  border-color:#BBD5E6;
+}
+.hplus-usp__node{
+  position:absolute;
+  left:20px; top:28px;
+  width:44px; height:44px;
+  border-radius:12px;
+  background:linear-gradient(150deg,var(--wash-2),var(--wash));
+  border:1px solid var(--line);
+  display:grid; place-items:center;
+  color:var(--teal); z-index:2;
+}
+.hplus-usp__node svg{width:24px; height:24px; display:block}
+.hplus-usp__step{
+  font-family:'Poppins',sans-serif !important;
+  font-weight:600 !important;
+  font-size:.72rem !important;
+  letter-spacing:.14em !important;
+  text-transform:uppercase !important;
+  color:var(--teal) !important;
+  display:block;
+  margin:0 0 6px 0 !important;
+}
+.hplus-usp__stage h3{
+  font-family:'Poppins',sans-serif !important;
+  font-weight:600 !important;
+  color:var(--navy) !important;
+  font-size:1.16rem !important;
+  line-height:1.3 !important;
+  letter-spacing:0 !important;
+  font-style:normal !important;
+  text-transform:none !important;
+  margin:0 0 9px 0 !important;
+}
+.hplus-usp__stage p{
+  font-family:'Inter',sans-serif !important;
+  font-weight:400 !important;
+  font-size:.98rem !important;
+  line-height:1.6 !important;
+  letter-spacing:normal !important;
+  font-style:normal !important;
+  color:var(--muted) !important;
+  margin:0 !important;
+}
+.hplus-usp__stage p b{color:var(--ink) !important; font-weight:600 !important}
+.hplus-usp__stages::before{
+  content:"";
+  position:absolute;
+  left:42px; top:34px; bottom:34px;
+  width:2px;
+  background:linear-gradient(var(--teal),var(--teal-bright),rgba(15,181,165,.25));
+  z-index:0;
+}
+@media(min-width:860px){
+  .hplus-usp__stages{grid-template-columns:repeat(4,1fr); gap:20px}
+  .hplus-usp__stages::before{
+    left:12%; right:12%; top:34px; bottom:auto;
+    width:auto; height:2px;
+    background:linear-gradient(90deg,rgba(0,126,198,.25),var(--teal),var(--teal-bright),rgba(15,181,165,.25));
+  }
+  .hplus-usp__stage{padding:66px 22px 24px; text-align:left}
+  .hplus-usp__node{left:22px; top:-6px; width:52px; height:52px}
+  .hplus-usp__node svg{width:27px; height:27px}
+  .hplus-usp__stage h3{font-size:1.1rem !important}
+  .hplus-usp__stage p{font-size:.93rem !important}
+}
+@media(max-width:859px){
+  .hplus-usp__stages{
+    display:flex;
+    grid-template-columns:none;
+    gap:14px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    margin-left:calc(-1 * clamp(18px,4vw,40px));
+    margin-right:calc(-1 * clamp(18px,4vw,40px));
+    padding:6px clamp(18px,4vw,40px) 16px;
+    scroll-padding-left:clamp(18px,4vw,40px);
+    scrollbar-width:none;
+  }
+  .hplus-usp__stages::-webkit-scrollbar{display:none}
+  .hplus-usp__stages::before{display:none}
+  .hplus-usp__stage{
+    flex:0 0 82%;
+    scroll-snap-align:start;
+  }
+}
+.hplus-usp__free{
+  position:relative;
+  margin-top:clamp(30px,4.5vw,48px);
+  border-radius:22px;
+  overflow:hidden;
+  background:linear-gradient(120deg,var(--navy-deep) 0%, var(--navy) 46%, var(--teal) 100%);
+  color:var(--white) !important;
+  padding:clamp(30px,4.6vw,46px) clamp(26px,4vw,52px);
+  box-shadow:var(--shadow);
+}
+.hplus-usp__free::after{
+  content:""; position:absolute;
+  right:-80px; bottom:-120px;
+  width:360px; height:360px;
+  background:linear-gradient(135deg,rgba(15,181,165,.5),rgba(15,181,165,0));
+  transform:rotate(38deg); pointer-events:none;
+}
+.hplus-usp__free-text{position:relative; z-index:2; max-width:620px}
+.hplus-usp__free-kicker{
+  font-family:'Inter',sans-serif !important;
+  display:inline-flex; align-items:center; gap:9px;
+  font-weight:600 !important; font-size:.8rem !important; letter-spacing:.06em !important;
+  text-transform:uppercase !important; color:#BCDFF5 !important;
+  margin:0 0 12px 0 !important;
+}
+.hplus-usp__free-kicker svg{width:17px; height:17px}
+.hplus-usp__free-head{
+  font-family:'Poppins',sans-serif !important;
+  font-weight:700 !important;
+  color:var(--white) !important;
+  font-size:clamp(1.4rem,3vw,1.9rem) !important;
+  line-height:1.2 !important;
+  letter-spacing:0 !important;
+  text-transform:none !important;
+  margin:0 0 10px 0 !important;
+}
+.hplus-usp__free-sub{
+  font-family:'Inter',sans-serif !important;
+  font-weight:400 !important;
+  font-size:.98rem !important;
+  line-height:1.55 !important;
+  letter-spacing:normal !important;
+  color:#D5E7F2 !important;
+  opacity:.92;
+  margin:0 !important;
+}
+@media(prefers-reduced-motion:reduce){.hplus-usp *{transition:none !important}}
+.hplus-usp__stage:focus-visible{outline:3px solid var(--teal); outline-offset:3px}
+
+/* ---- mobile optimisation (added) ---- */
+/* reserve top space so the eyebrow can't slide under the absolute lang switch + logo */
+@media(max-width:859px){
+  .hplus-usp__inner{padding-top:56px}
+}
+@media(max-width:640px){
+  .hplus-usp{padding-left:16px !important;padding-right:16px !important;overflow-x:hidden}
+  .hplus-usp__inner{max-width:100%;padding-top:52px}
+  .hplus-usp__heading{max-width:100%;font-size:clamp(1.5rem,7vw,2rem) !important}
+  .hplus-usp__desc{max-width:100%}
+  .hplus-usp__logo{width:50px;height:31px}
+  .hplus-usp__lang{right:62px;top:2px}
+  .hplus-usp__langbtn{padding:5px 9px;font-size:11px}
+  .hplus-usp__stages{margin-left:-16px;margin-right:-16px;padding:6px 16px 12px;scroll-padding-left:16px}
+  .hplus-usp__free-sub{max-width:100%}
+}
+
+.hplus-usp__lang{position:absolute;top:6px;right:104px;display:flex;gap:4px;z-index:6}
+.hplus-usp__langbtn{font:600 12px/1 Inter,system-ui,sans-serif;letter-spacing:.04em;color:var(--ink,#06324C);background:transparent;border:1px solid rgba(6,50,76,.22);border-radius:999px;padding:6px 11px;cursor:pointer;transition:all .15s}
+.hplus-usp__langbtn:hover{border-color:var(--teal,#007EC6)}
+.hplus-usp__langbtn.is-active{background:var(--teal,#007EC6);border-color:var(--teal,#007EC6);color:#fff}
+.hplus-usp__inner{position:relative}
+</style>
+
+<section class="hplus-usp" aria-labelledby="hplus-usp-title">
+  <div class="hplus-usp__inner">
+
+    <div class="hplus-usp__lang" role="group" aria-label="Sprache / Language">
+      <button type="button" class="hplus-usp__langbtn is-active" data-lang="de">DE</button>
+      <button type="button" class="hplus-usp__langbtn" data-lang="en">EN</button>
+    </div>
+
+    <svg class="hplus-usp__logo" role="img" aria-label="United Healthcare Partners"><use href="#uhp-mark"></use></svg>
+
+    <p class="hplus-usp__eyebrow" data-uspi="eyebrow">Fortschrittliche Versorgung mit dem H+ Therapy Companion</p>
+
+    <h2 class="hplus-usp__heading" id="hplus-usp-title" data-uspihtml="heading">Flexible Unterstützung <span>für Ihre Therapie</span></h2>
+
+    <p class="hplus-usp__desc" data-uspihtml="desc">
+      Eine komplexe Therapie aufrechtzuerhalten kann herausfordernd sein. <strong>Der H+ Therapy Companion der Healthcare Deutschland (kurz: H+) unterstützt die Koordination Ihrer Therapie,</strong> damit Sie sich ganz auf Ihre Behandlung konzentrieren können – statt auf Verwaltungsaufwand.
+      <br><br>
+      H+ unterstützt Menschen in ganz Europa, die mit seltenen und komplexen Erkrankungen leben. Erfahrene Pflegefachkräfte und ein spezialisiertes Team, das täglich mit Therapien wie Ihrer arbeitet, begleiten Sie auf Ihrem Weg.
+      <br><br>
+      Mit dem H+ Therapy Companion erhalten Sie genau diese hochwertige Unterstützung direkt auf Ihr Smartphone – kostenlos und ergänzend zu der Betreuung, die Sie bereits von Ihrem medizinischen Behandlungsteam erhalten.
+      <br><br>
+      So haben Sie wichtige Informationen, Erinnerungen an Ihre Therapie und Unterstützung jederzeit griffbereit – einfach, sicher und bequem auf Ihrem Mobilgerät.
+    </p>
+
+    <nav class="hplus-usp__path" aria-label="So unterstützt Sie der H+ Therapy Companion">
+      <ol class="hplus-usp__stages">
+
+        <li class="hplus-usp__stage" tabindex="0">
+          <span class="hplus-usp__node" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="3" width="16" height="18" rx="2.5"/>
+              <path d="M8 8h4a2 2 0 0 1 0 4H8V8m0 4 4 5"/>
+              <path d="M14.5 13.5 18 17m0-3.5L14.5 17"/>
+            </svg>
+          </span>
+          <span class="hplus-usp__step" data-uspi="s1_step">Schritt 1 &middot; FOLGEREZEPTE</span>
+          <h3 data-uspi="s1_h">Nie wieder ohne Medikament</h3>
+          <p data-uspi="s1_p">Die rechtzeitige Organisation von Rezepten kann aufwendig sein und im Alltag schnell untergehen. Wir behalten Ihren Medikamentenvorrat im Blick und organisieren auf Wunsch Ihre Nachbestellung bis zu Ihnen nach Hause, um unfreiwillige Therapiepausen zu vermeiden.</p>
+        </li>
+
+        <li class="hplus-usp__stage" tabindex="0">
+          <span class="hplus-usp__node" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 10.5 12 4l9 6.5"/>
+              <path d="M5 9.5V20h14V9.5"/>
+              <path d="M9.5 20v-5h5v5"/>
+              <path d="M9.5 12.2h5" opacity=".55"/>
+            </svg>
+          </span>
+          <span class="hplus-usp__step" data-uspi="s2_step">Schritt 2 &middot; TERMINE</span>
+          <h3 data-uspi="s2_h">Keine Untersuchung wird vergessen</h3>
+          <p data-uspi="s2_p">Komplexe Therapien erfordern regelmäßige Überwachung. Wir helfen Ihnen bei der Planung und erinnern Sie rechtzeitig an Nachsorgetermine – damit Sie sich keine Sorge mehr um Ihre nächste Untersuchung machen müssen.</p>
+        </li>
+
+        <li class="hplus-usp__stage" tabindex="0">
+          <span class="hplus-usp__node" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3.5" y="5" width="17" height="15" rx="2.5"/>
+              <path d="M3.5 9.5h17M8 3v4M16 3v4"/>
+              <path d="M8.8 14.4l2.2 2.2 3.8-4"/>
+            </svg>
+          </span>
+          <span class="hplus-usp__step" data-uspi="s3_step">Schritt 3 &middot; ERINNERUNGEN</span>
+          <h3 data-uspi="s3_h">Regelmäßige Erinnerungen, die zu Ihrem Alltag passen</h3>
+          <p data-uspi="s3_p">Nach einmaliger Einrichtung Ihres Therapieplans stellen wir durch flexible Erinnerungsbenachrichtigungen via WhatsApp, SMS, E-Mail oder Telefon sicher, dass Sie keine Einnahme mehr vergessen. Wir melden uns auf Ihrem bevorzugten Wege – um die Therapietreue zu erhöhen und einen positiven Therapieverlauf zu begünstigen.</p>
+        </li>
+
+        <li class="hplus-usp__stage" tabindex="0">
+          <span class="hplus-usp__node" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.5 9.2c0 4.6-6.2 8.5-8.5 10.3-2.3-1.8-8.5-5.7-8.5-10.3A4.2 4.2 0 0 1 12 6.7a4.2 4.2 0 0 1 8.5 2.5Z"/>
+              <path d="M6.5 11.6h2.4l1.4-2.4 1.8 4.2 1.3-2.3h3.6"/>
+            </svg>
+          </span>
+          <span class="hplus-usp__step" data-uspi="s4_step">Schritt 4 &middot; UNTERSTÜTZUNG</span>
+          <h3 data-uspi="s4_h">Unser Expertenteam ist für Sie da</h3>
+          <p data-uspi="s4_p">Eine komplexe Behandlung kann viele Fragen aufwerfen. Das H+ Team – bestehend aus medizinischem Fachpersonal, das täglich PatientInnen mit seltenen und komplexen Therapien unterstützt – ist von Montag bis Freitag (08:00–18:00 Uhr) persönlich für Ihre Anliegen erreichbar.</p>
+        </li>
+
+      </ol>
+    </nav>
+
+    <div class="hplus-usp__free">
+      <svg class="hplus-usp__free-logo" aria-hidden="true"><use href="#uhp-mark"></use></svg>
+      <div class="hplus-usp__free-text">
+        <div class="hplus-usp__free-head" data-uspi="free_head">Wer wir sind</div>
+        <p class="hplus-usp__free-sub" data-uspi="free_sub">
+          Der H+ Therapy Companion ist ein kostenloses Serviceangebot der Healthcare Deutschland GmbH (H+). H+ hat sich als spezialisierter Heimtherapieanbieter zur Aufgabe gemacht, die Lebensqualität für PatientInnen mit seltenen, chronischen Erkrankungen zu verbessern &ndash; melden Sie sich einfach an und gestalten Sie Ihre Therapie aktiv mit.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function(){
+  var I18N={
+    de:{
+      eyebrow:"Fortschrittliche Versorgung mit dem H+ Therapy Companion",
+      heading:'Flexible Unterst\u00fctzung <span>f\u00fcr Ihre Therapie</span>',
+      s1_step:"Schritt 1 &middot; FOLGEREZEPTE", s1_h:"Nie wieder ohne Medikament",
+      s2_step:"Schritt 2 &middot; TERMINE", s2_h:"Keine Untersuchung wird vergessen",
+      s3_step:"Schritt 3 &middot; ERINNERUNGEN", s3_h:"Regelm\u00e4\u00dfige Erinnerungen, die zu Ihrem Alltag passen",
+      s4_step:"Schritt 4 &middot; UNTERST\u00dcTZUNG", s4_h:"Unser Expertenteam ist f\u00fcr Sie da",
+      free_head:"Wer wir sind"
+    },
+    en:{
+      eyebrow:"Advanced care with the H+ Therapy Companion",
+      heading:'Flexible support <span>for your treatment</span>',
+      desc:'Maintaining a complex treatment programme can be challenging. <strong>Healthcare Deutschland\u2019s (H+ for short) H+ Therapy Companion helps coordinate your treatment,</strong> so that you can focus entirely on your care \u2013 rather than on administrative tasks.<br><br>H+ supports people across Europe who are living with rare and complex conditions. Experienced healthcare professionals and a specialist team, who work with therapies like yours on a daily basis, will accompany you on your journey.<br><br>With the H+ Therapy Companion, you receive exactly this high-quality support directly on your smartphone \u2013 free of charge and in addition to the care you already receive from your medical team.<br><br>This means you have important information, reminders about your treatment and support at your fingertips at all times \u2013 simply, securely and conveniently on your mobile device.',
+      s1_step:"Step 1 &middot; REPEAT PRESCRIPTIONS", s1_h:"Never run out of medication again",
+      s1_p:"Organising prescriptions in good time can be time-consuming and easily get lost in the hustle and bustle of everyday life. We keep an eye on your medication supply and, if you wish, arrange for your repeat prescriptions to be delivered straight to your home to avoid any unwanted breaks in your treatment.",
+      s2_step:"Step 2 &middot; APPOINTMENTS", s2_h:"No check-up will be forgotten",
+      s2_p:"Complex treatments require regular monitoring. We help you with planning and remind you in good time of follow-up appointments \u2013 so you no longer have to worry about your next check-up.",
+      s3_step:"Step 3 &middot; REMINDERS", s3_h:"Regular reminders that fit into your daily routine",
+      s3_p:"Once your treatment plan has been set up, we use flexible reminder notifications via WhatsApp, text message, email or phone to ensure you never miss a dose. We\u2019ll contact you via your preferred method \u2013 to improve adherence to your treatment and support a positive treatment outcome.",
+      s4_step:"Step 4 &middot; SUPPORT", s4_h:"Our team of experts is here for you",
+      s4_p:"A complex treatment can raise many questions. The H+ team \u2013 made up of healthcare professionals who support patients with rare and complex treatments on a daily basis \u2013 is available in person to address your concerns from Monday to Friday (08:00\u201318:00).",
+      free_head:"Who we are",
+      free_sub:"The H+ Therapy Companion is a free service provided by Healthcare Deutschland GmbH (H+). As a specialist provider of home-based therapy, H+ is committed to improving the quality of life for patients with rare, chronic conditions \u2013 simply register and take an active role in shaping your treatment."
+    }
+  };
+  var root=document.currentScript.previousElementSibling;
+  while(root && !(root.classList && root.classList.contains('hplus-usp'))) root=root.previousElementSibling;
+  if(!root) root=document.querySelector('.hplus-usp');
+  var BASE={};
+  function snap(){
+    root.querySelectorAll('[data-uspi]').forEach(function(el){BASE[el.getAttribute('data-uspi')]=el.textContent;});
+    root.querySelectorAll('[data-uspihtml]').forEach(function(el){BASE['h:'+el.getAttribute('data-uspihtml')]=el.innerHTML;});
+  }
+  function apply(lang){
+    var d=I18N[lang]||{};
+    root.querySelectorAll('[data-uspi]').forEach(function(el){
+      var k=el.getAttribute('data-uspi');
+      var v=(lang==='de')?(d[k]!==undefined?d[k]:BASE[k]):(d[k]!==undefined?d[k]:BASE[k]);
+      el.innerHTML=v;
+    });
+    root.querySelectorAll('[data-uspihtml]').forEach(function(el){
+      var k=el.getAttribute('data-uspihtml');
+      var v=(d[k]!==undefined?d[k]:BASE['h:'+k]);
+      el.innerHTML=v;
+    });
+    root.querySelectorAll('.hplus-usp__langbtn').forEach(function(b){
+      b.classList.toggle('is-active', b.getAttribute('data-lang')===lang);
+    });
+  }
+  snap();
+  root.querySelectorAll('.hplus-usp__langbtn').forEach(function(b){
+    b.addEventListener('click', function(){apply(b.getAttribute('data-lang'));});
+  });
+  apply('de');
+})();
+</script>
