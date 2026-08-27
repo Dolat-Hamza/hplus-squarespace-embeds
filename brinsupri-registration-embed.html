@@ -446,7 +446,8 @@
           <input type="text" id="other_medication" data-i18n-ph="other_med_ph" />
         </div>
 
-        <div class="opt-card" id="card_freq">
+        <div class="opt-card" id="card_reminders">
+        <div id="card_freq">
           <h4><span class="ic-chip"><svg><use href="#ic-reminder"/></svg></span><span data-i18n="freq_h"></span></h4>
           <p data-i18n="freq_para"></p>
           <div class="pill-row">
@@ -456,7 +457,7 @@
           </div>
         </div>
 
-        <div class="field" data-required>
+        <div class="field" data-required style="margin-top:16px;padding-top:16px;border-top:1px solid var(--hair)">
           <span class="group-label" data-i18n="rxlow_q"></span>
           <div class="pill-row">
             <label class="choice"><input type="radio" name="prescription_reminders_low" value="Yes"><span class="ctxt" data-i18n="opt_yes"></span></label>
@@ -465,7 +466,7 @@
           <div class="err-msg" data-i18n="err_select"></div>
         </div>
 
-        <div class="opt-card" id="card_prefs" style="display:none">
+        <div id="card_prefs" style="display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--hair)">
           <h4><span class="ic-chip"><svg><use href="#ic-reminder"/></svg></span><span data-i18n="prefs_q"></span></h4>
           <div class="pill-row" id="prefs_prefs">
             <label class="choice"><input type="checkbox" value="Email"><span class="ctxt" data-i18n="opt_email"></span></label>
@@ -477,6 +478,7 @@
           <div class="field cond" id="p2_whatsapp" style="display:none;margin-top:12px"><label data-i18n="whatsapp_label"></label><input type="tel" id="prefs_whatsapp" data-validate="phone-global"></div>
           <div class="field cond" id="p2_phone" style="display:none;margin-top:12px"><label data-i18n="phone_label"></label><div class="phone-row"><select id="prefs_phone_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="prefs_phone" data-validate="phone"></div></div>
           <div class="field cond" id="p2_sms" style="display:none;margin-top:12px"><label data-i18n="sms_label"></label><div class="phone-row"><select id="prefs_sms_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="prefs_sms" data-validate="phone"></div></div>
+        </div>
         </div>
 
         <div class="nav">
