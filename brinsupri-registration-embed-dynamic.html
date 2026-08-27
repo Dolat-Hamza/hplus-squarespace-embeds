@@ -495,7 +495,7 @@
           <h3 class="step-title" data-i18n="s3_title"></h3>
           <p class="step-sub" data-i18n="s3_sub"></p>
 
-          <div class="field" data-required>
+          <div class="field" data-required id="countryField" style="display:none">
             <label data-i18n="country_label"></label>
             <select id="country">
               <option value="" data-i18n="opt_select"></option>
@@ -1076,7 +1076,41 @@ const I18N = {
 };
 
 let currentLang = (function(){ try{ return localStorage.getItem('hplus_lang')||'de'; }catch(e){ return 'de'; } })();
-const t = k => (I18N[currentLang][k] ?? I18N.de[k] ?? k);
+/* Caregiver perspective overrides: when the user registers as a Caregiver,
+   second-person wording ("you/your") becomes patient-perspective ("the patient"). */
+const CG = {
+  de:{
+    s1_title:"Erzählen Sie uns von der Patientin / dem Patienten",
+    s1_sub:"Diese Angaben helfen uns, den H+ Therapy Companion persönlich für die Patientin / den Patienten einzurichten.",
+    email_reassure:"Wir nutzen die E-Mail nur für den H+ Therapy Companion der Patientin / des Patienten – niemals für Werbung Dritter.",
+    comm_label:"Wie sollen wir die Patientin / den Patienten kontaktieren, um unsere Leistungen zu erbringen?",
+    s2_sub:"Bitte prüfen Sie die Angaben zum Rezept der Patientin / des Patienten.",
+    confirm_med:"Ich bestätige, dass der Patientin / dem Patienten die oben genannten Medikamente in diesen Dosierungen verschrieben wurden.",
+    received_med_q:"Hat die Patientin / der Patient das Medikament bereits erhalten?",
+    firstdate_label:"Wann hat die Patientin / der Patient die erste Dosis eingenommen?",
+    firstdate_will:"Wann wird die Patientin / der Patient die erste Dosis einnehmen?",
+    rxlow_q:"Möchten Sie Erinnerungen erhalten, wenn der Medikamentenvorrat der Patientin / des Patienten zur Neige geht?",
+    prefs_q:"Welche Präferenzen bestehen für diese automatisierten Dienste?"
+  },
+  en:{
+    s1_title:"Tell us about the patient",
+    s1_sub:"This helps us set up the patient's H+ Therapy Companion.",
+    email_reassure:"We use the email only for the patient's H+ Therapy Companion — never for third-party marketing.",
+    comm_label:"How should we contact the patient to perform our services?",
+    s2_sub:"Please check the details of the patient's prescription.",
+    confirm_med:"I confirm that the above medication was prescribed to the patient at these doses.",
+    received_med_q:"Has the patient already received their medication?",
+    firstdate_label:"When was the patient's first dose taken?",
+    firstdate_will:"When will the patient take their first dose?",
+    rxlow_q:"Would you like to receive prescription reminders when the patient is low on medication?",
+    prefs_q:"What are the preferences for these automated services?"
+  }
+};
+const t = k => {
+  const isCg = ((document.getElementById('customer_type')||{}).value === 'Caregiver');
+  const o = isCg ? (CG[currentLang]||{})[k] : undefined;
+  return (o ?? I18N[currentLang][k] ?? I18N.de[k] ?? k);
+};
 
 const MEDS={
   "Brinsupri (Brensocatib)":{de:{dose:"25 mg Filmtablette",frequency:"Eine Tablette täglich",administration:"Oral"},en:{dose:"25 mg film-coated tablet",frequency:"One tablet daily",administration:"Oral"}},
@@ -1168,6 +1202,7 @@ document.querySelectorAll('#cg_comm_prefs input').forEach(c=>c.addEventListener(
 function syncSecondPerson(){ $('caregiverBlock').style.display = (val('customer_type')==='Caregiver' || radio('second_person')==='Yes') ? 'block' : 'none'; }
 document.querySelectorAll('input[name=second_person]').forEach(r=>r.addEventListener('change',syncSecondPerson));
 $('customer_type').addEventListener('change',syncSecondPerson);
+$('customer_type').addEventListener('change',()=>applyLang(currentLang));
 document.querySelectorAll('.choice input').forEach(inp=>{
   const paint=()=>{ const c=inp.closest('.choice'); if(inp.type==='radio'){document.querySelectorAll(`input[name="${inp.name}"]`).forEach(o=>o.closest('.choice').classList.remove('selected'));} c.classList.toggle('selected',inp.checked); };
   inp.addEventListener('change',paint); paint();
@@ -1836,6 +1871,22 @@ document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==
 /* init */
 applyLang(currentLang);
 restoreState();                                            // autofill from a prior visit (this browser)
+/* Country is hidden and derived from the URL the patient arrives on
+   (?country=at|de | ?market= | ?c=  ; else an .at hostname; else Germany). */
+(function(){
+  function detectCountry(){
+    try{
+      var p=new URLSearchParams(location.search);
+      var q=(p.get('country')||p.get('market')||p.get('c')||'').toLowerCase();
+      if(/^(at|aut|austria|osterreich|oesterreich|österreich)$/.test(q)) return 'Österreich';
+      if(/^(de|deu|germany|deutschland)$/.test(q)) return 'Deutschland';
+      if(/\.at$/.test(location.hostname)) return 'Österreich';
+    }catch(e){}
+    return 'Deutschland';
+  }
+  var c=$('country');
+  if(c){ c.value=detectCountry(); c.dispatchEvent(new Event('change',{bubbles:true})); }
+})();
 syncOptions(); syncConsentVisibility(); syncSecondPerson(); setupDates();
 $('hplusForm').addEventListener('input',saveState);        // persist as the patient types
 $('hplusForm').addEventListener('change',saveState);
