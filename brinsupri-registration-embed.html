@@ -736,12 +736,11 @@
 </div>
 <div class="modal-ov" id="altPharmacyModal">
   <div class="modal" role="dialog" aria-modal="true">
+    <h3 data-i18n="altpm_title"></h3>
     <p data-i18n="altpm_intro"></p>
-    <ul class="mlist">
-      <li data-i18n="altpm_li1"></li>
-      <li data-i18n="altpm_li2"></li>
-    </ul>
+    <p data-i18n="altpm_note" style="font-size:13px;color:var(--muted)"></p>
     <p class="altpm-q" data-i18n="altpm_q" style="font-weight:700;color:var(--ink-head)"></p>
+    <div class="field" style="margin:6px 0 2px"><label class="choice"><input type="checkbox" id="contact_my_pharmacy"><span class="ctxt" data-i18n="altpm_contact"></span></label></div>
     <div class="modal-actions">
       <button type="button" class="btn btn-primary" id="altpmYes" data-i18n="altpm_yes"></button>
       <button type="button" class="btn-outline" id="altpmNo" data-i18n="altpm_no"></button>
@@ -888,13 +887,13 @@ const I18N = {
     pharma_badge:"Empfohlen",
     pharma_feat_delivery:"Abhol- und Lieferservice innerhalb von 48 Stunden",
     pharma_feat_stock:"Brinsupri auf Lager",
-    altpm_title:"Sind Sie sicher?",
-    altpm_intro:"Wenn Sie eine andere Apotheke wählen, können wir die von Ihnen gewünschten Leistungen wahrscheinlich nicht erbringen. Je nach Ihrer Wahl können wir möglicherweise nicht:",
+    altpm_title:"Ihre Wunschapotheke ist noch keine Partnerapotheke",
+    altpm_intro:"Gerne kontaktieren wir Ihre Wunschapotheke und prüfen, ob wir sie als Partnerapotheke in unser Programm aufnehmen können. Grundsätzlich arbeiten wir mit jeder Apotheke zusammen, sofern sie unsere Prozesse und Qualitätsanforderungen erfüllt. So stellen wir sicher, dass wir unseren Service in der gewohnt hohen Qualität erbringen können.", altpm_note:"Bitte beachten Sie: Der Prüf- und Aufnahmeprozess kann mehrere Wochen dauern.", altpm_contact:"Ja, bitte kontaktieren Sie meine Wunschapotheke.",
     altpm_li1:"Ihre Medikamente an Ihre Haustür liefern",
     altpm_li2:"Ihre Folgerezepte verwalten",
-    altpm_q:"Möchten Sie diese Leistungen für sich einrichten lassen?",
-    altpm_yes:"Ja, Leistungen einrichten",
-    altpm_no:"Nein, eigene Apotheke nutzen",
+    altpm_q:"Möchten Sie, dass wir diesen Prozess für Sie starten?",
+    altpm_yes:"Weiter →",
+    altpm_no:"Doch H+ Partnerapotheke nutzen",
     pharmacy_other:"Eine andere Apotheke meiner Wahl (bitte beachten Sie, dass wir Ihnen in diesem Fall möglicherweise nicht liefern können)",
     err_pharmacy:"Bitte wählen Sie eine Apotheke.",
     alt_pharmacy_h:"Angaben zur alternativen Apotheke",
@@ -1029,13 +1028,13 @@ const I18N = {
     pharma_badge:"Recommended",
     pharma_feat_delivery:"Pick Up and Delivery Service within 48 hours",
     pharma_feat_stock:"Brinsupri in stock",
-    altpm_title:"Are you sure?",
-    altpm_intro:"Selecting another pharmacy means that it is unlikely we will be able to provide the services you have requested. Depending on your choice we may not be able to:",
+    altpm_title:"Your preferred pharmacy isn't a partner yet",
+    altpm_intro:"We're happy to contact your preferred pharmacy and check whether we can add it to our partner programme. In principle we work with any pharmacy, as long as it meets our processes and quality standards \u2014 so we can keep delivering our service at the usual high quality.", altpm_note:"Please note: the review and onboarding process can take several weeks.", altpm_contact:"Yes, please contact my preferred pharmacy.",
     altpm_li1:"Deliver the medication to your door",
     altpm_li2:"Manage your repeat prescriptions",
-    altpm_q:"Would you like to have these services arranged for you?",
-    altpm_yes:"Yes, arrange these services",
-    altpm_no:"No, use my own pharmacy",
+    altpm_q:"Would you like us to start this process for you?",
+    altpm_yes:"Continue →",
+    altpm_no:"Use the H+ partner pharmacy instead",
     pharmacy_other:"Another pharmacy of my choice (please note that selecting this means that we may not be able to deliver to you)",
     err_pharmacy:"Please choose a pharmacy.",
     alt_pharmacy_h:"Alternative pharmacy details",
@@ -1229,8 +1228,8 @@ document.querySelectorAll('input[name=pharmacy_choice]').forEach(r=>r.addEventLi
     $('pharmaMini').addEventListener('click',()=>setTimeout(()=>{ if(no.checked && altM) altM.classList.add('open'); },0));
   }
   if(altM){
-    $('altpmYes').addEventListener('click',()=>{ yes.checked=true; yes.dispatchEvent(new Event('change',{bubbles:true})); altM.classList.remove('open'); });
-    $('altpmNo').addEventListener('click',()=>altM.classList.remove('open'));
+    $('altpmYes').addEventListener('click',()=>{ altM.classList.remove('open'); });
+    $('altpmNo').addEventListener('click',()=>{ yes.checked=true; yes.dispatchEvent(new Event('change',{bubbles:true})); altM.classList.remove('open'); });
     altM.addEventListener('click',e=>{ if(e.target===altM) altM.classList.remove('open'); });
   }
   const listM=$('pharmaListModal');
