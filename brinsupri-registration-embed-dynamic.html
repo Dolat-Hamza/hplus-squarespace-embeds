@@ -892,8 +892,8 @@ const I18N = {
     altpm_li1:"Ihre Medikamente an Ihre Haustür liefern",
     altpm_li2:"Ihre Folgerezepte verwalten",
     altpm_q:"Möchten Sie, dass wir diesen Prozess für Sie starten?",
-    altpm_yes:"Weiter →",
-    altpm_no:"Doch H+ Partnerapotheke nutzen",
+    altpm_yes:"Weiter mit Partnerapotheke",
+    altpm_no:"Nein, eigene Apotheke nutzen",
     pharmacy_other:"Eine andere Apotheke meiner Wahl (bitte beachten Sie, dass wir Ihnen in diesem Fall möglicherweise nicht liefern können)",
     err_pharmacy:"Bitte wählen Sie eine Apotheke.",
     alt_pharmacy_h:"Angaben zur alternativen Apotheke",
@@ -1033,8 +1033,8 @@ const I18N = {
     altpm_li1:"Deliver the medication to your door",
     altpm_li2:"Manage your repeat prescriptions",
     altpm_q:"Would you like us to start this process for you?",
-    altpm_yes:"Continue →",
-    altpm_no:"Use the H+ partner pharmacy instead",
+    altpm_yes:"Continue with the partner pharmacy",
+    altpm_no:"No, use my own pharmacy",
     pharmacy_other:"Another pharmacy of my choice (please note that selecting this means that we may not be able to deliver to you)",
     err_pharmacy:"Please choose a pharmacy.",
     alt_pharmacy_h:"Alternative pharmacy details",
@@ -1269,8 +1269,8 @@ document.querySelectorAll('input[name=pharmacy_choice]').forEach(r=>r.addEventLi
     $('pharmaMini').addEventListener('click',()=>setTimeout(()=>{ if(no.checked && altM) altM.classList.add('open'); },0));
   }
   if(altM){
-    $('altpmYes').addEventListener('click',()=>{ altM.classList.remove('open'); });
-    $('altpmNo').addEventListener('click',()=>{ yes.checked=true; yes.dispatchEvent(new Event('change',{bubbles:true})); altM.classList.remove('open'); });
+    $('altpmYes').addEventListener('click',()=>{ yes.checked=true; yes.dispatchEvent(new Event('change',{bubbles:true})); altM.classList.remove('open'); });
+    $('altpmNo').addEventListener('click',()=>{ altM.classList.remove('open'); });
     altM.addEventListener('click',e=>{ if(e.target===altM) altM.classList.remove('open'); });
   }
   const listM=$('pharmaListModal');
