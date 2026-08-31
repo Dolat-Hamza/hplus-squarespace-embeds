@@ -283,18 +283,28 @@
 <div class="hplus-root">
 <div class="hplus-wrap">
 
-  <!-- ===== Account Settings (top-right) ===== -->
+  <!-- ===== Header (logo + Account Settings) ===== -->
   <style>
-  .uhp-accountbar{display:flex;align-items:center;justify-content:flex-end;gap:12px;flex-wrap:wrap;margin:0 0 14px}
-  .acct-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff !important;font-family:inherit;font-size:clamp(11px,.95vw,14px);font-weight:500;letter-spacing:.3px;line-height:1;text-transform:uppercase;text-decoration:none !important;padding:14px 20px;border-radius:8px;white-space:nowrap;transition:opacity .2s ease,transform .2s ease}
-  .acct-btn:hover{opacity:.9;transform:translateY(-1px)}
-  .uhp-avatar{width:40px;height:40px;display:block;object-fit:contain}
-  @media(max-width:767px){.acct-btn{font-size:12px;padding:12px 16px}.uhp-avatar{width:34px;height:34px}}
+  .uhp-header{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;position:relative;padding:2px 0 16px;margin:0 0 20px}
+  .uhp-header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--blue),var(--teal) 55%,rgba(15,181,165,0))}
+  .uhp-brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none}
+  .uhp-brand svg{height:34px;width:58px;color:var(--blue);flex:0 0 auto}
+  .uhp-brand .bt{line-height:1.05}
+  .uhp-brand .bt b{font-family:var(--font-head),'Poppins',sans-serif;font-weight:700;color:var(--ink-head);font-size:17px;letter-spacing:.01em;display:block}
+  .uhp-brand .bt small{display:block;font-family:var(--font-body);font-weight:600;color:var(--blue-2);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;margin-top:3px}
+  .uhp-header-right{display:flex;align-items:center;gap:12px}
+  .acct-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--blue),var(--blue-3));color:#fff !important;font-family:var(--font-head),inherit;font-size:clamp(11px,.95vw,13.5px);font-weight:600;letter-spacing:.4px;line-height:1;text-transform:uppercase;text-decoration:none !important;padding:13px 20px;border-radius:999px;white-space:nowrap;box-shadow:0 12px 24px -12px rgba(0,126,198,.75);transition:opacity .2s ease,transform .2s ease,box-shadow .2s ease}
+  .acct-btn:hover{transform:translateY(-1px);box-shadow:0 16px 30px -12px rgba(0,126,198,.8)}
+  .uhp-avatar{width:42px;height:42px;display:block;object-fit:contain;border-radius:50%;box-shadow:0 4px 12px -6px rgba(6,50,76,.5)}
+  @media(max-width:767px){.acct-btn{font-size:12px;padding:11px 16px}.uhp-avatar{width:36px;height:36px}.uhp-brand svg{height:28px;width:48px}.uhp-brand .bt b{font-size:15px}}
   </style>
-  <div class="uhp-accountbar">
-    <a href="/uhp/account" class="acct-btn">Account Settings</a>
-    <a href="/uhp/account" aria-label="Account"><img class="uhp-avatar" src="https://images.squarespace-cdn.com/content/69821059a09d4c3e86e6809d/1781090219744-48F9YQ7N12F087G7RLLF/UHP+User.png?content-type=image%2Fpng" alt="Account"></a>
-  </div>
+  <header class="uhp-header">
+    <a href="/uhp" class="uhp-brand"><svg><use href="#ic-hlogo"/></svg><span class="bt"><b>United Pharma Partners</b><small>H+ Therapy Companion</small></span></a>
+    <div class="uhp-header-right">
+      <a href="/uhp/account" class="acct-btn">Account Settings</a>
+      <a href="/uhp/account" aria-label="Account"><img class="uhp-avatar" src="https://images.squarespace-cdn.com/content/69821059a09d4c3e86e6809d/1781090219744-48F9YQ7N12F087G7RLLF/UHP+User.png?content-type=image%2Fpng" alt="Account"></a>
+    </div>
+  </header>
 
   <!-- LANGUAGE SWITCHER -->
   <div class="langswitch"><div class="seg">
@@ -705,6 +715,32 @@
     <div class="rowc"><svg><use href="#ic-hotline"/></svg><a href="tel:08004402044" style="color:var(--blue);text-decoration:none">0800 44 020 44</a><span style="color:var(--muted)" data-i18n="contact_hours"></span></div>
   </div>
   <p class="disclaimer" data-i18n="disclaimer"></p>
+
+  <!-- ===== Footer ===== -->
+  <style>
+  .uhp-footer{margin-top:26px;border-radius:22px;overflow:hidden;position:relative;background:linear-gradient(120deg,#06324C 0%,#064B73 48%,#007EC6 100%);color:#fff;padding:26px 30px;box-shadow:0 18px 44px -24px rgba(6,50,76,.55)}
+  .uhp-footer::after{content:"";position:absolute;right:-70px;bottom:-110px;width:320px;height:320px;background:linear-gradient(135deg,rgba(15,181,165,.5),rgba(15,181,165,0));transform:rotate(38deg);pointer-events:none}
+  .uhp-footer-top{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:14px 24px;flex-wrap:wrap}
+  .uhp-footer-brand{display:flex;align-items:center;gap:12px}
+  .uhp-footer-brand svg{height:30px;width:52px;color:#fff}
+  .uhp-footer-brand span{font-family:var(--font-head),'Poppins',sans-serif;font-weight:600;font-size:15px}
+  .uhp-footer-links{display:flex;gap:18px;flex-wrap:wrap}
+  .uhp-footer-links a{color:#D5E7F2;text-decoration:none;font-family:var(--font-body);font-size:13.5px;font-weight:500;transition:color .15s}
+  .uhp-footer-links a:hover{color:#fff}
+  .uhp-footer-bottom{position:relative;z-index:1;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.18);font-family:var(--font-body);font-size:12px;color:#BCDFF5}
+  @media(max-width:767px){.uhp-footer{padding:22px 20px;text-align:center}.uhp-footer-top{justify-content:center}.uhp-footer-links{justify-content:center}}
+  </style>
+  <footer class="uhp-footer">
+    <div class="uhp-footer-top">
+      <div class="uhp-footer-brand"><svg><use href="#ic-hlogo"/></svg><span>United Pharma Partners</span></div>
+      <nav class="uhp-footer-links">
+        <a href="/therapy-companion/privacy-policy" target="_blank" rel="noopener">Datenschutz</a>
+        <a href="/therapy-companion/terms-and-conditions" target="_blank" rel="noopener">AGB</a>
+        <a href="/uhp/contact">Kontakt</a>
+      </nav>
+    </div>
+    <div class="uhp-footer-bottom">© 2026 United Pharma Partners · Ihr digitaler Begleiter für Ihre Therapie</div>
+  </footer>
 </div>
 
 <!-- no-support confirmation modal -->
