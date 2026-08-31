@@ -1580,3 +1580,69 @@ $('hplusForm').addEventListener('change',saveState);
 
 })();
 </script>
+
+<!-- ===== Account prefill: magic-link token -> load saved details from HubSpot (via serverless) ===== -->
+<style>
+#acctGate{max-width:820px;margin:0 auto 16px;background:#EAF4FB;border:1px solid #cfe6f5;border-radius:14px;padding:14px 16px;font-family:'Inter',system-ui,sans-serif;color:#06324C;font-size:14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+#acctGate .g-lbl{font-weight:600;flex:1 1 100%}
+#acctGate input{flex:1 1 220px;min-width:0;font-size:15px;border:1px solid #cfe6f5;border-radius:9px;padding:10px 12px;background:#fff}
+#acctGate button{background:#007EC6;color:#fff;border:none;border-radius:9px;padding:11px 18px;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif}
+#acctGate .g-msg{flex:1 1 100%;font-size:13px;color:#0567A1}
+#acctPrefillNote{max-width:820px;margin:0 auto 16px;font-family:'Inter',system-ui,sans-serif;font-size:13.5px;color:#0567A1;background:#E7F6EF;border:1px solid #b9e6d1;border-radius:12px;padding:11px 15px;display:none}
+</style>
+<script>
+(function(){
+  var ACCOUNT_API = "https://YOUR-ACCOUNT-API.vercel.app"; // <-- set to your deployed hplus-account-api URL
+  function fire(el,ev){ try{ el.dispatchEvent(new Event(ev,{bubbles:true})); }catch(e){} }
+  function setVal(id,v){ var e=document.getElementById(id); if(e){ e.value=v; fire(e,'input'); fire(e,'change'); } }
+  function setCheck(id,on){ var e=document.getElementById(id); if(e){ e.checked=!!on; fire(e,'change'); } }
+  function setRadio(name,val){ document.querySelectorAll('input[name="'+name+'"]').forEach(function(r){ if(r.value===val){ r.checked=true; fire(r,'change'); } }); }
+  function setMulti(containerId,vals){ var box=document.getElementById(containerId)||document; box.querySelectorAll('input[type=checkbox]').forEach(function(c){ if((vals||[]).indexOf(c.value)>=0){ c.checked=true; fire(c,'change'); } }); }
+
+  function apply(data){
+    Object.keys(data).forEach(function(id){
+      var it=data[id]; if(!it) return; var k=it.kind, v=it.value;
+      if(k==='text'||k==='date'||k==='select') setVal(id,v);
+      else if(k==='check') setCheck(id, v==='true');
+      else if(k==='radio') setRadio(id, v);
+      else if(k==='multi') setMulti(id, v);
+    });
+    var note=document.getElementById('acctPrefillNote');
+    if(note){ note.style.display='block'; note.textContent='Ihre gespeicherten Angaben wurden geladen. Bitte prüfen und aktualisieren Sie sie unten. · Your saved details were loaded — review and update them below.'; }
+  }
+
+  function prefill(token){
+    fetch(ACCOUNT_API+'/api/account/prefill?token='+encodeURIComponent(token))
+      .then(function(r){ return r.json(); })
+      .then(function(j){ if(j && j.ok && j.data) apply(j.data); else showGate('Dieser Link ist ungültig oder abgelaufen. · This link is invalid or expired.'); })
+      .catch(function(){ showGate('Angaben konnten nicht geladen werden. · Could not load your details.'); });
+  }
+
+  function showGate(msg){
+    if(document.getElementById('acctGate')) { if(msg){var m=document.querySelector('#acctGate .g-msg'); if(m)m.textContent=msg;} return; }
+    var root=document.querySelector('.hplus-wrap')||document.body;
+    var g=document.createElement('div'); g.id='acctGate';
+    g.innerHTML='<span class="g-lbl">Bereits registriert? Geben Sie Ihre E-Mail ein, um Ihre gespeicherten Angaben zu bearbeiten. · Already registered? Enter your email to edit your saved details.</span>'+
+      '<input type="email" id="acctEmail" placeholder="you@email.com" autocomplete="email">'+
+      '<button type="button" id="acctSend">Link senden / Send link</button>'+
+      '<span class="g-msg" id="acctMsg"></span>';
+    root.insertBefore(g, root.firstChild);
+    if(msg){ document.getElementById('acctMsg').textContent=msg; }
+    document.getElementById('acctSend').addEventListener('click',function(){
+      var em=(document.getElementById('acctEmail').value||'').trim();
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){ document.getElementById('acctMsg').textContent='Bitte gültige E-Mail eingeben. · Please enter a valid email.'; return; }
+      this.disabled=true; this.textContent='…';
+      fetch(ACCOUNT_API+'/api/account/request-link',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em})})
+        .then(function(){ document.getElementById('acctMsg').textContent='Wenn diese E-Mail registriert ist, haben wir Ihnen einen Link gesendet. Bitte prüfen Sie Ihr Postfach. · If that email is registered, we sent you a link — check your inbox.'; })
+        .catch(function(){ document.getElementById('acctMsg').textContent='Etwas ist schiefgelaufen. Bitte erneut versuchen. · Something went wrong, please try again.'; })
+        .finally(function(){ var b=document.getElementById('acctSend'); b.disabled=false; b.textContent='Link senden / Send link'; });
+    });
+  }
+
+  function boot(){
+    var token=new URLSearchParams(location.search).get('token');
+    if(token) prefill(token); else showGate('');
+  }
+  if(document.readyState!=='loading') boot(); else document.addEventListener('DOMContentLoaded', boot);
+})();
+</script>
