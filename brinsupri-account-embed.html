@@ -1592,7 +1592,7 @@ $('hplusForm').addEventListener('change',saveState);
 </style>
 <script>
 (function(){
-  var ACCOUNT_API = "https://YOUR-ACCOUNT-API.vercel.app"; // <-- set to your deployed hplus-account-api URL
+  var ACCOUNT_API = "https://hplus-account-api.vercel.app"; // deployed read-function
   function fire(el,ev){ try{ el.dispatchEvent(new Event(ev,{bubbles:true})); }catch(e){} }
   function setVal(id,v){ var e=document.getElementById(id); if(e){ e.value=v; fire(e,'input'); fire(e,'change'); } }
   function setCheck(id,on){ var e=document.getElementById(id); if(e){ e.checked=!!on; fire(e,'change'); } }
@@ -1611,8 +1611,8 @@ $('hplusForm').addEventListener('change',saveState);
     if(note){ note.style.display='block'; note.textContent='Ihre gespeicherten Angaben wurden geladen. Bitte prüfen und aktualisieren Sie sie unten. · Your saved details were loaded — review and update them below.'; }
   }
 
-  function prefill(token){
-    fetch(ACCOUNT_API+'/api/account/prefill?token='+encodeURIComponent(token))
+  function prefill(qs){
+    fetch(ACCOUNT_API+'/api/account/prefill?'+qs)
       .then(function(r){ return r.json(); })
       .then(function(j){ if(j && j.ok && j.data) apply(j.data); else showGate('Dieser Link ist ungültig oder abgelaufen. · This link is invalid or expired.'); })
       .catch(function(){ showGate('Angaben konnten nicht geladen werden. · Could not load your details.'); });
@@ -1640,8 +1640,11 @@ $('hplusForm').addEventListener('change',saveState);
   }
 
   function boot(){
-    var token=new URLSearchParams(location.search).get('token');
-    if(token) prefill(token); else showGate('');
+    var p=new URLSearchParams(location.search);
+    var token=p.get('token'), email=p.get('email');
+    if(token) prefill('token='+encodeURIComponent(token));
+    else if(email) prefill('email='+encodeURIComponent(email));
+    else showGate('');
   }
   if(document.readyState!=='loading') boot(); else document.addEventListener('DOMContentLoaded', boot);
 })();
