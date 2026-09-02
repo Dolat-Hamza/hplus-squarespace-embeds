@@ -1,20 +1,121 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-.hplus-legal{--blue:#007EC6;--navy:#06324C;--text:#24272A;--muted:#71777C;--line:#DCE2E6;--wash:#F6F8F9;font-family:'Inter',sans-serif;color:var(--text);background:var(--wash);padding:clamp(24px,5vw,64px) 16px;line-height:1.65}.hplus-legal *{box-sizing:border-box}.hplus-legal__card{max-width:880px;margin:auto;background:#fff;border:1px solid var(--line);border-radius:22px;padding:clamp(24px,5vw,52px);box-shadow:0 20px 50px -32px rgba(6,50,76,.45)}.hplus-legal__eyebrow{color:var(--blue);font-weight:700;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}.hplus-legal__draft{display:inline-block;margin:14px 0 4px;padding:5px 10px;border-radius:999px;background:#E6F3FB;color:#0567A1;font-size:.78rem;font-weight:600}.hplus-legal h1,.hplus-legal h2{font-family:'Poppins',sans-serif;color:var(--navy)}.hplus-legal h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.2;margin:10px 0 16px}.hplus-legal h2{font-size:1.15rem;margin:30px 0 8px}.hplus-legal p{margin:0 0 14px}.hplus-legal__intro{font-size:1.05rem;color:var(--muted);padding-bottom:22px;border-bottom:1px solid var(--line)}.hplus-legal__note{margin-top:32px;padding:14px 16px;border-radius:12px;background:#E6F3FB;color:#0567A1;font-size:.9rem}@media(max-width:520px){.hplus-legal{padding:12px}.hplus-legal__card{border-radius:16px;padding:22px 18px}}
+.uhp-legal-page{--blue:#007EC6;--blue-2:#0567A1;--blue-3:#064B73;--teal:#0FB5A5;--navy:#06324C;--ink-head:#06324C;--text:#24272A;--muted:#71777C;--line:#DCE2E6;--wash:#F6F8F9;--blue-050:#E6F3FB;
+--font-head:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+--font-body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+font-family:var(--font-body);color:var(--text);background:var(--wash);padding:clamp(18px,4vw,40px) 16px;line-height:1.65}
+.uhp-legal-page *{box-sizing:border-box}
+.uhp-legal-page .wrap{max-width:880px;margin:auto}
+.uhp-header{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;position:relative;padding:2px 0 16px;margin:0 0 22px}
+.uhp-header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--blue),var(--teal) 55%,rgba(15,181,165,0))}
+.uhp-brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none}
+.uhp-brand svg{height:34px;width:58px;color:var(--blue);flex:0 0 auto}
+.uhp-brand .bt{line-height:1.05}
+.uhp-brand .bt b{font-family:var(--font-head);font-weight:700;color:var(--ink-head);font-size:17px;letter-spacing:.01em;display:block}
+.uhp-brand .bt small{display:block;font-family:var(--font-body);font-weight:600;color:var(--blue-2);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;margin-top:3px}
+.uhp-header-right{display:flex;align-items:center;gap:12px}
+.acct-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--blue),var(--blue-3));color:#fff !important;font-family:var(--font-head);font-size:clamp(11px,.95vw,13.5px);font-weight:600;letter-spacing:.4px;line-height:1;text-transform:uppercase;text-decoration:none !important;padding:13px 20px;border-radius:999px;white-space:nowrap;box-shadow:0 12px 24px -12px rgba(0,126,198,.75);transition:transform .2s,box-shadow .2s}
+.acct-btn:hover{transform:translateY(-1px);box-shadow:0 16px 30px -12px rgba(0,126,198,.8)}
+.uhp-avatar{width:42px;height:42px;display:block;object-fit:contain;border-radius:50%;box-shadow:0 4px 12px -6px rgba(6,50,76,.5)}
+.uhp-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:clamp(24px,5vw,52px);box-shadow:0 20px 50px -32px rgba(6,50,76,.45)}
+.uhp-card .eyebrow{color:var(--blue);font-weight:700;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}
+.uhp-card h1{font-family:var(--font-head);color:var(--navy);font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.2;margin:10px 0 8px}
+.uhp-card .intro{font-size:1.05rem;color:var(--muted);padding-bottom:22px;margin:0 0 8px;border-bottom:1px solid var(--line)}
+.uhp-card h2{font-family:var(--font-head);color:var(--navy);font-size:1.2rem;margin:34px 0 8px;padding-top:6px}
+.uhp-card h3{font-family:var(--font-head);color:var(--ink-head);font-size:1.02rem;margin:20px 0 6px}
+.uhp-card p{margin:0 0 13px}
+.uhp-card ul{margin:0 0 14px;padding-left:20px}
+.uhp-card li{margin:0 0 7px}
+.uhp-card a{color:var(--blue-2);font-weight:600}
+.uhp-card .addr{margin:2px 0 14px;padding:14px 16px;border-radius:12px;background:var(--wash);border:1px solid var(--line);color:var(--text);font-size:.95rem;line-height:1.55}
+.uhp-card .tbc{color:var(--muted);font-style:italic}
+.uhp-card .updated{margin-top:6px;font-size:.85rem;color:var(--muted)}
+.uhp-card .note{margin-top:32px;padding:14px 16px;border-radius:12px;background:var(--blue-050);color:var(--blue-2);font-size:.9rem}
+.uhp-footer{margin-top:26px;border-radius:22px;overflow:hidden;position:relative;background:linear-gradient(120deg,#06324C 0%,#064B73 48%,#007EC6 100%);color:#fff;padding:26px 30px;box-shadow:0 18px 44px -24px rgba(6,50,76,.55)}
+.uhp-footer::after{content:"";position:absolute;right:-70px;bottom:-110px;width:320px;height:320px;background:linear-gradient(135deg,rgba(15,181,165,.5),rgba(15,181,165,0));transform:rotate(38deg);pointer-events:none}
+.uhp-footer-top{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:14px 24px;flex-wrap:wrap}
+.uhp-footer-brand{display:flex;align-items:center;gap:12px}
+.uhp-footer-brand svg{height:30px;width:52px;color:#fff}
+.uhp-footer-brand span{font-family:var(--font-head);font-weight:600;font-size:15px}
+.uhp-footer-links{display:flex;gap:18px;flex-wrap:wrap}
+.uhp-footer-links a{color:#D5E7F2;text-decoration:none;font-family:var(--font-body);font-size:13.5px;font-weight:500;transition:color .15s}
+.uhp-footer-links a:hover{color:#fff}
+.uhp-footer-bottom{position:relative;z-index:1;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.18);font-family:var(--font-body);font-size:12px;color:#BCDFF5}
+@media(max-width:767px){.uhp-footer{padding:22px 20px;text-align:center}.uhp-footer-top{justify-content:center}.uhp-footer-links{justify-content:center}.acct-btn{font-size:12px;padding:11px 16px}.uhp-avatar{width:36px;height:36px}}
+@media(max-width:520px){.uhp-legal-page{padding:12px}.uhp-card{border-radius:16px;padding:22px 18px}}
 </style>
-<main class="hplus-legal">
-  <article class="hplus-legal__card">
-    <div class="hplus-legal__eyebrow">H+ Therapy Companion</div>
-    <span class="hplus-legal__draft">Draft placeholder · Entwurf</span>
-    <h1>Terms &amp; Conditions</h1>
-    <p class="hplus-legal__intro">Allgemeine Geschäftsbedingungen · Terms and conditions for use of the H+ Therapy Companion.</p>
-    <h2>1. Lorem ipsum</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-    <h2>2. Dolor sit amet</h2>
-    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
-    <h2>3. Consectetur adipiscing</h2>
-    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
-    <div class="hplus-legal__note">Placeholder content only — replace this text with approved legal wording before publication. · Nur Platzhalter — vor Veröffentlichung durch freigegebene Rechtstexte ersetzen.</div>
-  </article>
-</main>
+<div class="uhp-legal-page"><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><mask id="hlmask"><image href="data:image/png;base64,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" x="0" y="0" width="1134" height="709"/></mask><symbol id="ic-hlogo" viewBox="0 0 1134 709"><rect width="1134" height="709" fill="currentColor" mask="url(#hlmask)"/></symbol></defs></svg><div class="wrap"><header class="uhp-header"><a href="/uhp" class="uhp-brand"><svg><use href="#ic-hlogo"/></svg><span class="bt"><b>United Pharma Partners</b><small>H+ Therapy Companion</small></span></a><div class="uhp-header-right"><a href="/uhp/account" class="acct-btn">Account Settings</a><a href="/uhp/account" aria-label="Account"><img class="uhp-avatar" src="https://images.squarespace-cdn.com/content/69821059a09d4c3e86e6809d/1781090219744-48F9YQ7N12F087G7RLLF/UHP+User.png?content-type=image%2Fpng" alt="Account"></a></div></header><article class="uhp-card"><div class="eyebrow">H+ Therapy Companion</div><h1>Terms &amp; Conditions</h1><p class="intro">The terms governing your access to and use of the United Healthcare Professionals website and secure portal.</p>
+<h2>1. About These Terms</h2>
+<p>These Terms of Use (&ldquo;Terms&rdquo;) govern your access to and use of the website operated by United Healthcare Professionals GmbH (&ldquo;UHP&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;), accessible at <a href="http://united-healthcare.eu" target="_blank" rel="noopener">united-healthcare.eu</a> and any associated subdomains or services, including the secure patient and physician portal.</p>
+<p>By accessing or using this website, you confirm that you have read, understood, and agree to be bound by these Terms. If you do not agree to these Terms, please discontinue use of this website immediately.</p>
+<p>These Terms apply to all users of the website, including patients, family members and carers, healthcare professionals, pharmaceutical partners, healthcare insurance representatives, and general visitors.</p>
 
+<h2>2. Who We Are</h2>
+<p>United Healthcare Professionals (UHP) is a specialist provider of home-based therapy services for patients with rare and orphan diseases, operating across Germany, Austria, and throughout the European Union.</p>
+<p>Registered company details:</p>
+<div class="addr">United Healthcare Professionals GmbH<br><span class="tbc">[Registered address &mdash; to be confirmed]</span><br><span class="tbc">[Commercial register number &mdash; HRB to be confirmed]</span><br><span class="tbc">[VAT identification number &mdash; to be confirmed]</span><br>Managing Director: <span class="tbc">[Name to be confirmed]</span></div>
+<p>Contact:</p>
+<div class="addr">Email: <span class="tbc">[contact email]</span><br>Telephone: <span class="tbc">[telephone number]</span><br>Website: <a href="http://united-healthcare.eu" target="_blank" rel="noopener">united-healthcare.eu</a></div>
+
+<h2>3. Nature of Information on This Website</h2>
+<h3>3.1 General health information only</h3>
+<p>The information published on this website &mdash; including content relating to rare diseases, therapy types, home infusion procedures, self-injection training, and disease management &mdash; is provided for general informational and educational purposes only. This content does not constitute medical advice, clinical guidance, diagnosis, or treatment recommendations. It is not a substitute for professional medical consultation with a qualified physician or specialist.</p>
+<h3>3.2 No doctor&ndash;patient relationship</h3>
+<p>Accessing this website does not establish a therapeutic or doctor&ndash;patient relationship between you and UHP or any healthcare professional associated with UHP. Any enquiry submitted through our contact or booking forms represents an expression of interest only and does not constitute a clinical referral or formal treatment relationship.</p>
+
+<h2>4. Use of This Website</h2>
+<h3>4.1 Permitted use</h3>
+<p>You may use this website for lawful purposes only, including obtaining information about UHP's services, submitting enquiries, accessing the secure patient or physician portal (if registered), and downloading approved resources.</p>
+<h3>4.2 Prohibited conduct</h3>
+<p>You agree not to:</p>
+<ul>
+<li>Use this website for any unlawful purpose or in violation of applicable law</li>
+<li>Attempt to gain unauthorised access to any part of the website, including the secure patient portal, physician portal, or backend systems</li>
+<li>Transmit any material that is defamatory, offensive, or otherwise objectionable</li>
+<li>Engage in any activity that disrupts, damages, or impairs the functioning of the website or its infrastructure</li>
+<li>Use automated tools (bots, scrapers, crawlers) to extract data from this website without prior written consent from UHP</li>
+<li>Impersonate any person or entity, including a UHP employee, healthcare professional, or other user</li>
+<li>Attempt to reverse-engineer, decompile, or extract source code from any software component of this website</li>
+</ul>
+<h3>4.3 Accuracy of information you provide</h3>
+<p>When submitting enquiries, registering for the patient or physician portal, or completing any form on this website, you agree to provide accurate, complete, and truthful information. UHP reserves the right to suspend access for any user found to have submitted false or misleading information.</p>
+
+<h2>5. Intellectual Property</h2>
+<h3>5.1 UHP-owned content</h3>
+<p>All content on this website &mdash; including text, clinical descriptions, graphic elements, logos, photography, video, and structural design &mdash; is the intellectual property of United Healthcare Professionals GmbH or is used under licence. All rights are reserved.</p>
+<h3>5.2 Permitted use of content</h3>
+<p>You may access and view content on this website for personal, non-commercial purposes. You may not reproduce, redistribute, adapt, publish, or commercially exploit any content from this website without prior written permission from UHP.</p>
+<h3>5.3 Patient and physician resources</h3>
+<p>Downloadable resources (PDF guides, therapy documentation, patient information materials) are provided for personal use by the individual patient, carer, or registered healthcare professional. These materials may not be modified, redistributed, or published without UHP's consent.</p>
+
+<h2>6. Limitation of Liability</h2>
+<h3>6.1 Exclusion of warranties</h3>
+<p>To the fullest extent permitted under applicable German and EU law, UHP excludes all warranties, express or implied, in relation to this website and its content, including warranties of fitness for a particular purpose, accuracy, or uninterrupted availability.</p>
+<h3>6.2 Healthcare liability limitation</h3>
+<p>UHP expressly disclaims liability for any clinical outcome, treatment decision, or health consequence arising from reliance on the general informational content of this website. UHP's clinical liability &mdash; relating to the direct provision of home therapy services to registered patients &mdash; is governed separately by the individual service agreement between UHP and the patient or their responsible physician.</p>
+<h3>6.3 Technical limitations</h3>
+<p>UHP does not guarantee that this website will be available at all times, free from errors, or free from viruses or other harmful components. UHP accepts no liability for any loss or damage resulting from reliance on information obtained from this website, or from temporary unavailability of any part of the service.</p>
+
+<h2>7. Links to External Websites</h2>
+<p>This website may contain links to external websites for informational purposes &mdash; including patient organisations, rare disease registries, regulatory bodies, and partner institutions. These links are provided as a convenience only. UHP does not endorse, control, or take responsibility for the content, accuracy, or data practices of any externally linked website. Accessing external links is at your own discretion and risk.</p>
+
+<h2>8. Accessibility</h2>
+<p>UHP is committed to making this website accessible to all users, including those with disabilities, in compliance with Web Content Accessibility Guidelines (WCAG) 2.1 Level AA. Our full Accessibility Statement is available at <a href="/accessibility">/accessibility</a>. If you experience any accessibility barrier on this website, please contact us at <span class="tbc">[accessibility contact email]</span> and we will endeavour to resolve it promptly.</p>
+
+<h2>9. Changes to These Terms</h2>
+<p>UHP reserves the right to amend these Terms at any time. Amendments will be published on this page with an updated effective date. For material changes that affect registered portal users, UHP will provide notification via email. Continued use of this website following the publication of updated Terms constitutes acceptance of those Terms. If you do not agree with updated Terms, you must discontinue use of the website and may request deletion of your portal account by contacting <span class="tbc">[data protection contact]</span>.</p>
+
+<h2>10. Governing Law and Jurisdiction</h2>
+<p>These Terms are governed by and construed in accordance with the laws of the Federal Republic of Germany, without regard to conflict of law principles. Any disputes arising from or in connection with these Terms or your use of this website shall be subject to the exclusive jurisdiction of the courts of <span class="tbc">[city &mdash; to be confirmed with legal counsel, typically registered office city]</span>. For users residing in another EU Member State, nothing in these Terms affects your rights under the mandatory consumer protection laws of your country of residence.</p>
+
+<h2>11. Severability</h2>
+<p>If any provision of these Terms is found by a court of competent jurisdiction to be invalid, unlawful, or unenforceable, that provision shall be severed from the remaining Terms, which shall continue in full force and effect.</p>
+
+<h2>12. Contact and Complaints</h2>
+<p>For questions relating to these Terms, please contact:</p>
+<div class="addr">United Healthcare Professionals GmbH<br><span class="tbc">[Registered address]</span><br>Email: <span class="tbc">[legal/compliance contact email]</span><br>Telephone: <span class="tbc">[telephone number]</span></div>
+<p>For data protection enquiries specifically, contact our Data Protection Officer (if appointed): <span class="tbc">[DPO contact &mdash; confirm if DPO appointment is required under GDPR Art. 37]</span>.</p>
+<p>For complaints you may not resolve directly with UHP, you may contact the relevant supervisory authority. The competent data protection authority for UHP's registered location is: <span class="tbc">[Name of relevant Landesdatenschutzbeh&ouml;rde &mdash; to be confirmed based on registered office]</span>.</p>
+
+<div class="note">Fields marked in italics are placeholders to be confirmed with legal counsel before publication.</div>
+</article><footer class="uhp-footer"><div class="uhp-footer-top"><div class="uhp-footer-brand"><svg><use href="#ic-hlogo"/></svg><span>United Pharma Partners</span></div><nav class="uhp-footer-links"><a href="/therapy-companion/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a><a href="/therapy-companion/terms-and-conditions" target="_blank" rel="noopener">Terms &amp; Conditions</a><a href="/therapy-companion/data-processing-agreement" target="_blank" rel="noopener">DPA</a><a href="/uhp/contact">Contact</a></nav></div><div class="uhp-footer-bottom">&copy; 2026 United Pharma Partners &middot; Your digital companion throughout your therapy</div></footer></div></div>
