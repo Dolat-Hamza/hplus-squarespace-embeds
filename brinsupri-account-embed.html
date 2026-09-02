@@ -1576,7 +1576,7 @@ document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==
 
 /* init */
 applyLang(currentLang);
-restoreState();                                            // autofill from a prior visit (this browser)
+if(!/[?&](token|email)=/.test(location.search)) restoreState();  // prior-visit autofill — but a prefill link (token/email) is authoritative, so skip stale local data for returning customers
 syncOptions(); syncConsentVisibility(); syncSecondPerson(); setupDates();
 $('hplusForm').addEventListener('input',saveState);        // persist as the patient types
 $('hplusForm').addEventListener('change',saveState);

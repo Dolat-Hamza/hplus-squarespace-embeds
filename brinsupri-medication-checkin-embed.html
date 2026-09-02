@@ -431,7 +431,7 @@
   const ctrls=()=>[...document.querySelectorAll('#f input,#f select')];
   function save(){try{const s={};ctrls().forEach((e,i)=>{if(e.type==='checkbox'||e.type==='radio'){if(e.checked)s[i]=1;}else if(e.value!=='')s[i]=e.value;});localStorage.setItem(LS_KEY,JSON.stringify(s));}catch(e){}}
   function restore(){let s;try{s=JSON.parse(localStorage.getItem(LS_KEY)||'null');}catch(e){}if(!s)return;const cs=ctrls();Object.keys(s).forEach(k=>{const e=cs[+k];if(!e)return;if(e.type==='checkbox'||e.type==='radio')e.checked=!!s[k];else e.value=s[k];});document.querySelectorAll('input[data-reveal],.choice input').forEach(i=>i.dispatchEvent(new Event('change')));}
-  applyLang(lang); restore(); prefillIdentity(); syncShowif(); syncCheckGroups();
+  applyLang(lang); if(!/[?&](token|email)=/.test(location.search)) restore(); prefillIdentity(); syncShowif(); syncCheckGroups();
   $('f').addEventListener('input',save);$('f').addEventListener('change',save);
   $('resetBtn').addEventListener('click',()=>{try{localStorage.removeItem(LS_KEY);}catch(e){}location.reload();});
 
