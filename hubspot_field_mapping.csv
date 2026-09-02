@@ -1,58 +1,67 @@
-HubSpot Form,Section,Question / Field,Form field id,HubSpot property,Status,Notes
-Registration,About you,Are you the patient or caregiver?,customer_type,customer_type,MAPPED,
-Registration,About you,First name,firstname,firstname,MAPPED,
-Registration,About you,Last name,lastname,lastname,MAPPED,
-Registration,About you,Email,email,email,MAPPED,
-Registration,About you,How should we contact you (channels),#comm_prefs (multi),communication_preference,MAPPED,semicolon-joined
-Registration,About you,Patient WhatsApp number,patient_whatsapp,patient_whatsapp,MAPPED,conditional
-Registration,About you,Patient phone number,patient_phone,patient_phone,MAPPED,conditional
-Registration,About you,Patient SMS number,patient_sms,patient_sms,MAPPED,conditional
-Registration,About you,Send reminders to a caregiver too?,second_person,would_you_like_the_medication_reminders_to_be_sent_to_a_second_person_,MAPPED,
-Registration,Caregiver,Caregiver first name,second_contact_person,second_contact_person,MAPPED,
-Registration,Caregiver,Caregiver last name,second_contact_surname,second_contact_surname,MAPPED,
-Registration,Caregiver,Relationship to patient,caregiver_relationship,caregiver_relationship,MAPPED,
-Registration,Caregiver,How to contact caregiver (channels),#cg_comm_prefs (multi),caregiver_communication_preferences,MAPPED,
-Registration,Caregiver,Caregiver email,second_contact_email,second_contact_email,MAPPED,
-Registration,Caregiver,Caregiver WhatsApp,second_contact_whatsapp,second_contact_whatsapp,MAPPED,
-Registration,Caregiver,Caregiver phone,second_contact_phone,second_contact_phone,MAPPED,
-Registration,Caregiver,Caregiver SMS,caregiver_sms,caregiver_sms,MAPPED,
-Registration,Account,Create an account,create_an_account,create_an_account,MAPPED,check if UI still present
-Registration,Consent,Agree to T&C,agree_to_terms,agree_to_terms,MAPPED,hardcoded true on submit
-Registration,Medication,Selected medicine,med_select / HS.med.medicine,medicine,MAPPED,
-Medical,Medication,Dose,HS.med.dose,medication_dose__open_field_,MAPPED,from medicine data
-Medical,Medication,Frequency,HS.med.frequency,medication_frequency,MAPPED,
-Medical,Medication,Administration,HS.med.administration,medication_administration,MAPPED,
-Medical,Medication,Confirm prescribed at these doses,confirmation_medication,confirmation_medication___dosage_is_correct,MAPPED,
-Medical,Medication,First dose date,first_medication_date,uhp_first_medication_date,MAPPED,epoch ms
-Medical,Medication,Any other medication?,other_medication,does_the_patient_take_any_other_medication_,MAPPED,
-Medical,Medication,Check-in frequency,reminder_freq,uhp_medication_reminder_preferences,MAPPED,
-Delivery,Service,Country (from URL /de /at),country,h_country + doctors_country_brinsupri,MAPPED,sent to both
-Delivery,Service,Pick Up & Delivery Service,delivery_management,delivery_management,MAPPED,
-Delivery,Service,Prescription coordination (mirrors delivery),prescription_management,prescription_management,MAPPED,mirrored from delivery box
-Delivery,Service,No support right now,no_support,i_don_t_want_hcp_support_right_now,MAPPED,
-Delivery,Consent,Agree delivery terms,delivery_consent,delivery_consent_germany / delivery_consent_austria,MAPPED,by country
-Delivery,Pharmacy,Partner pharmacy vs own,pharmacy_choice,consent_for_h_pharmacy_germany,MAPPED,yes=partner / no=own
-Delivery,Pharmacy,Own pharmacy name,chosen_pharmacy_name,chosen_pharmacy_name,MAPPED,when own pharmacy
-Delivery,Pharmacy,Own pharmacy street,chosen_pharmacy_street,chosen_pharmacy_street,MAPPED,
-Delivery,Pharmacy,Own pharmacy city,chosen_pharmacy_city,chosen_pharmacy_city,MAPPED,
-Delivery,Pharmacy,Own pharmacy post code,chosen_pharmacy_postcode,chosen_pharmacy_post_code,MAPPED,
-Delivery,Doctor,Doctor first name,doctor_first,doctor_s_first_name,MAPPED,
-Delivery,Doctor,Doctor last name,doctor_last,doctor_s_last_name,MAPPED,
-Delivery,Doctor,Doctor street,doctor_street,doctor_s_street_address,MAPPED,
-Delivery,Doctor,Doctor address line 2 / practice,doctor_street2,doctor_s_street_address_2,MAPPED,
-Delivery,Doctor,Doctor post code,doctor_postcode,doctor_s_post_code,MAPPED,
-Delivery,Doctor,Doctor phone,doctor_phone,doctor_s_phone_number,MAPPED,
-Delivery,Doctor,Doctor email,doctor_email,work_email,MAPPED,note: maps to work_email
-Delivery,Doctor,Doctor fax,doctor_fax,doctor_s_fax,MAPPED,
-Delivery,Medication,Have you already received your medication?,received_medication,PROPOSED: has_received_medication,UNMAPPED - FIX,needs HubSpot property (create)
-Medical/Delivery,Reminders,Prescription reminders when low?,prescription_reminders_low,PROPOSED: prescription_low_reminders,UNMAPPED - FIX,needs HubSpot property
-Medical/Delivery,Reminders,Preferences for automated services (channels),#prefs_prefs (multi),PROPOSED: automated_service_channels,UNMAPPED - FIX,needs HubSpot property
-Medical/Delivery,Reminders,Prefs WhatsApp/Phone/SMS detail,prefs_whatsapp/prefs_phone/prefs_sms,PROPOSED: reuse patient_* or new,UNMAPPED - DECIDE,only shown if channel not already given
-Delivery,Delivery address,Delivery street & house number,delivery_street,PROPOSED: delivery_street_address,UNMAPPED - FIX (CRITICAL),where meds are delivered
-Delivery,Delivery address,Delivery address line 2,delivery_street2,PROPOSED: delivery_address_line_2,UNMAPPED - FIX,
-Delivery,Delivery address,Delivery post code,delivery_postcode,PROPOSED: delivery_post_code,UNMAPPED - FIX (CRITICAL),
-Delivery,Delivery address,Delivery city,delivery_city,PROPOSED: delivery_city,UNMAPPED - FIX (CRITICAL),
-Delivery,Pharmacy,Contact my preferred pharmacy to onboard,contact_my_pharmacy,PROPOSED: contact_preferred_pharmacy,UNMAPPED - FIX,checkbox in the onboard modal
-Delivery,DEAD,Appointment reminders module,check_up_reminder_management,check_up_reminder_management,DEAD,UI removed - always false - can drop from payload
-Delivery,DEAD,HCP/prescription consent,hcp_consent,hcp_consent / hcp_consent_austria,DEAD,consent page removed - always false
-Delivery,DEAD,Next appointment date,appointment_date,when_is_your_next_doctor_s_appointment_scheduled_,DEAD,removed - falls back to callback/false
+HubSpot property,Status,HubSpot label,Type,Sent by forms
+account_email,Mapped,Account Email,string / text,"Account update, Caregiver consent, Registration"
+agree_to_terms,Mapped,Agree to Terms,enumeration / booleancheckbox,"Account update, Caregiver consent, Patient consent, Registration"
+call_to_reduce_missed_pills,NEEDS CREATING,"(to create) Values: Yes, No",enumeration / booleancheckbox,Check-in
+caregiver_communication_preferences,Mapped,Caregiver Communication Preferences,enumeration / checkbox,"Account update, Registration"
+caregiver_relationship,Mapped,Caregiver Relationship,enumeration / select,"Account update, Caregiver consent, Registration"
+caregiver_sms,Mapped,Caregiver SMS,string / phonenumber,"Account update, Registration"
+check_up_reminder_management,Mapped,Appointment Reminder Management,enumeration / booleancheckbox,"Account update, Registration"
+check_up_reminder_management___caregiver_,Mapped,Check-Up Reminder Management  (Caregiver),enumeration / booleancheckbox,Account update
+chosen_pharmacy_city,Mapped,Chosen Pharmacy City,string / text,"Account update, Registration"
+chosen_pharmacy_name,Mapped,Chosen Pharmacy Name,string / text,"Account update, Registration"
+chosen_pharmacy_post_code,Mapped,Chosen Pharmacy Post Code,string / text,"Account update, Registration"
+chosen_pharmacy_street,Mapped,Chosen Pharmacy Street,string / text,"Account update, Registration"
+communication_preference,Mapped,Communication Preference,enumeration / checkbox,"Account update, Caregiver consent, Patient consent, Registration"
+confirmation_medication___dosage_is_correct,Mapped,Confirmation Medication & Dosage is correct,enumeration / booleancheckbox,"Account update, Registration"
+consent_for_h_pharmacy_germany,Mapped,Consent for H+ Pharmacy (Germany),bool / booleancheckbox,"Account update, Registration"
+create_an_account,Mapped,Create an account,enumeration / booleancheckbox,"Account update, Caregiver consent, Registration"
+currently_compliant_to_medicine_protocols,Mapped,Currently compliant to Medicine Protocols,enumeration / booleancheckbox,Check-in
+customer_type,Mapped,Customer Type,enumeration / select,"Account update, Registration"
+delivery_consent_austria,Mapped,Delivery Consent (Austria),bool / booleancheckbox,"Account update, Registration"
+delivery_consent_germany,Mapped,Delivery Consent (Germany),bool / booleancheckbox,"Account update, Registration"
+delivery_management,Mapped,Delivery Management,bool / booleancheckbox,"Account update, Registration"
+doctor_s_fax,Mapped,Doctor's Fax,string / phonenumber,"Account update, Registration"
+doctor_s_first_name,Mapped,Doctor's First Name,string / text,"Account update, Registration"
+doctor_s_last_name,Mapped,Doctor's Last name,string / text,"Account update, Registration"
+doctor_s_phone_number,Mapped,Doctor's Phone Number,string / phonenumber,"Account update, Registration"
+doctor_s_post_code,Mapped,Doctor's Post Code,string / text,"Account update, Registration"
+doctor_s_street_address,Mapped,Doctor's Street Address,string / text,"Account update, Registration"
+doctor_s_street_address_2,Mapped,Doctor's Street Address 2,string / text,"Account update, Registration"
+doctors_country_brinsupri,Mapped,Doctor's Country (Brinsupri),enumeration / select,"Account update, Registration"
+does_the_patient_take_any_other_medication_,Mapped,Does the patient take any other medication?,string / text,"Account update, Registration"
+email,Mapped,Email,string / text,"Account update, Caregiver consent, Check-in, Patient consent, Registration"
+firstname,Mapped,First Name,string / text,"Account update, Caregiver consent, Check-in, Patient consent, Registration"
+h_country,Mapped,H+ Country,enumeration / select,"Account update, Registration"
+hcp_consent,Mapped,Prescription Consent (Germany),bool / booleancheckbox,"Account update, Registration"
+hcp_consent_austria,Mapped,Prescription Consent (Austria),bool / booleancheckbox,"Account update, Registration"
+hs_lead_status,Mapped,Lead Status,enumeration / radio,"Caregiver consent, Check-in"
+hs_whatsapp_phone_number,Mapped,WhatsApp Phone Number,string / phonenumber,"Account update, Caregiver consent, Patient consent"
+i_don_t_want_hcp_support_right_now,Mapped,I don't want HCP Support right now,enumeration / booleancheckbox,"Account update, Registration"
+lastname,Mapped,Last Name,string / text,"Account update, Caregiver consent, Check-in, Patient consent, Registration"
+medication_administration,Mapped,Medication Administration,enumeration / radio,"Account update, Registration"
+medication_dose__open_field_,Mapped,Medication Dose (open field),string / text,"Account update, Registration"
+medication_frequency,Mapped,Medication Frequency,enumeration / radio,"Account update, Registration"
+medication_instructions,Mapped,Medication Instructions,string / textarea,Caregiver consent
+medicine,Mapped,Medicine,enumeration / select,"Account update, Caregiver consent, Registration"
+missed_pills_reason,NEEDS CREATING,(to create) Free text (multi-line),string / textarea,Check-in
+mobilephone,Mapped,Mobile Phone Number,string / phonenumber,Caregiver consent
+patient_email,Mapped,Patient Email,string / text,Caregiver consent
+patient_phone,Mapped,Patient Phone,string / phonenumber,"Account update, Registration"
+patient_sms,Mapped,Patient SMS,string / phonenumber,"Account update, Patient consent, Registration"
+patient_whatsapp,Mapped,Patient WhatsApp,string / phonenumber,"Account update, Registration"
+phone,Mapped,Phone Number,string / phonenumber,"Account update, Caregiver consent, Patient consent"
+pills_taken_last_7_days,NEEDS CREATING,"(to create) Values: 0-3, 3-5, 5-7",enumeration / radio,Check-in
+prescription_management,Mapped,Prescription Management,enumeration / booleancheckbox,"Account update, Registration"
+prescription_management___caregiver_,Mapped,Prescription Management  (Caregiver),enumeration / booleancheckbox,Account update
+reorder_prescription,NEEDS CREATING,"(to create) Values: Yes, No",enumeration / booleancheckbox,Check-in
+second_contact_email,Mapped,Caregiver Contact Email,string / text,"Account update, Registration"
+second_contact_person,Mapped,Caregiver First Name,string / text,"Account update, Registration"
+second_contact_phone,Mapped,Caregiver Phone,string / phonenumber,"Account update, Registration"
+second_contact_surname,Mapped,Caregiver Surname,string / text,"Account update, Registration"
+second_contact_whatsapp,Mapped,Caregiver Whatsapp,string / phonenumber,"Account update, Registration"
+taken_medicine,Mapped,Taken Medicine,enumeration / booleancheckbox,Check-in
+uhp_first_medication_date,Mapped,H+ First Medication Date,date / date,"Account update, Registration"
+uhp_medication_reminder_preferences,Mapped,H+ Medication Checkin Reminder Preferences,enumeration / radio,"Account update, Registration"
+when_is_your_next_doctor_s_appointment_scheduled_,Mapped,HCP Set Up Date,date / date,"Account update, Registration"
+work_email,Mapped,Work email,string / text,"Account update, Registration"
+would_you_like_the_medication_reminders_to_be_sent_to_a_second_person_,Mapped,Would you like the medication reminders to be sent to a second person?,enumeration / radio,"Account update, Registration"
