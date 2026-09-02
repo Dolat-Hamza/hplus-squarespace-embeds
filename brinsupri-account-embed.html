@@ -173,6 +173,12 @@
 .hplus-root .review-block .row{font-size:14px;display:flex;justify-content:space-between;gap:16px;padding:3px 0;color:var(--ink)}
 .hplus-root .review-block .row span:first-child{color:var(--muted)}
 .hplus-root .review-block .row .rv-right{text-align:right;max-width:60%}
+.hplus-root .svc{display:flex;align-items:center;gap:11px;font-size:14px;padding:7px 0;color:var(--ink)}
+.hplus-root .svc + .svc{border-top:1px solid #eef2f5}
+.hplus-root .svc .svc-ic{flex:0 0 auto;width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.hplus-root .svc .svc-ic.on{background:rgba(30,166,114,.14);color:var(--ok)}
+.hplus-root .svc .svc-ic.off{background:#eef2f5;color:var(--grey)}
+.hplus-root .svc.off span:last-child{color:var(--muted)}
 .hplus-root .err-msg{color:var(--error);font-size:13px;font-weight:600;margin-top:6px;display:none}
 .hplus-root .field.invalid input, .hplus-root .field.invalid select{border-color:var(--error);box-shadow:0 0 0 3px rgba(255,106,90,.16)}
 .hplus-root .field.invalid .err-msg, .hplus-root .err-msg.show{display:block}
@@ -223,7 +229,7 @@
   .hplus-root .contact .rowc{font-size:13px;align-items:flex-start}
 }
 </style>
-<!-- ICON SPRITE — line-art recreated in the style of the H+ Brinsupri leaflet -->
+<!-- ICON SPRITE â line-art recreated in the style of the H+ Brinsupri leaflet -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
     <symbol id="ic-reminder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 4.5 1.8 5.7 2.2 6.6a.6.6 0 0 1-.55.9H4.35a.6.6 0 0 1-.55-.9C4.2 14.7 6 13.5 6 9Z"/><path d="M9.8 20a2.3 2.3 0 0 0 4.4 0"/><path d="M12 3.2V2"/></symbol>
@@ -254,7 +260,7 @@
     <button type="button" data-lang="en">EN</button>
   </div></div>
 
-  <!-- HERO — newsletter follow-on -->
+  <!-- HERO â newsletter follow-on -->
   <div class="trustbar">
     <span data-i18n="trust1"></span><span data-i18n="trust2"></span>
     <span data-i18n="trust3"></span><span data-i18n="trust4"></span>
@@ -314,8 +320,8 @@
         </div>
 
         <div class="field cond" id="c_whatsapp" style="display:none"><label data-i18n="whatsapp_label"></label><input type="tel" id="patient_whatsapp" placeholder="+49 176 1234567" inputmode="tel" autocomplete="tel" data-validate="phone-global" /></div>
-        <div class="field cond" id="c_phone" style="display:none"><label data-i18n="phone_label"></label><div class="phone-row"><select id="patient_phone_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="patient_phone" placeholder="176 1234567" data-validate="phone" /></div></div>
-        <div class="field cond" id="c_sms" style="display:none"><label data-i18n="sms_label"></label><div class="phone-row"><select id="patient_sms_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="patient_sms" placeholder="176 1234567" data-validate="phone" /></div></div>
+        <div class="field cond" id="c_phone" style="display:none"><label data-i18n="phone_label"></label><div class="phone-row"><select id="patient_phone_cc" class="cc-select"><option value="+49">ð©ðª +49</option><option value="+43">ð¦ð¹ +43</option></select><input type="tel" id="patient_phone" placeholder="176 1234567" data-validate="phone" /></div></div>
+        <div class="field cond" id="c_sms" style="display:none"><label data-i18n="sms_label"></label><div class="phone-row"><select id="patient_sms_cc" class="cc-select"><option value="+49">ð©ðª +49</option><option value="+43">ð¦ð¹ +43</option></select><input type="tel" id="patient_sms" placeholder="176 1234567" data-validate="phone" /></div></div>
 
         <div class="field" data-required>
           <span class="group-label" data-i18n="second_label"></span>
@@ -355,15 +361,10 @@
           </div>
           <div class="field cond" id="c_sc_email" style="display:none"><label data-i18n="sc_email"></label><input type="email" id="second_contact_email" data-validate="email" /></div>
           <div class="field cond" id="c_sc_whatsapp" style="display:none"><label data-i18n="sc_whatsapp"></label><input type="tel" id="second_contact_whatsapp" placeholder="+44 7700 900123" inputmode="tel" data-validate="phone-global" /></div>
-          <div class="field cond" id="c_sc_phone" style="display:none"><label data-i18n="sc_phone"></label><div class="phone-row"><select id="second_contact_phone_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="second_contact_phone" placeholder="176 1234567" data-validate="phone" /></div></div>
-          <div class="field cond" id="c_sc_sms" style="display:none"><label data-i18n="sc_sms"></label><div class="phone-row"><select id="caregiver_sms_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="caregiver_sms" placeholder="176 1234567" data-validate="phone" /></div></div>
+          <div class="field cond" id="c_sc_phone" style="display:none"><label data-i18n="sc_phone"></label><div class="phone-row"><select id="second_contact_phone_cc" class="cc-select"><option value="+49">ð©ðª +49</option><option value="+43">ð¦ð¹ +43</option></select><input type="tel" id="second_contact_phone" placeholder="176 1234567" data-validate="phone" /></div></div>
+          <div class="field cond" id="c_sc_sms" style="display:none"><label data-i18n="sc_sms"></label><div class="phone-row"><select id="caregiver_sms_cc" class="cc-select"><option value="+49">ð©ðª +49</option><option value="+43">ð¦ð¹ +43</option></select><input type="tel" id="caregiver_sms" placeholder="176 1234567" data-validate="phone" /></div></div>
         </div>
 
-
-        <div class="field" data-required style="margin-top:6px">
-          <label class="choice"><input type="checkbox" id="agree_to_terms"><span class="ctxt" data-i18n-html="terms_html"></span></label>
-          <div class="err-msg" data-i18n="err_terms"></div>
-        </div>
 
         <div class="nav"><span></span><button type="button" class="btn btn-primary" data-next data-i18n="next_med"></button></div>
       </section>
@@ -383,15 +384,6 @@
           </dl>
         </div>
 
-        <div class="field" data-required>
-          <label class="choice"><input type="checkbox" id="confirmation_medication"><span class="ctxt" data-i18n="confirm_med"></span></label>
-          <div class="err-msg" data-i18n="err_confirm"></div>
-        </div>
-        <div class="field" data-required>
-          <label data-i18n="firstdate_label"></label>
-          <input type="date" id="first_medication_date" />
-          <div class="err-msg" data-i18n="err_date"></div>
-        </div>
         <div class="field">
           <label data-i18n-html="other_med_label_html"></label>
           <input type="text" id="other_medication" data-i18n-ph="other_med_ph" />
@@ -457,14 +449,13 @@
           <h3 class="step-title" data-i18n="consent_page_h"></h3>
           <p class="step-sub" data-i18n="consent_page_intro"></p>
 
-          <div class="field" data-required>
-            <label data-i18n="country_label"></label>
+          <!-- country: no longer asked on the account form; value comes from the account/prefill and drives the country-specific consent wording -->
+          <div class="field" style="display:none" aria-hidden="true">
             <select id="country">
               <option value="" data-i18n="opt_select"></option>
               <option value="Deutschland" data-i18n="country_de"></option>
-              <option value="Österreich" data-i18n="country_at"></option>
+              <option value="Ãsterreich" data-i18n="country_at"></option>
             </select>
-            <div class="err-msg" data-i18n="err_country"></div>
           </div>
 
           <h5 class="consent-title" data-i18n="consent_delivery_title"></h5>
@@ -473,7 +464,7 @@
             <label class="choice"><input type="checkbox" id="delivery_consent"><span class="ctxt" data-i18n="agree_delivery"></span></label>
             <div class="err-msg" data-i18n="err_delivery_consent"></div>
           </div>
-          <!-- Germany-only pharmacy choice — directly under the delivery agreement -->
+          <!-- Germany-only pharmacy choice â directly under the delivery agreement -->
           <div id="pharmacyBlock" style="display:none">
             <p class="group-label" data-i18n="pharmacy_q"></p>
             <label class="choice top"><input type="radio" name="pharmacy_choice" value="yes"><span class="ctxt" id="pharmHplusTxt"></span></label>
@@ -540,15 +531,15 @@
             <div class="field"><label data-i18n="doc_street"></label><input type="text" id="doctor_street"></div>
             <div class="field" style="max-width:220px"><label data-i18n="doc_postcode"></label><input type="text" id="doctor_postcode"></div>
             <div class="two-col">
-              <div class="field"><label data-i18n="doc_phone"></label><div class="phone-row"><select id="doctor_phone_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="doctor_phone" placeholder="30 1234567" data-validate="phone"></div></div>
+              <div class="field"><label data-i18n="doc_phone"></label><div class="phone-row"><select id="doctor_phone_cc" class="cc-select"><option value="+49">ð©ðª +49</option><option value="+43">ð¦ð¹ +43</option></select><input type="tel" id="doctor_phone" placeholder="30 1234567" data-validate="phone"></div></div>
               <div class="field"><label data-i18n="doc_email"></label><input type="email" id="doctor_email" data-validate="email"></div>
             </div>
-            <div class="field"><label data-i18n="doc_fax"></label><div class="phone-row"><select id="doctor_fax_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="doctor_fax" placeholder="30 1234567" data-validate="phone"></div></div>
+            <div class="field"><label data-i18n="doc_fax"></label><div class="phone-row"><select id="doctor_fax_cc" class="cc-select"><option value="+49">ð©ðª +49</option><option value="+43">ð¦ð¹ +43</option></select><input type="tel" id="doctor_fax" placeholder="30 1234567" data-validate="phone"></div></div>
           </div>
 
           <div class="err-msg" id="infoErr" data-i18n="err_need_info"></div>
 
-          <!-- can't find the practice → reveal callback -->
+          <!-- can't find the practice â reveal callback -->
           <button type="button" class="linkbtn" id="cantFindBtn" data-i18n="cant_find_btn"></button>
 
           <div class="callback-box" id="callbackBox" style="display:none">
@@ -608,7 +599,7 @@
   <!-- leaflet contact block -->
   <div class="contact">
     <h4 class="contact-head"><svg class="hlogo hlogo-contact"><use href="#ic-hlogo"/></svg><span data-i18n="contact_h"></span></h4>
-    <div class="rowc"><svg><use href="#ic-hub"/></svg><span>Healthcare Deutschland GmbH · Bergstraße 31, 69469 Weinheim</span></div>
+    <div class="rowc"><svg><use href="#ic-hub"/></svg><span>Healthcare Deutschland GmbH Â· BergstraÃe 31, 69469 Weinheim</span></div>
     <div class="rowc"><svg><use href="#ic-info"/></svg><a href="mailto:info@united-healthcare.eu" style="color:var(--blue);text-decoration:none">info@united-healthcare.eu</a></div>
     <div class="rowc"><svg><use href="#ic-hotline"/></svg><a href="tel:+498004402044" style="color:var(--blue);text-decoration:none">+49 (0) 800 44 020 44</a><span style="color:var(--muted)" data-i18n="contact_hours"></span></div>
   </div>
@@ -643,18 +634,18 @@
 const HS = {
   portalId:'146131370', region:'eu1',
   forms:{ registration:'3bb29747-f8d6-4ed6-bfc9-4debf11461a2', medical:'d3516c06-84c4-4355-840b-c6e62debb2bc', delivery:'87622c04-93bc-4107-becf-321c98736b68' },
-  med:{ medicine:'Brinsupri (Brensocatib)', dose:'25mg Filmtablette', frequency:'Eine Tablette täglich', administration:'Oral' }
+  med:{ medicine:'Brinsupri (Brensocatib)', dose:'25mg Filmtablette', frequency:'Eine Tablette tÃ¤glich', administration:'Oral' }
 };
 const endpoint = g => `https://api-${HS.region}.hsforms.com/submissions/v3/integration/submit/${HS.portalId}/${g}`;
 
 /* Google Maps API key for the "find my doctor's practice" search.
-   Project: cybernetic-pact-449121-h3 (123356130118) — needs Maps JavaScript API
+   Project: cybernetic-pact-449121-h3 (123356130118) â needs Maps JavaScript API
    + Places API (New) enabled, billing active, and this domain in the key's referrer restrictions. */
 const GOOGLE_MAPS_API_KEY = 'AIzaSyDrh2aK005Nxjhz_r-f02q-ycS73PsWuZA';
 
-/* Legal template placeholders — set the real values before going live. */
+/* Legal template placeholders â set the real values before going live. */
 const CARE_SERVICE = 'Healthcare Deutschland GmbH';
-const PARTNER_PHARMACY = 'H+ Partnerapotheke, [Adresse einfügen]';
+const PARTNER_PHARMACY = 'H+ Partnerapotheke, [Adresse einfÃ¼gen]';
 
 /* ============================================================
    TRANSLATIONS (UI only; submitted VALUES stay constant)
@@ -662,137 +653,138 @@ const PARTNER_PHARMACY = 'H+ Partnerapotheke, [Adresse einfügen]';
 const I18N = {
   de:{
     hero_eyebrow:"H+ Therapy Companion",
-    hero_h1:"Ihr persönlicher, digitaler Begleiter für Ihre Therapie.",
-    hero_p:"Wir liefern Ihr Brinsupri (Brensocatib) kostenlos direkt an Ihre Haustür, erinnern Sie an jede Einnahme und behalten Ihre Arzttermine im Blick – damit Sie sich ganz auf Ihre Gesundheit konzentrieren können.",
-    hero_tie:"Sie haben diese Broschüre zusammen mit Ihrem Brinsupri erhalten? Schließen Sie hier in wenigen Minuten Ihre kostenlose Anmeldung ab.",
-    benefits_title:"Ihre Vorteile im Überblick",
+    hero_h1:"Ihr persÃ¶nlicher, digitaler Begleiter fÃ¼r Ihre Therapie.",
+    hero_p:"Wir liefern Ihr Brinsupri (Brensocatib) kostenlos direkt an Ihre HaustÃ¼r, erinnern Sie an jede Einnahme und behalten Ihre Arzttermine im Blick â damit Sie sich ganz auf Ihre Gesundheit konzentrieren kÃ¶nnen.",
+    hero_tie:"Sie haben diese BroschÃ¼re zusammen mit Ihrem Brinsupri erhalten? SchlieÃen Sie hier in wenigen Minuten Ihre kostenlose Anmeldung ab.",
+    benefits_title:"Ihre Vorteile im Ãberblick",
     ben_rem_t:"Erinnerungsservice", ben_rem_d:"Personalisierbare Erinnerungen rund um Ihre Therapie.",
-    ben_rx_t:"Rezept-Unterstützung", ben_rx_d:"Unterstützung bei der Koordination von Folgeverschreibungen.",
+    ben_rx_t:"Rezept-UnterstÃ¼tzung", ben_rx_d:"UnterstÃ¼tzung bei der Koordination von Folgeverschreibungen.",
     ben_term_t:"Terminorganisation", ben_term_d:"Hilfe bei der Planung erforderlicher Kontrolluntersuchungen.",
-    ben_hot_t:"Patientenhotline", ben_hot_d:"Unterstützung bei allgemeinen Fragen rund um Ihre Behandlung.",
+    ben_hot_t:"Patientenhotline", ben_hot_d:"UnterstÃ¼tzung bei allgemeinen Fragen rund um Ihre Behandlung.",
     ben_info_t:"Informationsmaterial", ben_info_d:"Hilfreiche Schulungsinhalte zu Ihrer Therapie.",
-    ben_hub_t:"Alles an einem Ort", ben_hub_d:"Ihr persönlicher Service-Bereich, jederzeit abrufbar.",
-    contact_h:"Fragen? Wir sind für Sie da.", contact_hours:" · Mo–Fr, 08:00–18:00 Uhr",
-    disclaimer:"Der Therapy Companion ist ein freiwilliges, kostenloses Unterstützungsangebot der Healthcare Deutschland GmbH und ersetzt nicht die Beratung durch Ihren Arzt oder Apotheker. Die Teilnahme hat keinen Einfluss auf Ihre medizinische Behandlung.",
-    err_phone:"Bitte geben Sie eine gültige deutsche oder österreichische Telefonnummer ein.", err_whatsapp_global:"Bitte geben Sie eine gültige internationale WhatsApp-Nummer mit Ländervorwahl ein.", err_email_fmt:"Bitte geben Sie eine gültige E-Mail-Adresse ein.", err_required:"Bitte füllen Sie dieses Feld aus.",
+    ben_hub_t:"Alles an einem Ort", ben_hub_d:"Ihr persÃ¶nlicher Service-Bereich, jederzeit abrufbar.",
+    contact_h:"Fragen? Wir sind fÃ¼r Sie da.", contact_hours:" Â· MoâFr, 08:00â18:00 Uhr",
+    disclaimer:"Der Therapy Companion ist ein freiwilliges, kostenloses UnterstÃ¼tzungsangebot der Healthcare Deutschland GmbH und ersetzt nicht die Beratung durch Ihren Arzt oder Apotheker. Die Teilnahme hat keinen Einfluss auf Ihre medizinische Behandlung.",
+    err_phone:"Bitte geben Sie eine gÃ¼ltige deutsche oder Ã¶sterreichische Telefonnummer ein.", err_whatsapp_global:"Bitte geben Sie eine gÃ¼ltige internationale WhatsApp-Nummer mit LÃ¤ndervorwahl ein.", err_email_fmt:"Bitte geben Sie eine gÃ¼ltige E-Mail-Adresse ein.", err_required:"Bitte fÃ¼llen Sie dieses Feld aus.",
     next_title:"Wie es jetzt weitergeht",
-    nxt1_t:"Bestätigung per E-Mail", nxt1_d:"Sie erhalten in Kürze eine E-Mail, die alle von Ihnen gemachten Angaben bestätigt.",
-    nxt2_t:"Wir organisieren alles für Sie", nxt2_d:"Sofern Sie die erforderlichen Angaben gemacht haben, klärt das H+ Team alles direkt mit Ihrem Arzt und Ihrer Apotheke. Sobald alle Details bestätigt sind, melden wir uns bei Ihnen und erklären die nächsten Schritte.", nxt2_pill:"Dauer: bis zu 48 Stunden",
-    nxt3_t:"Sie erhalten Benachrichtigungen von uns", nxt3_d:"In der Zwischenzeit erhalten Sie weiterhin Benachrichtigungen – ganz nach den von Ihnen gewählten Einstellungen.",
-    trust1:"✓ 100% kostenlos", trust2:"✓ DSGVO-konform", trust3:"✓ Von Apothekern betreut", trust4:"✓ Jederzeit kündbar",
-    step1_name:"Über Sie", step2_name:"Ihre Medikation", step3_name:"Lieferung & Unterstützung", step4_name:"Bestätigung",
-    s1_title:"Erzählen Sie uns von sich", s1_sub:"Diese Angaben helfen uns, Ihren Companion-Service persönlich für Sie einzurichten.",
-    role_label:"Sind Sie der Patient oder der Betreuer?", opt_select:"Bitte auswählen…", opt_patient:"Patient", opt_caregiver:"Betreuer",
+    nxt1_t:"BestÃ¤tigung per E-Mail", nxt1_d:"Sie erhalten in KÃ¼rze eine E-Mail, die alle von Ihnen gemachten Angaben bestÃ¤tigt.",
+    nxt2_t:"Wir organisieren alles fÃ¼r Sie", nxt2_d:"Sofern Sie die erforderlichen Angaben gemacht haben, klÃ¤rt das H+ Team alles direkt mit Ihrem Arzt und Ihrer Apotheke. Sobald alle Details bestÃ¤tigt sind, melden wir uns bei Ihnen und erklÃ¤ren die nÃ¤chsten Schritte.", nxt2_pill:"Dauer: bis zu 48 Stunden",
+    nxt3_t:"Sie erhalten Benachrichtigungen von uns", nxt3_d:"In der Zwischenzeit erhalten Sie weiterhin Benachrichtigungen â ganz nach den von Ihnen gewÃ¤hlten Einstellungen.",
+    trust1:"â 100% kostenlos", trust2:"â DSGVO-konform", trust3:"â Von Apothekern betreut", trust4:"â Jederzeit kÃ¼ndbar",
+    step1_name:"Ãber Sie", step2_name:"Ihre Medikation", step3_name:"Lieferung & UnterstÃ¼tzung", step4_name:"BestÃ¤tigung",
+    s1_title:"ErzÃ¤hlen Sie uns von sich", s1_sub:"Diese Angaben helfen uns, Ihren Companion-Service persÃ¶nlich fÃ¼r Sie einzurichten.",
+    role_label:"Sind Sie der Patient oder der Betreuer?", opt_select:"Bitte auswÃ¤hlenâ¦", opt_patient:"Patient", opt_caregiver:"Betreuer",
     firstname_label:"Vorname", lastname_label:"Nachname", email_label:"E-Mail-Adresse",
-    email_reassure:"Wir nutzen Ihre E-Mail nur für Ihren Companion-Service – niemals für Werbung Dritter.",
+    email_reassure:"Wir nutzen Ihre E-Mail nur fÃ¼r Ihren Companion-Service â niemals fÃ¼r Werbung Dritter.",
     comm_label:"Wie sollen wir den Patienten mit unseren Erinnerungsdiensten kontaktieren?",
     opt_email:"E-Mail", opt_whatsapp:"WhatsApp", opt_phone:"Telefonanruf", opt_sms:"SMS",
     whatsapp_label:"WhatsApp-Nummer", phone_label:"Telefonnummer", sms_label:"SMS-Nummer",
-    second_label:"Möchten Sie, dass die Erinnerungen an die Medikamenteneinnahme auch an einen Betreuer gesendet werden?",
+    second_label:"MÃ¶chten Sie, dass die Erinnerungen an die Medikamenteneinnahme auch an einen Betreuer gesendet werden?",
     opt_yes:"Ja", opt_no:"Nein",
     sc_first:"Vorname", sc_last:"Nachname",
     rel_label:"Welche Beziehung hat diese Person zum Patienten?",
-    rel_parent:"Elternteil", rel_grand:"Großelternteil", rel_sib:"Geschwister", rel_partner:"Partner / Ehepartner", rel_friend:"Freund/in", rel_prof:"Professionelle Pflegekraft",
+    rel_parent:"Elternteil", rel_grand:"GroÃelternteil", rel_sib:"Geschwister", rel_partner:"Partner / Ehepartner", rel_friend:"Freund/in", rel_prof:"Professionelle Pflegekraft",
     cg_comm_label:"Wie sollen wir diese Person kontaktieren?",
     sc_email:"E-Mail", sc_whatsapp:"WhatsApp-Nummer", sc_phone:"Telefonnummer", sc_sms:"SMS-Nummer",
     create_acct:"Konto erstellen", create_acct_sub:"Wir empfehlen ein kostenloses Konto, um alle Dienste an einem Ort zu verwalten.",
-    terms_html:'Ich stimme den <a href="/therapy-companion/terms-and-conditions" target="_blank" rel="noopener" style="color:#007EC6;text-decoration:underline">Allgemeinen Geschäftsbedingungen</a> zu und habe die <a href="/therapy-companion/privacy-policy" target="_blank" rel="noopener" style="color:#007EC6;text-decoration:underline">Datenschutzerklärung</a> gelesen.',
-    next_med:"Weiter zu Ihrer Medikation →",
+    terms_html:'Ich stimme den <a href="/therapy-companion/terms-and-conditions" target="_blank" rel="noopener" style="color:#007EC6;text-decoration:underline">Allgemeinen GeschÃ¤ftsbedingungen</a> zu und habe die <a href="/therapy-companion/privacy-policy" target="_blank" rel="noopener" style="color:#007EC6;text-decoration:underline">DatenschutzerklÃ¤rung</a> gelesen.',
+    next_med:"Weiter zu Ihrer Medikation â",
     err_select:"Bitte treffen Sie eine Auswahl.", err_first:"Bitte geben Sie einen Vornamen ein.", err_last:"Bitte geben Sie einen Nachnamen ein.",
-    err_email:"Bitte geben Sie eine gültige E-Mail-Adresse ein.", err_comm:"Bitte wählen Sie mindestens eine Kontaktart.", err_terms:"Bitte stimmen Sie den Bedingungen zu, um fortzufahren.",
-    s2_title:"Ihre Medikation bestätigen", s2_sub:"Bitte prüfen Sie die Angaben zu Ihrem Brinsupri-Rezept.",
-    med_h:"Medikationsdetails", med_name_l:"Name", med_dose_l:"Dosis", med_dose_v:"25 mg Filmtablette", med_freq_l:"Häufigkeit", med_freq_v:"Eine Tablette täglich", med_admin_l:"Verabreichung", med_admin_v:"Oral",
-    confirm_med:"Ich bestätige, dass mir die oben genannten Medikamente in diesen Dosierungen verschrieben wurden.", err_confirm:"Bitte bestätigen Sie Ihre Verschreibung.",
+    err_email:"Bitte geben Sie eine gÃ¼ltige E-Mail-Adresse ein.", err_comm:"Bitte wÃ¤hlen Sie mindestens eine Kontaktart.", err_terms:"Bitte stimmen Sie den Bedingungen zu, um fortzufahren.",
+    s2_title:"Ihre Medikation bestÃ¤tigen", s2_sub:"Bitte prÃ¼fen Sie die Angaben zu Ihrem Brinsupri-Rezept.",
+    med_h:"Medikationsdetails", med_name_l:"Name", med_dose_l:"Dosis", med_dose_v:"25 mg Filmtablette", med_freq_l:"HÃ¤ufigkeit", med_freq_v:"Eine Tablette tÃ¤glich", med_admin_l:"Verabreichung", med_admin_v:"Oral",
+    confirm_med:"Ich bestÃ¤tige, dass mir die oben genannten Medikamente in diesen Dosierungen verschrieben wurden.", err_confirm:"Bitte bestÃ¤tigen Sie Ihre Verschreibung.",
     firstdate_label:"Wann war das Datum der ersten Einnahme?", err_date:"Bitte geben Sie ein Datum an.",
     other_med_label_html:'Nimmt der Patient noch andere Medikamente ein? <span style="font-weight:400;color:#71777C">(Bitte geben Sie Details an)</span>',
-    other_med_ph:"z. B. Name, Dosis … oder „keine“",
-    freq_label:"Wie oft möchten Sie, dass wir uns bei Ihnen melden?",
-    freq_h:"Regelmäßige Check-ins",
-    freq_para:"Regelmäßige Check-ins stellen sicher, dass Sie Ihr Medikament richtig einnehmen und alles Wichtige wissen. Zu Beginn empfehlen wir wöchentliche Check-ins.",
-    freq_weekly:"Wöchentlich", freq_weekly_sub:"Besonders zu Beginn empfohlen", freq_2w:"2-wöchentlich", freq_monthly:"Monatlich", err_freq:"Bitte wählen Sie eine Häufigkeit.",
-    next_delivery:"Weiter zum Liefer- und Abholservice →", back:"← Zurück", next_generic:"Weiter →", to_review:"Zur Übersicht →", or_word:"oder",
+    other_med_ph:"z. B. Name, Dosis â¦ oder âkeineâ",
+    freq_label:"Wie oft mÃ¶chten Sie, dass wir uns bei Ihnen melden?",
+    freq_h:"RegelmÃ¤Ãige Check-ins",
+    freq_para:"RegelmÃ¤Ãige Check-ins stellen sicher, dass Sie Ihr Medikament richtig einnehmen und alles Wichtige wissen. Zu Beginn empfehlen wir wÃ¶chentliche Check-ins.",
+    freq_weekly:"WÃ¶chentlich", freq_weekly_sub:"Besonders zu Beginn empfohlen", freq_2w:"2-wÃ¶chentlich", freq_monthly:"Monatlich", err_freq:"Bitte wÃ¤hlen Sie eine HÃ¤ufigkeit.",
+    next_delivery:"Weiter zum Liefer- und Abholservice â", back:"â ZurÃ¼ck", next_generic:"Weiter â", to_review:"Zur Ãbersicht â", or_word:"oder",
     /* 3.1 */
     sub_of:"Schritt %s von 3",
-    s3_title:"Wie können wir Sie unterstützen?", s3_sub:"Wählen Sie die Leistungen, die Ihren Alltag mit Brinsupri leichter machen.",
-    country_label:"In welchem Land sind Sie ansässig?", country_de:"Deutschland", country_at:"Österreich", err_country:"Bitte wählen Sie Ihr Land.",
-    support_label:"Wobei dürfen wir Sie unterstützen?",
+    s3_title:"Wie kÃ¶nnen wir Sie unterstÃ¼tzen?", s3_sub:"WÃ¤hlen Sie die Leistungen, die Ihren Alltag mit Brinsupri leichter machen.",
+    country_label:"In welchem Land sind Sie ansÃ¤ssig?", country_de:"Deutschland", country_at:"Ãsterreich", err_country:"Bitte wÃ¤hlen Sie Ihr Land.",
+    support_label:"Wobei dÃ¼rfen wir Sie unterstÃ¼tzen?",
     delivery_h:"Liefer- und Abholservice",
-    delivery_para:"Brinsupri ist teuer und in vielen Apotheken nur schwer erhältlich. Wir übernehmen die Beschaffung und liefern Ihre Medikamente zuverlässig direkt an Ihre Haustür – pünktlich und einsatzbereit, wenn Sie sie brauchen. Nie wieder von Apotheke zu Apotheke laufen oder befürchten, ohne Ihre Behandlung dazustehen.",
-    delivery_opt:"Ja, ich möchte den kostenlosen Liefer- und Abholservice nutzen",
+    delivery_para:"Brinsupri ist teuer und in vielen Apotheken nur schwer erhÃ¤ltlich. Wir Ã¼bernehmen die Beschaffung und liefern Ihre Medikamente zuverlÃ¤ssig direkt an Ihre HaustÃ¼r â pÃ¼nktlich und einsatzbereit, wenn Sie sie brauchen. Nie wieder von Apotheke zu Apotheke laufen oder befÃ¼rchten, ohne Ihre Behandlung dazustehen.",
+    delivery_opt:"Ja, ich mÃ¶chte den kostenlosen Liefer- und Abholservice nutzen",
     rx_h:"Nie wieder ohne Rezept",
-    rx_para:"Ein abgelaufenes Rezept kann Ihre Behandlung unterbrechen. Wir behalten Ihre Nachbestellungen im Blick, stimmen uns rechtzeitig mit Ihrem Arzt ab und kümmern uns um jedes Folge-Rezept – ganz ohne Aufwand für Sie. So bleibt Ihre Therapie lückenlos und Sie müssen an nichts denken.",
-    rx_opt:"Ja, ich möchte Hilfe bei der automatischen Organisation meines Rezepts.",
+    rx_para:"Ein abgelaufenes Rezept kann Ihre Behandlung unterbrechen. Wir behalten Ihre Nachbestellungen im Blick, stimmen uns rechtzeitig mit Ihrem Arzt ab und kÃ¼mmern uns um jedes Folge-Rezept â ganz ohne Aufwand fÃ¼r Sie. So bleibt Ihre Therapie lÃ¼ckenlos und Sie mÃ¼ssen an nichts denken.",
+    rx_opt:"Ja, ich mÃ¶chte Hilfe bei der automatischen Organisation meines Rezepts.",
     checkup_h:"Kein Termin mehr verpasst",
-    checkup_para:"Regelmäßige Kontrolltermine sind wichtig, um Ihre Behandlung sicher zu begleiten. Wir behalten Ihre anstehenden Arzttermine im Blick und erinnern Sie rechtzeitig – so verpassen Sie keine wichtige Untersuchung und wissen immer, wann und wo Sie sein müssen.",
+    checkup_para:"RegelmÃ¤Ãige Kontrolltermine sind wichtig, um Ihre Behandlung sicher zu begleiten. Wir behalten Ihre anstehenden Arzttermine im Blick und erinnern Sie rechtzeitig â so verpassen Sie keine wichtige Untersuchung und wissen immer, wann und wo Sie sein mÃ¼ssen.",
     checkup_opt:"Ja, bitte erinnern Sie mich an meine Termine",
-    delivery_notice:"Wenn Sie möchten, dass wir Ihre Folge-Rezepte verwalten, müssen Sie uns auch den Liefer- und Abholservice erlauben – bitte wählen Sie diese Option ebenfalls aus.",
-    nosupport_t:"Ich möchte im Moment keine Unterstützung.",
-    err_options:"Bitte wählen Sie mindestens eine Option.",
+    delivery_notice:"Wenn Sie mÃ¶chten, dass wir Ihre Folge-Rezepte verwalten, mÃ¼ssen Sie uns auch den Liefer- und Abholservice erlauben â bitte wÃ¤hlen Sie diese Option ebenfalls aus.",
+    nosupport_t:"Ich mÃ¶chte im Moment keine UnterstÃ¼tzung.",
+    err_options:"Bitte wÃ¤hlen Sie mindestens eine Option.",
     /* 3.2 */
-    s3b_title:"Ihre Einwilligung", s3b_sub:"Ein Klick genügt – und Sie können Ihre Einwilligung jederzeit widerrufen.",
+    s3b_title:"Ihre Einwilligung", s3b_sub:"Ein Klick genÃ¼gt â und Sie kÃ¶nnen Ihre Einwilligung jederzeit widerrufen.",
     consent_delivery:"Ich bin einverstanden, dass H+ meine personenbezogenen Daten verarbeitet, um meine Medikamente zu beschaffen und an mich zu liefern.",
-    consent_hcp:"Ich ermächtige H+ (Healthcare Deutschland GmbH), zur Ausstellung meiner Folge-Rezepte mit meiner Ärztin bzw. meinem Arzt Kontakt aufzunehmen.",
+    consent_hcp:"Ich ermÃ¤chtige H+ (Healthcare Deutschland GmbH), zur Ausstellung meiner Folge-Rezepte mit meiner Ãrztin bzw. meinem Arzt Kontakt aufzunehmen.",
     consent_page_h:"Einwilligung",
-    consent_page_intro:"Damit wir die von Ihnen gewählten Leistungen erbringen können, benötigen wir Ihre Einwilligung zu Folgendem.",
+    consent_page_intro:"Damit wir die von Ihnen gewÃ¤hlten Leistungen erbringen kÃ¶nnen, benÃ¶tigen wir Ihre Einwilligung zu Folgendem.",
     consent_delivery_title:"Kostenloser Liefer- und Abholservice",
     consent_hcp_title:"Kostenlose Verwaltung und Hilfe bei Ihren Folge-Rezepten",
-    consent_read_tc:"Bitte lesen Sie die nachstehenden Bedingungen.", consent_terms_link:"Bedingungen für den Liefer- und Abholservice lesen", hcp_terms_link:"Bedingungen für die Rezeptkoordination lesen",
-    agree_delivery:"Ich habe die Bedingungen für den Liefer- und Abholservice gelesen und stimme ihnen zu.",
+    consent_read_tc:"Bitte lesen Sie die nachstehenden Bedingungen.", consent_terms_link:"Bedingungen fÃ¼r den Liefer- und Abholservice lesen", hcp_terms_link:"Bedingungen fÃ¼r die Rezeptkoordination lesen",
+    agree_delivery:"Ich habe die Bedingungen fÃ¼r den Liefer- und Abholservice gelesen und stimme ihnen zu.",
     agree_hcp:"Ich habe die obige Einwilligung zu Folge-Rezepten gelesen und stimme ihr zu.",
-    consent_hcp_germany:'Ich beauftrage und ermächtige [PFLEGEDIENST] (nachfolgend „der Pflegedienst"), für mich bei meiner/meinen behandelnden Ärztin/Arzt bzw. Ärztinnen und Ärzten <strong>Folge- bzw. Wiederholungsverordnungen</strong> für meine Dauermedikation anzufordern und die Ausstellung zu veranlassen.<br><br>Zu diesem Zweck willige ich ein, dass der Pflegedienst die hierfür erforderlichen Daten verarbeitet und an die jeweilige Arztpraxis übermittelt, insbesondere: Vor- und Nachname, Geburtsdatum, Anschrift, Versichertendaten, Angaben zur benötigten Medikation (Medikationsplan) sowie die Kontaktdaten der Arztpraxis.<br><br>Soweit erforderlich, <strong>entbinde ich die genannten Ärztinnen und Ärzte gegenüber dem Pflegedienst von der ärztlichen Schweigepflicht</strong>, beschränkt auf den Zweck der Anforderung und Abwicklung von Folgeverordnungen (§ 203 StGB).<br><br>Diese Einwilligung ist <strong>freiwillig</strong>. Ich kann sie jederzeit mit Wirkung für die Zukunft widerrufen, ohne dass mir dadurch Nachteile entstehen; meine pflegerische Versorgung bleibt davon unberührt. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Verarbeitung bleibt unberührt.',
-    consent_delivery_germany:'Zu diesem Zweck willige ich ein, dass der Pflegedienst die erforderlichen Daten an die von mir gewählte Apotheke übermittelt oder eine solche Übermittlung veranlasst, insbesondere: Name, Lieferadresse, Verordnungsdaten sowie ggf. Kontaktdaten für Rückfragen und Lieferung.<br><br><strong>Hinweis zum E-Rezept:</strong> Bei elektronischen Verordnungen erfolgt die Zuweisung an die gewählte Apotheke vorrangig durch mich selbst (z. B. über die E-Rezept-App, die elektronische Gesundheitskarte oder einen Papierausdruck mit Rezeptcode). Der Pflegedienst übermittelt keine Zugangsdaten für E-Rezepte („Token") über unsichere Kanäle.<br><br>Ich bin damit einverstanden, dass die gewählte Apotheke die Medikamente an meine Lieferadresse liefert, sofern sie einen entsprechenden Kurier-/Lieferdienst anbietet.<br><br>Diese Einwilligung ist freiwillig und kann jederzeit mit Wirkung für die Zukunft widerrufen werden; Nachteile entstehen dadurch nicht.',
-    consent_hcp_austria:'Ich beauftrage und ermächtige [PFLEGEDIENST] (nachfolgend „der Pflegedienst"), für mich bei meiner/meinem behandelnden Ärztin/Arzt <strong>Folge- bzw. Dauerverordnungen (e-Rezept) für meine Dauermedikation</strong> anzufordern und die Ausstellung zu veranlassen.<br><br>Zu diesem Zweck willige ich ein, dass der Pflegedienst die erforderlichen Daten verarbeitet und an die Ordination übermittelt, insbesondere: Vor- und Nachname, Geburtsdatum, Anschrift, Sozialversicherungsnummer, Angaben zur benötigten Medikation sowie die Kontaktdaten der Ordination.<br><br>Soweit erforderlich, <strong>entbinde ich die genannte Ärztin/den genannten Arzt gegenüber dem Pflegedienst von der ärztlichen Verschwiegenheitspflicht (§ 54 ÄrzteG 1998)</strong>, beschränkt auf den Zweck der Anforderung und Abwicklung von Folgeverordnungen.<br><br>Diese Einwilligung ist freiwillig und jederzeit mit Wirkung für die Zukunft widerruflich, ohne dass mir Nachteile entstehen; meine pflegerische Versorgung bleibt unberührt. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Verarbeitung bleibt unberührt.<br><br><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a i. V. m. Art. 9 Abs. 2 lit. a DSGVO.',
-    consent_delivery_austria:'In Österreich ist der Versand rezeptpflichtiger Arzneimittel verboten (§ 59 Abs. 8 AMG). Damit ich meine Medikamente dennoch bequem erhalte, <strong>beauftrage und bevollmächtige ich den Pflegedienst, meine Medikamente in der von mir gewählten Apotheke vor Ort abzuholen und mir zu überbringen</strong>. Es handelt sich um eine Abholung durch eine von mir bevollmächtigte Person (Botendienst) – nicht um einen Versand durch die Apotheke; die Abgabe erfolgt wie üblich in der Apotheke.',
+    consent_hcp_germany:'Ich beauftrage und ermÃ¤chtige [PFLEGEDIENST] (nachfolgend âder Pflegedienst"), fÃ¼r mich bei meiner/meinen behandelnden Ãrztin/Arzt bzw. Ãrztinnen und Ãrzten <strong>Folge- bzw. Wiederholungsverordnungen</strong> fÃ¼r meine Dauermedikation anzufordern und die Ausstellung zu veranlassen.<br><br>Zu diesem Zweck willige ich ein, dass der Pflegedienst die hierfÃ¼r erforderlichen Daten verarbeitet und an die jeweilige Arztpraxis Ã¼bermittelt, insbesondere: Vor- und Nachname, Geburtsdatum, Anschrift, Versichertendaten, Angaben zur benÃ¶tigten Medikation (Medikationsplan) sowie die Kontaktdaten der Arztpraxis.<br><br>Soweit erforderlich, <strong>entbinde ich die genannten Ãrztinnen und Ãrzte gegenÃ¼ber dem Pflegedienst von der Ã¤rztlichen Schweigepflicht</strong>, beschrÃ¤nkt auf den Zweck der Anforderung und Abwicklung von Folgeverordnungen (Â§ 203 StGB).<br><br>Diese Einwilligung ist <strong>freiwillig</strong>. Ich kann sie jederzeit mit Wirkung fÃ¼r die Zukunft widerrufen, ohne dass mir dadurch Nachteile entstehen; meine pflegerische Versorgung bleibt davon unberÃ¼hrt. Die RechtmÃ¤Ãigkeit der bis zum Widerruf erfolgten Verarbeitung bleibt unberÃ¼hrt.',
+    consent_delivery_germany:'Zu diesem Zweck willige ich ein, dass der Pflegedienst die erforderlichen Daten an die von mir gewÃ¤hlte Apotheke Ã¼bermittelt oder eine solche Ãbermittlung veranlasst, insbesondere: Name, Lieferadresse, Verordnungsdaten sowie ggf. Kontaktdaten fÃ¼r RÃ¼ckfragen und Lieferung.<br><br><strong>Hinweis zum E-Rezept:</strong> Bei elektronischen Verordnungen erfolgt die Zuweisung an die gewÃ¤hlte Apotheke vorrangig durch mich selbst (z. B. Ã¼ber die E-Rezept-App, die elektronische Gesundheitskarte oder einen Papierausdruck mit Rezeptcode). Der Pflegedienst Ã¼bermittelt keine Zugangsdaten fÃ¼r E-Rezepte (âToken") Ã¼ber unsichere KanÃ¤le.<br><br>Ich bin damit einverstanden, dass die gewÃ¤hlte Apotheke die Medikamente an meine Lieferadresse liefert, sofern sie einen entsprechenden Kurier-/Lieferdienst anbietet.<br><br>Diese Einwilligung ist freiwillig und kann jederzeit mit Wirkung fÃ¼r die Zukunft widerrufen werden; Nachteile entstehen dadurch nicht.',
+    consent_hcp_austria:'Ich beauftrage und ermÃ¤chtige [PFLEGEDIENST] (nachfolgend âder Pflegedienst"), fÃ¼r mich bei meiner/meinem behandelnden Ãrztin/Arzt <strong>Folge- bzw. Dauerverordnungen (e-Rezept) fÃ¼r meine Dauermedikation</strong> anzufordern und die Ausstellung zu veranlassen.<br><br>Zu diesem Zweck willige ich ein, dass der Pflegedienst die erforderlichen Daten verarbeitet und an die Ordination Ã¼bermittelt, insbesondere: Vor- und Nachname, Geburtsdatum, Anschrift, Sozialversicherungsnummer, Angaben zur benÃ¶tigten Medikation sowie die Kontaktdaten der Ordination.<br><br>Soweit erforderlich, <strong>entbinde ich die genannte Ãrztin/den genannten Arzt gegenÃ¼ber dem Pflegedienst von der Ã¤rztlichen Verschwiegenheitspflicht (Â§ 54 ÃrzteG 1998)</strong>, beschrÃ¤nkt auf den Zweck der Anforderung und Abwicklung von Folgeverordnungen.<br><br>Diese Einwilligung ist freiwillig und jederzeit mit Wirkung fÃ¼r die Zukunft widerruflich, ohne dass mir Nachteile entstehen; meine pflegerische Versorgung bleibt unberÃ¼hrt. Die RechtmÃ¤Ãigkeit der bis zum Widerruf erfolgten Verarbeitung bleibt unberÃ¼hrt.<br><br><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a i. V. m. Art. 9 Abs. 2 lit. a DSGVO.',
+    consent_delivery_austria:'In Ãsterreich ist der Versand rezeptpflichtiger Arzneimittel verboten (Â§ 59 Abs. 8 AMG). Damit ich meine Medikamente dennoch bequem erhalte, <strong>beauftrage und bevollmÃ¤chtige ich den Pflegedienst, meine Medikamente in der von mir gewÃ¤hlten Apotheke vor Ort abzuholen und mir zu Ã¼berbringen</strong>. Es handelt sich um eine Abholung durch eine von mir bevollmÃ¤chtigte Person (Botendienst) â nicht um einen Versand durch die Apotheke; die Abgabe erfolgt wie Ã¼blich in der Apotheke.',
     freechoice_h:"Freie Apothekenwahl",
-    freechoice_p:"Sie haben das Recht, Ihre Apotheke frei zu wählen (§ 31 Abs. 1 SGB V). Die unten genannte Partnerapotheke ist lediglich ein unverbindliches Angebot. Sie sind nicht verpflichtet, diese zu nutzen, und können jederzeit eine andere Apotheke benennen oder die Apotheke wechseln – ohne Nachteile.",
-    freechoice_h_at:"Freie Apothekenwahl in Österreich",
-    freechoice_p_at:"Sie können Ihre Apotheke frei wählen. Die Partnerapotheke ist ein unverbindliches Angebot. Sie können jederzeit eine andere Apotheke für den Liefer- und Abholservice angeben – ohne Nachteile.",
+    freechoice_p:"Sie haben das Recht, Ihre Apotheke frei zu wÃ¤hlen (Â§ 31 Abs. 1 SGB V). Die unten genannte Partnerapotheke ist lediglich ein unverbindliches Angebot. Sie sind nicht verpflichtet, diese zu nutzen, und kÃ¶nnen jederzeit eine andere Apotheke benennen oder die Apotheke wechseln â ohne Nachteile.",
+    freechoice_h_at:"Freie Apothekenwahl in Ãsterreich",
+    freechoice_p_at:"Sie kÃ¶nnen Ihre Apotheke frei wÃ¤hlen. Die Partnerapotheke ist ein unverbindliches Angebot. Sie kÃ¶nnen jederzeit eine andere Apotheke fÃ¼r den Liefer- und Abholservice angeben â ohne Nachteile.",
     pharmacy_q:"Ich bitte darum, dass mein (elektronisches) Rezept zur Abgabe an die folgende Apotheke weitergeleitet wird bzw. eine solche Weiterleitung veranlasst wird:",
-    pharmacy_hplus:"H+ Apotheke – Liefer- und Abholservice: %p",
-    pharmacy_other:"Eine andere Apotheke meiner Wahl (bitte beachten Sie, dass wir Ihnen in diesem Fall möglicherweise nicht liefern können)",
-    err_pharmacy:"Bitte wählen Sie eine Apotheke.",
+    pharmacy_hplus:"H+ Apotheke â Liefer- und Abholservice: %p",
+    pharmacy_other:"Eine andere Apotheke meiner Wahl (bitte beachten Sie, dass wir Ihnen in diesem Fall mÃ¶glicherweise nicht liefern kÃ¶nnen)",
+    err_pharmacy:"Bitte wÃ¤hlen Sie eine Apotheke.",
     alt_pharmacy_h:"Angaben zur alternativen Apotheke",
-    pharm_name:"Name der Apotheke", pharm_street:"Straße der Apotheke", pharm_city:"Ort der Apotheke", pharm_postcode:"Postleitzahl der Apotheke",
-    appt_when:"Wann ist Ihr nächster Arzttermin?", err_appt:"Bitte geben Sie Ihren nächsten Termin an.",
-    err_delivery_consent:"Diese Zustimmung ist für die Lieferung erforderlich.", err_hcp_consent:"Diese Zustimmung ist für die Rezeptverwaltung erforderlich.",
-    gdpr_note:'<b>Datenschutz:</b> Ihre Daten – einschließlich Gesundheitsdaten (Art. 9 Abs. 2 lit. a DSGVO) – werden ausschließlich zur Erbringung des H+ Therapy Companion-Service verarbeitet und niemals zu Werbezwecken an Dritte weitergegeben. Verantwortlicher: Healthcare Deutschland GmbH, Bergstraße 31, 69469 Weinheim. Widerruf jederzeit möglich unter info@united-healthcare.eu.',
+    pharm_name:"Name der Apotheke", pharm_street:"StraÃe der Apotheke", pharm_city:"Ort der Apotheke", pharm_postcode:"Postleitzahl der Apotheke",
+    appt_when:"Wann ist Ihr nÃ¤chster Arzttermin?", err_appt:"Bitte geben Sie Ihren nÃ¤chsten Termin an.",
+    err_delivery_consent:"Diese Zustimmung ist fÃ¼r die Lieferung erforderlich.", err_hcp_consent:"Diese Zustimmung ist fÃ¼r die Rezeptverwaltung erforderlich.",
+    gdpr_note:'<b>Datenschutz:</b> Ihre Daten â einschlieÃlich Gesundheitsdaten (Art. 9 Abs. 2 lit. a DSGVO) â werden ausschlieÃlich zur Erbringung des H+ Therapy Companion-Service verarbeitet und niemals zu Werbezwecken an Dritte weitergegeben. Verantwortlicher: Healthcare Deutschland GmbH, BergstraÃe 31, 69469 Weinheim. Widerruf jederzeit mÃ¶glich unter info@united-healthcare.eu.',
     /* 3.3 */
-    s3c_title:"Nur noch ein paar Angaben", s3c_sub_rx:"Um Ihre Folge-Rezepte zu organisieren und Ihre Lieferung zu planen, müssen wir Ihre Ärztin bzw. Ihren Arzt kontaktieren – dafür benötigen wir deren Kontaktdaten.",
-    doc_first:"Vorname", doc_last:"Nachname", doc_practice:"Name der Praxis", doc_street:"Straße und Hausnummer", doc_street2:"Adresszusatz (optional)", doc_postcode:"Postleitzahl",
+    s3c_title:"Nur noch ein paar Angaben", s3c_sub_rx:"Um Ihre Folge-Rezepte zu organisieren und Ihre Lieferung zu planen, mÃ¼ssen wir Ihre Ãrztin bzw. Ihren Arzt kontaktieren â dafÃ¼r benÃ¶tigen wir deren Kontaktdaten.",
+    doc_first:"Vorname", doc_last:"Nachname", doc_practice:"Name der Praxis", doc_street:"StraÃe und Hausnummer", doc_street2:"Adresszusatz (optional)", doc_postcode:"Postleitzahl",
     doc_phone:"Telefonnummer des Arztes", doc_email:"E-Mail des Arztes", doc_fax:"Faxnummer (optional)",
-    callback_prompt_h:"Angaben gerade nicht zur Hand?", callback_prompt_p:"Kein Problem. Vereinbaren Sie einen kostenlosen Rückruf – ein Betreuer geht dann in Ruhe alles mit Ihnen durch.",
+    callback_prompt_h:"Angaben gerade nicht zur Hand?", callback_prompt_p:"Kein Problem. Vereinbaren Sie einen kostenlosen RÃ¼ckruf â ein Betreuer geht dann in Ruhe alles mit Ihnen durch.",
     callback_toggle:"Ja, bitte rufen Sie mich an", callback_when:"Wann sollen wir Sie anrufen?",
-    err_need_info:"Bitte geben Sie die Kontaktdaten Ihres Arztes an – oder vereinbaren Sie unten einen Rückruf.",
+    err_need_info:"Bitte geben Sie die Kontaktdaten Ihres Arztes an â oder vereinbaren Sie unten einen RÃ¼ckruf.",
     /* new: page headings, dates, practice search, modal */
     patient_details_h:"Patientendaten", second_details_h:"Angaben zum Betreuer", doctor_details_h:"Angaben zum Arzt",
     freq_2w_sub:"Besonders zu Beginn empfohlen",
-    err_date_range:"Bitte wählen Sie ein Datum zwischen dem 2. Juli und 3 Monaten ab heute.",
-    practice_search_btn:"Nach meiner Arztpraxis suchen", practice_search_ph:"Praxisname oder Adresse eingeben…",
-    practice_search_hint:"Wählen Sie Ihre Praxis aus – wir füllen die Adresse automatisch aus.",
-    practice_search_err:"Die Praxissuche ist derzeit nicht verfügbar. Bitte geben Sie die Adresse unten manuell ein.",
+    err_date_range:"Bitte wÃ¤hlen Sie ein Datum zwischen dem 2. Juli und 3 Monaten ab heute.",
+    practice_search_btn:"Nach meiner Arztpraxis suchen", practice_search_ph:"Praxisname oder Adresse eingebenâ¦",
+    practice_search_hint:"WÃ¤hlen Sie Ihre Praxis aus â wir fÃ¼llen die Adresse automatisch aus.",
+    practice_search_err:"Die Praxissuche ist derzeit nicht verfÃ¼gbar. Bitte geben Sie die Adresse unten manuell ein.",
     cant_find_btn:"Angaben Ihres Arztes nicht gefunden?",
-    err_callback_range:"Bitte wählen Sie einen Termin zwischen 48 Stunden und 7 Tagen ab heute.",
-    ns_title:"Sind Sie sicher?", ns_body:"Ohne Anmeldung verzichten Sie auf wertvolle, kostenlose Unterstützung, die Ihre Behandlung deutlich einfacher macht:",
-    ns_b1:"Kostenlose Lieferung Ihres schwer erhältlichen Brinsupri direkt nach Hause.", ns_b2:"Automatische Erinnerungen, damit Ihnen nie das Medikament ausgeht oder Sie einen Termin verpassen.", ns_b3:"Wir kümmern uns um Folge-Rezepte und die Abstimmung mit Ihrem Arzt.",
-    ns_tail:"Alle Leistungen sind kostenlos und jederzeit kündbar. Möchten Sie wirklich verzichten?",
-    ns_reconsider:"Leistungen ansehen", ns_confirm:"Nein danke, ohne Unterstützung fortfahren",
+    err_callback_range:"Bitte wÃ¤hlen Sie einen Termin zwischen 48 Stunden und 7 Tagen ab heute.",
+    ns_title:"Sind Sie sicher?", ns_body:"Ohne Anmeldung verzichten Sie auf wertvolle, kostenlose UnterstÃ¼tzung, die Ihre Behandlung deutlich einfacher macht:",
+    ns_b1:"Kostenlose Lieferung Ihres schwer erhÃ¤ltlichen Brinsupri direkt nach Hause.", ns_b2:"Automatische Erinnerungen, damit Ihnen nie das Medikament ausgeht oder Sie einen Termin verpassen.", ns_b3:"Wir kÃ¼mmern uns um Folge-Rezepte und die Abstimmung mit Ihrem Arzt.",
+    ns_tail:"Alle Leistungen sind kostenlos und jederzeit kÃ¼ndbar. MÃ¶chten Sie wirklich verzichten?",
+    ns_reconsider:"Leistungen ansehen", ns_confirm:"Nein danke, ohne UnterstÃ¼tzung fortfahren",
     /* 4 */
-    s4_title:"Alles bereit – bitte überprüfen", s4_sub:"Ein letzter Blick, dann richten wir Ihren H+ Therapy Companion ein.",
-    submit_btn:"Registrierung abschließen ✓", submitting:"Wird gesendet…",
-    submit_hint:"Kostenlos & unverbindlich · Ihre Daten werden DSGVO-konform verarbeitet.",
+    s4_title:"Ihr H+ Therapy Companion Konto", s4_sub:"Hier finden Sie alle Ihre Angaben. Tippen Sie auf „Bearbeiten“, um einen Bereich zu ändern.",
+    submit_btn:"Registrierung abschlieÃen â", submitting:"Wird gesendetâ¦",
+    submit_hint:"Kostenlos & unverbindlich Â· Ihre Daten werden DSGVO-konform verarbeitet.",
     submit_err:"Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
-    success_h:"Herzlichen Glückwunsch! Sie sind registriert.",
-    success_p1:"Willkommen bei Ihrem H+ Therapy Companion. Wir haben Ihre Angaben erhalten und richten alles für Sie ein.",
-    success_p2:"Sie erhalten in Kürze eine Bestätigung an Ihre E-Mail-Adresse.",
-    rv_about:"Über Sie", rv_edit:"Bearbeiten", rv_name:"Name", rv_role:"Rolle", rv_email:"E-Mail", rv_contact:"Kontakt via", rv_second:"Zweite Person", rv_no:"Nein",
-    rv_med:"Ihre Medikation", rv_medication:"Medikament", rv_firstdose:"Erste Einnahme", rv_freq:"Check-in-Häufigkeit",
-    rv_delivery:"Liefer- und Abholservice", rv_country:"Land", rv_support:"Unterstützung", rv_dash:"—",
-    sup_delivery:"Liefer- und Abholservice", sup_rx:"Folge-Rezepte", sup_checkup:"Terminplanung", sup_none:"Aktuell keine", sup_callback:"Rückruf vereinbart"
+    success_h:"Herzlichen GlÃ¼ckwunsch! Sie sind registriert.",
+    success_p1:"Willkommen bei Ihrem H+ Therapy Companion. Wir haben Ihre Angaben erhalten und richten alles fÃ¼r Sie ein.",
+    success_p2:"Sie erhalten in KÃ¼rze eine BestÃ¤tigung an Ihre E-Mail-Adresse.",
+    rv_about:"Ãber Sie", rv_edit:"Bearbeiten", rv_name:"Name", rv_role:"Rolle", rv_email:"E-Mail", rv_contact:"Kontakt via", rv_second:"Zweite Person", rv_no:"Nein",
+    rv_your_details:"Ihre Angaben", rv_other_person:"Weitere Person", rv_relationship:"Beziehung", rv_services:"Therapy Companion Leistungen", edit_return:"Speichern & zurÃ¼ck zur Ãbersicht", account_intro:"Hier finden Sie alle Ihre Angaben. Tippen Sie auf âBearbeitenâ, um einen Bereich zu Ã¤ndern.",
+    rv_med:"Ihre Medikation", rv_medication:"Medikament", rv_firstdose:"Erste Einnahme", rv_freq:"Check-in-HÃ¤ufigkeit",
+    rv_delivery:"Liefer- und Abholservice", rv_country:"Land", rv_support:"UnterstÃ¼tzung", rv_dash:"â",
+    sup_delivery:"Liefer- und Abholservice", sup_rx:"Folge-Rezepte", sup_checkup:"Terminplanung", sup_none:"Aktuell keine", sup_callback:"RÃ¼ckruf vereinbart"
   },
   en:{
     hero_eyebrow:"H+ Therapy Companion",
     hero_h1:"Your personal, digital companion throughout your therapy.",
-    hero_p:"We deliver your Brinsupri (Brensocatib) to your door free of charge, remind you of every dose, and keep track of your medical appointments — so you can focus entirely on your health.",
+    hero_p:"We deliver your Brinsupri (Brensocatib) to your door free of charge, remind you of every dose, and keep track of your medical appointments â so you can focus entirely on your health.",
     hero_tie:"Received this leaflet with your Brinsupri? Complete your free registration here in just a few minutes.",
     benefits_title:"Your benefits at a glance",
     ben_rem_t:"Reminder service", ben_rem_d:"Personalised reminders throughout your therapy.",
@@ -801,19 +793,19 @@ const I18N = {
     ben_hot_t:"Patient hotline", ben_hot_d:"Support with any general questions about your treatment.",
     ben_info_t:"Educational material", ben_info_d:"Helpful learning content about your therapy.",
     ben_hub_t:"Everything in one place", ben_hub_d:"Your personal service area, available whenever you need it.",
-    contact_h:"Questions? We're here for you.", contact_hours:" · Mon–Fri, 08:00–18:00",
+    contact_h:"Questions? We're here for you.", contact_hours:" Â· MonâFri, 08:00â18:00",
     disclaimer:"The Therapy Companion is a voluntary, free support service from Healthcare Deutschland GmbH and does not replace advice from your doctor or pharmacist. Taking part has no effect on your medical treatment.",
     err_phone:"Please enter a valid German or Austrian phone number.", err_whatsapp_global:"Please enter a valid international WhatsApp number including its country code.", err_email_fmt:"Please enter a valid email address.", err_required:"Please complete this field.",
     next_title:"What happens next",
     nxt1_t:"Confirmation by email", nxt1_d:"You'll shortly receive an email confirming all the details you provided.",
     nxt2_t:"We arrange everything for you", nxt2_d:"If you have provided the necessary details, the H+ team will arrange everything directly with your doctor and pharmacy. Once all the details are confirmed, we'll be in touch to explain the next steps.", nxt2_pill:"Takes up to 48 hours",
-    nxt3_t:"You will receive notifications from us", nxt3_d:"In the meantime, you'll keep receiving notifications — based on the preferences you selected.",
-    trust1:"✓ 100% free", trust2:"✓ GDPR-compliant", trust3:"✓ Pharmacist-managed", trust4:"✓ Cancel anytime",
+    nxt3_t:"You will receive notifications from us", nxt3_d:"In the meantime, you'll keep receiving notifications â based on the preferences you selected.",
+    trust1:"â 100% free", trust2:"â GDPR-compliant", trust3:"â Pharmacist-managed", trust4:"â Cancel anytime",
     step1_name:"About you", step2_name:"Your medication", step3_name:"Delivery & support", step4_name:"Confirm",
     s1_title:"Tell us about yourself", s1_sub:"This helps us set up your Companion service just for you.",
-    role_label:"Are you the patient or the caregiver?", opt_select:"Please select…", opt_patient:"Patient", opt_caregiver:"Caregiver",
+    role_label:"Are you the patient or the caregiver?", opt_select:"Please selectâ¦", opt_patient:"Patient", opt_caregiver:"Caregiver",
     firstname_label:"First name", lastname_label:"Last name", email_label:"Email address",
-    email_reassure:"We use your email only for your Companion service — never for third-party marketing.",
+    email_reassure:"We use your email only for your Companion service â never for third-party marketing.",
     comm_label:"How should we contact the patient with our reminder service?",
     opt_email:"Email", opt_whatsapp:"WhatsApp", opt_phone:"Phone call", opt_sms:"SMS",
     whatsapp_label:"WhatsApp number", phone_label:"Phone number", sms_label:"SMS number",
@@ -826,7 +818,7 @@ const I18N = {
     sc_email:"Email", sc_whatsapp:"WhatsApp number", sc_phone:"Phone number", sc_sms:"SMS number",
     create_acct:"Create an account", create_acct_sub:"We recommend a free account to manage all services in one place.",
     terms_html:'I agree to the <a href="/therapy-companion/terms-and-conditions" target="_blank" rel="noopener" style="color:#007EC6;text-decoration:underline">Terms &amp; Conditions</a> and have read the <a href="/therapy-companion/privacy-policy" target="_blank" rel="noopener" style="color:#007EC6;text-decoration:underline">Privacy Policy</a>.',
-    next_med:"Continue to your medication →",
+    next_med:"Continue to your medication â",
     err_select:"Please make a selection.", err_first:"Please enter a first name.", err_last:"Please enter a last name.",
     err_email:"Please enter a valid email address.", err_comm:"Please select at least one contact method.", err_terms:"Please agree to the terms to continue.",
     s2_title:"Confirm your medication", s2_sub:"Please review the details of your Brinsupri prescription.",
@@ -834,29 +826,29 @@ const I18N = {
     confirm_med:"I confirm that the above medication was prescribed to me at these doses.", err_confirm:"Please confirm your prescription.",
     firstdate_label:"When was your first dose taken?", err_date:"Please provide a date.",
     other_med_label_html:'Does the patient take any other medication? <span style="font-weight:400;color:#71777C">(please provide details)</span>',
-    other_med_ph:"e.g. name, dose … or “none”",
+    other_med_ph:"e.g. name, dose â¦ or ânoneâ",
     freq_label:"How often would you like us to check in?",
     freq_h:"Regular check-ins",
     freq_para:"Regular check-ins help make sure you're taking your medicine correctly and always know everything you need to. We recommend weekly check-ins to start.",
     freq_weekly:"Weekly", freq_weekly_sub:"Recommended especially at the start", freq_2w:"Every two weeks", freq_monthly:"Monthly", err_freq:"Please choose a frequency.",
-    next_delivery:"Continue to delivery and pick up service →", back:"← Back", next_generic:"Continue →", to_review:"Continue to summary →", or_word:"or",
+    next_delivery:"Continue to delivery and pick up service â", back:"â Back", next_generic:"Continue â", to_review:"Continue to summary â", or_word:"or",
     sub_of:"Step %s of 3",
     s3_title:"How can we support you?", s3_sub:"Choose the services that make life with Brinsupri easier.",
     country_label:"Which country do you live in?", country_de:"Germany", country_at:"Austria", err_country:"Please select your country.",
     support_label:"How can we help you?",
     delivery_h:"Delivery and pick up service",
-    delivery_para:"Brinsupri is costly and hard to source at many pharmacies. We take care of procurement and deliver your medication reliably to your door — on time and ready when you need it. No more calling around pharmacies or worrying about running out of your treatment.",
+    delivery_para:"Brinsupri is costly and hard to source at many pharmacies. We take care of procurement and deliver your medication reliably to your door â on time and ready when you need it. No more calling around pharmacies or worrying about running out of your treatment.",
     delivery_opt:"Yes, I would like to use the free delivery and pick up service",
     rx_h:"Never without a prescription",
-    rx_para:"An expired prescription can interrupt your treatment. We keep track of your refills, coordinate with your doctor in good time and handle every repeat prescription for you — with zero effort on your side. Your therapy stays uninterrupted and it's one less thing on your mind.",
+    rx_para:"An expired prescription can interrupt your treatment. We keep track of your refills, coordinate with your doctor in good time and handle every repeat prescription for you â with zero effort on your side. Your therapy stays uninterrupted and it's one less thing on your mind.",
     rx_opt:"Yes, I would like to have help arranging my prescription automatically.",
     checkup_h:"Never miss an appointment",
-    checkup_para:"Regular check-ups are important to keep your treatment on track. We keep an eye on your upcoming appointments and remind you in good time — so you never miss an important check-up and always know when and where to be.",
+    checkup_para:"Regular check-ups are important to keep your treatment on track. We keep an eye on your upcoming appointments and remind you in good time â so you never miss an important check-up and always know when and where to be.",
     checkup_opt:"Yes, please remind me of my appointments",
-    delivery_notice:"If you would like us to manage your repeat prescriptions, you must also allow us to handle the delivery and pick up service — please select this option too.",
+    delivery_notice:"If you would like us to manage your repeat prescriptions, you must also allow us to handle the delivery and pick up service â please select this option too.",
     nosupport_t:"I don't need any support right now.",
     err_options:"Please select at least one option.",
-    s3b_title:"Your consent", s3b_sub:"One click is all it takes — and you can withdraw your consent at any time.",
+    s3b_title:"Your consent", s3b_sub:"One click is all it takes â and you can withdraw your consent at any time.",
     consent_delivery:"I agree that H+ may process my personal data to source and deliver my medication.",
     consent_hcp:"I authorise H+ (Healthcare Deutschland GmbH) to contact my doctor to arrange my repeat prescriptions.",
     consent_page_h:"Consent",
@@ -866,34 +858,34 @@ const I18N = {
     consent_read_tc:"Please read the terms and conditions below.", consent_terms_link:"Read the delivery and pick up service terms", hcp_terms_link:"Read the prescription coordination terms",
     agree_delivery:"I have read and agree to the delivery and pick up service terms.",
     agree_hcp:"I have read and agree to the prescription consent above.",
-    consent_hcp_germany:'I commission and authorize [CARE SERVICE] (hereinafter “the care service”) to request, on my behalf, <strong>follow-up or repeat prescriptions for my long-term medication</strong> from my treating physician(s) and to arrange for their issuance.<br><br>For this purpose, I consent to the care service processing the data required for this and transmitting it to the relevant doctor’s practice, in particular: first and last name, date of birth, address, insurance data, details of the required medication (medication plan), and the contact details of the doctor’s practice.<br><br>To the extent necessary, I <strong>release the named physicians from their duty of medical confidentiality</strong> vis-à-vis the care service, limited to the purpose of requesting and processing follow-up prescriptions.<br><br>This consent is voluntary. I may <strong>revoke it at any time with effect for the future</strong> without suffering any disadvantage as a result; my nursing care remains unaffected. The lawfulness of processing carried out up to the point of revocation remains unaffected.',
-    consent_delivery_germany:'For this purpose, I consent to the care service transmitting the required data to the pharmacy chosen by me, or arranging such transmission, in particular: name, delivery address, prescription details, and, where applicable, contact details for queries and delivery.<br><br><strong>Note on the e-prescription:</strong> For electronic prescriptions, assignment to the chosen pharmacy is primarily carried out by me myself (e.g. via the e-prescription app, the electronic health card, or a paper printout with prescription code). The care service does not transmit access data for e-prescriptions (“tokens”) via insecure channels.<br><br>I agree that the chosen pharmacy may deliver the medicines to my delivery address, provided it offers a corresponding courier/delivery service.<br><br>This consent is voluntary and may be revoked at any time with effect for the future; no disadvantages arise as a result.',
-    consent_hcp_austria:'I commission and authorize [CARE SERVICE] (hereinafter “the care service”) to request, on my behalf, <strong>follow-up or long-term prescriptions (e-prescription) for my long-term medication</strong> from my treating physician and to arrange for their issuance.<br><br>For this purpose, I consent to the care service processing the required data and transmitting it to the doctor’s practice, in particular: first and last name, date of birth, address, social insurance number, details of the required medication, and the contact details of the practice.<br><br>To the extent necessary, I <strong>release the named physician from the duty of medical confidentiality (§ 54 ÄrzteG 1998)</strong> vis-à-vis the care service, limited to the purpose of requesting and processing follow-up prescriptions.<br><br>This consent is voluntary and may be revoked at any time with effect for the future, without any disadvantage to me; my nursing care remains unaffected. The lawfulness of processing carried out up to the point of revocation remains unaffected.',
-    consent_delivery_austria:'In Austria, shipping prescription-only medicines is prohibited (§ 59 (8) AMG). So that I can nevertheless receive my medications conveniently, I <strong>commission and authorize the care service to collect my medications at the local pharmacy chosen by me and deliver them to me</strong>. This is a collection by a person authorized by me (courier service) – not shipping by the pharmacy; dispensing takes place, as usual, at the pharmacy.',
+    consent_hcp_germany:'I commission and authorize [CARE SERVICE] (hereinafter âthe care serviceâ) to request, on my behalf, <strong>follow-up or repeat prescriptions for my long-term medication</strong> from my treating physician(s) and to arrange for their issuance.<br><br>For this purpose, I consent to the care service processing the data required for this and transmitting it to the relevant doctorâs practice, in particular: first and last name, date of birth, address, insurance data, details of the required medication (medication plan), and the contact details of the doctorâs practice.<br><br>To the extent necessary, I <strong>release the named physicians from their duty of medical confidentiality</strong> vis-Ã -vis the care service, limited to the purpose of requesting and processing follow-up prescriptions.<br><br>This consent is voluntary. I may <strong>revoke it at any time with effect for the future</strong> without suffering any disadvantage as a result; my nursing care remains unaffected. The lawfulness of processing carried out up to the point of revocation remains unaffected.',
+    consent_delivery_germany:'For this purpose, I consent to the care service transmitting the required data to the pharmacy chosen by me, or arranging such transmission, in particular: name, delivery address, prescription details, and, where applicable, contact details for queries and delivery.<br><br><strong>Note on the e-prescription:</strong> For electronic prescriptions, assignment to the chosen pharmacy is primarily carried out by me myself (e.g. via the e-prescription app, the electronic health card, or a paper printout with prescription code). The care service does not transmit access data for e-prescriptions (âtokensâ) via insecure channels.<br><br>I agree that the chosen pharmacy may deliver the medicines to my delivery address, provided it offers a corresponding courier/delivery service.<br><br>This consent is voluntary and may be revoked at any time with effect for the future; no disadvantages arise as a result.',
+    consent_hcp_austria:'I commission and authorize [CARE SERVICE] (hereinafter âthe care serviceâ) to request, on my behalf, <strong>follow-up or long-term prescriptions (e-prescription) for my long-term medication</strong> from my treating physician and to arrange for their issuance.<br><br>For this purpose, I consent to the care service processing the required data and transmitting it to the doctorâs practice, in particular: first and last name, date of birth, address, social insurance number, details of the required medication, and the contact details of the practice.<br><br>To the extent necessary, I <strong>release the named physician from the duty of medical confidentiality (Â§ 54 ÃrzteG 1998)</strong> vis-Ã -vis the care service, limited to the purpose of requesting and processing follow-up prescriptions.<br><br>This consent is voluntary and may be revoked at any time with effect for the future, without any disadvantage to me; my nursing care remains unaffected. The lawfulness of processing carried out up to the point of revocation remains unaffected.',
+    consent_delivery_austria:'In Austria, shipping prescription-only medicines is prohibited (Â§ 59 (8) AMG). So that I can nevertheless receive my medications conveniently, I <strong>commission and authorize the care service to collect my medications at the local pharmacy chosen by me and deliver them to me</strong>. This is a collection by a person authorized by me (courier service) â not shipping by the pharmacy; dispensing takes place, as usual, at the pharmacy.',
     freechoice_h:"Free choice of pharmacy",
-    freechoice_p:"You have the right to choose your pharmacy freely (§ 31 (1) SGB V). The partner pharmacy named below is merely a non-binding offer. You are not obliged to use it and may name a different pharmacy or switch pharmacies at any time – without any disadvantage.",
+    freechoice_p:"You have the right to choose your pharmacy freely (Â§ 31 (1) SGB V). The partner pharmacy named below is merely a non-binding offer. You are not obliged to use it and may name a different pharmacy or switch pharmacies at any time â without any disadvantage.",
     freechoice_h_at:"Free choice of pharmacy in Austria",
     freechoice_p_at:"You may choose your pharmacy freely. The partner pharmacy is a non-binding option. You may select a different pharmacy for the delivery and pick up service at any time, without disadvantage.",
     pharmacy_q:"I request that my (electronic) prescription be forwarded to the following pharmacy for dispensing, or that such forwarding be arranged:",
-    pharmacy_hplus:"H+ pharmacy – delivery and pick up service: %p",
+    pharmacy_hplus:"H+ pharmacy â delivery and pick up service: %p",
     pharmacy_other:"Another pharmacy of my choice (please note that selecting this means that we may not be able to deliver to you)",
     err_pharmacy:"Please choose a pharmacy.",
     alt_pharmacy_h:"Alternative pharmacy details",
     pharm_name:"Pharmacy name", pharm_street:"Pharmacy street", pharm_city:"Pharmacy city", pharm_postcode:"Pharmacy post code",
-    appt_when:"When is your next doctor’s appointment?", err_appt:"Please provide your next appointment date.",
+    appt_when:"When is your next doctorâs appointment?", err_appt:"Please provide your next appointment date.",
     err_delivery_consent:"This consent is required for delivery.", err_hcp_consent:"This consent is required for prescription management.",
-    gdpr_note:'<b>Data protection:</b> Your data — including health data (Art. 9(2)(a) GDPR) — is processed solely to provide the H+ Therapy Companion service and is never shared with third parties for marketing. Controller: Healthcare Deutschland GmbH, Bergstraße 31, 69469 Weinheim. You can withdraw at any time at info@united-healthcare.eu.',
-    s3c_title:"Just a few more details", s3c_sub_rx:"In order to arrange your repeat prescriptions and schedule your delivery, we need to contact your doctor — so we need their contact details.",
+    gdpr_note:'<b>Data protection:</b> Your data â including health data (Art. 9(2)(a) GDPR) â is processed solely to provide the H+ Therapy Companion service and is never shared with third parties for marketing. Controller: Healthcare Deutschland GmbH, BergstraÃe 31, 69469 Weinheim. You can withdraw at any time at info@united-healthcare.eu.',
+    s3c_title:"Just a few more details", s3c_sub_rx:"In order to arrange your repeat prescriptions and schedule your delivery, we need to contact your doctor â so we need their contact details.",
     doc_first:"First name", doc_last:"Last Name", doc_practice:"Practice name", doc_street:"Street and house number", doc_street2:"Address line 2 (optional)", doc_postcode:"Post code",
     doc_phone:"Doctor's phone number", doc_email:"Doctor's email", doc_fax:"Fax number (optional)",
     callback_prompt_h:"Don't have the details to hand?", callback_prompt_p:"No problem. Arrange a free callback and a support agent will go through everything with you.",
     callback_toggle:"Yes, please call me", callback_when:"When should we call you?",
-    err_need_info:"Please provide your doctor's contact details — or arrange a callback below.",
+    err_need_info:"Please provide your doctor's contact details â or arrange a callback below.",
     /* new: page headings, dates, practice search, modal */
     patient_details_h:"Patient details", second_details_h:"Caregiver details", doctor_details_h:"Doctor details",
     freq_2w_sub:"Recommended especially at the start",
     err_date_range:"Please choose a date between 2 July and 3 months from today.",
-    practice_search_btn:"Search for my doctor's practice", practice_search_ph:"Enter practice name or address…",
+    practice_search_btn:"Search for my doctor's practice", practice_search_ph:"Enter practice name or addressâ¦",
     practice_search_hint:"Select your practice and we'll fill in the address for you.",
     practice_search_err:"Practice search is currently unavailable. Please enter the address manually below.",
     cant_find_btn:"Can't find your doctor's details?",
@@ -902,16 +894,17 @@ const I18N = {
     ns_b1:"Free delivery of hard-to-source Brinsupri straight to your door.", ns_b2:"Automatic reminders so you never run out of medicine or miss an appointment.", ns_b3:"We handle repeat prescriptions and coordinate with your doctor.",
     ns_tail:"Every service is free and you can cancel anytime. Are you sure you want to opt out?",
     ns_reconsider:"Show me the services", ns_confirm:"No thanks, continue without support",
-    s4_title:"All set — please review", s4_sub:"One last look, then we'll set up your H+ Therapy Companion.",
-    submit_btn:"Complete registration ✓", submitting:"Submitting…",
-    submit_hint:"Free & no obligation · Your data is processed in line with GDPR.",
+    s4_title:"Your H+ Therapy Companion account", s4_sub:"Here are all your details. Tap “Edit” on any section to change it.",
+    submit_btn:"Complete registration â", submitting:"Submittingâ¦",
+    submit_hint:"Free & no obligation Â· Your data is processed in line with GDPR.",
     submit_err:"Something went wrong. Please try again.",
     success_h:"Congratulations! You're registered.",
     success_p1:"Welcome to your H+ Therapy Companion. We've received your details and are setting everything up for you.",
     success_p2:"You'll receive a confirmation at your email address shortly.",
     rv_about:"About you", rv_edit:"Edit", rv_name:"Name", rv_role:"Role", rv_email:"Email", rv_contact:"Contact via", rv_second:"Second person", rv_no:"No",
+    rv_your_details:"Your details", rv_other_person:"Other person", rv_relationship:"Relationship", rv_services:"Therapy Companion services", edit_return:"Save & back to overview", account_intro:"Here are all your details. Tap âEditâ on any section to change it.",
     rv_med:"Your medication", rv_medication:"Medication", rv_firstdose:"First dose", rv_freq:"Check-in frequency",
-    rv_delivery:"Delivery and pick up service", rv_country:"Country", rv_support:"Support", rv_dash:"—",
+    rv_delivery:"Delivery and pick up service", rv_country:"Country", rv_support:"Support", rv_dash:"â",
     sup_delivery:"Delivery and pick up service", sup_rx:"Repeat prescriptions", sup_checkup:"Scheduling", sup_none:"None right now", sup_callback:"Callback arranged"
   }
 };
@@ -942,14 +935,14 @@ const radio = name => (document.querySelector(`input[name="${name}"]:checked`)||
 const toEpoch = d => { if(!d) return ''; const [y,m,day]=d.split('-').map(Number); return String(Date.UTC(y,m-1,day)); };
 const field = (name,value)=>({objectTypeId:'0-1',name,value:String(value)});
 
-/* conditional UI — step 1 */
+/* conditional UI â step 1 */
 function syncCommFields(){
   $('c_whatsapp').style.display=document.querySelector('#comm_prefs input[value=Whatsapp]').checked?'block':'none';
   $('c_phone').style.display=document.querySelector('#comm_prefs input[value=Phone]').checked?'block':'none';
   $('c_sms').style.display=document.querySelector('#comm_prefs input[value=SMS]').checked?'block':'none';
 }
 document.querySelectorAll('#comm_prefs input').forEach(c=>c.addEventListener('change',syncCommFields));
-/* caregiver contact fields — same pattern as the patient's: only show the ones selected */
+/* caregiver contact fields â same pattern as the patient's: only show the ones selected */
 function syncCgCommFields(){
   $('c_sc_email').style.display=document.querySelector('#cg_comm_prefs input[value=Email]').checked?'block':'none';
   $('c_sc_whatsapp').style.display=document.querySelector('#cg_comm_prefs input[value=Whatsapp]').checked?'block':'none';
@@ -966,7 +959,7 @@ document.querySelectorAll('.choice input').forEach(inp=>{
   inp.addEventListener('change',paint); paint();
 });
 
-/* check-in frequency: allow deselecting — click a selected option to turn it off (none) */
+/* check-in frequency: allow deselecting â click a selected option to turn it off (none) */
 (function(){
   let last=null;
   document.querySelectorAll('input[name="reminder_freq"]').forEach(r=>{
@@ -977,7 +970,7 @@ document.querySelectorAll('.choice input').forEach(inp=>{
   });
 })();
 
-/* conditional UI — step 3 options + consent visibility */
+/* conditional UI â step 3 options + consent visibility */
 function syncOptions(){
   ['delivery','rx','checkup'].forEach(k=>{});
   $('card_delivery').classList.toggle('selected',checked('delivery_management'));
@@ -992,7 +985,7 @@ function syncConsentVisibility(){
 }
 /* Consent text is country-specific: Germany uses the full legal wording + pharmacy choice. */
 function updateConsentTexts(){
-  const country = val('country'), de = country==='Deutschland', at = country==='Österreich';
+  const country = val('country'), de = country==='Deutschland', at = country==='Ãsterreich';
   $('deliveryTermsLink').href=at?'/therapy-companion/delivery-and-collection-services-at':'/therapy-companion/delivery-and-collection-services-de';
   const showPharm = (de||at) && (checked('delivery_management')||checked('prescription_management')) && checked('delivery_consent');
   $('pharmacyBlock').style.display = showPharm ? 'block' : 'none';
@@ -1008,20 +1001,19 @@ $('no_support').addEventListener('change',()=>{ if(checked('no_support')){['deli
 ['delivery_management','prescription_management','check_up_reminder_management'].forEach(id=>$(id).addEventListener('change',()=>{ if(checked(id)){$('no_support').checked=false;$('no_support').closest('.choice').classList.remove('selected');}}));
 $('arrange_call').addEventListener('change',()=>{ $('callbackWhen').style.display=checked('arrange_call')?'block':'none'; });
 
-/* ---- date bounds: first dose (2 Jul → +3 months) · callback (+48h → +7 days) ---- */
+/* ---- date bounds: first dose (2 Jul â +3 months) Â· callback (+48h â +7 days) ---- */
 const ymd=d=>{const z=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+z(d.getMonth()+1)+'-'+z(d.getDate());};
 function setupDates(){
   const today=new Date();
-  const fd=$('first_medication_date'); const maxDose=new Date(today); maxDose.setMonth(maxDose.getMonth()+3);
-  fd.min='2026-07-02'; fd.max=ymd(maxDose);
+  const fd=$('first_medication_date'); if(fd){ const maxDose=new Date(today); maxDose.setMonth(maxDose.getMonth()+3); fd.min='2026-07-02'; fd.max=ymd(maxDose); }
   const ap=$('appointment_date'); if(ap) ap.min=ymd(today);
   const cb=$('callback_date'); const minCb=new Date(today); minCb.setDate(minCb.getDate()+2); const maxCb=new Date(today); maxCb.setDate(maxCb.getDate()+7);
   cb.min=ymd(minCb); cb.max=ymd(maxCb);
 }
 
-/* ---- doctor practice search (Google Places UI Kit — PlaceAutocompleteElement) ---- */
+/* ---- doctor practice search (Google Places UI Kit â PlaceAutocompleteElement) ---- */
 let placesLoaded=false, placesInited=false;
-/* Official Google dynamic-library bootstrap loader — required for PlaceAutocompleteElement. */
+/* Official Google dynamic-library bootstrap loader â required for PlaceAutocompleteElement. */
 function loadPlaces(cb){
   if(placesLoaded){ cb(); return; }
   if(!GOOGLE_MAPS_API_KEY){ cb('nokey'); return; }
@@ -1053,7 +1045,7 @@ function placesFailed(msg){
 }
 async function initAutocomplete(){
   if(placesInited) return; placesInited=true;
-  const at=val('country')==='Österreich';
+  const at=val('country')==='Ãsterreich';
   try{
     const { PlaceAutocompleteElement } = await google.maps.importLibrary('places');
     const pac = new PlaceAutocompleteElement({ includedRegionCodes:[at?'at':'de'] });
@@ -1061,7 +1053,7 @@ async function initAutocomplete(){
     const box=$('practiceSearchBox');
     $('practiceSearch').style.display='none';
     box.insertBefore(pac, box.firstChild);
-    // user picks a prediction → fetch details → fill address fields
+    // user picks a prediction â fetch details â fill address fields
     pac.addEventListener('gmp-select', async (ev)=>{
       try{
         const pred = ev.placePrediction || (ev.detail && ev.detail.placePrediction);
@@ -1072,13 +1064,13 @@ async function initAutocomplete(){
       }catch(e){ placesFailed('fetchFields error: '+e.message); }
     });
     pac.addEventListener('gmp-error', ()=>placesFailed('PlaceAutocompleteElement error event'));
-  }catch(e){ placesFailed('init failed — enable "Places API (New)" for the key. '+e.message); }
+  }catch(e){ placesFailed('init failed â enable "Places API (New)" for the key. '+e.message); }
 }
 $('practiceSearchBtn').addEventListener('click',()=>{
   $('practiceSearchBox').style.display='block';
   loadPlaces(err=>{ if(err==='nokey'){ $('practiceSearchBox').style.display='none'; $('addressFields').style.display='block'; } else initAutocomplete(); });
 });
-/* can't find details → reveal callback option (button stays available) */
+/* can't find details â reveal callback option (button stays available) */
 $('cantFindBtn').addEventListener('click',()=>{ $('addressFields').style.display='block'; $('callbackBox').style.display='block'; $('addressFields').scrollIntoView({behavior:'smooth',block:'start'}); });
 
 /* ---- no-support confirmation modal ---- */
@@ -1093,12 +1085,23 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape' && $('noSupportModa
 /* ============================================================
    MAIN STEP NAVIGATION (4 steps). Progress steps clickable.
    ============================================================ */
-let current=1, sub3=1; const totalSteps=4;
+let current=1, sub3=1; const totalSteps=4; let editMode=false;
+/* When a section is edited from the summary, show a bar that saves and returns to the overview. */
+function ensureEditBar(){
+  let bar=document.getElementById('editReturnBar');
+  if(!bar){ bar=document.createElement('button'); bar.type='button'; bar.id='editReturnBar';
+    bar.style.cssText='display:none;width:100%;margin:0 0 16px;padding:13px 18px;border:none;border-radius:12px;cursor:pointer;background:linear-gradient(135deg,var(--blue),var(--blue-3));color:#fff;font-family:var(--font-head);font-weight:600;font-size:15px;box-shadow:0 10px 22px -12px rgba(0,126,198,.8)';
+    const card=document.querySelector('.card'); card.insertBefore(bar, card.firstChild);
+    bar.addEventListener('click',()=>{ editMode=false; showStep(4); });
+  }
+  bar.textContent='â '+t('edit_return');
+  return bar;
+}
 const emailOk = e => { const v=String(e||'').trim(); return v.length<=254 && /^[^\s@]{1,64}@[^\s@]+\.[A-Za-z]{2,}$/.test(v); };
 function setSubTag(){ const el=$('subTag'); if(el) el.textContent=t('sub_of').replace('%s',sub3); }
 function showSub3(n){
   sub3=n; ['sub31','sub32','sub33','sub34'].forEach((id,i)=>$(id).classList.toggle('active',i===n-1));
-  if(n===4){ const cc=val('country')==='Österreich'?'+43':'+49'; ['doctor_phone_cc','doctor_fax_cc'].forEach(id=>{ if($(id) && !$(id).dataset.touched) $(id).value=cc; }); }
+  if(n===4){ const cc=val('country')==='Ãsterreich'?'+43':'+49'; ['doctor_phone_cc','doctor_fax_cc'].forEach(id=>{ if($(id) && !$(id).dataset.touched) $(id).value=cc; }); }
   document.querySelector('.card').scrollIntoView({behavior:'smooth',block:'start'});
 }
 document.querySelectorAll('#doctor_phone_cc,#doctor_fax_cc').forEach(sel=>sel.addEventListener('change',()=>sel.dataset.touched='1'));
@@ -1109,7 +1112,8 @@ function showStep(n){
   $('progressLine').style.width=(n/totalSteps*100)+'%';
   document.querySelectorAll('#progressSteps li').forEach(li=>{const s=+li.dataset.s;li.classList.toggle('active',s===n);li.classList.toggle('done',s<n);});
   if(n===3) showSub3(1);
-  if(n===4) buildReview();
+  if(n===4){ editMode=false; buildReview(); }
+  const bar=ensureEditBar(); bar.style.display=(editMode && n!==4)?'block':'none';
   document.querySelector('.card').scrollIntoView({behavior:'smooth',block:'start'});
 }
 document.querySelectorAll('#progressSteps li').forEach(li=>li.addEventListener('click',()=>showStep(+li.dataset.s)));
@@ -1118,7 +1122,7 @@ function markInvalid(el,bad){ el.classList.toggle('invalid',bad); }
 function showErr(id,show){ $(id).classList.toggle('show',show); }
 
 /* ---- format validators (mirror the HubSpot phone/email checks) ---- */
-/* country-aware: DE national numbers run 6–11 digits, AT 4–13 (after stripping a leading 0) */
+/* country-aware: DE national numbers run 6â11 digits, AT 4â13 (after stripping a leading 0) */
 function phoneOk(v,cc){
   const d=v.replace(/\D/g,'').replace(/^0+/,'');
   if(!/^[+()\-.\s\/0-9]+$/.test(v)) return false;
@@ -1142,7 +1146,7 @@ function validateFormats(scope){
   let ok=true;
   scope.querySelectorAll('input[data-validate]').forEach(inp=>{
     const f=inp.closest('.field'); if(!f || f.offsetParent===null) return;    // skip hidden
-    const v=inp.value.trim(); if(!v) return;                                   // empty → required logic handles it
+    const v=inp.value.trim(); if(!v) return;                                   // empty â required logic handles it
     const bad = !formatOk(inp);
     if(bad){ f.classList.add('invalid'); ensureFmtErr(f,t(formatErrorKey(inp))); ok=false; }
   });
@@ -1170,7 +1174,7 @@ function validateStep(n){
       const cb=f.querySelector('input[type=checkbox]');
       if(radios.length){ bad=![...radios].some(r=>r.checked); }
       else if(cb && !input){ bad=!cb.checked; }
-      else if(input){ bad=input.value.trim()===''; }   // format (email/phone) is validated exclusively by validateFormats() below — avoids duplicate error messages
+      else if(input){ bad=input.value.trim()===''; }   // format (email/phone) is validated exclusively by validateFormats() below â avoids duplicate error messages
     }
     markInvalid(f,bad);
     if(bad){
@@ -1193,10 +1197,6 @@ function validateStep(n){
       if(!requireIf('second_contact_email',cg('Email'))) ok=false;
     }
   }
-  if(n===2){
-    const fd=$('first_medication_date'), fv=fd.value;
-    if(fv && ((fd.min && fv<fd.min) || (fd.max && fv>fd.max))){ const f=fd.closest('.field'); f.classList.add('invalid'); ensureFmtErr(f,t('err_date_range')); ok=false; }
-  }
   return ok;
 }
 
@@ -1210,15 +1210,14 @@ function validateSub3(n){
     const rxNeedsDelivery = checked('prescription_management') && !checked('delivery_management');
     $('rxNote').classList.toggle('note-error',rxNeedsDelivery);
     if(rxNeedsDelivery){ ok=false; $('card_delivery').scrollIntoView({behavior:'smooth',block:'center'}); }
-    showErr('freqErr',false);   // check-in frequency is optional — choosing none is fine
+    showErr('freqErr',false);   // check-in frequency is optional â choosing none is fine
     if(checked('check_up_reminder_management')){ const af=$('appointment_date').closest('.field'), bad=val('appointment_date')===''; markInvalid(af,bad); if(bad){ok=false;af.scrollIntoView({behavior:'smooth',block:'center'});} }
   }
   if(n===2){   // DELIVERY consent page (shown when delivery || rx)
     clearScope($('sub32')); showErr('pharmacyErr',false);
-    const cf=$('country').closest('.field'); const countryBad = val('country')===''; markInvalid(cf,countryBad); if(countryBad) ok=false;
     const bad=!checked('delivery_consent'); markInvalid($('deliveryConsentWrap'),bad); if(bad) ok=false;
     // Germany: pharmacy choice required once delivery consent given; alt-pharmacy details if chosen
-    if((val('country')==='Deutschland'||val('country')==='Österreich') && checked('delivery_consent')){
+    if((val('country')==='Deutschland'||val('country')==='Ãsterreich') && checked('delivery_consent')){
       const ph=radio('pharmacy_choice');
       showErr('pharmacyErr', ph===''); if(ph==='') ok=false;
       if(ph==='no'){
@@ -1248,14 +1247,14 @@ function validateSub3(n){
   }
   return ok;
 }
-/* routing within step 3 (conditional 4-page sub-flow) — delivery form is sent on completion */
+/* routing within step 3 (conditional 4-page sub-flow) â delivery form is sent on completion */
 async function finishStep3(){ showStep(4); }
 async function step3Next(from){
   const delivery=checked('delivery_management'), rx=checked('prescription_management'), none=checked('no_support');
   if(from===1){ if(!validateSub3(1)) return; if(none){ openNoSupportModal(); } else if(!delivery&&!rx){ await finishStep3(); } else { showSub3(2); } return; }
-  if(from===2){ if(!validateSub3(2)) return; if(rx){ showSub3(3); } else { await finishStep3(); } return; }  // delivery consent → hcp consent (if rx) else review
-  if(from===3){ if(!validateSub3(3)) return; showSub3(4); return; }                                          // hcp consent → doctor
-  if(from===4){ if(!validateSub3(4)) return; await finishStep3(); return; }                                  // doctor → review
+  if(from===2){ if(!validateSub3(2)) return; if(rx){ showSub3(3); } else { await finishStep3(); } return; }  // delivery consent â hcp consent (if rx) else review
+  if(from===3){ if(!validateSub3(3)) return; showSub3(4); return; }                                          // hcp consent â doctor
+  if(from===4){ if(!validateSub3(4)) return; await finishStep3(); return; }                                  // doctor â review
 }
 function step3Back(from){ if(from===1){ showStep(2); } else if(from===2){ showSub3(1); } else if(from===3){ showSub3(2); } else if(from===4){ showSub3(3); } }
 $('s3next1').addEventListener('click',()=>step3Next(1));
@@ -1281,7 +1280,7 @@ function validateStep3All(){
 
 document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',async ()=>{
   if(!validateStep(current)){ document.querySelector('.step.active .invalid')?.scrollIntoView({behavior:'smooth',block:'center'}); return; }
-  showStep(current+1);   // Account Update submits once at the end (to 212bd920) — no progressive onboarding sends
+  showStep(current+1);   // Account Update submits once at the end (to 212bd920) â no progressive onboarding sends
 }));
 document.querySelectorAll('[data-prev]').forEach(b=>b.addEventListener('click',()=>showStep(current-1)));
 
@@ -1291,36 +1290,40 @@ document.querySelectorAll('[data-prev]').forEach(b=>b.addEventListener('click',(
 function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function buildReview(){
   const commLabels={Email:t('opt_email'),Whatsapp:'WhatsApp',Phone:t('opt_phone'),SMS:'SMS'};
-  const comm=multi('#comm_prefs input').split(';').filter(Boolean).map(v=>commLabels[v]).join(', ');
+  const commOf=sel=>multi(sel).split(';').filter(Boolean).map(v=>commLabels[v]).join(', ');
+  const patientComm=commOf('#comm_prefs input');
+  const careComm=commOf('#cg_comm_prefs input');
   const freqLabels={'Weekly (recommended especially in the beginning)':t('freq_weekly'),'Every two weeks':t('freq_2w'),'Every four weeks':t('freq_monthly')};
-  const support=[];
-  if(checked('delivery_management'))support.push(t('sup_delivery'));
-  if(checked('prescription_management'))support.push(t('sup_rx'));
-  if(checked('check_up_reminder_management'))support.push(t('sup_checkup'));
-  if(checked('no_support'))support.push(t('sup_none'));
-  if(checked('arrange_call')&&val('callback_date'))support.push(t('sup_callback'));
-  const countryLabel=val('country')==='Deutschland'?t('country_de'):val('country')==='Österreich'?t('country_at'):'';
+  const relLabels={Parent:t('rel_parent'),Grandparent:t('rel_grand'),Sibling:t('rel_sib'),'Partner / Spouse':t('rel_partner'),Friend:t('rel_friend'),'Professional Caregiver':t('rel_prof')};
+  const isCare=val('customer_type')==='Caregiver';
+  const hasCare=radio('second_person')==='Yes' || (val('second_contact_person')+val('second_contact_surname'))!=='';
+  const row=(l,v)=>`<div class="row"><span>${l}</span><span class="rv-right">${v||t('rv_dash')}</span></div>`;
+  // patient + caregiver detail blocks, then assigned to "your details" / "other person" by who is viewing
+  const patientRows=row(t('rv_name'),esc(val('firstname')+' '+val('lastname')))+row(t('rv_email'),esc(val('email')))+row(t('rv_contact'),esc(patientComm));
+  const careRows=row(t('rv_name'),esc(val('second_contact_person')+' '+val('second_contact_surname')))+row(t('rv_relationship'),esc(relLabels[val('caregiver_relationship')]||''))+row(t('rv_contact'),esc(careComm));
+  const you = isCare ? {title:t('rv_your_details'),role:t('opt_caregiver'),rows:careRows} : {title:t('rv_your_details'),role:t('opt_patient'),rows:patientRows};
+  const other = isCare ? {show:true,title:t('rv_other_person'),role:t('opt_patient'),rows:patientRows} : {show:hasCare,title:t('rv_other_person'),role:t('opt_caregiver'),rows:careRows};
+  const svc=(id,label)=>{const on=checked(id);return `<div class="svc ${on?'on':'off'}"><span class="svc-ic ${on?'on':'off'}">${on?'â':'â'}</span><span>${label}</span></div>`;};
+  const services = svc('delivery_management',t('sup_delivery'))+svc('prescription_management',t('sup_rx'))+svc('check_up_reminder_management',t('sup_checkup'));
   $('reviewArea').innerHTML=`
     <div class="review-block">
-      <h4>${t('rv_about')} <a data-goto="1">${t('rv_edit')}</a></h4>
-      <div class="row"><span>${t('rv_name')}</span><span>${esc(val('firstname'))} ${esc(val('lastname'))}</span></div>
-      <div class="row"><span>${t('rv_role')}</span><span>${val('customer_type')==='Caregiver'?t('opt_caregiver'):t('opt_patient')}</span></div>
-      <div class="row"><span>${t('rv_email')}</span><span>${esc(val('email'))}</span></div>
-      <div class="row"><span>${t('rv_contact')}</span><span>${esc(comm)||t('rv_dash')}</span></div>
-      <div class="row"><span>${t('rv_second')}</span><span>${radio('second_person')==='Yes'?esc(val('second_contact_person')+' '+val('second_contact_surname')):t('rv_no')}</span></div>
+      <h4>${you.title} <a data-goto="1">${t('rv_edit')}</a></h4>
+      ${row(t('rv_role'),you.role)}${you.rows}
     </div>
+    ${other.show?`<div class="review-block">
+      <h4>${other.title} <a data-goto="1">${t('rv_edit')}</a></h4>
+      ${row(t('rv_role'),other.role)}${other.rows}
+    </div>`:''}
     <div class="review-block">
       <h4>${t('rv_med')} <a data-goto="2">${t('rv_edit')}</a></h4>
-      <div class="row"><span>${t('rv_medication')}</span><span>${HS.med.medicine}, ${t('med_dose_v')}</span></div>
-      <div class="row"><span>${t('rv_firstdose')}</span><span>${esc(val('first_medication_date'))||t('rv_dash')}</span></div>
-      <div class="row"><span>${t('rv_freq')}</span><span>${freqLabels[radio('reminder_freq')]||t('rv_dash')}</span></div>
+      <div class="row"><span>${t('rv_medication')}</span><span class="rv-right">${HS.med.medicine}, ${t('med_dose_v')}</span></div>
     </div>
     <div class="review-block">
-      <h4>${t('rv_delivery')} <a data-goto="3">${t('rv_edit')}</a></h4>
-      <div class="row"><span>${t('rv_country')}</span><span>${esc(countryLabel)||t('rv_dash')}</span></div>
-      <div class="row"><span>${t('rv_support')}</span><span class="rv-right">${support.join(', ')||t('rv_dash')}</span></div>
+      <h4>${t('rv_services')} <a data-goto="3">${t('rv_edit')}</a></h4>
+      ${row(t('rv_freq'),freqLabels[radio('reminder_freq')])}
+      <div style="margin-top:8px">${services}</div>
     </div>`;
-  document.querySelectorAll('#reviewArea a[data-goto]').forEach(a=>a.addEventListener('click',()=>showStep(+a.dataset.goto)));
+  document.querySelectorAll('#reviewArea a[data-goto]').forEach(a=>a.addEventListener('click',()=>{ editMode=true; showStep(+a.dataset.goto); }));
 }
 
 /* ============================================================
@@ -1368,7 +1371,7 @@ function payloadMedical(){
 }
 function payloadDelivery(){
   const f=[];
-  const at=val('country')==='Österreich', delivery=checked('delivery_management'), rx=checked('prescription_management');
+  const at=val('country')==='Ãsterreich', delivery=checked('delivery_management'), rx=checked('prescription_management');
   const consentGiven=checked('delivery_consent'), hcpGiven=checked('hcp_consent');
   f.push(field('h_country',val('country')));
   f.push(field('doctors_country_brinsupri',val('country')));
@@ -1377,17 +1380,17 @@ function payloadDelivery(){
   f.push(field('check_up_reminder_management',checked('check_up_reminder_management')?'true':'false'));
   f.push(field('i_don_t_want_hcp_support_right_now',checked('no_support')?'true':'false'));
   /* Form 3 marks all four country consents + appointment date REQUIRED; endpoint ignores
-     conditional logic, so send every one — only the genuinely-given consent is 'true'. */
+     conditional logic, so send every one â only the genuinely-given consent is 'true'. */
   const deliveryConsent=(delivery||rx)&&consentGiven;
   f.push(field('delivery_consent_germany',(!at&&deliveryConsent)?'true':'false'));
   f.push(field('delivery_consent_austria',( at&&deliveryConsent)?'true':'false'));
   f.push(field('hcp_consent',         (!at&&rx&&hcpGiven)?'true':'false'));
   f.push(field('hcp_consent_austria', ( at&&rx&&hcpGiven)?'true':'false'));
   f.push(field('when_is_your_next_doctor_s_appointment_scheduled_',(rx&&val('callback_date'))?toEpoch(val('callback_date')):'false'));
-  /* Germany pharmacy choice (§31 SGB V free pharmacy choice) */
+  /* Germany pharmacy choice (Â§31 SGB V free pharmacy choice) */
   if((delivery||rx) && consentGiven){
     const ph=radio('pharmacy_choice');
-    if(ph) f.push(field('consent_for_h_pharmacy_germany', ph));   // 'yes' = H+ pharmacy · 'no' = own pharmacy
+    if(ph) f.push(field('consent_for_h_pharmacy_germany', ph));   // 'yes' = H+ pharmacy Â· 'no' = own pharmacy
     if(ph==='no'){
       if(val('chosen_pharmacy_name'))     f.push(field('chosen_pharmacy_name',val('chosen_pharmacy_name')));
       if(val('chosen_pharmacy_street'))   f.push(field('chosen_pharmacy_street',val('chosen_pharmacy_street')));
@@ -1454,7 +1457,7 @@ function payloadAccount(){
   return {fields:f, context:context()};
 }
 /* progressive submit: each form is sent as its step completes; re-sent only if its
-   data changed since the last send (dedup by payload signature → no duplicate events). */
+   data changed since the last send (dedup by payload signature â no duplicate events). */
 const lastSent={registration:'',medical:'',delivery:''};
 const payloadFor={registration:payloadRegistration,medical:payloadMedical,delivery:payloadDelivery};
 async function sendStep(key){
@@ -1493,7 +1496,7 @@ document.querySelectorAll('.cc-select').forEach(sel=>sel.addEventListener('chang
 }));
 
 /* ============================================================
-   PERSISTENCE — autofill on return + drop-out capture
+   PERSISTENCE â autofill on return + drop-out capture
    Field values are saved to THIS browser only (localStorage).
    Nothing leaves the device until a step's HubSpot form submits.
    (Same-device autofill; not cross-device known-contact prefill.)
@@ -1531,8 +1534,8 @@ function restoreState(){
    HubSpot upserts by email, so a beacon + a later full submit = one contact. */
 function _canFlush(n){
   if(n===1) return !!(val('email')&&val('firstname')&&val('lastname')&&val('customer_type'));
-  if(n===2) return !!(val('email')&&val('first_medication_date')&&checked('confirmation_medication'));
-  if(n===3) return !!(val('email')&&val('country')&&(checked('delivery_management')||checked('prescription_management')||checked('check_up_reminder_management')||checked('no_support')));
+  if(n===2) return !!(val('email'));
+  if(n===3) return !!(val('email')&&(checked('delivery_management')||checked('prescription_management')||checked('check_up_reminder_management')||checked('no_support')));
   return false;
 }
 function beaconStep(key){
@@ -1548,7 +1551,7 @@ function beaconStep(key){
 /* ---- F1: clear removed values ----
    buildPayload() wraps a step's payload so any field that was sent earlier but
    is now emptied is explicitly re-sent as '' to clear it in the backend.
-   (An edited email intentionally creates a new contact — no email lock.)
+   (An edited email intentionally creates a new contact â no email lock.)
    Backend-only; no UI change. */
 const sentFields={registration:new Set(),medical:new Set(),delivery:new Set()};
 function withClears(key,p){
@@ -1577,6 +1580,11 @@ restoreState();                                            // autofill from a pr
 syncOptions(); syncConsentVisibility(); syncSecondPerson(); setupDates();
 $('hplusForm').addEventListener('input',saveState);        // persist as the patient types
 $('hplusForm').addEventListener('change',saveState);
+
+/* Account form lands on the summary page; the prefill script re-syncs it once data arrives. */
+window.__accShowStep = showStep;
+window.__accBuildReview = buildReview;
+showStep(4);
 
 })();
 </script>
@@ -1608,21 +1616,23 @@ $('hplusForm').addEventListener('change',saveState);
       else if(k==='multi') setMulti(id, v);
     });
     var note=document.getElementById('acctPrefillNote');
-    if(note){ note.style.display='block'; note.textContent='Ihre gespeicherten Angaben wurden geladen. Bitte prüfen und aktualisieren Sie sie unten. · Your saved details were loaded — review and update them below.'; }
+    if(note){ note.style.display='block'; note.textContent='Ihre gespeicherten Angaben wurden geladen. Bitte prÃ¼fen und aktualisieren Sie sie unten. Â· Your saved details were loaded â review and update them below.'; }
+    // re-sync the summary page now that the saved data has populated the fields
+    try{ if(window.__accShowStep) window.__accShowStep(4); else if(window.__accBuildReview) window.__accBuildReview(); }catch(e){}
   }
 
   function prefill(qs){
     fetch(ACCOUNT_API+'/api/account/prefill?'+qs)
       .then(function(r){ return r.json(); })
-      .then(function(j){ if(j && j.ok && j.data) apply(j.data); else showGate('Dieser Link ist ungültig oder abgelaufen. · This link is invalid or expired.'); })
-      .catch(function(){ showGate('Angaben konnten nicht geladen werden. · Could not load your details.'); });
+      .then(function(j){ if(j && j.ok && j.data) apply(j.data); else showGate('Dieser Link ist ungÃ¼ltig oder abgelaufen. Â· This link is invalid or expired.'); })
+      .catch(function(){ showGate('Angaben konnten nicht geladen werden. Â· Could not load your details.'); });
   }
 
   function showGate(msg){
     if(document.getElementById('acctGate')) { if(msg){var m=document.querySelector('#acctGate .g-msg'); if(m)m.textContent=msg;} return; }
     var root=document.querySelector('.hplus-wrap')||document.body;
     var g=document.createElement('div'); g.id='acctGate';
-    g.innerHTML='<span class="g-lbl">Bereits registriert? Geben Sie Ihre E-Mail ein, um Ihre gespeicherten Angaben zu bearbeiten. · Already registered? Enter your email to edit your saved details.</span>'+
+    g.innerHTML='<span class="g-lbl">Bereits registriert? Geben Sie Ihre E-Mail ein, um Ihre gespeicherten Angaben zu bearbeiten. Â· Already registered? Enter your email to edit your saved details.</span>'+
       '<input type="email" id="acctEmail" placeholder="you@email.com" autocomplete="email">'+
       '<button type="button" id="acctSend">Link senden / Send link</button>'+
       '<span class="g-msg" id="acctMsg"></span>';
@@ -1630,11 +1640,11 @@ $('hplusForm').addEventListener('change',saveState);
     if(msg){ document.getElementById('acctMsg').textContent=msg; }
     document.getElementById('acctSend').addEventListener('click',function(){
       var em=(document.getElementById('acctEmail').value||'').trim();
-      if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){ document.getElementById('acctMsg').textContent='Bitte gültige E-Mail eingeben. · Please enter a valid email.'; return; }
-      this.disabled=true; this.textContent='…';
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){ document.getElementById('acctMsg').textContent='Bitte gÃ¼ltige E-Mail eingeben. Â· Please enter a valid email.'; return; }
+      this.disabled=true; this.textContent='â¦';
       fetch(ACCOUNT_API+'/api/account/request-link',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em})})
-        .then(function(){ document.getElementById('acctMsg').textContent='Wenn diese E-Mail registriert ist, haben wir Ihnen einen Link gesendet. Bitte prüfen Sie Ihr Postfach. · If that email is registered, we sent you a link — check your inbox.'; })
-        .catch(function(){ document.getElementById('acctMsg').textContent='Etwas ist schiefgelaufen. Bitte erneut versuchen. · Something went wrong, please try again.'; })
+        .then(function(){ document.getElementById('acctMsg').textContent='Wenn diese E-Mail registriert ist, haben wir Ihnen einen Link gesendet. Bitte prÃ¼fen Sie Ihr Postfach. Â· If that email is registered, we sent you a link â check your inbox.'; })
+        .catch(function(){ document.getElementById('acctMsg').textContent='Etwas ist schiefgelaufen. Bitte erneut versuchen. Â· Something went wrong, please try again.'; })
         .finally(function(){ var b=document.getElementById('acctSend'); b.disabled=false; b.textContent='Link senden / Send link'; });
     });
   }
