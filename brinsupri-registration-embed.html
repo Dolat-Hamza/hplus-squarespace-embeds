@@ -1750,20 +1750,54 @@ function payloadRegistration(){
   f.push(field('firstname',val('firstname')));
   f.push(field('lastname',val('lastname')));
   f.push(field('email',val('email')));
-  const comm=multi('#comm_prefs input'); if(comm) f.push(field('communication_preference',comm));
-  if(val('patient_whatsapp')) f.push(field('patient_whatsapp',phoneFull('patient_whatsapp')));
-  if(val('patient_phone'))    f.push(field('patient_phone',phoneFull('patient_phone')));
-  if(val('patient_sms'))      f.push(field('patient_sms',phoneFull('patient_sms')));
+  /* Role-aware mapping: the first block is always the registrant, the second block the
+     other person. A caregiver registrant therefore writes their own details to the
+     caregiver properties and the patient's to the patient properties (and vice versa). */
+  const isCg = val('customer_type')==='Caregiver';
+  const put=(prop,v)=>{ if(v) f.push(field(prop,v)); };
+  const comm=multi('#comm_prefs input'), cg=multi('#cg_comm_prefs input');
+  if(isCg){
+    // registrant = caregiver
+    put('second_contact_person',  val('firstname'));
+    put('second_contact_surname', val('lastname'));
+    put('second_contact_email',   val('email'));
+    if(comm) f.push(field('caregiver_communication_preferences',comm));
+    put('second_contact_whatsapp',phoneFull('patient_whatsapp'));
+    put('second_contact_phone',   phoneFull('patient_phone'));
+    put('caregiver_sms',          phoneFull('patient_sms'));
+    put('caregiver_relationship', val('caregiver_relationship'));
+  } else {
+    // registrant = patient
+    put('patient_first_name', val('firstname'));
+    put('patient_last_name',  val('lastname'));
+    put('patient_email',      val('email'));
+    if(comm) f.push(field('communication_preference',comm));
+    put('patient_whatsapp',   phoneFull('patient_whatsapp'));
+    put('patient_phone',      phoneFull('patient_phone'));
+    put('patient_sms',        phoneFull('patient_sms'));
+  }
   f.push(field('would_you_like_the_medication_reminders_to_be_sent_to_a_second_person_',radio('second_person')));
-  if(radio('second_person')==='Yes'){
-    if(val('second_contact_person'))  f.push(field('second_contact_person',val('second_contact_person')));
-    if(val('second_contact_surname')) f.push(field('second_contact_surname',val('second_contact_surname')));
-    if(val('caregiver_relationship')) f.push(field('caregiver_relationship',val('caregiver_relationship')));
-    const cg=multi('#cg_comm_prefs input'); if(cg) f.push(field('caregiver_communication_preferences',cg));
-    if(val('second_contact_email'))    f.push(field('second_contact_email',val('second_contact_email')));
-    if(val('second_contact_whatsapp')) f.push(field('second_contact_whatsapp',phoneFull('second_contact_whatsapp')));
-    if(val('second_contact_phone'))    f.push(field('second_contact_phone',phoneFull('second_contact_phone')));
-    if(val('caregiver_sms'))           f.push(field('caregiver_sms',phoneFull('caregiver_sms')));
+  if(radio('second_person')==='Yes' || isCg){
+    if(isCg){
+      // other person = the patient
+      put('patient_first_name', val('second_contact_person'));
+      put('patient_last_name',  val('second_contact_surname'));
+      put('patient_email',      val('second_contact_email'));
+      if(cg) f.push(field('communication_preference',cg));
+      put('patient_whatsapp',   phoneFull('second_contact_whatsapp'));
+      put('patient_phone',      phoneFull('second_contact_phone'));
+      put('patient_sms',        phoneFull('caregiver_sms'));
+    } else {
+      // other person = the caregiver
+      put('second_contact_person',  val('second_contact_person'));
+      put('second_contact_surname', val('second_contact_surname'));
+      put('caregiver_relationship', val('caregiver_relationship'));
+      if(cg) f.push(field('caregiver_communication_preferences',cg));
+      put('second_contact_email',   val('second_contact_email'));
+      put('second_contact_whatsapp',phoneFull('second_contact_whatsapp'));
+      put('second_contact_phone',   phoneFull('second_contact_phone'));
+      put('caregiver_sms',          phoneFull('caregiver_sms'));
+    }
   }
   if(checked('create_an_account')){ f.push(field('create_an_account','true')); f.push(field('account_email',val('email'))); }
   f.push(field('agree_to_terms','true'));
