@@ -377,7 +377,8 @@
         <div class="field cond" id="c_whatsapp" style="display:none"><label data-i18n="whatsapp_label"></label><input type="tel" id="patient_whatsapp" placeholder="+49 176 1234567" inputmode="tel" autocomplete="tel" data-validate="phone-global" /></div>
         <div class="field cond" id="c_sms" style="display:none"><label data-i18n="sms_label"></label><div class="phone-row"><select id="patient_sms_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="patient_sms" placeholder="176 1234567" data-validate="phone" /></div></div>
 
-        <div class="field" data-required>
+        <div id="secondSlotYou"></div>
+        <div class="field" data-required id="secondPersonField">
           <span class="group-label" data-i18n="second_label"></span>
           <div class="pill-row">
             <label class="choice"><input type="radio" name="second_person" value="Yes"><span class="ctxt" data-i18n="opt_yes"></span></label>
@@ -392,6 +393,7 @@
             <div class="field"><label data-i18n="sc_first"></label><input type="text" id="second_contact_person" /></div>
             <div class="field"><label data-i18n="sc_last"></label><input type="text" id="second_contact_surname" /></div>
           </div>
+          <div id="secondSlotPatient"></div>
           <div id="relSlotOther"></div>
           <div class="field" id="relField">
             <label data-i18n="rel_label"></label>
@@ -405,6 +407,7 @@
               <option value="Professional Caregiver" data-i18n="rel_prof"></option>
             </select>
           </div>
+          <div id="cgContactBlock">
           <div class="field">
             <span class="group-label" data-i18n="cg_comm_label"></span>
             <div class="pill-row" id="cg_comm_prefs">
@@ -418,6 +421,7 @@
           <div class="field cond" id="c_sc_whatsapp" style="display:none"><label data-i18n="sc_whatsapp"></label><input type="tel" id="second_contact_whatsapp" placeholder="+44 7700 900123" inputmode="tel" data-validate="phone-global" /></div>
           <div class="field cond" id="c_sc_phone" style="display:none"><label data-i18n="sc_phone"></label><div class="phone-row"><select id="second_contact_phone_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="second_contact_phone" placeholder="176 1234567" data-validate="phone" /></div></div>
           <div class="field cond" id="c_sc_sms" style="display:none"><label data-i18n="sc_sms"></label><div class="phone-row"><select id="caregiver_sms_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="caregiver_sms" placeholder="176 1234567" data-validate="phone" /></div></div>
+          </div>
         </div>
 
         <div class="field" data-required style="margin-top:6px">
@@ -1244,6 +1248,14 @@ function applyRoleWording(){
   set('[data-i18n="second_label"]', isCg ? tt.second_label_pt : tt.second_label);
   set('[data-i18n="rel_label"]', isCg ? tt.rel_label_pt : tt.rel_label);
   placeRelationshipField(isCg);
+  placeSecondPersonQuestion(isCg);
+}
+/* For a caregiver the question belongs under the patient's name; for a patient it
+   stays in their own section. */
+function placeSecondPersonQuestion(isCg){
+  var fld=$('secondPersonField'); if(!fld) return;
+  var slot = isCg ? $('secondSlotPatient') : $('secondSlotYou');
+  if(slot && fld.previousElementSibling!==slot){ slot.parentNode.insertBefore(fld, slot.nextSibling); }
 }
 /* A caregiver's relationship is a fact about them, so it belongs in "Your details";
    for a patient it stays with the other person's details. */
@@ -1297,7 +1309,12 @@ function syncCgCommFields(){
 }
 document.querySelectorAll('#cg_comm_prefs input').forEach(c=>c.addEventListener('change',syncCgCommFields));
 /* second-person details show when role = Caregiver OR reminders wanted for a second person */
-function syncSecondPerson(){ $('caregiverBlock').style.display = (val('customer_type')==='Caregiver' || radio('second_person')==='Yes') ? 'block' : 'none'; }
+function syncSecondPerson(){
+  const isCg = val('customer_type')==='Caregiver', yes = radio('second_person')==='Yes';
+  $('caregiverBlock').style.display = (isCg || yes) ? 'block' : 'none';
+  // a caregiver always gives the patient's name; the contact questions follow only on "Yes"
+  const cc=$('cgContactBlock'); if(cc) cc.style.display = (isCg && !yes) ? 'none' : 'block';
+}
 document.querySelectorAll('input[name=second_person]').forEach(r=>r.addEventListener('change',syncSecondPerson));
 $('customer_type').addEventListener('change',function(){ syncSecondPerson(); applyLang(currentLang); });
 document.querySelectorAll('.choice input').forEach(inp=>{
@@ -1432,7 +1449,7 @@ async function initAutocomplete(){
   const at=val('country')==='Österreich';
   try{
     const { PlaceAutocompleteElement } = await google.maps.importLibrary('places');
-    const pac = new PlaceAutocompleteElement({ includedRegionCodes:[at?'at':'de'] });
+    const pac = new PlaceAutocompleteElement({ includedRegionCodes:['de','at'] });
     window.__practicePac = pac;
     pac.style.width='100%';
     const box=$('practiceSearchBox');
@@ -1474,7 +1491,7 @@ async function initDeliveryAutocomplete(){
   const at=val('country')==='Österreich';
   try{
     const { PlaceAutocompleteElement } = await google.maps.importLibrary('places');
-    const pac=new PlaceAutocompleteElement({ includedRegionCodes:[at?'at':'de'] });
+    const pac=new PlaceAutocompleteElement({ includedRegionCodes:['de','at'] });
     window.__deliveryPac = pac;
     pac.style.width='100%';
     const box=$('deliverySearchBox'); $('deliverySearch').style.display='none';
@@ -1494,7 +1511,7 @@ async function initDeliveryAutocomplete(){
 /* The address searches are created once; keep their region in step with the
    country (Austria was previously stuck on the German region). */
 function syncPlacesRegion(){
-  const codes=[val('country')==='Österreich'?'at':'de'];
+  const codes=['de','at'];
   [window.__practicePac, window.__deliveryPac].forEach(pac=>{
     if(!pac) return;
     try{ pac.includedRegionCodes=codes; }catch(e){}
@@ -1691,7 +1708,7 @@ function validateSub3(n){
       // all doctor practice details are required to progress
       $('addressFields').style.display='block';
       let complete=true;
-      ['doctor_first','doctor_last','doctor_street2','doctor_street','doctor_postcode','doctor_phone','doctor_fax'].forEach(id=>{
+      ['doctor_first','doctor_last','doctor_street2','doctor_street','doctor_postcode','doctor_phone'].forEach(id=>{
         if(val(id)===''){ const f=$(id).closest('.field'); if(f){ f.classList.add('invalid'); ensureFmtErr(f,t('err_required')); } complete=false; }
       });
       if(!complete){ showErr('infoErr',true); ok=false; $('infoErr').scrollIntoView({behavior:'smooth',block:'center'}); }
