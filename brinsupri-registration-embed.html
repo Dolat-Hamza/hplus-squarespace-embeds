@@ -873,9 +873,11 @@ const I18N = {
     opt_email:"E-Mail", opt_whatsapp:"WhatsApp", opt_phone:"Telefonanruf", opt_sms:"SMS",
     whatsapp_label:"WhatsApp-Nummer", phone_label:"Telefonnummer", sms_label:"SMS-Nummer",
     second_label:"Möchten Sie, dass wir eine Betreuungsperson kontaktieren, um unsere Leistungen zu erbringen?",
+    second_label_pt:"Möchten Sie, dass wir den Patienten kontaktieren, um unsere Leistungen zu erbringen?",
+    your_details_h:"Ihre Angaben", other_details_pt:"Angaben zum Patienten", rel_label_pt:"Wie ist Ihre Beziehung zum Patienten?",
     opt_yes:"Ja", opt_no:"Nein",
     sc_first:"Vorname", sc_last:"Nachname",
-    rel_label:"Welche Beziehung hat diese Person zum Patienten?",
+    rel_label:"Welche Beziehung hat diese Person zu Ihnen?",
     rel_parent:"Elternteil", rel_grand:"Großelternteil", rel_sib:"Geschwister", rel_partner:"Partner / Ehepartner", rel_friend:"Freund/in", rel_prof:"Professionelle Pflegekraft",
     cg_comm_label:"Wie sollen wir diese Person kontaktieren, um unsere Leistungen zu erbringen?",
     sc_email:"E-Mail", sc_whatsapp:"WhatsApp-Nummer", sc_phone:"Telefonnummer", sc_sms:"SMS-Nummer",
@@ -1016,9 +1018,11 @@ const I18N = {
     opt_email:"Email", opt_whatsapp:"WhatsApp", opt_phone:"Phone call", opt_sms:"SMS",
     whatsapp_label:"WhatsApp number", phone_label:"Phone number", sms_label:"SMS number",
     second_label:"Would you like us to contact a caregiver to perform our services?",
+    second_label_pt:"Would you like us to contact the patient to perform our services?",
+    your_details_h:"Your details", other_details_pt:"Patient details", rel_label_pt:"What is your relationship to the patient?",
     opt_yes:"Yes", opt_no:"No",
     sc_first:"First name", sc_last:"Last Name",
-    rel_label:"What is this person's relationship to the patient?",
+    rel_label:"What is this person's relationship to you?",
     rel_parent:"Parent", rel_grand:"Grandparent", rel_sib:"Sibling", rel_partner:"Partner / Spouse", rel_friend:"Friend", rel_prof:"Professional caregiver",
     cg_comm_label:"How should we contact this person to perform our services?",
     sc_email:"Email", sc_whatsapp:"WhatsApp number", sc_phone:"Phone number", sc_sms:"SMS number",
@@ -1167,7 +1171,19 @@ function applyLang(lang){
   if(typeof updateConsentTexts==='function') updateConsentTexts();
   fillMed(currentLang);
   try{syncFirstDateLabel();syncMedPrefs();}catch(e){}
+  applyRoleWording();
   if(current===4) buildReview();
+}
+/* Role-aware wording: the registrant is always "you"; the other person flips
+   between caregiver (patient registrant) and patient (caregiver registrant). */
+function applyRoleWording(){
+  var tt=I18N[currentLang]; if(!tt) return;
+  var isCg = val('customer_type')==='Caregiver';
+  var set=function(sel,txt){ var el=document.querySelector(sel); if(el&&txt) el.textContent=txt; };
+  set('[data-i18n="patient_details_h"]', tt.your_details_h);
+  set('#caregiverBlock [data-i18n="second_details_h"]', isCg ? tt.other_details_pt : tt.second_details_h);
+  set('[data-i18n="second_label"]', isCg ? tt.second_label_pt : tt.second_label);
+  set('[data-i18n="rel_label"]', isCg ? tt.rel_label_pt : tt.rel_label);
 }
 document.querySelectorAll('.langswitch button').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));
 /* ---- Step 2: received-medication date label + prescription-reminder preferences ---- */
@@ -1216,7 +1232,7 @@ document.querySelectorAll('#cg_comm_prefs input').forEach(c=>c.addEventListener(
 /* second-person details show when role = Caregiver OR reminders wanted for a second person */
 function syncSecondPerson(){ $('caregiverBlock').style.display = (val('customer_type')==='Caregiver' || radio('second_person')==='Yes') ? 'block' : 'none'; }
 document.querySelectorAll('input[name=second_person]').forEach(r=>r.addEventListener('change',syncSecondPerson));
-$('customer_type').addEventListener('change',syncSecondPerson);
+$('customer_type').addEventListener('change',function(){ syncSecondPerson(); applyRoleWording(); });
 document.querySelectorAll('.choice input').forEach(inp=>{
   const paint=()=>{ const c=inp.closest('.choice'); if(inp.type==='radio'){document.querySelectorAll(`input[name="${inp.name}"]`).forEach(o=>o.closest('.choice').classList.remove('selected'));} c.classList.toggle('selected',inp.checked); };
   inp.addEventListener('change',paint); paint();
