@@ -354,6 +354,8 @@
           <div class="field" data-required><label data-i18n="lastname_label"></label><input type="text" id="lastname" autocomplete="family-name" /><div class="err-msg" data-i18n="err_last"></div></div>
         </div>
 
+        <div id="relSlotYou"></div>
+
         <div class="field" data-required>
           <label data-i18n="email_label"></label>
           <input type="email" id="email" autocomplete="email" data-validate="email" />
@@ -390,7 +392,8 @@
             <div class="field"><label data-i18n="sc_first"></label><input type="text" id="second_contact_person" /></div>
             <div class="field"><label data-i18n="sc_last"></label><input type="text" id="second_contact_surname" /></div>
           </div>
-          <div class="field">
+          <div id="relSlotOther"></div>
+          <div class="field" id="relField">
             <label data-i18n="rel_label"></label>
             <select id="caregiver_relationship">
               <option value="" data-i18n="opt_select"></option>
@@ -1240,6 +1243,14 @@ function applyRoleWording(){
   set('#caregiverBlock [data-i18n="second_details_h"]', isCg ? tt.other_details_pt : tt.second_details_h);
   set('[data-i18n="second_label"]', isCg ? tt.second_label_pt : tt.second_label);
   set('[data-i18n="rel_label"]', isCg ? tt.rel_label_pt : tt.rel_label);
+  placeRelationshipField(isCg);
+}
+/* A caregiver's relationship is a fact about them, so it belongs in "Your details";
+   for a patient it stays with the other person's details. */
+function placeRelationshipField(isCg){
+  var fld=$('relField'); if(!fld) return;
+  var slot = isCg ? $('relSlotYou') : $('relSlotOther');
+  if(slot && fld.previousElementSibling!==slot){ slot.parentNode.insertBefore(fld, slot.nextSibling); }
 }
 document.querySelectorAll('.langswitch button').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));
 /* ---- Step 2: received-medication date label + prescription-reminder preferences ---- */
