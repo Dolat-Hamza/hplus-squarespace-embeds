@@ -1460,7 +1460,7 @@ const emailOk = e => { const v=String(e||'').trim(); return v.length<=254 && /^[
 const step3Log=(message,details)=>console.log('[H+ Step 3] '+message,details||'');
 function setSubTag(){ const el=$('subTag'); if(el) el.textContent=t('sub_of').replace('%s',sub3); }
 function showSub3(n){
-  sub3=n; ['sub31','sub32','sub33','sub34'].forEach((id,i)=>$(id).classList.toggle('active',i===n-1));
+  sub3=n; ['sub31','sub32','sub33','sub34'].forEach((id,i)=>{ const el=$(id); if(el) el.classList.toggle('active',i===n-1); });
   if(n===4){ const cc=val('country')==='Österreich'?'+43':'+49'; ['doctor_phone_cc','doctor_fax_cc'].forEach(id=>{ if($(id) && !$(id).dataset.touched) $(id).value=cc; }); }
   document.querySelector('.card').scrollIntoView({behavior:'smooth',block:'start'});
 }
@@ -1612,7 +1612,7 @@ function validateSub3(n){
     }
   }
   if(n===3){   // PRESCRIPTION consent page (shown when rx)
-    clearScope($('sub33'));
+    { const sc=$('sub33'); if(sc) clearScope(sc); }
     const bad=!checked('hcp_consent'); markInvalid($('hcpConsentWrap'),bad); if(bad) ok=false;
   }
   if(n===4){   // DOCTOR details page
