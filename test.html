@@ -250,7 +250,7 @@
   .hplus-root .hero-copy{padding:24px 20px !important}
   .hplus-root .hero h1{font-size:23px !important}
   .hplus-root .hero p{font-size:15px !important}
-  .hplus-root .pill-row .choice{flex:1 1 40% !important;min-width:0 !important}
+  .hplus-root .pill-row .choice{flex:1 1 100% !important;min-width:0 !important}
   .hplus-root .trustbar{font-size:11.5px;gap:6px 12px}
   .hplus-root .progress-steps li{font-size:10.5px;padding:3px 1px;letter-spacing:0}
   .hplus-root .two-col{grid-template-columns:1fr !important}
@@ -282,30 +282,6 @@
 </svg>
 <div class="hplus-root">
 <div class="hplus-wrap">
-
-  <!-- ===== Header (logo + Account Settings) ===== -->
-  <style>
-  .uhp-header{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;position:relative;padding:2px 0 16px;margin:0 0 20px}
-  .uhp-header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--blue),var(--teal) 55%,rgba(15,181,165,0))}
-  .uhp-brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none}
-  .uhp-brand svg{height:34px;width:58px;color:var(--blue);flex:0 0 auto}
-  .uhp-brand .bt{line-height:1.05}
-  .uhp-brand .bt b{font-family:var(--font-head),'Poppins',sans-serif;font-weight:700;color:var(--ink-head);font-size:17px;letter-spacing:.01em;display:block}
-  .uhp-brand .bt small{display:block;font-family:var(--font-body);font-weight:600;color:var(--blue-2);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;margin-top:3px}
-  .uhp-header-right{display:none;align-items:center;gap:12px}
-  .uhp-header-right.show{display:flex}
-  .acct-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--blue),var(--blue-3));color:#fff !important;font-family:var(--font-head),inherit;font-size:clamp(11px,.95vw,13.5px);font-weight:600;letter-spacing:.4px;line-height:1;text-transform:uppercase;text-decoration:none !important;padding:13px 20px;border-radius:999px;white-space:nowrap;box-shadow:0 12px 24px -12px rgba(0,126,198,.75);transition:opacity .2s ease,transform .2s ease,box-shadow .2s ease}
-  .acct-btn:hover{transform:translateY(-1px);box-shadow:0 16px 30px -12px rgba(0,126,198,.8)}
-  .uhp-avatar{width:42px;height:42px;display:block;object-fit:contain;border-radius:50%;box-shadow:0 4px 12px -6px rgba(6,50,76,.5)}
-  @media(max-width:767px){.acct-btn{font-size:12px;padding:11px 16px}.uhp-avatar{width:36px;height:36px}.uhp-brand svg{height:28px;width:48px}.uhp-brand .bt b{font-size:15px}}
-  </style>
-  <header class="uhp-header">
-    <a href="/uhp" class="uhp-brand"><svg><use href="#ic-hlogo"/></svg><span class="bt"><b>United Pharma Partners</b><small>H+ Therapy Companion</small></span></a>
-    <div class="uhp-header-right">
-      <a href="/brinsupri-account" class="acct-btn">Account Settings</a>
-      <a href="/brinsupri-account" aria-label="Account"><img class="uhp-avatar" src="https://images.squarespace-cdn.com/content/69821059a09d4c3e86e6809d/1781090219744-48F9YQ7N12F087G7RLLF/UHP+User.png?content-type=image%2Fpng" alt="Account"></a>
-    </div>
-  </header>
 
   <!-- LANGUAGE SWITCHER -->
   <div class="langswitch"><div class="seg">
@@ -432,7 +408,7 @@
 
         <div class="field" data-required>
           <label for="med_select" data-i18n="med_q"></label>
-          <select id="med_select" autocomplete="off" aria-label="Medication"><option value="" data-i18n="opt_select"></option><option value="Brinsupri (Brensocatib)">Brinsupri (Brensocatib)</option><option value="Revestive (Teduglutide)">Revestive (Teduglutide)</option><option value="Takhzyro (Lanadelumab)">Takhzyro (Lanadelumab)</option><option value="Galafold (Migalastat)">Galafold (Migalastat)</option><option value="Vyvgart (Efgartigimod alfa)">Vyvgart (Efgartigimod alfa)</option><option value="Zilbrysq (Zilucoplan)">Zilbrysq (Zilucoplan)</option><option value="Other">— Other —</option></select>
+          <select id="med_select" autocomplete="off" aria-label="Medication"><option value="Brinsupri (Brensocatib)" selected>Brinsupri (Brensocatib)</option><option value="Revestive (Teduglutide)">Revestive (Teduglutide)</option><option value="Takhzyro (Lanadelumab)">Takhzyro (Lanadelumab)</option><option value="Galafold (Migalastat)">Galafold (Migalastat)</option><option value="Vyvgart (Efgartigimod alfa)">Vyvgart (Efgartigimod alfa)</option><option value="Zilbrysq (Zilucoplan)">Zilbrysq (Zilucoplan)</option><option value="Other">— Other —</option></select>
         </div>
 
         <div class="medcard">
@@ -543,7 +519,7 @@
           <div class="err-msg" id="optionsErr" data-i18n="err_options"></div>
 
 
-          <div id="doctorInline" style="display:none;margin-top:34px;padding-top:8px">
+          <div id="doctorInline" style="display:none">
           <h4 class="section-head lg" data-i18n="doctor_details_h"></h4>
           <p class="step-sub" id="s3cSub" data-i18n="s3c_sub_rx"></p>
 
@@ -561,8 +537,8 @@
             </div>
           </div>
 
-          <!-- address fields: hidden until the Search button is pressed (or a practice is selected) -->
-          <div id="addressFields" style="display:none">
+          <!-- address fields: hidden until a practice is selected or manual entry begins -->
+          <div id="addressFields">
             <div class="field"><label data-i18n="doc_practice"></label><input type="text" id="doctor_street2"></div>
             <div class="field"><label data-i18n="doc_street"></label><input type="text" id="doctor_street"></div>
             <div class="field" style="max-width:220px"><label data-i18n="doc_postcode"></label><input type="text" id="doctor_postcode"></div>
@@ -645,12 +621,6 @@
 
             <div id="deliveryPrefs" style="display:none;margin-top:24px;padding-top:20px;border-top:1px solid var(--hair)">
               <h4 class="section-head" data-i18n="delivery_prefs_h"></h4>
-              <div class="field" id="deliverySearchWrap">
-                <button type="button" class="searchbtn" id="deliverySearchBtn"><svg><use href="#ic-search"/></svg><span data-i18n="delivery_search_btn"></span></button>
-                <div id="deliverySearchBox" style="display:none;margin-top:12px">
-                  <input type="text" id="deliverySearch" data-i18n-ph="delivery_search_ph" autocomplete="off">
-                </div>
-              </div>
               <div class="field"><label data-i18n="dp_street"></label><input type="text" id="delivery_street"></div>
               <div class="field"><label data-i18n="dp_street2"></label><input type="text" id="delivery_street2"></div>
               <div class="two-col">
@@ -722,32 +692,6 @@
     <div class="rowc"><svg><use href="#ic-hotline"/></svg><a href="tel:08004402044" style="color:var(--blue);text-decoration:none">0800 44 020 44</a><span style="color:var(--muted)" data-i18n="contact_hours"></span></div>
   </div>
   <p class="disclaimer" data-i18n="disclaimer"></p>
-
-  <!-- ===== Footer ===== -->
-  <style>
-  .uhp-footer{margin-top:26px;border-radius:22px;overflow:hidden;position:relative;background:linear-gradient(120deg,#06324C 0%,#064B73 48%,#007EC6 100%);color:#fff;padding:26px 30px;box-shadow:0 18px 44px -24px rgba(6,50,76,.55)}
-  .uhp-footer::after{content:"";position:absolute;right:-70px;bottom:-110px;width:320px;height:320px;background:linear-gradient(135deg,rgba(15,181,165,.5),rgba(15,181,165,0));transform:rotate(38deg);pointer-events:none}
-  .uhp-footer-top{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:14px 24px;flex-wrap:wrap}
-  .uhp-footer-brand{display:flex;align-items:center;gap:12px}
-  .uhp-footer-brand svg{height:30px;width:52px;color:#fff}
-  .uhp-footer-brand span{font-family:var(--font-head),'Poppins',sans-serif;font-weight:600;font-size:15px}
-  .uhp-footer-links{display:flex;gap:18px;flex-wrap:wrap}
-  .uhp-footer-links a{color:#D5E7F2;text-decoration:none;font-family:var(--font-body);font-size:13.5px;font-weight:500;transition:color .15s}
-  .uhp-footer-links a:hover{color:#fff}
-  .uhp-footer-bottom{position:relative;z-index:1;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.18);font-family:var(--font-body);font-size:12px;color:#BCDFF5}
-  @media(max-width:767px){.uhp-footer{padding:22px 20px;text-align:center}.uhp-footer-top{justify-content:center}.uhp-footer-links{justify-content:center}}
-  </style>
-  <footer class="uhp-footer">
-    <div class="uhp-footer-top">
-      <div class="uhp-footer-brand"><svg><use href="#ic-hlogo"/></svg><span>United Pharma Partners</span></div>
-      <nav class="uhp-footer-links">
-        <a href="/therapy-companion/privacy-policy" target="_blank" rel="noopener">Datenschutz</a>
-        <a href="/therapy-companion/terms-and-conditions" target="_blank" rel="noopener">AGB</a>
-        <a href="/uhp/contact">Kontakt</a>
-      </nav>
-    </div>
-    <div class="uhp-footer-bottom">© 2026 United Pharma Partners · Ihr digitaler Begleiter für Ihre Therapie</div>
-  </footer>
 </div>
 
 <!-- no-support confirmation modal -->
@@ -774,7 +718,7 @@
     <h3 data-i18n="pharma_list_title"></h3>
     <div style="text-align:left;margin:14px 0">
       <div style="padding:12px 0;border-bottom:1px solid var(--hair)"><b style="font-family:var(--font-head);color:var(--ink-head)">Apotheke an der Bergstraße</b><br><span style="color:var(--muted);font-size:13.5px">Bergstraße 31, 69469 Weinheim, Germany</span></div>
-      <div style="padding:12px 0"><b style="font-family:var(--font-head);color:var(--ink-head)">International Specialty Pharmacy (ISP)</b><br><span style="color:var(--muted);font-size:13.5px">Paul-Henri Spaaklaan 3B, 6229 EN Maastricht, Netherlands</span></div>
+      <div style="padding:12px 0"><b style="font-family:var(--font-head);color:var(--ink-head)">International Specialty Pharmacy (ISP)</b><br><span style="color:var(--muted);font-size:13.5px">Kärntner Ring 17, 1010 Wien, Austria</span></div>
     </div>
     <div class="modal-actions"><button type="button" class="btn-outline" id="pharmListClose" data-i18n="close_btn"></button></div>
   </div>
@@ -792,9 +736,12 @@
 </div>
 <div class="modal-ov" id="altPharmacyModal">
   <div class="modal" role="dialog" aria-modal="true">
-    <h3 data-i18n="altpm_title"></h3>
     <p data-i18n="altpm_intro"></p>
-    <p data-i18n="altpm_note" style="font-size:13px;color:var(--muted)"></p>
+    <ul class="mlist">
+      <li data-i18n="altpm_li1"></li>
+      <li data-i18n="altpm_li2"></li>
+    </ul>
+    <p class="altpm-q" data-i18n="altpm_q" style="font-weight:700;color:var(--ink-head)"></p>
     <div class="modal-actions">
       <button type="button" class="btn btn-primary" id="altpmYes" data-i18n="altpm_yes"></button>
       <button type="button" class="btn-outline" id="altpmNo" data-i18n="altpm_no"></button>
@@ -836,7 +783,7 @@ const PHARMA = {
   'Österreich': {
     de: 'H+ Partner Pharmacy - International Specialty Pharmacy (ISP) - pick up service',
     en: 'H+ Partner Pharmacy - International Specialty Pharmacy (ISP) - pick up service',
-    addr: 'International Specialty Pharmacy (ISP), Paul-Henri Spaaklaan 3B, 6229 EN Maastricht, Netherlands'
+    addr: 'International Specialty Pharmacy (ISP), Kärntner Ring 17, 1010 Wien, Austria'
   }
 };
 
@@ -868,46 +815,44 @@ const I18N = {
     nxt2_t:"Wir organisieren alles für Sie", nxt2_d:"Sofern Sie die erforderlichen Angaben gemacht haben, klärt das H+ Team alles direkt mit Ihrem Arzt und Ihrer Apotheke. Sobald alle Details bestätigt sind, melden wir uns bei Ihnen und erklären die nächsten Schritte.", nxt2_pill:"Dauer: bis zu 48 Stunden",
     nxt3_t:"Sie erhalten Benachrichtigungen von uns", nxt3_d:"In der Zwischenzeit erhalten Sie weiterhin Benachrichtigungen – ganz nach den von Ihnen gewählten Einstellungen.",
     trust1:"✓ Kostenlos nutzbar", trust2:"✓ DSGVO-konform", trust3:"✓ Jederzeit kündbar", trust4:"✓ Expertenbetreuung",
-    step1_name:"Über Sie", step2_name:"Ihre Therapie", step3_name:"Ihre Unterstützung", step4_name:"Geschafft",
-    s1_title:"Willkommen{name} 👋", s1_sub:"Richten wir Ihren Therapy Companion ein – in nur ~2 Minuten kümmern wir uns um Erinnerungen, Nachschub und Lieferung.",
-    role_label:"Zuerst: Machen Sie das für sich selbst oder für jemanden, den Sie betreuen?", opt_select:"Bitte auswählen…", opt_patient:"Patient", opt_caregiver:"Betreuer",
+    step1_name:"Allgemeine Informationen", step2_name:"Ihre Medikation", step3_name:"Ihre Servicemodule", step4_name:"Bestätigung",
+    s1_title:"Erzählen Sie uns von sich", s1_sub:"Diese Angaben helfen uns, Ihren H+ Therapy Companion persönlich für Sie einzurichten.",
+    role_label:"Sind Sie der Patient oder der Betreuer?", opt_select:"Bitte auswählen…", opt_patient:"Patient", opt_caregiver:"Betreuer",
     firstname_label:"Vorname", lastname_label:"Nachname", email_label:"E-Mail-Adresse",
     email_reassure:"Wir nutzen Ihre E-Mail nur für Ihren H+ Therapy Companion – niemals für Werbung Dritter.",
     comm_label:"Wie möchten Sie, dass wir Sie kontaktieren, um unsere Leistungen zu erbringen?",
     opt_email:"E-Mail", opt_whatsapp:"WhatsApp", opt_phone:"Telefonanruf", opt_sms:"SMS",
     whatsapp_label:"WhatsApp-Nummer", phone_label:"Telefonnummer", sms_label:"SMS-Nummer",
-    second_label:"Sollen wir auch eine Betreuungsperson auf dem Laufenden halten?",
-    second_label_pt:"Sollen wir auch den Patienten auf dem Laufenden halten?",
-    your_details_h:"Ihre Angaben", other_details_pt:"Angaben zum Patienten", rel_label_pt:"Wie ist Ihre Beziehung zum Patienten?",
+    second_label:"Möchten Sie, dass wir eine Betreuungsperson kontaktieren, um unsere Leistungen zu erbringen?",
     opt_yes:"Ja", opt_no:"Nein",
     sc_first:"Vorname", sc_last:"Nachname",
-    rel_label:"Welche Beziehung hat diese Person zu Ihnen?",
+    rel_label:"Welche Beziehung hat diese Person zum Patienten?",
     rel_parent:"Elternteil", rel_grand:"Großelternteil", rel_sib:"Geschwister", rel_partner:"Partner / Ehepartner", rel_friend:"Freund/in", rel_prof:"Professionelle Pflegekraft",
-    cg_comm_label:"Wie sollen wir diese Person erreichen?",
+    cg_comm_label:"Wie sollen wir diese Person kontaktieren, um unsere Leistungen zu erbringen?",
     sc_email:"E-Mail", sc_whatsapp:"WhatsApp-Nummer", sc_phone:"Telefonnummer", sc_sms:"SMS-Nummer",
     create_acct:"Konto erstellen", create_acct_sub:"Wir empfehlen ein kostenloses Konto, um alle Dienste an einem Ort zu verwalten.",
     terms_html:'Ich stimme den <a href="/therapy-companion/terms-and-conditions" target="_blank" rel="noopener" style="color:#007EC6;text-decoration:underline">Allgemeinen Geschäftsbedingungen</a> zu und habe die <a href="/therapy-companion/privacy-policy" target="_blank" rel="noopener" style="color:#007EC6;text-decoration:underline">Datenschutzerklärung</a> gelesen.',
-    next_med:"Weiter geht’s →",
+    next_med:"Weiter zu Ihrer Medikation →",
     err_select:"Bitte treffen Sie eine Auswahl.", err_first:"Bitte geben Sie einen Vornamen ein.", err_last:"Bitte geben Sie einen Nachnamen ein.",
     err_email:"Bitte geben Sie eine gültige E-Mail-Adresse ein.", err_comm:"Bitte wählen Sie mindestens eine Kontaktart.", err_terms:"Bitte stimmen Sie den Bedingungen zu, um fortzufahren.",
-    s2_title:"Kurz zu Ihrem Medikament", s2_sub:"Bitte prüfen Sie die Angaben zu Ihrem Rezept.",
-    med_q:"Welches Medikament nehmen Sie?", med_h:"Medikationsdetails", med_name_l:"Name", med_dose_l:"Dosis", med_dose_v:"25 mg Filmtablette", med_freq_l:"Häufigkeit", med_freq_v:"Eine Tablette täglich", med_admin_l:"Verabreichung", med_admin_v:"Oral",
+    s2_title:"Ihre Medikation bestätigen", s2_sub:"Bitte prüfen Sie die Angaben zu Ihrem Rezept.",
+    med_q:"Welches Medikament wurde Ihnen verschrieben?", med_h:"Medikationsdetails", med_name_l:"Name", med_dose_l:"Dosis", med_dose_v:"25 mg Filmtablette", med_freq_l:"Häufigkeit", med_freq_v:"Eine Tablette täglich", med_admin_l:"Verabreichung", med_admin_v:"Oral",
     confirm_med:"Ich bestätige, dass mir die oben genannten Medikamente in diesen Dosierungen verschrieben wurden.", err_confirm:"Bitte bestätigen Sie Ihre Verschreibung.",
     firstdate_label:"Wann war das Datum der ersten Einnahme?", firstdate_will:"Wann werden Sie Ihre erste Dosis einnehmen?", err_date:"Bitte geben Sie ein Datum an.", received_med_q:"Haben Sie Ihr Medikament bereits erhalten?", rxlow_q:"Möchten Sie Erinnerungen erhalten, wenn Ihr Medikamentenvorrat zur Neige geht?", prefs_q:"Welche Präferenzen haben Sie für diese automatisierten Dienste?",
     other_med_label_html:'Nimmt der Patient noch andere Medikamente ein? <span style="font-weight:400;color:#71777C">(Bitte geben Sie Details an)</span>',
     other_med_ph:"z. B. Name, Dosis … oder „keine“",
     freq_label:"Wie oft möchten Sie, dass wir uns bei Ihnen melden?",
     freq_h:"Regelmäßige Check-ins",
-    freq_para:"Wir senden Ihnen von Zeit zu Zeit Ihre Erinnerungen – dabei können Sie uns auch mitteilen, wie es Ihnen geht:",
-    freq_weekly:"Wöchentlich (zu Beginn empfohlen)", freq_weekly_sub:"Besonders zu Beginn empfohlen", freq_2w:"2-wöchentlich", freq_monthly:"Monatlich", err_freq:"Bitte wählen Sie eine Häufigkeit.",
-    next_delivery:"Weiter zur Lieferung →", back:"← Zurück", next_generic:"Weiter →", to_review:"Zur Übersicht →", or_word:"oder",
+    freq_para:"Regelmäßige Check-ins stellen sicher, dass Sie Ihr Medikament richtig einnehmen und alles Wichtige wissen. Zu Beginn empfehlen wir wöchentliche Check-ins.",
+    freq_weekly:"Wöchentlich", freq_weekly_sub:"Besonders zu Beginn empfohlen", freq_2w:"2-wöchentlich", freq_monthly:"Monatlich", err_freq:"Bitte wählen Sie eine Häufigkeit.",
+    next_delivery:"Weiter zum Abhol- und Lieferservice →", back:"← Zurück", next_generic:"Weiter →", to_review:"Zur Übersicht →", or_word:"oder",
     /* 3.1 */
     sub_of:"Schritt %s von 3",
-    s3_title:"So machen wir Ihnen den Alltag leichter", s3_sub:"Im Folgenden können Sie aus unserem Leistungsangebot die Module auswählen, die Ihnen den Alltag mit Ihrer Therapie erleichtern.",
+    s3_title:"Wie können wir Sie unterstützen?", s3_sub:"Im Folgenden können Sie aus unserem Leistungsangebot die Module auswählen, die Ihnen den Alltag mit Ihrer Therapie erleichtern.",
     country_label:"In welchem Land sind Sie ansässig?", country_de:"Deutschland", country_at:"Österreich", err_country:"Bitte wählen Sie Ihr Land.",
     support_label:"Wobei dürfen wir Sie unterstützen?", service_h:"Rezeptkoordination & Abhol- und Lieferservice", service_para:"Wir beschaffen Ihr Medikament, liefern es direkt zu Ihnen nach Hause und koordinieren jedes Folgerezept mit Ihrem Arzt, damit Ihre Therapie nie unterbrochen wird. Eine einfache Zustimmung deckt beides ab – ganz ohne Aufwand für Sie.", service_opt:"Ja, ich möchte den kostenlosen Abhol- und Lieferservice inkl. Rezeptkoordination nutzen.",
     delivery_h:"Abhol- und Lieferservice",
-    delivery_para:"Wir übernehmen die Beschaffung und liefern zuverlässig an Ihre Tür – zur richtigen Zeit, in der richtigen Menge.",
+    delivery_para:"Therapien für chronische Erkrankungen sind oft teuer und nicht immer flächendeckend verfügbar. Wir übernehmen für Sie die Koordination und liefern Ihre Medikamente zuverlässig direkt an Ihre Haustür – zur richtigen Zeit, in der richtigen Menge. So ist Ihre Medikation einsatzbereit, wenn Sie sie brauchen.",
     delivery_opt:"Ja, ich möchte den kostenlosen Abhol- und Lieferservice nutzen",
     rx_h:"Rezeptkoordination",
     rx_para:"Ein fehlendes Rezept kann zu einer Unterbrechung in Ihrer Behandlung führen. Wir behalten für Sie den Medikamentenbestand gemäß Ihres Therapieplans im Blick und stimmen die Koordination von Folgerezepten rechtzeitig mit Ihrem Arzt ab. So stellen wir die lückenlose Therapiefortführung sicher und minimieren Ihren administrativen Aufwand für die Rezepteinholung.",
@@ -938,17 +883,17 @@ const I18N = {
     freechoice_p:"Sie haben das Recht, Ihre Apotheke frei zu wählen (§ 31 Abs. 1 SGB V). Die unten genannte Partnerapotheke ist lediglich ein unverbindliches Angebot. Sie sind nicht verpflichtet, diese zu nutzen, und können jederzeit eine andere Apotheke benennen oder die Apotheke wechseln – ohne Nachteile.",
     freechoice_h_at:"Freie Apothekenwahl in Österreich",
     freechoice_p_at:"Sie können Ihre Apotheke frei wählen. Die unten genannte Partnerapotheke ist ein unverbindliches Angebot. Sie können jederzeit eine andere Apotheke für den Abhol- und Lieferservice angeben – ohne Nachteile.",
-    pharmacy_q:"Ich bitte darum, dass mein Rezept zur Abgabe an eine der H+ Partnerapotheken weitergeleitet wird bzw. eine solche Weiterleitung veranlasst wird.", pharmacy_hplus_generic:"H+ Partnerapotheke – Abhol- und Lieferservice", stock_tmpl:"%m auf Lager", pharma_list_link:"Hier finden Sie eine Liste der Partnerapotheken.", pharma_list_title:"Unsere Partnerapotheken", close_btn:"Schließen", delivery_prefs_h:"Lieferadresse", dp_street:"Straße und Hausnummer", dp_street2:"Adresszusatz (optional)", dp_postcode:"Postleitzahl", dp_city:"Ort", fc_agree:"Ich verstehe und möchte fortfahren.", fc_continue:"Weiter",
+    pharmacy_q:"Ich bitte darum, dass mein Rezept zur Abgabe an eine der H+ Apotheken weitergeleitet wird bzw. eine solche Weiterleitung veranlasst wird.", pharmacy_hplus_generic:"H+ Partner Pharmacy Pick Up & Delivery Service", stock_tmpl:"%m auf Lager", pharma_list_link:"Hier finden Sie eine Liste der Partnerapotheken.", pharma_list_title:"Unsere Partnerapotheken", close_btn:"Schließen", delivery_prefs_h:"Lieferadresse", dp_street:"Straße und Hausnummer", dp_street2:"Adresszusatz (optional)", dp_postcode:"Postleitzahl", dp_city:"Ort", fc_agree:"Ich verstehe und möchte fortfahren.", fc_continue:"Weiter",
     pharmacy_hplus:"H+ Apotheke – Abhol- und Lieferservice",
     pharma_badge:"Empfohlen",
     pharma_feat_delivery:"Abhol- und Lieferservice innerhalb von 48 Stunden",
     pharma_feat_stock:"Brinsupri auf Lager",
-    altpm_title:"Ihre Wunschapotheke ist noch keine Partnerapotheke",
-    altpm_intro:"Gerne kontaktieren wir Ihre Wunschapotheke und prüfen, ob wir sie als Partnerapotheke in unser Programm aufnehmen können. Grundsätzlich arbeiten wir mit jeder Apotheke zusammen, sofern sie unsere Prozesse und Qualitätsanforderungen erfüllt. So stellen wir sicher, dass wir unseren Service in der gewohnt hohen Qualität erbringen können.", altpm_note:"Bitte beachten Sie: Der Prüf- und Aufnahmeprozess kann mehrere Wochen dauern.", altpm_contact:"Ja, bitte kontaktieren Sie meine Wunschapotheke.",
+    altpm_title:"Sind Sie sicher?",
+    altpm_intro:"Wenn Sie eine andere Apotheke wählen, können wir die von Ihnen gewünschten Leistungen wahrscheinlich nicht erbringen. Je nach Ihrer Wahl können wir möglicherweise nicht:",
     altpm_li1:"Ihre Medikamente an Ihre Haustür liefern",
     altpm_li2:"Ihre Folgerezepte verwalten",
-    altpm_q:"Möchten Sie, dass wir diesen Prozess für Sie starten?",
-    altpm_yes:"Weiter mit Partnerapotheke",
+    altpm_q:"Möchten Sie diese Leistungen für sich einrichten lassen?",
+    altpm_yes:"Ja, Leistungen einrichten",
     altpm_no:"Nein, eigene Apotheke nutzen",
     pharmacy_other:"Eine andere Apotheke meiner Wahl (bitte beachten Sie, dass wir Ihnen in diesem Fall möglicherweise nicht liefern können)",
     err_pharmacy:"Bitte wählen Sie eine Apotheke.",
@@ -968,7 +913,6 @@ const I18N = {
     freq_2w_sub:"Besonders zu Beginn empfohlen",
     err_date_range:"Bitte wählen Sie ein Datum zwischen dem 2. Juli und 3 Monaten ab heute.",
     practice_search_btn:"Nach meiner Arztpraxis suchen", practice_search_ph:"Praxisname oder Adresse eingeben…",
-    delivery_search_btn:"Nach meiner Lieferadresse suchen", delivery_search_ph:"Adresse eingeben…",
     practice_search_hint:"Wählen Sie Ihre Praxis aus – wir füllen die Adresse automatisch aus.",
     practice_search_err:"Die Praxissuche ist derzeit nicht verfügbar. Bitte geben Sie die Adresse unten manuell ein.",
     cant_find_btn:"Angaben Ihres Arztes nicht gefunden?",
@@ -978,13 +922,13 @@ const I18N = {
     ns_tail:"Alle Leistungen sind kostenlos und jederzeit kündbar. Möchten Sie wirklich verzichten?",
     ns_reconsider:"Leistungen ansehen", ns_confirm:"Nein danke, ohne Unterstützung fortfahren",
     /* 4 */
-    s4_title:"Fast geschafft{name} 🎉", s4_sub:"Ein kurzer Blick – dann übernehmen wir.",
-    submit_btn:"Los geht’s – Therapy Companion starten 🎉", submitting:"Wird gesendet…",
+    s4_title:"Alles bereit – bitte überprüfen Sie Ihre Angaben", s4_sub:"Ein letzter Blick, dann richten wir Ihren H+ Therapy Companion ein.",
+    submit_btn:"Registrierung abschließen ✓", submitting:"Wird gesendet…",
     submit_hint:"",
     submit_err:"Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
-    success_h:"Alles erledigt{name} 🎉",
-    success_p1:"Ihr Therapy Companion ist startklar. Ab jetzt kümmern wir uns – Erinnerungen, Rezepte und Lieferung.",
-    success_p2:"Eine Bestätigung ist schon auf dem Weg in Ihr Postfach.",
+    success_h:"Herzlichen Glückwunsch! Sie sind registriert.",
+    success_p1:"Willkommen bei Ihrem H+ Therapy Companion. Wir haben Ihre Angaben erhalten und richten alles für Sie ein.",
+    success_p2:"Sie erhalten in Kürze eine Bestätigung an Ihre E-Mail-Adresse.",
     rv_about:"Über Sie", rv_edit:"Bearbeiten", rv_name:"Name", rv_role:"Rolle", rv_email:"E-Mail", rv_contact:"Kontakt via", rv_second:"Zweite Person", rv_no:"Nein",
     rv_med:"Ihre Medikation", rv_medication:"Medikament", rv_firstdose:"Erste Einnahme", rv_freq:"Check-in-Häufigkeit",
     rv_delivery:"Abhol- und Lieferservice", rv_country:"Land", rv_support:"Unterstützung", rv_address:"Lieferadresse", rv_dash:"—",
@@ -1014,45 +958,43 @@ const I18N = {
     nxt2_t:"We arrange everything for you", nxt2_d:"If you have provided the necessary details, the H+ team will arrange everything directly with your doctor and pharmacy. Once all the details are confirmed, we'll be in touch to explain the next steps.", nxt2_pill:"Takes up to 48 hours",
     nxt3_t:"You will receive notifications from us", nxt3_d:"In the meantime, you'll keep receiving notifications — based on the preferences you selected.",
     trust1:"✓ Free to use", trust2:"✓ GDPR-compliant", trust3:"✓ Can be cancelled at any time", trust4:"✓ Expert support",
-    step1_name:"About you", step2_name:"Your therapy", step3_name:"Your support", step4_name:"All set",
-    s1_title:"Welcome{name} 👋", s1_sub:"Let’s set up your Therapy Companion – in ~2 minutes we’ll handle reminders, refills and delivery for you.",
-    role_label:"First up – is this for you, or for someone you care for?", opt_select:"Please select…", opt_patient:"Patient", opt_caregiver:"Caregiver",
+    step1_name:"General information", step2_name:"Your medication", step3_name:"Your service modules", step4_name:"Confirm",
+    s1_title:"Tell us about yourself", s1_sub:"This helps us set up your H+ Therapy Companion just for you.",
+    role_label:"Are you the patient or the caregiver?", opt_select:"Please select…", opt_patient:"Patient", opt_caregiver:"Caregiver",
     firstname_label:"First name", lastname_label:"Last name", email_label:"Email address",
     email_reassure:"We use your email only for your H+ Therapy Companion — never for third-party marketing.",
     comm_label:"How would you like us to contact you to perform our services?",
     opt_email:"Email", opt_whatsapp:"WhatsApp", opt_phone:"Phone call", opt_sms:"SMS",
     whatsapp_label:"WhatsApp number", phone_label:"Phone number", sms_label:"SMS number",
-    second_label:"Want us to keep a caregiver in the loop too?",
-    second_label_pt:"Want us to keep the patient in the loop too?",
-    your_details_h:"Your details", other_details_pt:"Patient details", rel_label_pt:"What is your relationship to the patient?",
+    second_label:"Would you like us to contact a caregiver to perform our services?",
     opt_yes:"Yes", opt_no:"No",
     sc_first:"First name", sc_last:"Last Name",
-    rel_label:"What is this person's relationship to you?",
+    rel_label:"What is this person's relationship to the patient?",
     rel_parent:"Parent", rel_grand:"Grandparent", rel_sib:"Sibling", rel_partner:"Partner / Spouse", rel_friend:"Friend", rel_prof:"Professional caregiver",
-    cg_comm_label:"How should we reach this person?",
+    cg_comm_label:"How should we contact this person to perform our services?",
     sc_email:"Email", sc_whatsapp:"WhatsApp number", sc_phone:"Phone number", sc_sms:"SMS number",
     create_acct:"Create an account", create_acct_sub:"We recommend a free account to manage all services in one place.",
     terms_html:'I agree to the <a href="/therapy-companion/terms-and-conditions" target="_blank" rel="noopener" style="color:#007EC6;text-decoration:underline">Terms &amp; Conditions</a> and have read the <a href="/therapy-companion/privacy-policy" target="_blank" rel="noopener" style="color:#007EC6;text-decoration:underline">Privacy Policy</a>.',
-    next_med:"Let’s keep going →",
+    next_med:"Continue to your medication →",
     err_select:"Please make a selection.", err_first:"Please enter a first name.", err_last:"Please enter a last name.",
     err_email:"Please enter a valid email address.", err_comm:"Please select at least one contact method.", err_terms:"Please agree to the terms to continue.",
-    s2_title:"A quick check on your medicine", s2_sub:"Please check the details of your prescription.",
-    med_q:"Which medicine are you taking?", med_h:"Medication details", med_name_l:"Name", med_dose_l:"Dose", med_dose_v:"25 mg film-coated tablet", med_freq_l:"Frequency", med_freq_v:"One tablet daily", med_admin_l:"Administration", med_admin_v:"Oral",
+    s2_title:"Confirm your medication", s2_sub:"Please check the details of your prescription.",
+    med_q:"Which medication were you prescribed?", med_h:"Medication details", med_name_l:"Name", med_dose_l:"Dose", med_dose_v:"25 mg film-coated tablet", med_freq_l:"Frequency", med_freq_v:"One tablet daily", med_admin_l:"Administration", med_admin_v:"Oral",
     confirm_med:"I confirm that the above medication was prescribed to me at these doses.", err_confirm:"Please confirm your prescription.",
     firstdate_label:"When was your first dose taken?", firstdate_will:"When will you take your first dose?", err_date:"Please provide a date.", received_med_q:"Have you already received your medication?", rxlow_q:"Would you like to receive prescription reminders when you are low on medication?", prefs_q:"What are your preferences for these automated services?",
     other_med_label_html:'Does the patient take any other medication? <span style="font-weight:400;color:#71777C">(please provide details)</span>',
     other_med_ph:"e.g. name, dose … or “none”",
     freq_label:"How often would you like us to check in?",
     freq_h:"Regular check-ins",
-    freq_para:"We offer to send your reminders from time to time - There you can let us also know how it's going:",
-    freq_weekly:"Weekly (recommended in the beginning)", freq_weekly_sub:"Recommended especially at the start", freq_2w:"Every two weeks", freq_monthly:"Monthly", err_freq:"Please choose a frequency.",
-    next_delivery:"Next: your delivery →", back:"← Back", next_generic:"Continue →", to_review:"Continue to summary →", or_word:"or",
+    freq_para:"Regular check-ins help make sure you're taking your medicine correctly and always know everything you need to. We recommend weekly check-ins to start.",
+    freq_weekly:"Weekly", freq_weekly_sub:"Recommended especially at the start", freq_2w:"Every two weeks", freq_monthly:"Monthly", err_freq:"Please choose a frequency.",
+    next_delivery:"Continue to Pick Up and Delivery Service →", back:"← Back", next_generic:"Continue →", to_review:"Continue to summary →", or_word:"or",
     sub_of:"Step %s of 3",
-    s3_title:"Let’s make your day-to-day easier", s3_sub:"Below, you can select the modules from our range of services that will make your day-to-day life with your treatment easier.",
+    s3_title:"How can we support you?", s3_sub:"Below, you can select the modules from our range of services that will make your day-to-day life with your treatment easier.",
     country_label:"Which country do you live in?", country_de:"Germany", country_at:"Austria", err_country:"Please select your country.",
     support_label:"How can we help you?", service_h:"Prescription Coordination & Pick Up and Delivery Service", service_para:"We source your medication and deliver it straight to your door, and coordinate every repeat prescription with your doctor so your therapy is never interrupted. One simple opt-in covers both \u2014 with zero admin for you.", service_opt:"Yes, I'd like the free Pick Up and Delivery Service including prescription coordination.",
     delivery_h:"Pick Up and Delivery Service",
-    delivery_para:"We handle sourcing and deliver reliably to your door – right time, right amount, ready when you need it.",
+    delivery_para:"Treatments for chronic conditions are often expensive and not always widely available. We take care of the coordination for you and deliver your medicines reliably straight to your doorstep – at the right time, in the right quantity. This ensures your medication is ready when you need it.",
     delivery_opt:"Yes, I would like to use the free Pick Up and Delivery Service",
     rx_h:"Prescription Coordination",
     rx_para:"A missing prescription can lead to a disruption in your treatment. We monitor your medication stock in line with your treatment plan and coordinate follow-up prescriptions with your doctor in good time. This ensures your treatment continues without interruption and minimises the administrative effort involved in obtaining prescriptions.",
@@ -1082,17 +1024,17 @@ const I18N = {
     freechoice_p:"You have the right to choose your pharmacy freely (§ 31 (1) SGB V). The partner pharmacy named below is merely a non-binding offer. You are not obliged to use it and may name a different pharmacy or switch pharmacies at any time – without any disadvantage.",
     freechoice_h_at:"Free choice of pharmacy in Austria",
     freechoice_p_at:"You may choose your pharmacy freely. The partner pharmacy below is a non-binding option. You may select a different pharmacy for the Pick Up and Delivery Service at any time, without disadvantage.",
-    pharmacy_q:"I request that my prescription be forwarded to one of the H+ partner pharmacies for dispensing, or that such forwarding be arranged.", pharmacy_hplus_generic:"H+ Partner Pharmacy – Pick Up & Delivery Service", stock_tmpl:"%m in stock", pharma_list_link:"Here is a list of the partner pharmacies.", pharma_list_title:"Our partner pharmacies", close_btn:"Close", delivery_prefs_h:"Delivery address", dp_street:"Street and house number", dp_street2:"Address line 2 (optional)", dp_postcode:"Post code", dp_city:"City", fc_agree:"I understand and want to continue.", fc_continue:"Continue",
+    pharmacy_q:"I request that my prescription be forwarded to one of the H+ pharmacies for dispensing, or that such forwarding be arranged.", pharmacy_hplus_generic:"H+ Partner Pharmacy Pick Up & Delivery Service", stock_tmpl:"%m in stock", pharma_list_link:"Here is a list of the partner pharmacies.", pharma_list_title:"Our partner pharmacies", close_btn:"Close", delivery_prefs_h:"Delivery address", dp_street:"Street and house number", dp_street2:"Address line 2 (optional)", dp_postcode:"Post code", dp_city:"City", fc_agree:"I understand and want to continue.", fc_continue:"Continue",
     pharmacy_hplus:"H+ pharmacy – Pick Up and Delivery Service",
     pharma_badge:"Recommended",
     pharma_feat_delivery:"Pick Up and Delivery Service within 48 hours",
     pharma_feat_stock:"Brinsupri in stock",
-    altpm_title:"Your preferred pharmacy isn't a partner yet",
-    altpm_intro:"We're happy to contact your preferred pharmacy and check whether we can add it to our partner programme. In principle we work with any pharmacy, as long as it meets our processes and quality standards \u2014 so we can keep delivering our service at the usual high quality.", altpm_note:"Please note: the review and onboarding process can take several weeks.", altpm_contact:"Yes, please contact my preferred pharmacy.",
+    altpm_title:"Are you sure?",
+    altpm_intro:"Selecting another pharmacy means that it is unlikely we will be able to provide the services you have requested. Depending on your choice we may not be able to:",
     altpm_li1:"Deliver the medication to your door",
     altpm_li2:"Manage your repeat prescriptions",
-    altpm_q:"Would you like us to start this process for you?",
-    altpm_yes:"Continue with the partner pharmacy",
+    altpm_q:"Would you like to have these services arranged for you?",
+    altpm_yes:"Yes, arrange these services",
     altpm_no:"No, use my own pharmacy",
     pharmacy_other:"Another pharmacy of my choice (please note that selecting this means that we may not be able to deliver to you)",
     err_pharmacy:"Please choose a pharmacy.",
@@ -1111,7 +1053,6 @@ const I18N = {
     freq_2w_sub:"Recommended especially at the start",
     err_date_range:"Please choose a date between 2 July and 3 months from today.",
     practice_search_btn:"Search for my doctor's practice", practice_search_ph:"Enter practice name or address…",
-    delivery_search_btn:"Search for my delivery address", delivery_search_ph:"Enter address…",
     practice_search_hint:"Select your practice and we'll fill in the address for you.",
     practice_search_err:"Practice search is currently unavailable. Please enter the address manually below.",
     cant_find_btn:"Can't find your doctor's details?",
@@ -1120,13 +1061,13 @@ const I18N = {
     ns_b1:"Free delivery of your medication straight to your door.", ns_b2:"Automatic reminders so you never run out of medicine or miss an appointment.", ns_b3:"We handle repeat prescriptions and coordinate with your doctor.",
     ns_tail:"Every service is free and you can cancel anytime. Are you sure you want to opt out?",
     ns_reconsider:"Show me the services", ns_confirm:"No thanks, continue without support",
-    s4_title:"Almost there{name} 🎉", s4_sub:"A quick look, then we take over.",
-    submit_btn:"Start my Therapy Companion 🎉", submitting:"Submitting…",
+    s4_title:"All set – please check your details", s4_sub:"One last look, then we'll set up your H+ Therapy Companion.",
+    submit_btn:"Complete registration ✓", submitting:"Submitting…",
     submit_hint:"",
     submit_err:"Something went wrong. Please try again.",
-    success_h:"You’re all set{name} 🎉",
-    success_p1:"Your Therapy Companion is live. From here, we’ve got it – reminders, prescriptions and delivery.",
-    success_p2:"A confirmation is already on its way to your inbox.",
+    success_h:"Congratulations! You're registered.",
+    success_p1:"Welcome to your H+ Therapy Companion. We've received your details and are setting everything up for you.",
+    success_p2:"You'll receive a confirmation at your email address shortly.",
     rv_about:"About you", rv_edit:"Edit", rv_name:"Name", rv_role:"Role", rv_email:"Email", rv_contact:"Contact via", rv_second:"Second person", rv_no:"No",
     rv_med:"Your medication", rv_medication:"Medication", rv_firstdose:"First dose", rv_freq:"Check-in frequency",
     rv_delivery:"Pick Up and Delivery Service", rv_country:"Country", rv_support:"Support", rv_address:"Delivery address", rv_dash:"—",
@@ -1135,48 +1076,7 @@ const I18N = {
 };
 
 let currentLang = (function(){ try{ return localStorage.getItem('hplus_lang')||'de'; }catch(e){ return 'de'; } })();
-/* Caregiver perspective: the registrant is "you"; questions about the patient are
-   rephrased in the third person. Only keys that differ are listed. */
-const CG = {
-  de:{
-    step2_name:"Die Therapie",
-    s2_title:"Kurz zum Medikament des Patienten",
-    s2_sub:"Bitte prüfen Sie die Angaben zum Rezept des Patienten.",
-    med_q:"Welches Medikament nimmt der Patient?",
-    confirm_med:"Ich bestätige, dass dem Patienten die oben genannten Medikamente in diesen Dosierungen verschrieben wurden.",
-    received_med_q:"Hat der Patient sein Medikament bereits erhalten?",
-    firstdate_label:"Wann hat der Patient die erste Dosis eingenommen?",
-    firstdate_will:"Wann wird der Patient die erste Dosis einnehmen?",
-    rxlow_q:"Möchten Sie Erinnerungen erhalten, wenn der Medikamentenvorrat des Patienten zur Neige geht?",
-    freq_label:"Wie oft sollen wir uns bei Ihnen zur Therapie des Patienten melden?",
-    s3_title:"So machen wir Ihnen und dem Patienten den Alltag leichter",
-    med_h:"Medikationsdetails des Patienten"
-  },
-  en:{
-    step2_name:"The therapy",
-    s2_title:"A quick check on the patient's medicine",
-    s2_sub:"Please check the details of the patient's prescription.",
-    med_q:"Which medicine is the patient taking?",
-    confirm_med:"I confirm that the above medication was prescribed to the patient at these doses.",
-    received_med_q:"Has the patient already received their medication?",
-    firstdate_label:"When did the patient take their first dose?",
-    firstdate_will:"When will the patient take their first dose?",
-    rxlow_q:"Would you like reminders when the patient is low on medication?",
-    freq_label:"How often should we check in with you about the patient's therapy?",
-    s3_title:"Let's make things easier for you and the patient",
-    med_h:"The patient's medication details"
-  }
-};
-const t = k => {
-  const isCg = ((document.getElementById('customer_type')||{}).value === 'Caregiver');
-  const o = isCg ? (CG[currentLang]||{})[k] : undefined;
-  let str = (o ?? I18N[currentLang][k] ?? I18N.de[k] ?? k);
-  if(typeof str==='string' && str.indexOf('{name}')>=0){
-    const nm=((document.getElementById('firstname')||{}).value||'').trim().split(/\s+/)[0]||'';
-    str = str.replace(/\{name\}/g, nm ? (' '+nm) : '');
-  }
-  return str;
-};
+const t = k => (I18N[currentLang][k] ?? I18N.de[k] ?? k);
 
 const MEDS={
   "Brinsupri (Brensocatib)":{de:{dose:"25 mg Filmtablette",frequency:"Eine Tablette täglich",administration:"Oral"},en:{dose:"25 mg film-coated tablet",frequency:"One tablet daily",administration:"Oral"}},
@@ -1197,15 +1097,6 @@ function fillMed(lang){
     HS.med.medicine=g('md_name_in'); HS.med.dose=g('md_dose_in'); HS.med.frequency=g('md_freq_in'); HS.med.administration=g('md_admin_in');
     return;
   }
-  // nothing chosen yet: blank the details card and hide it
-  var card=document.querySelector('.medcard');
-  if(!name){
-    if(card) card.style.display='none';
-    HS.med.medicine=''; HS.med.dose=''; HS.med.frequency=''; HS.med.administration='';
-    ['mdName','mdDose','mdFreq','mdAdmin'].forEach(function(id){var e2=document.getElementById(id); if(e2) e2.textContent='';});
-    return;
-  }
-  if(card) card.style.display='';
   var m=MEDS[name]; if(!m) return;
   var d=m[lang]||m.de;
   HS.med.medicine=name; HS.med.dose=d.dose; HS.med.frequency=d.frequency; HS.med.administration=d.administration;
@@ -1227,19 +1118,7 @@ function applyLang(lang){
   if(typeof updateConsentTexts==='function') updateConsentTexts();
   fillMed(currentLang);
   try{syncFirstDateLabel();syncMedPrefs();}catch(e){}
-  applyRoleWording();
   if(current===4) buildReview();
-}
-/* Role-aware wording: the registrant is always "you"; the other person flips
-   between caregiver (patient registrant) and patient (caregiver registrant). */
-function applyRoleWording(){
-  var tt=I18N[currentLang]; if(!tt) return;
-  var isCg = val('customer_type')==='Caregiver';
-  var set=function(sel,txt){ var el=document.querySelector(sel); if(el&&txt) el.textContent=txt; };
-  set('[data-i18n="patient_details_h"]', tt.your_details_h);
-  set('#caregiverBlock [data-i18n="second_details_h"]', isCg ? tt.other_details_pt : tt.second_details_h);
-  set('[data-i18n="second_label"]', isCg ? tt.second_label_pt : tt.second_label);
-  set('[data-i18n="rel_label"]', isCg ? tt.rel_label_pt : tt.rel_label);
 }
 document.querySelectorAll('.langswitch button').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));
 /* ---- Step 2: received-medication date label + prescription-reminder preferences ---- */
@@ -1260,7 +1139,7 @@ document.querySelectorAll('input[name="received_medication"]').forEach(function(
 document.querySelectorAll('input[name="reminder_freq"],input[name="prescription_reminders_low"],#prefs_prefs input').forEach(function(r){r.addEventListener('change',syncMedPrefs);});
 /* Hero CTA: jump straight into the form without reading the intro */
 (function(){var b=document.getElementById('heroStart');if(!b)return;b.addEventListener('click',function(){var t=document.getElementById('firstname')||document.querySelector('#hplusForm input,#hplusForm select');if(t){t.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){try{t.focus({preventScroll:true});}catch(e){}},300);}});})();
-(function(){var s=document.getElementById('med_select');function reset(){if(s){fillMed(currentLang);}}if(s)s.addEventListener('change',function(){fillMed(currentLang);if(current===4)buildReview();});reset();window.addEventListener('pageshow',reset);})();
+(function(){var s=document.getElementById('med_select');function reset(){if(s){s.value='Brinsupri (Brensocatib)';fillMed(currentLang);}}if(s)s.addEventListener('change',function(){fillMed(currentLang);if(current===4)buildReview();});reset();window.addEventListener('pageshow',reset);})();
 
 /* helpers */
 const $ = id => document.getElementById(id);
@@ -1288,7 +1167,7 @@ document.querySelectorAll('#cg_comm_prefs input').forEach(c=>c.addEventListener(
 /* second-person details show when role = Caregiver OR reminders wanted for a second person */
 function syncSecondPerson(){ $('caregiverBlock').style.display = (val('customer_type')==='Caregiver' || radio('second_person')==='Yes') ? 'block' : 'none'; }
 document.querySelectorAll('input[name=second_person]').forEach(r=>r.addEventListener('change',syncSecondPerson));
-$('customer_type').addEventListener('change',function(){ syncSecondPerson(); applyLang(currentLang); });
+$('customer_type').addEventListener('change',syncSecondPerson);
 document.querySelectorAll('.choice input').forEach(inp=>{
   const paint=()=>{ const c=inp.closest('.choice'); if(inp.type==='radio'){document.querySelectorAll(`input[name="${inp.name}"]`).forEach(o=>o.closest('.choice').classList.remove('selected'));} c.classList.toggle('selected',inp.checked); };
   inp.addEventListener('change',paint); paint();
@@ -1330,7 +1209,7 @@ function updateConsentTexts(){
   $('pharmacyBlock').style.display=showPharm?'block':'none';
   $('pharmHplusTxt').textContent=t('pharmacy_hplus_generic');
   $('pharmStock').textContent=t('stock_tmpl').replace('%m',(HS.med&&HS.med.medicine)||'');
-  $('deliveryPrefs').style.display=(showPharm && (radio('pharmacy_choice')==='yes'||radio('pharmacy_choice')==='no'))?'block':'none';
+  $('deliveryPrefs').style.display=(showPharm && radio('pharmacy_choice')==='yes')?'block':'none';
   { const alt=$('altPharmacy'); if(alt) alt.style.display=(showPharm && radio('pharmacy_choice')==='no')?'block':'none'; }
   { const mini=$('pharmaMini'); if(mini) mini.classList.toggle('is-selected', radio('pharmacy_choice')==='no'); }
 }
@@ -1351,7 +1230,7 @@ document.querySelectorAll('input[name=pharmacy_choice]').forEach(r=>r.addEventLi
   }
   if(altM){
     $('altpmYes').addEventListener('click',()=>{ yes.checked=true; yes.dispatchEvent(new Event('change',{bubbles:true})); altM.classList.remove('open'); });
-    $('altpmNo').addEventListener('click',()=>{ altM.classList.remove('open'); });
+    $('altpmNo').addEventListener('click',()=>altM.classList.remove('open'));
     altM.addEventListener('click',e=>{ if(e.target===altM) altM.classList.remove('open'); });
   }
   const listM=$('pharmaListModal');
@@ -1422,7 +1301,6 @@ async function initAutocomplete(){
   try{
     const { PlaceAutocompleteElement } = await google.maps.importLibrary('places');
     const pac = new PlaceAutocompleteElement({ includedRegionCodes:[at?'at':'de'] });
-    window.__practicePac = pac;
     pac.style.width='100%';
     const box=$('practiceSearchBox');
     $('practiceSearch').style.display='none';
@@ -1442,59 +1320,13 @@ async function initAutocomplete(){
 }
 $('practiceSearchBtn').addEventListener('click',()=>{
   $('practiceSearchBox').style.display='block';
-  $('addressFields').style.display='block';   // reveal the practice details once the user starts searching
-  loadPlaces(err=>{ if(err==='nokey'){ $('practiceSearchBox').style.display='none'; } else initAutocomplete().then(syncPlacesRegion); });
+  loadPlaces(err=>{ if(err==='nokey'){ $('practiceSearchBox').style.display='none'; $('addressFields').style.display='block'; } else initAutocomplete(); });
 });
 /* can't find details → reveal callback option (button stays available) */
 $('cantFindBtn').addEventListener('click',()=>{ $('addressFields').style.display='block'; $('callbackBox').style.display='block'; $('addressFields').scrollIntoView({behavior:'smooth',block:'start'}); });
-/* Practice details stay hidden until the user presses Search (or "can't find"),
-   per the requested flow. */
-
-/* ---- Delivery address: optional Google Places search (mirrors the practice search) ---- */
-let delivPacInited=false;
-function fillDeliveryFromComponents(comps){
-  const street=[comps.route, comps.street_number].filter(Boolean).join(' ');
-  if(street) $('delivery_street').value=street;
-  if(comps.postal_code) $('delivery_postcode').value=comps.postal_code;
-  if(comps.locality) $('delivery_city').value=comps.locality;
-}
-async function initDeliveryAutocomplete(){
-  if(delivPacInited) return; delivPacInited=true;
-  const at=val('country')==='Österreich';
-  try{
-    const { PlaceAutocompleteElement } = await google.maps.importLibrary('places');
-    const pac=new PlaceAutocompleteElement({ includedRegionCodes:[at?'at':'de'] });
-    window.__deliveryPac = pac;
-    pac.style.width='100%';
-    const box=$('deliverySearchBox'); $('deliverySearch').style.display='none';
-    box.insertBefore(pac, box.firstChild);
-    pac.addEventListener('gmp-select', async (ev)=>{
-      try{
-        const pred=ev.placePrediction||(ev.detail&&ev.detail.placePrediction);
-        const place=pred.toPlace();
-        await place.fetchFields({ fields:['addressComponents'] });
-        const comps={}; (place.addressComponents||[]).forEach(c=>(c.types||[]).forEach(ty=>comps[ty]=c.longText));
-        fillDeliveryFromComponents(comps);
-      }catch(e){ $('deliverySearch').style.display='block'; }
-    });
-    pac.addEventListener('gmp-error', ()=>{ $('deliverySearch').style.display='block'; });
-  }catch(e){ $('deliverySearch').style.display='block'; }
-}
-/* The address searches are created once; keep their region in step with the
-   country (Austria was previously stuck on the German region). */
-function syncPlacesRegion(){
-  const codes=[val('country')==='Österreich'?'at':'de'];
-  [window.__practicePac, window.__deliveryPac].forEach(pac=>{
-    if(!pac) return;
-    try{ pac.includedRegionCodes=codes; }catch(e){}
-  });
-}
-$('country').addEventListener('change',syncPlacesRegion);
-
-$('deliverySearchBtn').addEventListener('click',()=>{
-  $('deliverySearchBox').style.display='block';
-  loadPlaces(err=>{ if(err!=='nokey'){ initDeliveryAutocomplete().then(syncPlacesRegion); } });
-});
+/* Never trap the user: reveal the doctor contact fields as soon as they start
+   entering a name — the Places search stays an optional convenience above. */
+['doctor_first','doctor_last'].forEach(id=>{ const e=$(id); if(!e) return; const reveal=()=>{ $('addressFields').style.display='block'; }; e.addEventListener('focus',reveal); e.addEventListener('input',reveal); });
 
 /* ---- no-support confirmation modal ---- */
 function openNoSupportModal(){ $('noSupportModal').classList.add('open'); }
@@ -1514,7 +1346,7 @@ const emailOk = e => { const v=String(e||'').trim(); return v.length<=254 && /^[
 const step3Log=(message,details)=>console.log('[H+ Step 3] '+message,details||'');
 function setSubTag(){ const el=$('subTag'); if(el) el.textContent=t('sub_of').replace('%s',sub3); }
 function showSub3(n){
-  sub3=n; ['sub31','sub32','sub33','sub34'].forEach((id,i)=>{ const el=$(id); if(el) el.classList.toggle('active',i===n-1); });
+  sub3=n; ['sub31','sub32','sub33','sub34'].forEach((id,i)=>$(id).classList.toggle('active',i===n-1));
   if(n===4){ const cc=val('country')==='Österreich'?'+43':'+49'; ['doctor_phone_cc','doctor_fax_cc'].forEach(id=>{ if($(id) && !$(id).dataset.touched) $(id).value=cc; }); }
   document.querySelector('.card').scrollIntoView({behavior:'smooth',block:'start'});
 }
@@ -1658,15 +1490,14 @@ function validateSub3(n){
           if(val(id)===''){ const f=$(id).closest('.field'); f.classList.add('invalid'); ensureFmtErr(f,t('err_required')); ok=false; }
         });
       } else if(ph==='no'){
-        ['chosen_pharmacy_name','chosen_pharmacy_street','chosen_pharmacy_city','chosen_pharmacy_postcode',
-         'delivery_street','delivery_postcode','delivery_city'].forEach(id=>{
+        ['chosen_pharmacy_name','chosen_pharmacy_street','chosen_pharmacy_city','chosen_pharmacy_postcode'].forEach(id=>{
           if(val(id)===''){ const f=$(id).closest('.field'); f.classList.add('invalid'); ensureFmtErr(f,t('err_required')); ok=false; }
         });
       }
     }
   }
   if(n===3){   // PRESCRIPTION consent page (shown when rx)
-    { const sc=$('sub33'); if(sc) clearScope(sc); }
+    clearScope($('sub33'));
     const bad=!checked('hcp_consent'); markInvalid($('hcpConsentWrap'),bad); if(bad) ok=false;
   }
   if(n===4){   // DOCTOR details page
@@ -1677,13 +1508,8 @@ function validateSub3(n){
       else if((cbEl.min && cv<cbEl.min) || (cbEl.max && cv>cbEl.max)){ $('callbackWhen').classList.add('invalid'); $('callbackErr').textContent=t('err_callback_range'); $('callbackErr').classList.add('show'); ok=false; }
       showErr('infoErr',false);
     } else {
-      // all doctor practice details are required to progress
-      $('addressFields').style.display='block';
-      let complete=true;
-      ['doctor_first','doctor_last','doctor_street2','doctor_street','doctor_postcode','doctor_phone','doctor_fax'].forEach(id=>{
-        if(val(id)===''){ const f=$(id).closest('.field'); if(f){ f.classList.add('invalid'); ensureFmtErr(f,t('err_required')); } complete=false; }
-      });
-      if(!complete){ showErr('infoErr',true); ok=false; $('infoErr').scrollIntoView({behavior:'smooth',block:'center'}); }
+      const complete = val('doctor_first') && val('doctor_last') && (val('doctor_street')||val('doctor_postcode')||val('doctor_street2')||val('doctor_phone')||val('doctor_email'));
+      if(!complete){ $('addressFields').style.display='block'; showErr('infoErr',true); ok=false; $('infoErr').scrollIntoView({behavior:'smooth',block:'center'}); }
       else showErr('infoErr',false);
     }
     if(!validateFormats($('sub34'))) ok=false;
@@ -1811,54 +1637,20 @@ function payloadRegistration(){
   f.push(field('firstname',val('firstname')));
   f.push(field('lastname',val('lastname')));
   f.push(field('email',val('email')));
-  /* Role-aware mapping: the first block is always the registrant, the second block the
-     other person. A caregiver registrant therefore writes their own details to the
-     caregiver properties and the patient's to the patient properties (and vice versa). */
-  const isCg = val('customer_type')==='Caregiver';
-  const put=(prop,v)=>{ if(v) f.push(field(prop,v)); };
-  const comm=multi('#comm_prefs input'), cg=multi('#cg_comm_prefs input');
-  if(isCg){
-    // registrant = caregiver
-    put('second_contact_person',  val('firstname'));
-    put('second_contact_surname', val('lastname'));
-    put('second_contact_email',   val('email'));
-    if(comm) f.push(field('caregiver_communication_preferences',comm));
-    put('second_contact_whatsapp',phoneFull('patient_whatsapp'));
-    put('second_contact_phone',   phoneFull('patient_phone'));
-    put('caregiver_sms',          phoneFull('patient_sms'));
-    put('caregiver_relationship', val('caregiver_relationship'));
-  } else {
-    // registrant = patient
-    put('patient_first_name', val('firstname'));
-    put('patient_last_name',  val('lastname'));
-    put('patient_email',      val('email'));
-    if(comm) f.push(field('communication_preference',comm));
-    put('patient_whatsapp',   phoneFull('patient_whatsapp'));
-    put('patient_phone',      phoneFull('patient_phone'));
-    put('patient_sms',        phoneFull('patient_sms'));
-  }
+  const comm=multi('#comm_prefs input'); if(comm) f.push(field('communication_preference',comm));
+  if(val('patient_whatsapp')) f.push(field('patient_whatsapp',phoneFull('patient_whatsapp')));
+  if(val('patient_phone'))    f.push(field('patient_phone',phoneFull('patient_phone')));
+  if(val('patient_sms'))      f.push(field('patient_sms',phoneFull('patient_sms')));
   f.push(field('would_you_like_the_medication_reminders_to_be_sent_to_a_second_person_',radio('second_person')));
-  if(radio('second_person')==='Yes' || isCg){
-    if(isCg){
-      // other person = the patient
-      put('patient_first_name', val('second_contact_person'));
-      put('patient_last_name',  val('second_contact_surname'));
-      put('patient_email',      val('second_contact_email'));
-      if(cg) f.push(field('communication_preference',cg));
-      put('patient_whatsapp',   phoneFull('second_contact_whatsapp'));
-      put('patient_phone',      phoneFull('second_contact_phone'));
-      put('patient_sms',        phoneFull('caregiver_sms'));
-    } else {
-      // other person = the caregiver
-      put('second_contact_person',  val('second_contact_person'));
-      put('second_contact_surname', val('second_contact_surname'));
-      put('caregiver_relationship', val('caregiver_relationship'));
-      if(cg) f.push(field('caregiver_communication_preferences',cg));
-      put('second_contact_email',   val('second_contact_email'));
-      put('second_contact_whatsapp',phoneFull('second_contact_whatsapp'));
-      put('second_contact_phone',   phoneFull('second_contact_phone'));
-      put('caregiver_sms',          phoneFull('caregiver_sms'));
-    }
+  if(radio('second_person')==='Yes'){
+    if(val('second_contact_person'))  f.push(field('second_contact_person',val('second_contact_person')));
+    if(val('second_contact_surname')) f.push(field('second_contact_surname',val('second_contact_surname')));
+    if(val('caregiver_relationship')) f.push(field('caregiver_relationship',val('caregiver_relationship')));
+    const cg=multi('#cg_comm_prefs input'); if(cg) f.push(field('caregiver_communication_preferences',cg));
+    if(val('second_contact_email'))    f.push(field('second_contact_email',val('second_contact_email')));
+    if(val('second_contact_whatsapp')) f.push(field('second_contact_whatsapp',phoneFull('second_contact_whatsapp')));
+    if(val('second_contact_phone'))    f.push(field('second_contact_phone',phoneFull('second_contact_phone')));
+    if(val('caregiver_sms'))           f.push(field('caregiver_sms',phoneFull('caregiver_sms')));
   }
   if(checked('create_an_account')){ f.push(field('create_an_account','true')); f.push(field('account_email',val('email'))); }
   f.push(field('agree_to_terms','true'));
@@ -1949,10 +1741,6 @@ $('submitBtn').addEventListener('click',async ()=>{
   if(r1&&r2&&r3){
     $('hplusForm').style.display='none'; $('progressWrap').style.display='none';
     $('successScreen').style.display='block';
-    // carry the registrant through to their account page so the data loads there
-    (function(){ var em=val('email'); if(!em) return; var q='?email='+encodeURIComponent(em);
-      document.querySelectorAll('.uhp-header-right a[href="/brinsupri-account"]').forEach(function(a){ a.href='/brinsupri-account'+q; }); })();
-    document.querySelector('.uhp-header-right')?.classList.add('show'); // reveal account button only after registration
     $('successScreen').scrollIntoView({behavior:'smooth',block:'center'});
   }else{
     btn.disabled=false; btn.textContent=t('submit_btn');
@@ -1976,7 +1764,7 @@ document.querySelectorAll('.cc-select').forEach(sel=>sel.addEventListener('chang
    Nothing leaves the device until a step's HubSpot form submits.
    (Same-device autofill; not cross-device known-contact prefill.)
    ============================================================ */
-const LS_KEY='hplus_form_v3'   // bumped: saved state is positional, and the field list changed;   // bumped: control set changed (removed doctor phone/fax country-code selects) — old index-keyed state is invalid
+const LS_KEY='hplus_form_v2';   // bumped: control set changed (removed doctor phone/fax country-code selects) — old index-keyed state is invalid
 const _ctrls=()=>[...document.querySelectorAll('#hplusForm input,#hplusForm select,#hplusForm textarea')];
 function saveState(){
   try{
@@ -2048,17 +1836,7 @@ document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==
 /* init */
 applyLang(currentLang);
 restoreState();                                            // autofill from a prior visit (this browser)
-/* Country is driven by the page URL (/de → Germany, /at → Austria) and hidden;
-   it only appears as a backup when the URL doesn't say which. */
-(function(){
-  var sel=$('country'); if(!sel) return;
-  var path=(location.pathname+location.search+location.hash).toLowerCase();
-  var c = /(^|[\/\-_?&=])at([\/\-_?&=]|$)/.test(path) ? 'Österreich'
-        : /(^|[\/\-_?&=])de([\/\-_?&=]|$)/.test(path) ? 'Deutschland' : '';
-  if(c){ sel.value=c; sel.dispatchEvent(new Event('change')); var f=sel.closest('.field'); if(f) f.style.display='none'; }
-})();
 syncOptions(); syncConsentVisibility(); syncSecondPerson(); setupDates();
-applyRoleWording();   // reflect a restored role in the wording
 $('hplusForm').addEventListener('input',saveState);        // persist as the patient types
 $('hplusForm').addEventListener('change',saveState);
 

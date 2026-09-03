@@ -604,15 +604,6 @@
         </div>
 
         <!-- SUB 3.3 : PRESCRIPTION consent (own page) -->
-        <div class="sub3" id="sub33">
-          <h3 class="step-title" data-i18n="consent_page_h"></h3>
-          <p class="step-sub" data-i18n="consent_page_intro"></p>
-          <h5 class="consent-title" data-i18n="consent_hcp_title"></h5>
-          <a class="consent-link" href="/therapy-companion/terms-and-conditions" target="_blank" rel="noopener" data-i18n="hcp_terms_link"></a>
-          <div class="field" id="hcpConsentWrap">
-            <label class="choice"><input type="checkbox" id="hcp_consent"><span class="ctxt" data-i18n="agree_hcp"></span></label>
-            <div class="err-msg" data-i18n="err_hcp_consent"></div>
-          </div>
           <div class="nav">
             <button type="button" class="btn btn-ghost" id="s3back3" data-i18n="back"></button>
             <button type="button" class="btn btn-primary" id="s3next3" data-i18n="next_generic"></button>
@@ -746,6 +737,18 @@
       <div style="padding:12px 0"><b style="font-family:var(--font-head);color:var(--ink-head)">International Specialty Pharmacy (ISP)</b><br><span style="color:var(--muted);font-size:13.5px">Kärntner Ring 17, 1010 Wien, Austria</span></div>
     </div>
     <div class="modal-actions"><button type="button" class="btn-outline" id="pharmListClose" data-i18n="close_btn"></button></div>
+  </div>
+</div>
+<div class="modal-ov" id="hcpModal">
+  <div class="modal" role="dialog" aria-modal="true">
+    <h3 data-i18n="consent_hcp_title"></h3>
+    <div class="consent-scroll"><p id="hcpModalText" class="consent-text"></p></div>
+    <a class="consent-link" href="/therapy-companion/terms-and-conditions" target="_blank" rel="noopener" data-i18n="hcp_terms_link"></a>
+    <div class="field" id="hcpModalWrap" style="margin-top:10px"><label class="choice"><input type="checkbox" id="hcp_consent"><span class="ctxt" data-i18n="agree_hcp"></span></label></div>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-primary" id="hcpContinue" data-i18n="fc_continue"></button>
+      <button type="button" class="btn-outline" id="hcpBack" data-i18n="back"></button>
+    </div>
   </div>
 </div>
 <div class="modal-ov" id="freeChoiceModal">
@@ -1263,7 +1266,7 @@ document.querySelectorAll('input[name=pharmacy_choice]').forEach(r=>r.addEventLi
   $('fcContinue').addEventListener('click',async ()=>{
     if(!$('fc_agree').checked){ markInvalid($('fcWrap'),true); return; }
     markInvalid($('fcWrap'),false); fc.classList.remove('open');
-    if(radio('prescription_reminders_low')!=='Yes'){ showSub3(4); }   /* doctor needed */
+    if(radio('prescription_reminders_low')==='Yes'){ openHcpModal(); }   /* need doctor + HCP consent */
     else { await finishStep3(); }
   });
   paint();
@@ -1366,7 +1369,7 @@ const emailOk = e => { const v=String(e||'').trim(); return v.length<=254 && /^[
 const step3Log=(message,details)=>console.log('[H+ Step 3] '+message,details||'');
 function setSubTag(){ const el=$('subTag'); if(el) el.textContent=t('sub_of').replace('%s',sub3); }
 function showSub3(n){
-  sub3=n; ['sub31','sub32','sub33','sub34'].forEach((id,i)=>$(id).classList.toggle('active',i===n-1));
+  sub3=n; ['sub31','sub32','sub33','sub34'].forEach((id,i)=>{var el=$(id); if(el) el.classList.toggle('active',i===n-1);});
   if(n===4){ const cc=val('country')==='Österreich'?'+43':'+49'; ['doctor_phone_cc','doctor_fax_cc'].forEach(id=>{ if($(id) && !$(id).dataset.touched) $(id).value=cc; }); }
   document.querySelector('.card').scrollIntoView({behavior:'smooth',block:'start'});
 }
@@ -1563,15 +1566,22 @@ async function step3Next(from){
   if(from===3){ if(!validateSub3(3)){showStep3Blocker(3);return;} step3Log('Opening doctor details');showSub3(4);return; }                                          // hcp consent → doctor
   if(from===4){ if(!validateSub3(4)){showStep3Blocker(4);return;} await finishStep3();return; }                                  // doctor → review
 }
-function step3Back(from){ if(from===1){ showStep(2); } else if(from===2){ showSub3(1); } else if(from===3){ showSub3(2); } else if(from===4){ showSub3(3); } }
+function openHcpModal(){ var m=document.getElementById('hcpModal'); if(!m) return; var el=document.getElementById('hcpModalText'); if(el) el.innerHTML=t(val('country')==='Österreich'?'consent_hcp_austria':'consent_hcp_germany'); m.classList.add('open'); }
+(function(){ var m=document.getElementById('hcpModal'); if(!m) return;
+  document.getElementById('hcpBack').addEventListener('click',function(){ m.classList.remove('open'); });
+  m.addEventListener('click',function(e){ if(e.target===m) m.classList.remove('open'); });
+  document.getElementById('hcpContinue').addEventListener('click',function(){
+    if(!document.getElementById('hcp_consent').checked){ markInvalid(document.getElementById('hcpModalWrap'),true); return; }
+    markInvalid(document.getElementById('hcpModalWrap'),false); m.classList.remove('open'); showSub3(4);
+  });
+})();
+function step3Back(from){ if(from===1){ showStep(2); } else if(from===2){ showSub3(1); } else if(from===3){ showSub3(2); } else if(from===4){ showSub3(2); } }
 function runStep3Next(n){ step3Next(n).catch(e=>console.error('[H+ Step 3] Navigation error in section '+n,e)); }
 $('s3next1').addEventListener('click',()=>runStep3Next(1));
 $('s3next2').addEventListener('click',()=>runStep3Next(2));
-$('s3next3').addEventListener('click',()=>runStep3Next(3));
 $('s3next4').addEventListener('click',()=>runStep3Next(4));
 $('s3back1').addEventListener('click',()=>step3Back(1));
 $('s3back2').addEventListener('click',()=>step3Back(2));
-$('s3back3').addEventListener('click',()=>step3Back(3));
 $('s3back4').addEventListener('click',()=>step3Back(4));
 
 /* full step-3 validation for final submit */
