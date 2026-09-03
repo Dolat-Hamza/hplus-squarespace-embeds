@@ -50,7 +50,7 @@ patient_phone,Mapped,Patient Phone,string / phonenumber,"Account update, Registr
 patient_sms,Mapped,Patient SMS,string / phonenumber,"Account update, Patient consent, Registration"
 patient_whatsapp,Mapped,Patient WhatsApp,string / phonenumber,"Account update, Registration"
 phone,Mapped,Phone Number,string / phonenumber,"Account update, Caregiver consent, Patient consent"
-pills_taken_last_7_days,NEEDS CREATING,"(to create) Values: 0-3, 3-5, 5-7",enumeration / radio,Check-in
+pills_taken_last_7_days,NEEDS CREATING,"(to create) Values: 0-1, 2-3, 4-6, 7",enumeration / radio,Check-in
 prescription_management,Mapped,Prescription Management,enumeration / booleancheckbox,"Account update, Registration"
 prescription_management___caregiver_,Mapped,Prescription Management  (Caregiver),enumeration / booleancheckbox,Account update
 reorder_prescription,NEEDS CREATING,"(to create) Values: Yes, No",enumeration / booleancheckbox,Check-in
