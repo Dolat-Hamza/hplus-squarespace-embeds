@@ -543,7 +543,7 @@
           <div class="err-msg" id="optionsErr" data-i18n="err_options"></div>
 
 
-          <div id="doctorInline" style="display:none">
+          <div id="doctorInline" style="display:none;margin-top:34px;padding-top:8px">
           <h4 class="section-head lg" data-i18n="doctor_details_h"></h4>
           <p class="step-sub" id="s3cSub" data-i18n="s3c_sub_rx"></p>
 
@@ -561,8 +561,8 @@
             </div>
           </div>
 
-          <!-- address fields: hidden until a practice is selected or manual entry begins -->
-          <div id="addressFields">
+          <!-- address fields: hidden until the Search button is pressed (or a practice is selected) -->
+          <div id="addressFields" style="display:none">
             <div class="field"><label data-i18n="doc_practice"></label><input type="text" id="doctor_street2"></div>
             <div class="field"><label data-i18n="doc_street"></label><input type="text" id="doctor_street"></div>
             <div class="field" style="max-width:220px"><label data-i18n="doc_postcode"></label><input type="text" id="doctor_postcode"></div>
@@ -645,6 +645,12 @@
 
             <div id="deliveryPrefs" style="display:none;margin-top:24px;padding-top:20px;border-top:1px solid var(--hair)">
               <h4 class="section-head" data-i18n="delivery_prefs_h"></h4>
+              <div class="field" id="deliverySearchWrap">
+                <button type="button" class="searchbtn" id="deliverySearchBtn"><svg><use href="#ic-search"/></svg><span data-i18n="delivery_search_btn"></span></button>
+                <div id="deliverySearchBox" style="display:none;margin-top:12px">
+                  <input type="text" id="deliverySearch" data-i18n-ph="delivery_search_ph" autocomplete="off">
+                </div>
+              </div>
               <div class="field"><label data-i18n="dp_street"></label><input type="text" id="delivery_street"></div>
               <div class="field"><label data-i18n="dp_street2"></label><input type="text" id="delivery_street2"></div>
               <div class="two-col">
@@ -964,6 +970,7 @@ const I18N = {
     freq_2w_sub:"Besonders zu Beginn empfohlen",
     err_date_range:"Bitte wählen Sie ein Datum zwischen dem 2. Juli und 3 Monaten ab heute.",
     practice_search_btn:"Nach meiner Arztpraxis suchen", practice_search_ph:"Praxisname oder Adresse eingeben…",
+    delivery_search_btn:"Nach meiner Lieferadresse suchen", delivery_search_ph:"Adresse eingeben…",
     practice_search_hint:"Wählen Sie Ihre Praxis aus – wir füllen die Adresse automatisch aus.",
     practice_search_err:"Die Praxissuche ist derzeit nicht verfügbar. Bitte geben Sie die Adresse unten manuell ein.",
     cant_find_btn:"Angaben Ihres Arztes nicht gefunden?",
@@ -1106,6 +1113,7 @@ const I18N = {
     freq_2w_sub:"Recommended especially at the start",
     err_date_range:"Please choose a date between 2 July and 3 months from today.",
     practice_search_btn:"Search for my doctor's practice", practice_search_ph:"Enter practice name or address…",
+    delivery_search_btn:"Search for my delivery address", delivery_search_ph:"Enter address…",
     practice_search_hint:"Select your practice and we'll fill in the address for you.",
     practice_search_err:"Practice search is currently unavailable. Please enter the address manually below.",
     cant_find_btn:"Can't find your doctor's details?",
@@ -1274,7 +1282,7 @@ function updateConsentTexts(){
   $('pharmacyBlock').style.display=showPharm?'block':'none';
   $('pharmHplusTxt').textContent=t('pharmacy_hplus_generic');
   $('pharmStock').textContent=t('stock_tmpl').replace('%m',(HS.med&&HS.med.medicine)||'');
-  $('deliveryPrefs').style.display=(showPharm && radio('pharmacy_choice')==='yes')?'block':'none';
+  $('deliveryPrefs').style.display=(showPharm && (radio('pharmacy_choice')==='yes'||radio('pharmacy_choice')==='no'))?'block':'none';
   { const alt=$('altPharmacy'); if(alt) alt.style.display=(showPharm && radio('pharmacy_choice')==='no')?'block':'none'; }
   { const mini=$('pharmaMini'); if(mini) mini.classList.toggle('is-selected', radio('pharmacy_choice')==='no'); }
 }
@@ -1385,13 +1393,47 @@ async function initAutocomplete(){
 }
 $('practiceSearchBtn').addEventListener('click',()=>{
   $('practiceSearchBox').style.display='block';
-  loadPlaces(err=>{ if(err==='nokey'){ $('practiceSearchBox').style.display='none'; $('addressFields').style.display='block'; } else initAutocomplete(); });
+  $('addressFields').style.display='block';   // reveal the practice details once the user starts searching
+  loadPlaces(err=>{ if(err==='nokey'){ $('practiceSearchBox').style.display='none'; } else initAutocomplete(); });
 });
 /* can't find details → reveal callback option (button stays available) */
 $('cantFindBtn').addEventListener('click',()=>{ $('addressFields').style.display='block'; $('callbackBox').style.display='block'; $('addressFields').scrollIntoView({behavior:'smooth',block:'start'}); });
-/* Never trap the user: reveal the doctor contact fields as soon as they start
-   entering a name — the Places search stays an optional convenience above. */
-['doctor_first','doctor_last'].forEach(id=>{ const e=$(id); if(!e) return; const reveal=()=>{ $('addressFields').style.display='block'; }; e.addEventListener('focus',reveal); e.addEventListener('input',reveal); });
+/* Practice details stay hidden until the user presses Search (or "can't find"),
+   per the requested flow. */
+
+/* ---- Delivery address: optional Google Places search (mirrors the practice search) ---- */
+let delivPacInited=false;
+function fillDeliveryFromComponents(comps){
+  const street=[comps.route, comps.street_number].filter(Boolean).join(' ');
+  if(street) $('delivery_street').value=street;
+  if(comps.postal_code) $('delivery_postcode').value=comps.postal_code;
+  if(comps.locality) $('delivery_city').value=comps.locality;
+}
+async function initDeliveryAutocomplete(){
+  if(delivPacInited) return; delivPacInited=true;
+  const at=val('country')==='Österreich';
+  try{
+    const { PlaceAutocompleteElement } = await google.maps.importLibrary('places');
+    const pac=new PlaceAutocompleteElement({ includedRegionCodes:[at?'at':'de'] });
+    pac.style.width='100%';
+    const box=$('deliverySearchBox'); $('deliverySearch').style.display='none';
+    box.insertBefore(pac, box.firstChild);
+    pac.addEventListener('gmp-select', async (ev)=>{
+      try{
+        const pred=ev.placePrediction||(ev.detail&&ev.detail.placePrediction);
+        const place=pred.toPlace();
+        await place.fetchFields({ fields:['addressComponents'] });
+        const comps={}; (place.addressComponents||[]).forEach(c=>(c.types||[]).forEach(ty=>comps[ty]=c.longText));
+        fillDeliveryFromComponents(comps);
+      }catch(e){ $('deliverySearch').style.display='block'; }
+    });
+    pac.addEventListener('gmp-error', ()=>{ $('deliverySearch').style.display='block'; });
+  }catch(e){ $('deliverySearch').style.display='block'; }
+}
+$('deliverySearchBtn').addEventListener('click',()=>{
+  $('deliverySearchBox').style.display='block';
+  loadPlaces(err=>{ if(err!=='nokey') initDeliveryAutocomplete(); });
+});
 
 /* ---- no-support confirmation modal ---- */
 function openNoSupportModal(){ $('noSupportModal').classList.add('open'); }
@@ -1555,7 +1597,8 @@ function validateSub3(n){
           if(val(id)===''){ const f=$(id).closest('.field'); f.classList.add('invalid'); ensureFmtErr(f,t('err_required')); ok=false; }
         });
       } else if(ph==='no'){
-        ['chosen_pharmacy_name','chosen_pharmacy_street','chosen_pharmacy_city','chosen_pharmacy_postcode'].forEach(id=>{
+        ['chosen_pharmacy_name','chosen_pharmacy_street','chosen_pharmacy_city','chosen_pharmacy_postcode',
+         'delivery_street','delivery_postcode','delivery_city'].forEach(id=>{
           if(val(id)===''){ const f=$(id).closest('.field'); f.classList.add('invalid'); ensureFmtErr(f,t('err_required')); ok=false; }
         });
       }
@@ -1573,8 +1616,13 @@ function validateSub3(n){
       else if((cbEl.min && cv<cbEl.min) || (cbEl.max && cv>cbEl.max)){ $('callbackWhen').classList.add('invalid'); $('callbackErr').textContent=t('err_callback_range'); $('callbackErr').classList.add('show'); ok=false; }
       showErr('infoErr',false);
     } else {
-      const complete = val('doctor_first') && val('doctor_last') && (val('doctor_street')||val('doctor_postcode')||val('doctor_street2')||val('doctor_phone')||val('doctor_email'));
-      if(!complete){ $('addressFields').style.display='block'; showErr('infoErr',true); ok=false; $('infoErr').scrollIntoView({behavior:'smooth',block:'center'}); }
+      // all doctor practice details are required to progress
+      $('addressFields').style.display='block';
+      let complete=true;
+      ['doctor_first','doctor_last','doctor_street2','doctor_street','doctor_postcode','doctor_phone'].forEach(id=>{
+        if(val(id)===''){ const f=$(id).closest('.field'); if(f){ f.classList.add('invalid'); ensureFmtErr(f,t('err_required')); } complete=false; }
+      });
+      if(!complete){ showErr('infoErr',true); ok=false; $('infoErr').scrollIntoView({behavior:'smooth',block:'center'}); }
       else showErr('infoErr',false);
     }
     if(!validateFormats($('sub34'))) ok=false;
@@ -1902,6 +1950,15 @@ document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==
 /* init */
 applyLang(currentLang);
 restoreState();                                            // autofill from a prior visit (this browser)
+/* Country is driven by the page URL (/de → Germany, /at → Austria) and hidden;
+   it only appears as a backup when the URL doesn't say which. */
+(function(){
+  var sel=$('country'); if(!sel) return;
+  var path=(location.pathname+location.search+location.hash).toLowerCase();
+  var c = /(^|[\/\-_?&=])at([\/\-_?&=]|$)/.test(path) ? 'Österreich'
+        : /(^|[\/\-_?&=])de([\/\-_?&=]|$)/.test(path) ? 'Deutschland' : '';
+  if(c){ sel.value=c; sel.dispatchEvent(new Event('change')); var f=sel.closest('.field'); if(f) f.style.display='none'; }
+})();
 syncOptions(); syncConsentVisibility(); syncSecondPerson(); setupDates();
 $('hplusForm').addEventListener('input',saveState);        // persist as the patient types
 $('hplusForm').addEventListener('change',saveState);
