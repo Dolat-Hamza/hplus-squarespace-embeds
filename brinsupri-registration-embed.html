@@ -1854,6 +1854,9 @@ $('submitBtn').addEventListener('click',async ()=>{
   if(r1&&r2&&r3){
     $('hplusForm').style.display='none'; $('progressWrap').style.display='none';
     $('successScreen').style.display='block';
+    // carry the registrant through to their account page so the data loads there
+    (function(){ var em=val('email'); if(!em) return; var q='?email='+encodeURIComponent(em);
+      document.querySelectorAll('.uhp-header-right a[href="/uhp/account"]').forEach(function(a){ a.href='/uhp/account'+q; }); })();
     document.querySelector('.uhp-header-right')?.classList.add('show'); // reveal account button only after registration
     $('successScreen').scrollIntoView({behavior:'smooth',block:'center'});
   }else{
