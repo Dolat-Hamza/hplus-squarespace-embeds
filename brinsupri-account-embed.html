@@ -303,7 +303,37 @@
   .acct-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--blue),var(--blue-3));color:#fff !important;font-family:var(--font-head),inherit;font-size:clamp(11px,.95vw,13.5px);font-weight:600;letter-spacing:.4px;line-height:1;text-transform:uppercase;text-decoration:none !important;padding:13px 20px;border-radius:999px;white-space:nowrap;box-shadow:0 12px 24px -12px rgba(0,126,198,.75);transition:opacity .2s ease,transform .2s ease,box-shadow .2s ease}
   .acct-btn:hover{transform:translateY(-1px);box-shadow:0 16px 30px -12px rgba(0,126,198,.8)}
   .uhp-avatar{width:42px;height:42px;display:block;object-fit:contain;border-radius:50%;box-shadow:0 4px 12px -6px rgba(6,50,76,.5)}
-  @media(max-width:767px){.acct-btn{font-size:12px;padding:11px 16px}.uhp-avatar{width:36px;height:36px}.uhp-brand svg{height:28px;width:48px}.uhp-brand .bt b{font-size:15px}}
+  
+/* ---- mobile polish (account form) ---- */
+@media(max-width:767px){
+  /* 16px stops iOS zooming the page when a field takes focus */
+  .hplus-root input,.hplus-root select,.hplus-root textarea{font-size:16px}
+  .hplus-root .cc-select{font-size:16px;min-height:48px}
+  .hplus-root .phone-row{display:flex;gap:8px}
+  .hplus-root .phone-row .cc-select{flex:0 0 104px;font-size:16px;padding:12px 6px}
+  .hplus-root .phone-row input{flex:1 1 auto;min-width:0}
+  /* comfortable tap targets */
+  .hplus-root .choice{min-height:52px;padding:14px 16px}
+  .hplus-root .btn,.hplus-root .searchbtn{min-height:48px;width:100%}
+  .hplus-root .langswitch button{min-height:44px;padding:0 18px}
+  .hplus-root .contact a,.hplus-root .uhp-foot a{display:inline-block;padding:6px 0;min-height:32px}
+  /* stack the two-column rows */
+  .hplus-root .two-col{grid-template-columns:1fr}
+  /* nav buttons stack, primary first */
+  .hplus-root .nav{flex-direction:column-reverse;gap:10px;align-items:stretch}
+  .hplus-root .nav .btn-ghost{width:100%}
+  .hplus-root .btn-back-summary{margin-left:0}
+  /* summary rows read better stacked than squeezed */
+  .hplus-root .review-block .row{flex-direction:column;align-items:flex-start;gap:2px}
+  .hplus-root .review-block .row .rv-right{text-align:left;max-width:100%}
+  .hplus-root .review-block .svc-row{flex-direction:row;align-items:center}
+  .hplus-root .review-block h4{flex-wrap:wrap;gap:6px}
+  /* keep long values (emails, addresses) inside the card */
+  .hplus-root .review-block .row span{overflow-wrap:anywhere}
+  .hplus-root .card{padding:22px 16px 26px}
+}
+
+@media(max-width:767px){.acct-btn{font-size:12px;padding:11px 16px}.uhp-avatar{width:36px;height:36px}.uhp-brand svg{height:28px;width:48px}.uhp-brand .bt b{font-size:15px}}
   </style>
   <header class="uhp-header">
     <a href="/uhp" class="uhp-brand"><svg><use href="#ic-hlogo"/></svg><span class="bt"><b>United Pharma Partners</b><small>H+ Therapy Companion</small></span></a>
@@ -383,6 +413,24 @@
         <div class="field cond" id="c_whatsapp" style="display:none"><label data-i18n="whatsapp_label"></label><input type="tel" id="patient_whatsapp" placeholder="+49 176 1234567" inputmode="tel" autocomplete="tel" data-validate="phone-global" /></div>
         <div class="field cond" id="c_sms" style="display:none"><label data-i18n="sms_label"></label><div class="phone-row"><select id="patient_sms_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="patient_sms" placeholder="176 1234567" data-validate="phone" /></div></div>
 
+<div id="deliveryPrefs" style="margin-top:24px;padding-top:20px;border-top:1px solid var(--hair)">
+              <h4 class="section-head" data-i18n="delivery_prefs_h"></h4>
+              <div class="field" id="deliverySearchWrap">
+                <button type="button" class="searchbtn" id="deliverySearchBtn"><svg><use href="#ic-search"/></svg><span data-i18n="delivery_search_btn"></span></button>
+                <div id="deliverySearchBox" style="display:none;margin-top:12px">
+                  <input type="text" id="deliverySearch" data-i18n-ph="delivery_search_ph" autocomplete="off">
+                </div>
+              </div>
+              <div class="field"><label data-i18n="dp_street"></label><input type="text" id="delivery_street"></div>
+              <div class="field"><label data-i18n="dp_street2"></label><input type="text" id="delivery_street2"></div>
+              <div class="two-col">
+                <div class="field"><label data-i18n="dp_postcode"></label><input type="text" id="delivery_postcode"></div>
+                <div class="field"><label data-i18n="dp_city"></label><input type="text" id="delivery_city"></div>
+              </div>
+            </div>
+
+        <h4 class="section-head" data-i18n="caregiver_details_h" style="margin-top:30px"></h4>
+
         <div id="secondSlotYou"></div>
         <div class="field" data-required id="secondPersonField">
           <span class="group-label" data-i18n="second_label"></span>
@@ -394,7 +442,6 @@
         </div>
 
         <div id="caregiverBlock" style="display:none">
-          <h4 class="section-head" data-i18n="second_details_h"></h4>
           <div class="two-col">
             <div class="field"><label data-i18n="sc_first"></label><input type="text" id="second_contact_person" /></div>
             <div class="field"><label data-i18n="sc_last"></label><input type="text" id="second_contact_surname" /></div>
@@ -630,21 +677,7 @@
               </div>
             </div>
 
-            <div id="deliveryPrefs" style="display:none;margin-top:24px;padding-top:20px;border-top:1px solid var(--hair)">
-              <h4 class="section-head" data-i18n="delivery_prefs_h"></h4>
-              <div class="field" id="deliverySearchWrap">
-                <button type="button" class="searchbtn" id="deliverySearchBtn"><svg><use href="#ic-search"/></svg><span data-i18n="delivery_search_btn"></span></button>
-                <div id="deliverySearchBox" style="display:none;margin-top:12px">
-                  <input type="text" id="deliverySearch" data-i18n-ph="delivery_search_ph" autocomplete="off">
-                </div>
-              </div>
-              <div class="field"><label data-i18n="dp_street"></label><input type="text" id="delivery_street"></div>
-              <div class="field"><label data-i18n="dp_street2"></label><input type="text" id="delivery_street2"></div>
-              <div class="two-col">
-                <div class="field"><label data-i18n="dp_postcode"></label><input type="text" id="delivery_postcode"></div>
-                <div class="field"><label data-i18n="dp_city"></label><input type="text" id="delivery_city"></div>
-              </div>
-            </div>
+            
           </div>
           <div class="nav">
             <button type="button" class="btn btn-ghost" id="s3back2" data-i18n="back"></button>
@@ -860,7 +893,7 @@ const I18N = {
     role_label:"Zuerst: Machen Sie das für sich selbst oder für jemanden, den Sie betreuen?", opt_select:"Bitte auswählen…", opt_patient:"Patient", opt_caregiver:"Betreuer",
     firstname_label:"Vorname", lastname_label:"Nachname", email_label:"E-Mail-Adresse",
     email_reassure:"Wir nutzen Ihre E-Mail nur für Ihren H+ Therapy Companion – niemals für Werbung Dritter.",
-    comm_label:"Wie möchten Sie, dass wir Sie kontaktieren, um unsere Leistungen zu erbringen?",
+    comm_label:"Kontaktpräferenz",
     opt_email:"E-Mail", opt_whatsapp:"WhatsApp", opt_phone:"Telefonanruf", opt_sms:"SMS",
     whatsapp_label:"WhatsApp-Nummer", phone_label:"Telefonnummer", sms_label:"SMS-Nummer",
     second_label:"Sollen wir auch eine Betreuungsperson auf dem Laufenden halten?",
@@ -951,7 +984,7 @@ const I18N = {
     callback_toggle:"Ja, bitte rufen Sie mich an", callback_when:"Wann sollen wir Sie anrufen?",
     err_need_info:"Bitte geben Sie die Kontaktdaten Ihres Arztes an – oder vereinbaren Sie unten einen Rückruf.",
     /* new: page headings, dates, practice search, modal */
-    patient_details_h:"Patientendaten", second_details_h:"Angaben zum Betreuer", doctor_details_h:"Angaben zum Arzt",
+    patient_details_h:"Patientendaten", caregiver_details_h:"Angaben zur Betreuungsperson", second_details_h:"Angaben zum Betreuer", doctor_details_h:"Angaben zum Arzt",
     freq_2w_sub:"Besonders zu Beginn empfohlen",
     err_date_range:"Bitte wählen Sie ein Datum zwischen dem 2. Juli und 3 Monaten ab heute.",
     practice_search_btn:"Nach meiner Arztpraxis suchen", practice_search_ph:"Praxisname oder Adresse eingeben…",
@@ -1006,7 +1039,7 @@ const I18N = {
     role_label:"First up – is this for you, or for someone you care for?", opt_select:"Please select…", opt_patient:"Patient", opt_caregiver:"Caregiver",
     firstname_label:"First name", lastname_label:"Last name", email_label:"Email address",
     email_reassure:"We use your email only for your H+ Therapy Companion — never for third-party marketing.",
-    comm_label:"How would you like us to contact you to perform our services?",
+    comm_label:"Contact Preference",
     opt_email:"Email", opt_whatsapp:"WhatsApp", opt_phone:"Phone call", opt_sms:"SMS",
     whatsapp_label:"WhatsApp number", phone_label:"Phone number", sms_label:"SMS number",
     second_label:"Want us to keep a caregiver in the loop too?",
@@ -1094,7 +1127,7 @@ const I18N = {
     callback_toggle:"Yes, please call me", callback_when:"When should we call you?",
     err_need_info:"Please provide your doctor's contact details — or arrange a callback below.",
     /* new: page headings, dates, practice search, modal */
-    patient_details_h:"Patient details", second_details_h:"Caregiver details", doctor_details_h:"Doctor details",
+    patient_details_h:"Patient Details", caregiver_details_h:"Caregiver Details", second_details_h:"Caregiver details", doctor_details_h:"Doctor details",
     freq_2w_sub:"Recommended especially at the start",
     err_date_range:"Please choose a date between 2 July and 3 months from today.",
     practice_search_btn:"Search for my doctor's practice", practice_search_ph:"Enter practice name or address…",
@@ -1223,12 +1256,10 @@ function applyRoleWording(){
   var tt=I18N[currentLang]; if(!tt) return;
   var isCg = val('customer_type')==='Caregiver';
   var set=function(sel,txt){ var el=document.querySelector(sel); if(el&&txt) el.textContent=txt; };
-  set('[data-i18n="patient_details_h"]', tt.your_details_h);
-  set('#caregiverBlock [data-i18n="second_details_h"]', isCg ? tt.other_details_pt : tt.second_details_h);
+  /* Account form: section names are fixed (Patient Details / Caregiver Details). */
   set('[data-i18n="second_label"]', isCg ? tt.second_label_pt : tt.second_label);
   set('[data-i18n="rel_label"]', isCg ? tt.rel_label_pt : tt.rel_label);
-  placeRelationshipField(isCg);
-  placeSecondPersonQuestion(isCg);
+  /* Account form: fields stay in their named sections. */
 }
 /* For a caregiver the question belongs under the patient's name; for a patient it
    stays in their own section. */
@@ -1290,10 +1321,11 @@ function syncCgCommFields(){
 document.querySelectorAll('#cg_comm_prefs input').forEach(c=>c.addEventListener('change',syncCgCommFields));
 /* second-person details show when role = Caregiver OR reminders wanted for a second person */
 function syncSecondPerson(){
-  const isCg = val('customer_type')==='Caregiver', yes = radio('second_person')==='Yes';
-  $('caregiverBlock').style.display = (isCg || yes) ? 'block' : 'none';
-  // a caregiver always gives the patient's name; the contact questions follow only on "Yes"
-  const cc=$('cgContactBlock'); if(cc) cc.style.display = (isCg && !yes) ? 'none' : 'block';
+  // Account form: the Caregiver Details section is always available; its contact
+  // questions follow the yes/no answer.
+  const yes = radio('second_person')==='Yes';
+  $('caregiverBlock').style.display='block';
+  const cc=$('cgContactBlock'); if(cc) cc.style.display = yes ? 'block' : 'none';
 }
 document.querySelectorAll('input[name=second_person]').forEach(r=>r.addEventListener('change',syncSecondPerson));
 $('customer_type').addEventListener('change',function(){ syncSecondPerson(); applyLang(currentLang); });
@@ -1338,7 +1370,7 @@ function updateConsentTexts(){
   $('pharmacyBlock').style.display=showPharm?'block':'none';
   $('pharmHplusTxt').textContent=t('pharmacy_hplus_generic');
   $('pharmStock').textContent=t('stock_tmpl').replace('%m',(HS.med&&HS.med.medicine)||'');
-  $('deliveryPrefs').style.display=(showPharm && (radio('pharmacy_choice')==='yes'||radio('pharmacy_choice')==='no'))?'block':'none';
+  /* delivery address lives in Patient Details on the account form and is always shown */
   { const alt=$('altPharmacy'); if(alt) alt.style.display=(showPharm && radio('pharmacy_choice')==='no')?'block':'none'; }
   { const mini=$('pharmaMini'); if(mini) mini.classList.toggle('is-selected', radio('pharmacy_choice')==='no'); }
 }
@@ -1832,7 +1864,7 @@ function buildReview(){
     + block(t('rv_services'),3,services)
     + block(t('doctor_details_h'),3,docRows)
     + block(t('rv_pharmacy'),3,pharmRows)
-    + block(t('rv_delivery_addr'),3,delivRows);
+    + block(t('rv_delivery_addr'),1,delivRows);
 
   document.querySelectorAll('#reviewArea a[data-goto]').forEach(a=>a.addEventListener('click',()=>editSection(+a.dataset.goto)));
 }
