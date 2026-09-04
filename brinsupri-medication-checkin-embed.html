@@ -289,9 +289,11 @@
   .hplus-root .review-block .row span:first-child{flex:0 0 auto;font-size:12.5px}
   .hplus-root .review-block .row .rv-right{max-width:none;min-width:0;overflow-wrap:anywhere;text-align:right}
   .hplus-root .card{padding:20px 14px 24px}
-  /* progress: keep the labels on one line instead of one wrapping out of step */
-  .hplus-root #progressSteps{align-items:center}
-  .hplus-root #progressSteps li{font-size:10.5px;letter-spacing:-.1px;white-space:nowrap;text-align:center;padding:0 2px}
+  /* progress labels wrap rather than clip on narrow screens */
+  .hplus-root .progress-steps{display:flex;flex-wrap:nowrap;justify-content:space-between;
+    align-items:flex-start;gap:4px;overflow:visible}
+  .hplus-root #progressSteps li{flex:1 1 0;min-width:0;font-size:10px;letter-spacing:-.2px;
+    padding:0;white-space:normal;text-align:center;line-height:1.2;overflow-wrap:anywhere}
   /* type and spacing sized for a narrow screen */
   .hplus-root .step-title{font-size:23px;line-height:1.2}
   .hplus-root .step-sub{font-size:14px;margin-bottom:18px}

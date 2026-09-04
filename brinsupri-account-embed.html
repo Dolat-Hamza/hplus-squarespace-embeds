@@ -358,10 +358,11 @@
   .hplus-root #card_freq .pill-row{grid-template-columns:1fr}
 
   /* progress: five sections don't fit across a phone — scroll them instead of clipping */
-  .hplus-root .progress-steps{display:flex;flex-wrap:nowrap;justify-content:flex-start;gap:14px;
-    overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
-  .hplus-root .progress-steps::-webkit-scrollbar{display:none}
-  .hplus-root #progressSteps li{flex:0 0 auto;font-size:12px;padding:0}
+  /* five sections across a phone: let the longest label wrap rather than clip */
+  .hplus-root .progress-steps{display:flex;flex-wrap:nowrap;justify-content:space-between;
+    align-items:flex-start;gap:4px;overflow:visible}
+  .hplus-root #progressSteps li{flex:1 1 0;min-width:0;font-size:10px;letter-spacing:-.2px;
+    padding:0;white-space:normal;text-align:center;line-height:1.2;overflow-wrap:anywhere}
   /* header: keep the brand and language switch on one compact row */
   .hplus-root .langswitch{margin:0 0 12px;display:flex;justify-content:flex-end}
   .hplus-root .trust{font-size:11.5px;padding:10px 12px}
@@ -1619,6 +1620,9 @@ function showStep(n){
   document.querySelectorAll('.step').forEach(s=>s.classList.toggle('active',+s.dataset.step===n));
   $('progressLine').style.width=(Math.min(n,totalSteps)/totalSteps*100)+'%';
   document.querySelectorAll('#progressSteps li').forEach(li=>{const s=+li.dataset.s;li.classList.toggle('active',s===n);li.classList.toggle('done',s<n);});
+  // narrow screens: make sure the section you're on is visible in the strip
+  const activeLi=document.querySelector('#progressSteps li.active');
+  if(activeLi && activeLi.scrollIntoView) activeLi.scrollIntoView({block:'nearest',inline:'center'});
   if(n===5) showSub3(1);
   if(n===6) buildReview();
   document.querySelector('.card').scrollIntoView({behavior:'smooth',block:'start'});
