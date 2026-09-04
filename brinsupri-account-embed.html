@@ -317,7 +317,8 @@
   .hplus-root .phone-row input{flex:1 1 auto;min-width:0}
   /* comfortable tap targets */
   .hplus-root .choice{min-height:52px;padding:14px 16px}
-  .hplus-root .btn,.hplus-root .searchbtn{min-height:48px;width:100%}
+  .hplus-root .btn,.hplus-root .searchbtn{min-height:48px;width:100%;font-size:15px;padding:12px 16px;line-height:1.25}
+  .hplus-root .nav{gap:8px}
   .hplus-root .langswitch button{min-height:44px;padding:0 18px}
   .hplus-root .contact a,.hplus-root .uhp-foot a{display:inline-block;padding:6px 0;min-height:32px}
   /* stack the two-column rows */
@@ -351,8 +352,16 @@
   .hplus-root .reassure{font-size:11.5px;margin-top:5px}
   /* short answers (Yes/No, 0-1, 2-3 ...) sit two per row instead of one long strip */
   .hplus-root .pill-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .hplus-root .pill-row .choice{margin-bottom:0;min-height:52px;padding:12px 12px}
-  .hplus-root .pill-row .choice .ctxt{font-size:14px}
+  .hplus-root .pill-row .choice{margin-bottom:0;min-height:52px;padding:12px 12px;align-items:center}
+  .hplus-root .pill-row .choice .ctxt{font-size:14px;min-width:0;overflow-wrap:anywhere;hyphens:auto}
+  /* long option labels (e.g. "Weekly (recommended in the beginning)") need the full width */
+  .hplus-root #card_freq .pill-row{grid-template-columns:1fr}
+
+  /* progress: five sections don't fit across a phone — scroll them instead of clipping */
+  .hplus-root .progress-steps{display:flex;flex-wrap:nowrap;justify-content:flex-start;gap:14px;
+    overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
+  .hplus-root .progress-steps::-webkit-scrollbar{display:none}
+  .hplus-root #progressSteps li{flex:0 0 auto;font-size:12px;padding:0}
   /* header: keep the brand and language switch on one compact row */
   .hplus-root .langswitch{margin:0 0 12px;display:flex;justify-content:flex-end}
   .hplus-root .trust{font-size:11.5px;padding:10px 12px}
@@ -399,16 +408,13 @@
       <section class="step active" data-step="1">
         <h3 class="step-title" data-i18n="s1_title"></h3>
         <p class="step-sub" data-i18n="s1_sub"></p>
+        <!-- role is known from the saved account; kept hidden so the wording and field mapping still work -->
+        <select id="customer_type" style="display:none" aria-hidden="true">
+          <option value=""></option>
+          <option value="Patient">Patient</option>
+          <option value="Caregiver">Caregiver</option>
+        </select>
 
-        <div class="field" data-required>
-          <label data-i18n="role_label"></label>
-          <select id="customer_type">
-            <option value="" data-i18n="opt_select"></option>
-            <option value="Patient" data-i18n="opt_patient"></option>
-            <option value="Caregiver" data-i18n="opt_caregiver"></option>
-          </select>
-          <div class="err-msg" data-i18n="err_select"></div>
-        </div>
 
         <h4 class="section-head" data-i18n="patient_details_h"></h4>
 
@@ -1056,7 +1062,7 @@ const I18N = {
     success_p1:"Ihr Therapy Companion ist startklar. Ab jetzt kümmern wir uns – Erinnerungen, Rezepte und Lieferung.",
     success_p2:"Eine Bestätigung ist schon auf dem Weg in Ihr Postfach.",
     rv_about:"Über Sie", rv_edit:"Bearbeiten", rv_name:"Name", rv_role:"Rolle", rv_email:"E-Mail", rv_contact:"Kontakt via", rv_second:"Zweite Person", rv_no:"Nein",
-    rxlow_q_short:"Rezept-Erinnerungen", other_med_label:"Weitere Medikamente", rv_your_details:"Ihre Angaben", rv_other_person:"Weitere Person", rv_other_patient:"Angaben zum Patienten", rv_services:"Therapy Companion Leistungen", rv_pharmacy:"Ihre Apotheke", rv_delivery_addr:"Lieferadresse", rel_label_short:"Beziehung", save_back:"Speichern & zurück zur Übersicht", acct_title:"Ihr H+ Therapy Companion Konto", acct_sub:"Hier finden Sie alle Ihre Angaben. Tippen Sie auf „Bearbeiten“, um einen Bereich zu ändern.", acct_save:"Änderungen speichern ✓", s2cg_title:"Angaben zur Betreuungsperson", s2cg_sub:"Wer unterstützt Sie – und wie sollen wir diese Person erreichen?", s4ci_title:"Ihre Check-ins", s4ci_sub:"Wie oft und worüber sollen wir uns bei Ihnen melden?", to_caregiver:"Weiter zur Betreuung →", to_medication:"Weiter zur Medikation →", to_checkin:"Weiter zum Check-in →", to_delivery:"Weiter zu Rezept & Lieferung →", rv_med:"Ihre Medikation", rv_medication:"Medikament", rv_firstdose:"Erste Einnahme", rv_freq:"Check-in-Häufigkeit",
+    rxlow_q_short:"Rezept-Erinnerungen", other_med_label:"Weitere Medikamente", rv_your_details:"Ihre Angaben", rv_other_person:"Weitere Person", rv_other_patient:"Angaben zum Patienten", rv_services:"Therapy Companion Leistungen", rv_pharmacy:"Ihre Apotheke", rv_delivery_addr:"Lieferadresse", rel_label_short:"Beziehung", save_back:"Speichern & zurück", acct_title:"Ihr H+ Therapy Companion Konto", acct_sub:"Hier finden Sie alle Ihre Angaben. Tippen Sie auf „Bearbeiten“, um einen Bereich zu ändern.", acct_save:"Änderungen speichern ✓", s2cg_title:"Angaben zur Betreuungsperson", s2cg_sub:"Wer unterstützt Sie – und wie sollen wir diese Person erreichen?", s4ci_title:"Ihre Check-ins", s4ci_sub:"Wie oft und worüber sollen wir uns bei Ihnen melden?", to_caregiver:"Weiter zur Betreuung →", to_medication:"Weiter zur Medikation →", to_checkin:"Weiter zum Check-in →", to_delivery:"Weiter zu Rezept & Lieferung →", rv_med:"Ihre Medikation", rv_medication:"Medikament", rv_firstdose:"Erste Einnahme", rv_freq:"Check-in-Häufigkeit",
     rv_delivery:"Abhol- und Lieferservice", rv_country:"Land", rv_support:"Unterstützung", rv_address:"Lieferadresse", rv_dash:"—",
     sup_delivery:"Abhol- und Lieferservice", sup_rx:"Folge-Rezepte", sup_checkup:"Terminplanung", sup_none:"Aktuell keine", sup_callback:"Rückruf vereinbart"
   },
@@ -1198,7 +1204,7 @@ const I18N = {
     success_p1:"Your Therapy Companion is live. From here, we’ve got it – reminders, prescriptions and delivery.",
     success_p2:"A confirmation is already on its way to your inbox.",
     rv_about:"About you", rv_edit:"Edit", rv_name:"Name", rv_role:"Role", rv_email:"Email", rv_contact:"Contact via", rv_second:"Second person", rv_no:"No",
-    rxlow_q_short:"Prescription reminders", other_med_label:"Other medication", rv_your_details:"Your details", rv_other_person:"Other person", rv_other_patient:"Patient details", rv_services:"Therapy Companion services", rv_pharmacy:"Your pharmacy", rv_delivery_addr:"Delivery address", rel_label_short:"Relationship", save_back:"Save & back to overview", acct_title:"Your H+ Therapy Companion account", acct_sub:"Here are all your details. Tap \u201cEdit\u201d to change any section.", acct_save:"Save changes \u2713", s2cg_title:"Caregiver Details", s2cg_sub:"Who supports you – and how should we reach them?", s4ci_title:"Check-in Details", s4ci_sub:"How often and about what should we get in touch?", to_caregiver:"Continue to Caregiver →", to_medication:"Continue to Medication →", to_checkin:"Continue to Check-in →", to_delivery:"Continue to Prescription & Delivery →", rv_med:"Your medication", rv_medication:"Medication", rv_firstdose:"First dose", rv_freq:"Check-in frequency",
+    rxlow_q_short:"Prescription reminders", other_med_label:"Other medication", rv_your_details:"Your details", rv_other_person:"Other person", rv_other_patient:"Patient details", rv_services:"Therapy Companion services", rv_pharmacy:"Your pharmacy", rv_delivery_addr:"Delivery address", rel_label_short:"Relationship", save_back:"Save & back", acct_title:"Your H+ Therapy Companion account", acct_sub:"Here are all your details. Tap \u201cEdit\u201d to change any section.", acct_save:"Save changes \u2713", s2cg_title:"Caregiver Details", s2cg_sub:"Who supports you – and how should we reach them?", s4ci_title:"Check-in Details", s4ci_sub:"How often and about what should we get in touch?", to_caregiver:"Continue to Caregiver →", to_medication:"Continue to Medication →", to_checkin:"Continue to Check-in →", to_delivery:"Continue to Prescription & Delivery →", rv_med:"Your medication", rv_medication:"Medication", rv_firstdose:"First dose", rv_freq:"Check-in frequency",
     rv_delivery:"Pick Up and Delivery Service", rv_country:"Country", rv_support:"Support", rv_address:"Delivery address", rv_dash:"—",
     sup_delivery:"Pick Up and Delivery Service", sup_rx:"Repeat prescriptions", sup_checkup:"Scheduling", sup_none:"None right now", sup_callback:"Callback arranged"
   }
@@ -1767,7 +1773,7 @@ function validateSub3(n){
       // all doctor practice details are required to progress
       $('addressFields').style.display='block';
       let complete=true;
-      ['doctor_first','doctor_last','doctor_street2','doctor_street','doctor_postcode','doctor_phone'].forEach(id=>{
+      ['doctor_first','doctor_last','doctor_street2','doctor_street','doctor_postcode','doctor_phone','doctor_fax'].forEach(id=>{
         if(val(id)===''){ const f=$(id).closest('.field'); if(f){ f.classList.add('invalid'); ensureFmtErr(f,t('err_required')); } complete=false; }
       });
       if(!complete){ showErr('infoErr',true); ok=false; $('infoErr').scrollIntoView({behavior:'smooth',block:'center'}); }
@@ -1851,7 +1857,7 @@ function setBackToSummaryBar(on){
     }else if(!on && b){ b.remove(); }
   });
   // editing from the overview: "Save & back" is the way out, so hide the plain Back
-  document.querySelectorAll('.step .nav [data-prev]').forEach(el=>{ el.style.display = on ? 'none' : ''; });
+  document.querySelectorAll('.step .nav [data-prev], .step .nav .btn-ghost').forEach(el=>{ el.style.display = on ? 'none' : ''; });
 }
 function buildReview(){
   const commLabels={Email:t('opt_email'),Whatsapp:'WhatsApp',Phone:t('opt_phone'),SMS:'SMS'};
