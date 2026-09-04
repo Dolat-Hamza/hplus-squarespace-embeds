@@ -1,5 +1,6 @@
 <!-- H+ form: paste ENTIRE block into ONE Squarespace Code Block (Business plan+). One form per page. -->
 <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
 :root{
@@ -1700,8 +1701,8 @@ function validateStep(n){
     if(!requireIf('second_contact_email',cg('Email'))) ok=false;
   }
   if(n===3){
-    const fd=$('first_medication_date'), fv=fd.value;
-    if(fv && ((fd.min && fv<fd.min) || (fd.max && fv>fd.max))){ const f=fd.closest('.field'); f.classList.add('invalid'); ensureFmtErr(f,t('err_date_range')); ok=false; }
+    const fd=$('first_medication_date'), fv=fd&&fd.value;
+    if(fd && fv && ((fd.min && fv<fd.min) || (fd.max && fv>fd.max))){ const f=fd.closest('.field'); f.classList.add('invalid'); ensureFmtErr(f,t('err_date_range')); ok=false; }
     if(val('med_select')==='Other'){
       ['md_name_in','md_dose_in','md_freq_in','md_admin_in'].forEach(function(id){ var el=$(id); if(el){ var bad=el.value.trim()===''; el.style.borderColor=bad?'var(--error)':''; if(bad) ok=false; } });
     }
@@ -1849,6 +1850,8 @@ function setBackToSummaryBar(on){
       nav.appendChild(b);
     }else if(!on && b){ b.remove(); }
   });
+  // editing from the overview: "Save & back" is the way out, so hide the plain Back
+  document.querySelectorAll('.step .nav [data-prev]').forEach(el=>{ el.style.display = on ? 'none' : ''; });
 }
 function buildReview(){
   const commLabels={Email:t('opt_email'),Whatsapp:'WhatsApp',Phone:t('opt_phone'),SMS:'SMS'};
