@@ -238,6 +238,35 @@
   .hplus-root .step-title{font-size:20px}
   .hplus-root .contact .rowc{font-size:13px;align-items:flex-start}
 }
+
+/* ---- mobile polish (shared) ---- */
+@media(max-width:767px){
+  /* 16px stops iOS zooming the page when a field takes focus */
+  .hplus-root input,.hplus-root select,.hplus-root textarea{font-size:16px}
+  .hplus-root .cc-select,.hplus-root .phone-row .cc-select{font-size:16px;min-height:48px;padding:12px 6px}
+  .hplus-root .phone-row{display:flex;gap:8px}
+  .hplus-root .phone-row .cc-select{flex:0 0 104px}
+  .hplus-root .phone-row input{flex:1 1 auto;min-width:0}
+  /* comfortable tap targets */
+  .hplus-root .choice{min-height:52px;padding:14px 16px}
+  .hplus-root .btn,.hplus-root .searchbtn,.hplus-root button[type=submit]{min-height:48px;width:100%}
+  .hplus-root .langswitch button{min-height:44px;padding:0 18px}
+  .hplus-root .contact a,.hplus-root .uhp-foot a{display:inline-block;padding:6px 0;min-height:32px}
+  .hplus-root .reset{min-height:44px;padding:12px 8px;width:100%}
+  /* stack columns and navigation */
+  .hplus-root .two-col{grid-template-columns:1fr}
+  .hplus-root .nav{flex-direction:column-reverse;gap:10px;align-items:stretch}
+  .hplus-root .nav .btn-ghost{width:100%}
+  /* summary rows read better stacked than squeezed */
+  .hplus-root .review-block .row{flex-direction:column;align-items:flex-start;gap:2px}
+  .hplus-root .review-block .row .rv-right{text-align:left;max-width:100%}
+  .hplus-root .review-block .svc-row{flex-direction:row;align-items:center}
+  .hplus-root .review-block h4{flex-wrap:wrap;gap:6px}
+  .hplus-root .review-block .row span{overflow-wrap:anywhere}
+  .hplus-root .card{padding:22px 16px 26px}
+  /* long values must never widen the page */
+  .hplus-root .info,.hplus-root .medcard,.hplus-root dd{overflow-wrap:anywhere}
+}
 </style>
 <style>
 .uhp-header{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;position:relative;padding:2px 0 16px;margin:0 0 18px}
