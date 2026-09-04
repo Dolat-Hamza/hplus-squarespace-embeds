@@ -275,13 +275,32 @@
   .hplus-root .two-col{grid-template-columns:1fr}
   .hplus-root .nav{flex-direction:column-reverse;gap:10px;align-items:stretch}
   .hplus-root .nav .btn-ghost{width:100%}
-  /* summary rows read better stacked than squeezed */
-  .hplus-root .review-block .row{flex-direction:column;align-items:flex-start;gap:2px}
-  .hplus-root .review-block .row .rv-right{text-align:left;max-width:100%}
-  .hplus-root .review-block .svc-row{flex-direction:row;align-items:center}
-  .hplus-root .review-block h4{flex-wrap:wrap;gap:6px}
-  .hplus-root .review-block .row span{overflow-wrap:anywhere}
-  .hplus-root .card{padding:22px 16px 26px}
+  /* summary: label and value stay on one line; long values wrap in place */
+  .hplus-root .review-block{padding:14px 15px;margin-bottom:10px;border-radius:12px}
+  .hplus-root .review-block h4{font-size:14.5px;margin-bottom:6px;align-items:baseline;gap:10px}
+  .hplus-root .review-block h4 a{font-size:12.5px;flex:0 0 auto}
+  .hplus-root .review-block .row{gap:12px;padding:4px 0;font-size:13.5px;align-items:baseline}
+  .hplus-root .review-block .row span:first-child{flex:0 0 auto;font-size:12.5px}
+  .hplus-root .review-block .row .rv-right{max-width:none;min-width:0;overflow-wrap:anywhere;text-align:right}
+  .hplus-root .card{padding:20px 14px 24px}
+  /* progress: keep the labels on one line instead of one wrapping out of step */
+  .hplus-root #progressSteps{align-items:center}
+  .hplus-root #progressSteps li{font-size:10.5px;letter-spacing:-.1px;white-space:nowrap;text-align:center;padding:0 2px}
+  /* type and spacing sized for a narrow screen */
+  .hplus-root .step-title{font-size:23px;line-height:1.2}
+  .hplus-root .step-sub{font-size:14px;margin-bottom:18px}
+  .hplus-root .section-head{font-size:13.5px;margin-top:20px;margin-bottom:10px}
+  .hplus-root .field > label:not(.choice),.hplus-root .group-label{font-size:13.5px;margin-bottom:6px}
+  .hplus-root .field{margin-bottom:14px}
+  .hplus-root .two-col{gap:0}
+  .hplus-root .reassure{font-size:11.5px;margin-top:5px}
+  /* short answers (Yes/No, 0-1, 2-3 ...) sit two per row instead of one long strip */
+  .hplus-root .pill-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .hplus-root .pill-row .choice{margin-bottom:0;min-height:52px;padding:12px 12px}
+  .hplus-root .pill-row .choice .ctxt{font-size:14px}
+  .hplus-root .langswitch{margin:0 0 12px;display:flex;justify-content:flex-end}
+  .hplus-root .trust{font-size:11.5px;padding:10px 12px}
+  .hplus-root .uhp-header{padding-bottom:12px;margin-bottom:14px}
   /* long values must never widen the page */
   .hplus-root .info,.hplus-root .medcard,.hplus-root dd{overflow-wrap:anywhere}
 }
