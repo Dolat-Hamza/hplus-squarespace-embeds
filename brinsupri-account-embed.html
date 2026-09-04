@@ -186,6 +186,8 @@
 .hplus-root .review-block .svc-mark.on{background:var(--blue-050);color:var(--blue)}
 .hplus-root .review-block .svc-mark.off{background:#f1f4f7;color:#9aa7b2}
 .hplus-root .review-block .svc-label{color:var(--ink)}
+.hplus-root .review-block .rv-sub{margin-top:10px;padding-top:8px;border-top:1px dashed var(--hair)}
+.hplus-root .review-block .rv-sub-h{font-size:12px;font-weight:700;color:var(--blue-2);margin-bottom:2px}
 .hplus-root .btn-back-summary{margin-left:auto}
 .hplus-root .err-msg{color:var(--error);font-size:13px;font-weight:600;margin-top:6px;display:none}
 .hplus-root .field.invalid input, .hplus-root .field.invalid select{border-color:var(--error);box-shadow:0 0 0 3px rgba(255,106,90,.16)}
@@ -386,6 +388,7 @@
         <li data-s="2" data-i18n="step2_name"></li>
         <li data-s="3" data-i18n="step3_name"></li>
         <li data-s="4" data-i18n="step4_name"></li>
+        <li data-s="5" data-i18n="step5_name"></li>
       </ul>
     </div>
 
@@ -436,25 +439,20 @@
         <div class="field cond" id="c_whatsapp" style="display:none"><label data-i18n="whatsapp_label"></label><input type="tel" id="patient_whatsapp" placeholder="+49 176 1234567" inputmode="tel" autocomplete="tel" data-validate="phone-global" /></div>
         <div class="field cond" id="c_sms" style="display:none"><label data-i18n="sms_label"></label><div class="phone-row"><select id="patient_sms_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="patient_sms" placeholder="176 1234567" data-validate="phone" /></div></div>
 
-<div id="deliveryPrefs" style="margin-top:24px;padding-top:20px;border-top:1px solid var(--hair)">
-              <h4 class="section-head" data-i18n="delivery_prefs_h"></h4>
-              <div class="field" id="deliverySearchWrap">
-                <button type="button" class="searchbtn" id="deliverySearchBtn"><svg><use href="#ic-search"/></svg><span data-i18n="delivery_search_btn"></span></button>
-                <div id="deliverySearchBox" style="display:none;margin-top:12px">
-                  <input type="text" id="deliverySearch" data-i18n-ph="delivery_search_ph" autocomplete="off">
-                </div>
-              </div>
-              <div class="field"><label data-i18n="dp_street"></label><input type="text" id="delivery_street"></div>
-              <div class="field"><label data-i18n="dp_street2"></label><input type="text" id="delivery_street2"></div>
-              <div class="two-col">
-                <div class="field"><label data-i18n="dp_postcode"></label><input type="text" id="delivery_postcode"></div>
-                <div class="field"><label data-i18n="dp_city"></label><input type="text" id="delivery_city"></div>
-              </div>
-            </div>
 
-        <h4 class="section-head" data-i18n="caregiver_details_h" style="margin-top:30px"></h4>
 
-        <div id="secondSlotYou"></div>
+        
+
+        
+
+        <div class="nav"><span></span><button type="button" class="btn btn-primary" data-next data-i18n="to_caregiver"></button></div>
+      </section>
+
+      <!-- STEP 2 : Medical -->
+      <section class="step" data-step="2">
+        <h3 class="step-title" data-i18n="s2cg_title"></h3>
+        <p class="step-sub" data-i18n="s2cg_sub"></p>
+<div id="secondSlotYou"></div>
         <div class="field" data-required id="secondPersonField">
           <span class="group-label" data-i18n="second_label"></span>
           <div class="pill-row">
@@ -499,12 +497,14 @@
           <div class="field cond" id="c_sc_sms" style="display:none"><label data-i18n="sc_sms"></label><div class="phone-row"><select id="caregiver_sms_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="caregiver_sms" placeholder="176 1234567" data-validate="phone" /></div></div>
           </div>
         </div>
-
-        <div class="nav"><span></span><button type="button" class="btn btn-primary" data-next data-i18n="next_med"></button></div>
+        <div class="nav">
+          <button type="button" class="btn btn-ghost" data-prev data-i18n="back"></button>
+          <button type="button" class="btn btn-primary" data-next data-i18n="to_medication"></button>
+        </div>
       </section>
 
-      <!-- STEP 2 : Medical -->
-      <section class="step" data-step="2">
+      <!-- STEP 3 : Medication details -->
+      <section class="step" data-step="3">
         <h3 class="step-title" data-i18n="s2_title"></h3>
         <p class="step-sub" data-i18n="s2_sub"></p>
 
@@ -529,7 +529,19 @@
           <input type="text" id="other_medication" data-i18n-ph="other_med_ph" />
         </div>
 
-        <div class="opt-card" id="card_reminders">
+        
+
+        <div class="nav">
+          <button type="button" class="btn btn-ghost" data-prev data-i18n="back"></button>
+          <button type="button" class="btn btn-primary" data-next data-i18n="to_checkin"></button>
+        </div>
+      </section>
+
+      <!-- STEP 4 : Check-in details -->
+      <section class="step" data-step="4">
+        <h3 class="step-title" data-i18n="s4ci_title"></h3>
+        <p class="step-sub" data-i18n="s4ci_sub"></p>
+<div class="opt-card" id="card_reminders">
         <div id="card_freq">
           <h4><span class="ic-chip"><svg><use href="#ic-reminder"/></svg></span><span data-i18n="freq_h"></span></h4>
           <p data-i18n="freq_para"></p>
@@ -563,15 +575,14 @@
           <div class="field cond" id="p2_sms" style="display:none;margin-top:12px"><label data-i18n="sms_label"></label><div class="phone-row"><select id="prefs_sms_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="prefs_sms" data-validate="phone"></div></div>
         </div>
         </div>
-
         <div class="nav">
           <button type="button" class="btn btn-ghost" data-prev data-i18n="back"></button>
-          <button type="button" class="btn btn-primary" data-next data-i18n="next_delivery"></button>
+          <button type="button" class="btn btn-primary" data-next data-i18n="to_delivery"></button>
         </div>
       </section>
 
-      <!-- STEP 3 : Delivery & support  (3 internal sub-steps) -->
-      <section class="step" data-step="3">
+      <!-- STEP 5 : Prescription & delivery (internal sub-steps) -->
+      <section class="step" data-step="5">
 
         <!-- SUB 3.1 : choose support (persuasion) -->
         <div class="sub3 active" id="sub31">
@@ -702,9 +713,24 @@
 
             
           </div>
+          <div id="deliveryPrefs" style="margin-top:24px;padding-top:20px;border-top:1px solid var(--hair)">
+              <h4 class="section-head" data-i18n="delivery_prefs_h"></h4>
+              <div class="field" id="deliverySearchWrap">
+                <button type="button" class="searchbtn" id="deliverySearchBtn"><svg><use href="#ic-search"/></svg><span data-i18n="delivery_search_btn"></span></button>
+                <div id="deliverySearchBox" style="display:none;margin-top:12px">
+                  <input type="text" id="deliverySearch" data-i18n-ph="delivery_search_ph" autocomplete="off">
+                </div>
+              </div>
+              <div class="field"><label data-i18n="dp_street"></label><input type="text" id="delivery_street"></div>
+              <div class="field"><label data-i18n="dp_street2"></label><input type="text" id="delivery_street2"></div>
+              <div class="two-col">
+                <div class="field"><label data-i18n="dp_postcode"></label><input type="text" id="delivery_postcode"></div>
+                <div class="field"><label data-i18n="dp_city"></label><input type="text" id="delivery_city"></div>
+              </div>
+            </div>
           <div class="nav">
             <button type="button" class="btn btn-ghost" id="s3back2" data-i18n="back"></button>
-            <button type="button" class="btn btn-primary" id="s3next2" data-i18n="next_generic"></button>
+            <button type="button" class="btn btn-primary" id="s3next2" data-i18n="to_overview"></button>
           </div>
         </div>
 
@@ -716,13 +742,13 @@
 
           <div class="nav">
             <button type="button" class="btn btn-ghost" id="s3back4" data-i18n="back"></button>
-            <button type="button" class="btn btn-primary" id="s3next4" data-i18n="to_review"></button>
+            <button type="button" class="btn btn-primary" id="s3next4" data-i18n="to_overview"></button>
           </div>
         </div>
       </section>
 
       <!-- STEP 4 : Review -->
-      <section class="step" data-step="4">
+      <section class="step" data-step="6">
         <h3 class="step-title" data-i18n="s4_title"></h3>
         <p class="step-sub" data-i18n="s4_sub"></p>
         <div id="reviewArea"></div>
@@ -911,8 +937,8 @@ const I18N = {
     nxt2_t:"Wir organisieren alles für Sie", nxt2_d:"Sofern Sie die erforderlichen Angaben gemacht haben, klärt das H+ Team alles direkt mit Ihrem Arzt und Ihrer Apotheke. Sobald alle Details bestätigt sind, melden wir uns bei Ihnen und erklären die nächsten Schritte.", nxt2_pill:"Dauer: bis zu 48 Stunden",
     nxt3_t:"Sie erhalten Benachrichtigungen von uns", nxt3_d:"In der Zwischenzeit erhalten Sie weiterhin Benachrichtigungen – ganz nach den von Ihnen gewählten Einstellungen.",
     trust1:"✓ Kostenlos nutzbar", trust2:"✓ DSGVO-konform", trust3:"✓ Jederzeit kündbar", trust4:"✓ Expertenbetreuung",
-    step1_name:"Über Sie", step2_name:"Ihre Therapie", step3_name:"Ihre Unterstützung", step4_name:"Geschafft",
-    s1_title:"Willkommen{name} 👋", s1_sub:"Richten wir Ihren Therapy Companion ein – in nur ~2 Minuten kümmern wir uns um Erinnerungen, Nachschub und Lieferung.",
+    step1_name:"Patient", step2_name:"Betreuung", step3_name:"Medikation", step4_name:"Check-in", step5_name:"Rezept & Lieferung",
+    s1_title:"Patientendaten", s1_sub:"Die Kontaktdaten der Patientin / des Patienten.",
     role_label:"Zuerst: Machen Sie das für sich selbst oder für jemanden, den Sie betreuen?", opt_select:"Bitte auswählen…", opt_patient:"Patient", opt_caregiver:"Betreuer",
     firstname_label:"Vorname", lastname_label:"Nachname", email_label:"E-Mail-Adresse",
     email_reassure:"Wir nutzen Ihre E-Mail nur für Ihren H+ Therapy Companion – niemals für Werbung Dritter.",
@@ -933,7 +959,7 @@ const I18N = {
     next_med:"Weiter geht’s →",
     err_select:"Bitte treffen Sie eine Auswahl.", err_first:"Bitte geben Sie einen Vornamen ein.", err_last:"Bitte geben Sie einen Nachnamen ein.",
     err_email:"Bitte geben Sie eine gültige E-Mail-Adresse ein.", err_comm:"Bitte wählen Sie mindestens eine Kontaktart.", err_terms:"Bitte stimmen Sie den Bedingungen zu, um fortzufahren.",
-    s2_title:"Kurz zu Ihrem Medikament", s2_sub:"Bitte prüfen Sie die Angaben zu Ihrem Rezept.",
+    s2_title:"Ihre Medikation", s2_sub:"Bitte prüfen Sie die Angaben zu Ihrem Rezept.",
     med_q:"Welches Medikament nehmen Sie?", med_h:"Medikationsdetails", med_name_l:"Name", med_dose_l:"Dosis", med_dose_v:"25 mg Filmtablette", med_freq_l:"Häufigkeit", med_freq_v:"Eine Tablette täglich", med_admin_l:"Verabreichung", med_admin_v:"Oral",
     confirm_med:"Ich bestätige, dass mir die oben genannten Medikamente in diesen Dosierungen verschrieben wurden.", err_confirm:"Bitte bestätigen Sie Ihre Verschreibung.",
     firstdate_label:"Wann war das Datum der ersten Einnahme?", firstdate_will:"Wann werden Sie Ihre erste Dosis einnehmen?", err_date:"Bitte geben Sie ein Datum an.", received_med_q:"Haben Sie Ihr Medikament bereits erhalten?", rxlow_q:"Möchten Sie Erinnerungen erhalten, wenn Ihr Medikamentenvorrat zur Neige geht?", prefs_q:"Welche Präferenzen haben Sie für diese automatisierten Dienste?",
@@ -943,10 +969,10 @@ const I18N = {
     freq_h:"Regelmäßige Check-ins",
     freq_para:"Wir senden Ihnen von Zeit zu Zeit Ihre Erinnerungen – dabei können Sie uns auch mitteilen, wie es Ihnen geht:",
     freq_weekly:"Wöchentlich (zu Beginn empfohlen)", freq_weekly_sub:"Besonders zu Beginn empfohlen", freq_2w:"2-wöchentlich", freq_monthly:"Monatlich", err_freq:"Bitte wählen Sie eine Häufigkeit.",
-    next_delivery:"Weiter zur Lieferung →", back:"← Zurück", next_generic:"Weiter →", to_review:"Zur Übersicht →", or_word:"oder",
+    next_delivery:"Weiter zur Lieferung →", back:"← Zurück", next_generic:"Weiter →", to_review:"Zur Übersicht →", to_overview:"Zur Übersicht →", or_word:"oder",
     /* 3.1 */
     sub_of:"Schritt %s von 3",
-    s3_title:"So machen wir Ihnen den Alltag leichter", s3_sub:"Im Folgenden können Sie aus unserem Leistungsangebot die Module auswählen, die Ihnen den Alltag mit Ihrer Therapie erleichtern.",
+    s3_title:"Rezept & Lieferung", s3_sub:"Im Folgenden können Sie aus unserem Leistungsangebot die Module auswählen, die Ihnen den Alltag mit Ihrer Therapie erleichtern.",
     country_label:"In welchem Land sind Sie ansässig?", country_de:"Deutschland", country_at:"Österreich", err_country:"Bitte wählen Sie Ihr Land.",
     support_label:"Wobei dürfen wir Sie unterstützen?", service_h:"Rezeptkoordination & Abhol- und Lieferservice", service_para:"Wir beschaffen Ihr Medikament, liefern es direkt zu Ihnen nach Hause und koordinieren jedes Folgerezept mit Ihrem Arzt, damit Ihre Therapie nie unterbrochen wird. Eine einfache Zustimmung deckt beides ab – ganz ohne Aufwand für Sie.", service_opt:"Ja, ich möchte den kostenlosen Abhol- und Lieferservice inkl. Rezeptkoordination nutzen.",
     delivery_h:"Abhol- und Lieferservice",
@@ -1029,7 +1055,7 @@ const I18N = {
     success_p1:"Ihr Therapy Companion ist startklar. Ab jetzt kümmern wir uns – Erinnerungen, Rezepte und Lieferung.",
     success_p2:"Eine Bestätigung ist schon auf dem Weg in Ihr Postfach.",
     rv_about:"Über Sie", rv_edit:"Bearbeiten", rv_name:"Name", rv_role:"Rolle", rv_email:"E-Mail", rv_contact:"Kontakt via", rv_second:"Zweite Person", rv_no:"Nein",
-    rv_your_details:"Ihre Angaben", rv_other_person:"Weitere Person", rv_other_patient:"Angaben zum Patienten", rv_services:"Therapy Companion Leistungen", rv_pharmacy:"Ihre Apotheke", rv_delivery_addr:"Lieferadresse", rel_label_short:"Beziehung", save_back:"Speichern & zurück zur Übersicht", acct_title:"Ihr H+ Therapy Companion Konto", acct_sub:"Hier finden Sie alle Ihre Angaben. Tippen Sie auf „Bearbeiten“, um einen Bereich zu ändern.", acct_save:"Änderungen speichern ✓", rv_med:"Ihre Medikation", rv_medication:"Medikament", rv_firstdose:"Erste Einnahme", rv_freq:"Check-in-Häufigkeit",
+    rxlow_q_short:"Rezept-Erinnerungen", other_med_label:"Weitere Medikamente", rv_your_details:"Ihre Angaben", rv_other_person:"Weitere Person", rv_other_patient:"Angaben zum Patienten", rv_services:"Therapy Companion Leistungen", rv_pharmacy:"Ihre Apotheke", rv_delivery_addr:"Lieferadresse", rel_label_short:"Beziehung", save_back:"Speichern & zurück zur Übersicht", acct_title:"Ihr H+ Therapy Companion Konto", acct_sub:"Hier finden Sie alle Ihre Angaben. Tippen Sie auf „Bearbeiten“, um einen Bereich zu ändern.", acct_save:"Änderungen speichern ✓", s2cg_title:"Angaben zur Betreuungsperson", s2cg_sub:"Wer unterstützt Sie – und wie sollen wir diese Person erreichen?", s4ci_title:"Ihre Check-ins", s4ci_sub:"Wie oft und worüber sollen wir uns bei Ihnen melden?", to_caregiver:"Weiter zur Betreuung →", to_medication:"Weiter zur Medikation →", to_checkin:"Weiter zum Check-in →", to_delivery:"Weiter zu Rezept & Lieferung →", rv_med:"Ihre Medikation", rv_medication:"Medikament", rv_firstdose:"Erste Einnahme", rv_freq:"Check-in-Häufigkeit",
     rv_delivery:"Abhol- und Lieferservice", rv_country:"Land", rv_support:"Unterstützung", rv_address:"Lieferadresse", rv_dash:"—",
     sup_delivery:"Abhol- und Lieferservice", sup_rx:"Folge-Rezepte", sup_checkup:"Terminplanung", sup_none:"Aktuell keine", sup_callback:"Rückruf vereinbart"
   },
@@ -1057,8 +1083,8 @@ const I18N = {
     nxt2_t:"We arrange everything for you", nxt2_d:"If you have provided the necessary details, the H+ team will arrange everything directly with your doctor and pharmacy. Once all the details are confirmed, we'll be in touch to explain the next steps.", nxt2_pill:"Takes up to 48 hours",
     nxt3_t:"You will receive notifications from us", nxt3_d:"In the meantime, you'll keep receiving notifications — based on the preferences you selected.",
     trust1:"✓ Free to use", trust2:"✓ GDPR-compliant", trust3:"✓ Can be cancelled at any time", trust4:"✓ Expert support",
-    step1_name:"About you", step2_name:"Your therapy", step3_name:"Your support", step4_name:"All set",
-    s1_title:"Welcome{name} 👋", s1_sub:"Let’s set up your Therapy Companion – in ~2 minutes we’ll handle reminders, refills and delivery for you.",
+    step1_name:"Patient", step2_name:"Caregiver", step3_name:"Medication", step4_name:"Check-in", step5_name:"Prescription & Delivery",
+    s1_title:"Patient Details", s1_sub:"The patient's contact details.",
     role_label:"First up – is this for you, or for someone you care for?", opt_select:"Please select…", opt_patient:"Patient", opt_caregiver:"Caregiver",
     firstname_label:"First name", lastname_label:"Last name", email_label:"Email address",
     email_reassure:"We use your email only for your H+ Therapy Companion — never for third-party marketing.",
@@ -1079,7 +1105,7 @@ const I18N = {
     next_med:"Let’s keep going →",
     err_select:"Please make a selection.", err_first:"Please enter a first name.", err_last:"Please enter a last name.",
     err_email:"Please enter a valid email address.", err_comm:"Please select at least one contact method.", err_terms:"Please agree to the terms to continue.",
-    s2_title:"A quick check on your medicine", s2_sub:"Please check the details of your prescription.",
+    s2_title:"Medication Details", s2_sub:"Please check the details of your prescription.",
     med_q:"Which medicine are you taking?", med_h:"Medication details", med_name_l:"Name", med_dose_l:"Dose", med_dose_v:"25 mg film-coated tablet", med_freq_l:"Frequency", med_freq_v:"One tablet daily", med_admin_l:"Administration", med_admin_v:"Oral",
     confirm_med:"I confirm that the above medication was prescribed to me at these doses.", err_confirm:"Please confirm your prescription.",
     firstdate_label:"When was your first dose taken?", firstdate_will:"When will you take your first dose?", err_date:"Please provide a date.", received_med_q:"Have you already received your medication?", rxlow_q:"Would you like to receive prescription reminders when you are low on medication?", prefs_q:"What are your preferences for these automated services?",
@@ -1089,9 +1115,9 @@ const I18N = {
     freq_h:"Regular check-ins",
     freq_para:"We offer to send your reminders from time to time - There you can let us also know how it's going:",
     freq_weekly:"Weekly (recommended in the beginning)", freq_weekly_sub:"Recommended especially at the start", freq_2w:"Every two weeks", freq_monthly:"Monthly", err_freq:"Please choose a frequency.",
-    next_delivery:"Next: your delivery →", back:"← Back", next_generic:"Continue →", to_review:"Continue to summary →", or_word:"or",
+    next_delivery:"Next: your delivery →", back:"← Back", next_generic:"Continue →", to_review:"Continue to summary →", to_overview:"Back to overview →", or_word:"or",
     sub_of:"Step %s of 3",
-    s3_title:"Let’s make your day-to-day easier", s3_sub:"Below, you can select the modules from our range of services that will make your day-to-day life with your treatment easier.",
+    s3_title:"Prescription & Delivery", s3_sub:"Below, you can select the modules from our range of services that will make your day-to-day life with your treatment easier.",
     country_label:"Which country do you live in?", country_de:"Germany", country_at:"Austria", err_country:"Please select your country.",
     support_label:"How can we help you?", service_h:"Prescription Coordination & Pick Up and Delivery Service", service_para:"We source your medication and deliver it straight to your door, and coordinate every repeat prescription with your doctor so your therapy is never interrupted. One simple opt-in covers both \u2014 with zero admin for you.", service_opt:"Yes, I'd like the free Pick Up and Delivery Service including prescription coordination.",
     delivery_h:"Pick Up and Delivery Service",
@@ -1171,7 +1197,7 @@ const I18N = {
     success_p1:"Your Therapy Companion is live. From here, we’ve got it – reminders, prescriptions and delivery.",
     success_p2:"A confirmation is already on its way to your inbox.",
     rv_about:"About you", rv_edit:"Edit", rv_name:"Name", rv_role:"Role", rv_email:"Email", rv_contact:"Contact via", rv_second:"Second person", rv_no:"No",
-    rv_your_details:"Your details", rv_other_person:"Other person", rv_other_patient:"Patient details", rv_services:"Therapy Companion services", rv_pharmacy:"Your pharmacy", rv_delivery_addr:"Delivery address", rel_label_short:"Relationship", save_back:"Save & back to overview", acct_title:"Your H+ Therapy Companion account", acct_sub:"Here are all your details. Tap \u201cEdit\u201d to change any section.", acct_save:"Save changes \u2713", rv_med:"Your medication", rv_medication:"Medication", rv_firstdose:"First dose", rv_freq:"Check-in frequency",
+    rxlow_q_short:"Prescription reminders", other_med_label:"Other medication", rv_your_details:"Your details", rv_other_person:"Other person", rv_other_patient:"Patient details", rv_services:"Therapy Companion services", rv_pharmacy:"Your pharmacy", rv_delivery_addr:"Delivery address", rel_label_short:"Relationship", save_back:"Save & back to overview", acct_title:"Your H+ Therapy Companion account", acct_sub:"Here are all your details. Tap \u201cEdit\u201d to change any section.", acct_save:"Save changes \u2713", s2cg_title:"Caregiver Details", s2cg_sub:"Who supports you – and how should we reach them?", s4ci_title:"Check-in Details", s4ci_sub:"How often and about what should we get in touch?", to_caregiver:"Continue to Caregiver →", to_medication:"Continue to Medication →", to_checkin:"Continue to Check-in →", to_delivery:"Continue to Prescription & Delivery →", rv_med:"Your medication", rv_medication:"Medication", rv_firstdose:"First dose", rv_freq:"Check-in frequency",
     rv_delivery:"Pick Up and Delivery Service", rv_country:"Country", rv_support:"Support", rv_address:"Delivery address", rv_dash:"—",
     sup_delivery:"Pick Up and Delivery Service", sup_rx:"Repeat prescriptions", sup_checkup:"Scheduling", sup_none:"None right now", sup_callback:"Callback arranged"
   }
@@ -1182,7 +1208,6 @@ let currentLang = (function(){ try{ return localStorage.getItem('hplus_lang')||'
    rephrased in the third person. Only keys that differ are listed. */
 const CG = {
   de:{
-    step2_name:"Die Therapie",
     s2_title:"Kurz zum Medikament des Patienten",
     s2_sub:"Bitte prüfen Sie die Angaben zum Rezept des Patienten.",
     med_q:"Welches Medikament nimmt der Patient?",
@@ -1196,7 +1221,6 @@ const CG = {
     med_h:"Medikationsdetails des Patienten"
   },
   en:{
-    step2_name:"The therapy",
     s2_title:"A quick check on the patient's medicine",
     s2_sub:"Please check the details of the patient's prescription.",
     med_q:"Which medicine is the patient taking?",
@@ -1271,7 +1295,7 @@ function applyLang(lang){
   fillMed(currentLang);
   try{syncFirstDateLabel();syncMedPrefs();}catch(e){}
   applyRoleWording();
-  if(current===4) buildReview();
+  if(current===6) buildReview();
 }
 /* Role-aware wording: the registrant is always "you"; the other person flips
    between caregiver (patient registrant) and patient (caregiver registrant). */
@@ -1317,7 +1341,7 @@ document.querySelectorAll('input[name="received_medication"]').forEach(function(
 document.querySelectorAll('input[name="reminder_freq"],input[name="prescription_reminders_low"],#prefs_prefs input').forEach(function(r){r.addEventListener('change',syncMedPrefs);});
 /* Hero CTA: jump straight into the form without reading the intro */
 (function(){var b=document.getElementById('heroStart');if(!b)return;b.addEventListener('click',function(){var t=document.getElementById('firstname')||document.querySelector('#hplusForm input,#hplusForm select');if(t){t.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){try{t.focus({preventScroll:true});}catch(e){}},300);}});})();
-(function(){var s=document.getElementById('med_select');function reset(){if(s){fillMed(currentLang);}}if(s)s.addEventListener('change',function(){fillMed(currentLang);if(current===4)buildReview();});reset();window.addEventListener('pageshow',reset);})();
+(function(){var s=document.getElementById('med_select');function reset(){if(s){fillMed(currentLang);}}if(s)s.addEventListener('change',function(){fillMed(currentLang);if(current===6)buildReview();});reset();window.addEventListener('pageshow',reset);})();
 
 /* helpers */
 const $ = id => document.getElementById(id);
@@ -1569,9 +1593,9 @@ $('noSupportModal').addEventListener('click',e=>{ if(e.target===$('noSupportModa
 document.addEventListener('keydown',e=>{ if(e.key==='Escape' && $('noSupportModal').classList.contains('open')){ closeNoSupportModal(); $('no_support').checked=false; $('no_support').closest('.choice').classList.remove('selected'); } });
 
 /* ============================================================
-   MAIN STEP NAVIGATION (4 steps). Progress steps clickable.
+   MAIN STEP NAVIGATION (5 sections + overview). Progress steps clickable.
    ============================================================ */
-let current=1, sub3=1; const totalSteps=4;
+let current=1, sub3=1; const totalSteps=5;
 const emailOk = e => { const v=String(e||'').trim(); return v.length<=254 && /^[^\s@]{1,64}@[^\s@]+\.[A-Za-z]{2,}$/.test(v); };
 /* Diagnostic logging intentionally excludes names, email addresses and medical details. */
 const step3Log=(message,details)=>console.log('[H+ Step 3] '+message,details||'');
@@ -1586,10 +1610,10 @@ function showStep(n){
   current=n;
   $('noSupportModal').classList.remove('open');   // never leave the confirm modal blocking clicks after navigation
   document.querySelectorAll('.step').forEach(s=>s.classList.toggle('active',+s.dataset.step===n));
-  $('progressLine').style.width=(n/totalSteps*100)+'%';
+  $('progressLine').style.width=(Math.min(n,totalSteps)/totalSteps*100)+'%';
   document.querySelectorAll('#progressSteps li').forEach(li=>{const s=+li.dataset.s;li.classList.toggle('active',s===n);li.classList.toggle('done',s<n);});
-  if(n===3) showSub3(1);
-  if(n===4) buildReview();
+  if(n===5) showSub3(1);
+  if(n===6) buildReview();
   document.querySelector('.card').scrollIntoView({behavior:'smooth',block:'start'});
 }
 document.querySelectorAll('#progressSteps li').forEach(li=>li.addEventListener('click',()=>showStep(+li.dataset.s)));
@@ -1667,15 +1691,15 @@ function validateStep(n){
     if(!requireIf('patient_whatsapp',cm('Whatsapp'))) ok=false;
     if(!requireIf('patient_phone',cm('Phone'))) ok=false;
     if(!requireIf('patient_sms',cm('SMS'))) ok=false;
-    if(radio('second_person')==='Yes'){
-      const cg=v=>document.querySelector(`#cg_comm_prefs input[value=${v}]`).checked;
-      if(!requireIf('second_contact_whatsapp',cg('Whatsapp'))) ok=false;
-      if(!requireIf('second_contact_phone',cg('Phone'))) ok=false;
-      if(!requireIf('caregiver_sms',cg('SMS'))) ok=false;
-      if(!requireIf('second_contact_email',cg('Email'))) ok=false;
-    }
   }
-  if(n===2){
+  if(n===2 && radio('second_person')==='Yes'){
+    const cg=v=>document.querySelector(`#cg_comm_prefs input[value=${v}]`).checked;
+    if(!requireIf('second_contact_whatsapp',cg('Whatsapp'))) ok=false;
+    if(!requireIf('second_contact_phone',cg('Phone'))) ok=false;
+    if(!requireIf('caregiver_sms',cg('SMS'))) ok=false;
+    if(!requireIf('second_contact_email',cg('Email'))) ok=false;
+  }
+  if(n===3){
     const fd=$('first_medication_date'), fv=fd.value;
     if(fv && ((fd.min && fv<fd.min) || (fd.max && fv>fd.max))){ const f=fd.closest('.field'); f.classList.add('invalid'); ensureFmtErr(f,t('err_date_range')); ok=false; }
     if(val('med_select')==='Other'){
@@ -1759,7 +1783,7 @@ function validateSub3(n){
    receives instant visual feedback by moving to the review step first. */
 async function finishStep3(){
   step3Log('Moving to Confirm and saving Step 3 in the background');
-  showStep(4);   // the account form saves once, on Save
+  showStep(6);   // back to the overview; the account form saves once, on Save
 }
 function showStep3Blocker(from){
   const scope=$('sub3'+from);
@@ -1774,7 +1798,7 @@ async function step3Next(from){
   if(from===2){ if(!validateSub3(2)){showStep3Blocker(2);return;} $('freeChoiceModal').classList.add('open'); return; }  // delivery consent → hcp consent (if rx) else review
   if(from===4){ if(!validateSub3(4)){showStep3Blocker(4);return;} await finishStep3();return; }                                  // doctor → review
 }
-function step3Back(from){ if(from===1){ showStep(2); } else if(from===2){ showSub3(1); } else if(from===3){ showSub3(2); } else if(from===4){ showSub3(3); } }
+function step3Back(from){ if(from===1){ showStep(4); } else if(from===2){ showSub3(1); } else if(from===3){ showSub3(2); } else if(from===4){ showSub3(3); } }
 function runStep3Next(n){ step3Next(n).catch(e=>console.error('[H+ Step 3] Navigation error in section '+n,e)); }
 $('s3next1').addEventListener('click',()=>runStep3Next(1));
 $('s3next2').addEventListener('click',()=>runStep3Next(2));
@@ -1785,11 +1809,11 @@ $('s3back4').addEventListener('click',()=>step3Back(4));
 
 /* full step-3 validation for final submit */
 function validateStep3All(){
-  if(!validateSub3(1)){ showStep(3); showSub3(1); return false; }
+  if(!validateSub3(1)){ showStep(5); showSub3(1); return false; }
   const delivery=checked('delivery_management'), rx=checked('prescription_management'), none=checked('no_support');
-  if(!none && (delivery||rx)){ if(!validateSub3(2)){ showStep(3); showSub3(2); return false; } }
+  if(!none && (delivery||rx)){ if(!validateSub3(2)){ showStep(5); showSub3(2); return false; } }
   if(rx){
-    if(!validateSub3(4)){ showStep(3); showSub3(1); return false; }
+    if(!validateSub3(4)){ showStep(5); showSub3(1); return false; }
   }
   return true;
 }
@@ -1808,86 +1832,102 @@ function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>'
    remaining steps. */
 let editingFromSummary=false;
 function editSection(n){ editingFromSummary=true; showStep(n); setBackToSummaryBar(true); }
-function backToSummary(){ editingFromSummary=false; setBackToSummaryBar(false); showStep(4); }
+function backToSummary(){ editingFromSummary=false; setBackToSummaryBar(false); showStep(6); }
 function setBackToSummaryBar(on){
   document.querySelectorAll('.step[data-step] .nav').forEach(nav=>{
     let b=nav.querySelector('.btn-back-summary');
-    if(on && !b && nav.closest('.step').dataset.step!=='4'){
+    if(on && !b && nav.closest('.step').dataset.step!=='6'){
       b=document.createElement('button');
       b.type='button'; b.className='btn btn-primary btn-back-summary';
       b.textContent=t('save_back');
-      b.addEventListener('click',()=>{ if(validateStep(current)!==false) backToSummary(); });
+      b.addEventListener('click',()=>{
+        if(validateStep(current)) { backToSummary(); return; }
+        // don't fail silently — take the user to the field that needs answering
+        const bad=document.querySelector('.step.active .field.invalid, .step.active .err-msg.show');
+        if(bad) bad.scrollIntoView({behavior:'smooth',block:'center'});
+      });
       nav.appendChild(b);
     }else if(!on && b){ b.remove(); }
   });
 }
 function buildReview(){
-  const isCg=val('customer_type')==='Caregiver';
   const commLabels={Email:t('opt_email'),Whatsapp:'WhatsApp',Phone:t('opt_phone'),SMS:'SMS'};
   const commOf=sel=>multi(sel).split(';').filter(Boolean).map(v=>commLabels[v]).join(', ');
   const freqLabels={'Weekly (recommended especially in the beginning)':t('freq_weekly'),'Every two weeks':t('freq_2w'),'Every four weeks':t('freq_monthly')};
   const row=(l,v)=>`<div class="row"><span>${l}</span><span class="rv-right">${v||t('rv_dash')}</span></div>`;
   const rowIf=(l,v)=>v?row(l,esc(v)):'';
+  const phoneIf=(l,id)=>val(id)?row(l,esc(phoneFull(id))):'';
+  const relText=()=>{const el=$('caregiver_relationship');return el&&el.selectedOptions[0]?el.selectedOptions[0].text:'';};
 
-  /* Every service is listed, ticked or not, so the account shows what is and isn't on. */
-  const tick=on=>`<span class="svc-mark ${on?'on':'off'}">${on?'✓':'–'}</span>`;
-  const svc=(on,label)=>`<div class="row svc-row">${tick(on)}<span class="svc-label">${label}</span></div>`;
-  const services =
-      svc(checked('delivery_management'),   t('sup_delivery'))
-    + svc(checked('prescription_management'),t('sup_rx'))
-    + row(t('rv_freq'), freqLabels[radio('reminder_freq')]||t('rv_dash'));
-
-  /* the person using the account, and the other person on the record */
-  const youRows = row(t('rv_role'), isCg?t('opt_caregiver'):t('opt_patient'))
-    + row(t('rv_name'), esc([val('firstname'),val('lastname')].filter(Boolean).join(' ')))
+  /* 1 — the patient, with every number they gave us */
+  const patient = row(t('rv_name'), esc([val('firstname'),val('lastname')].filter(Boolean).join(' ')))
     + row(t('rv_email'), esc(val('email')))
-    + rowIf(t('rel_label_short'), isCg?($('caregiver_relationship')?.selectedOptions[0]?.text||''):'')
+    + phoneIf(t('phone_label'),'patient_phone')
+    + phoneIf(t('whatsapp_label'),'patient_whatsapp')
+    + phoneIf(t('sms_label'),'patient_sms')
     + row(t('rv_contact'), esc(commOf('#comm_prefs input')));
-  const otherName=[val('second_contact_person'),val('second_contact_surname')].filter(Boolean).join(' ');
-  const otherRows = otherName
-    ? row(t('rv_name'), esc(otherName))
+
+  /* 2 — the caregiver */
+  const cgName=[val('second_contact_person'),val('second_contact_surname')].filter(Boolean).join(' ');
+  const caregiver = cgName
+    ? row(t('rv_name'), esc(cgName))
+      + rowIf(t('rel_label_short'), relText())
       + rowIf(t('rv_email'), val('second_contact_email'))
-      + rowIf(t('rel_label_short'), isCg?'':($('caregiver_relationship')?.selectedOptions[0]?.text||''))
+      + phoneIf(t('phone_label'),'second_contact_phone')
+      + phoneIf(t('whatsapp_label'),'second_contact_whatsapp')
+      + phoneIf(t('sms_label'),'caregiver_sms')
       + row(t('rv_contact'), esc(commOf('#cg_comm_prefs input')))
     : row(t('rv_second'), t('rv_no'));
 
-  const docRows=[
-    rowIf(t('rv_name'),[val('doctor_first'),val('doctor_last')].filter(Boolean).join(' ')),
-    rowIf(t('doc_practice'),val('doctor_street2')),
-    rowIf(t('doc_street'),val('doctor_street')),
-    rowIf(t('doc_postcode'),val('doctor_postcode')),
-    rowIf(t('doc_phone'),val('doctor_phone')?phoneFull('doctor_phone'):''),
-    rowIf(t('doc_email'),val('doctor_email')),
-    rowIf(t('doc_fax'),val('doctor_fax')?phoneFull('doctor_fax'):'')
-  ].join('');
+  /* 3 — the medication, in full */
+  const medication = row(t('med_name_l'), esc(HS.med.medicine))
+    + row(t('med_dose_l'), esc(HS.med.dose))
+    + row(t('med_freq_l'), esc(HS.med.frequency))
+    + row(t('med_admin_l'), esc(HS.med.administration))
+    + rowIf(t('other_med_label'), val('other_medication'));
 
-  const pharmRows=[
-    rowIf(t('pharm_name'),val('chosen_pharmacy_name')),
-    rowIf(t('pharm_street'),val('chosen_pharmacy_street')),
-    rowIf(t('pharm_postcode'),val('chosen_pharmacy_postcode')),
-    rowIf(t('pharm_city'),val('chosen_pharmacy_city'))
-  ].join('');
-  const delivRows=[
-    rowIf(t('dp_street'),val('delivery_street')),
-    rowIf(t('dp_street2'),val('delivery_street2')),
-    rowIf(t('dp_postcode'),val('delivery_postcode')),
-    rowIf(t('dp_city'),val('delivery_city'))
-  ].join('');
+  /* 4 — check-ins */
+  const checkin = row(t('freq_h'), freqLabels[radio('reminder_freq')]||t('rv_dash'))
+    + row(t('rxlow_q_short'), radio('prescription_reminders_low')==='Yes'?t('opt_yes'):radio('prescription_reminders_low')==='No'?t('opt_no'):t('rv_dash'))
+    + row(t('rv_contact'), esc(commOf('#pref_prefs input'))||esc(commOf('#comm_prefs input')));
 
-  const block=(title,goto,body)=>body?`
+  /* 5 — prescription & delivery: services, pharmacy, doctor, delivery address */
+  const tick=on=>`<span class="svc-mark ${on?'on':'off'}">${on?'✓':'–'}</span>`;
+  const svc=(on,label)=>`<div class="row svc-row">${tick(on)}<span class="svc-label">${label}</span></div>`;
+  const presc = svc(checked('delivery_management'), t('sup_delivery'))
+    + svc(checked('prescription_management'), t('sup_rx'))
+    + sub(t('rv_pharmacy'), [
+        rowIf(t('pharm_name'),val('chosen_pharmacy_name')),
+        rowIf(t('pharm_street'),val('chosen_pharmacy_street')),
+        rowIf(t('pharm_postcode'),val('chosen_pharmacy_postcode')),
+        rowIf(t('pharm_city'),val('chosen_pharmacy_city'))].join(''))
+    + sub(t('doctor_details_h'), [
+        rowIf(t('rv_name'),[val('doctor_first'),val('doctor_last')].filter(Boolean).join(' ')),
+        rowIf(t('doc_practice'),val('doctor_street2')),
+        rowIf(t('doc_street'),val('doctor_street')),
+        rowIf(t('doc_postcode'),val('doctor_postcode')),
+        phoneIf(t('doc_phone'),'doctor_phone'),
+        rowIf(t('doc_email'),val('doctor_email'))].join(''))
+    + sub(t('rv_delivery_addr'), [
+        rowIf(t('dp_street'),val('delivery_street')),
+        rowIf(t('dp_street2'),val('delivery_street2')),
+        rowIf(t('dp_postcode'),val('delivery_postcode')),
+        rowIf(t('dp_city'),val('delivery_city'))].join(''));
+
+  function sub(title,body){ return body?`<div class="rv-sub"><div class="rv-sub-h">${title}</div>${body}</div>`:''; }
+
+  const block=(title,goto,body)=>`
     <div class="review-block">
       <h4>${title} <a data-goto="${goto}">${t('rv_edit')}</a></h4>
       ${body}
-    </div>`:'';
+    </div>`;
 
   $('reviewArea').innerHTML =
-      block(t('rv_your_details'),1,youRows)
-    + block(isCg?t('rv_other_patient'):t('rv_other_person'),1,otherRows)
-    + block(t('rv_med'),2,row(t('rv_medication'), HS.med.medicine?esc(HS.med.medicine+', '+HS.med.dose):t('rv_dash')))
-    + block(t('rv_services'),3,services)
-    + block(t('doctor_details_h'),3,docRows)
-    + block(t('rv_pharmacy'),3,pharmRows)
-    + block(t('rv_delivery_addr'),1,delivRows);
+      block(t('step1_name'),1,patient)
+    + block(t('step2_name'),2,caregiver)
+    + block(t('step3_name'),3,medication)
+    + block(t('step4_name'),4,checkin)
+    + block(t('step5_name'),5,presc);
 
   document.querySelectorAll('#reviewArea a[data-goto]').forEach(a=>a.addEventListener('click',()=>editSection(+a.dataset.goto)));
 }
@@ -1947,8 +1987,7 @@ async function sendStep(key){
   catch(e){ console.warn('send failed:',key,e); return false; }
 }
 $('submitBtn').addEventListener('click',async ()=>{
-  if(!validateStep(1)){ showStep(1); return; }
-  if(!validateStep(2)){ showStep(2); return; }
+  for(const n of [1,2,3,4]){ if(!validateStep(n)){ showStep(n); return; } }
   if(!validateStep3All()){ return; }
   const btn=$('submitBtn'); btn.disabled=true; btn.textContent=t('submitting');
   $('submitError').style.display='none';
@@ -2069,7 +2108,7 @@ if(!/[?&](token|email)=/.test(location.search)) restoreState();  // a prefill li
 })();
 syncOptions(); syncConsentVisibility(); syncSecondPerson(); setupDates();
 applyRoleWording();   // reflect a restored role in the wording
-showStep(4);          // the account form opens on the overview
+showStep(6);          // the account form opens on the overview
 $('hplusForm').addEventListener('input',saveState);        // persist as the patient types
 $('hplusForm').addEventListener('change',saveState);
 
