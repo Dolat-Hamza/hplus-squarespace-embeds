@@ -1274,6 +1274,11 @@ function medAdminCode(txt){
   if(/oral/.test(s))                           return HS_ADMIN.oral;
   return '';
 }
+
+/* HubSpot's Medicine dropdown uses its own exact wording — sending our shorter
+   name silently leaves the field empty. */
+const HS_MEDICINE={'Brinsupri (Brensocatib)':'Brinsupri (Brensocatib) Filmtablette - 25mg'};
+function medicineOption(name){ return HS_MEDICINE[name]||''; }
 const MEDS={
   "Brinsupri (Brensocatib)":{de:{dose:"25 mg Filmtablette",frequency:"Eine Tablette täglich",administration:"Oral"},en:{dose:"25 mg film-coated tablet",frequency:"One tablet daily",administration:"Oral"}},
   "Revestive (Teduglutide)":{de:{dose:"0,05 mg/kg",frequency:"Einmal täglich",administration:"Subkutane Injektion (unter die Haut)"},en:{dose:"0.05 mg/kg",frequency:"Once daily",administration:"Subcutaneous (under the skin) injection"}},
@@ -2009,7 +2014,7 @@ function payloadAccount(){
   }
 
   /* medication — the dropdowns need HubSpot's option ids, the wording goes to instructions */
-  put('medicine', HS.med.medicine);
+  put('medicine', medicineOption(HS.med.medicine));
   put('medication_dose__open_field_', HS.med.dose);
   put('medication_frequency', medFreqCode(HS.med.frequency));
   put('medication_administration', medAdminCode(HS.med.administration));

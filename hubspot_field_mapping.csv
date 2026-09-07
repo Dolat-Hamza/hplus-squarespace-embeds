@@ -16,13 +16,13 @@ Email,second_contact_email
 Phone / WhatsApp / SMS,second_contact_phone / second_contact_whatsapp / caregiver_sms
 Contact preference,caregiver_communication_preferences
 MEDICATION,
-Medicine,medicine
+Medicine,medicine  (dropdown - sent as HubSpot's exact wording)
 Dose,medication_dose__open_field_
 Frequency,medication_frequency  (dropdown - sent as option id)
 Administration,medication_administration  (dropdown - sent as option id)
 Frequency + administration wording,medication_instructions
 Other medication,does_the_patient_take_any_other_medication_
-First dose date,uhp_first_medication_date
+First dose date,uhp_first_medication_date  (timestamp)
 Confirmed dosage,confirmation_medication___dosage_is_correct
 CHECK-IN,
 Check-in frequency,uhp_medication_reminder_preferences
@@ -48,3 +48,4 @@ Days taken in last 7,pills_taken_last_7_days   ** NOT YET CREATED **
 Reason for missed pills,missed_pills_reason       ** NOT YET CREATED **
 Wants a call,call_to_reduce_missed_pills ** NOT YET CREATED **
 Re-order prescription,reorder_prescription      ** NOT YET CREATED **
+Next doctor's appointment,when_is_your_next_doctor_s_appointment_scheduled_  (timestamp; omitted when empty)

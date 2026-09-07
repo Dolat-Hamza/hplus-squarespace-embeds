@@ -1256,6 +1256,11 @@ function medAdminCode(txt){
   if(/oral/.test(s))                           return HS_ADMIN.oral;
   return '';
 }
+
+/* HubSpot's Medicine dropdown uses its own exact wording — sending our shorter
+   name silently leaves the field empty. */
+const HS_MEDICINE={'Brinsupri (Brensocatib)':'Brinsupri (Brensocatib) Filmtablette - 25mg'};
+function medicineOption(name){ return HS_MEDICINE[name]||''; }
 const MEDS={
   "Brinsupri (Brensocatib)":{de:{dose:"25 mg Filmtablette",frequency:"Eine Tablette täglich",administration:"Oral"},en:{dose:"25 mg film-coated tablet",frequency:"One tablet daily",administration:"Oral"}},
   "Revestive (Teduglutide)":{de:{dose:"0,05 mg/kg",frequency:"Einmal täglich",administration:"Subkutane Injektion (unter die Haut)"},en:{dose:"0.05 mg/kg",frequency:"Once daily",administration:"Subcutaneous (under the skin) injection"}},
@@ -1964,12 +1969,12 @@ function payloadRegistration(){
   }
   if(checked('create_an_account')){ f.push(field('create_an_account','true')); f.push(field('account_email',val('email'))); }
   f.push(field('agree_to_terms','true'));
-  f.push(field('medicine',HS.med.medicine));
+  { const mo=medicineOption(HS.med.medicine); if(mo) f.push(field('medicine',mo)); }
   return {fields:f, context:context()};
 }
 function payloadMedical(){
   const f=[];
-  f.push(field('medicine',HS.med.medicine));
+  { const mo=medicineOption(HS.med.medicine); if(mo) f.push(field('medicine',mo)); }
   f.push(field('medication_dose__open_field_',HS.med.dose));
   const fq=medFreqCode(HS.med.frequency), ad=medAdminCode(HS.med.administration);
   if(fq) f.push(field('medication_frequency',fq));
@@ -2004,7 +2009,10 @@ function payloadDelivery(){
   /* delivery and prescription consent are given together, so they mirror each other */
   f.push(field('hcp_consent',         (!at&&deliveryConsent)?'true':'false'));
   f.push(field('hcp_consent_austria', ( at&&deliveryConsent)?'true':'false'));
-  f.push(field('when_is_your_next_doctor_s_appointment_scheduled_',(checked('check_up_reminder_management')&&val('appointment_date'))?toEpoch(val('appointment_date')):((rx&&val('callback_date'))?toEpoch(val('callback_date')):'false')));
+  /* date property: omit it entirely when there is no date — 'false' was being rejected */
+  const apptDate=(checked('check_up_reminder_management')&&val('appointment_date'))?toEpoch(val('appointment_date'))
+                 :((rx&&val('callback_date'))?toEpoch(val('callback_date')):'');
+  if(apptDate) f.push(field('when_is_your_next_doctor_s_appointment_scheduled_',apptDate));
   /* Shared German/Austrian pharmacy-choice flow. */
   if((delivery||rx) && consentGiven){
     const ph=radio('pharmacy_choice');
