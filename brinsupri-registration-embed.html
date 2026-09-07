@@ -1235,6 +1235,27 @@ const t = k => {
   return str;
 };
 
+
+/* HubSpot stores frequency/administration as fixed dropdowns whose values are opaque
+   ids — sending the free-text label silently drops the value, so translate first. */
+const HS_FREQ={daily:'yBlm7BvXttYUhvShRqZIj',biweekly:'U_q0LrVi9JRJZctPgGroE',weekly:'Y4OlS4_uMdJG0Pm6d1HLk',bimonthly:'4DBjg_c1R4GPMVaz6I2Dy',monthly:'ejKAPrzm9Z1CPNgmg27El'};
+const HS_ADMIN={oral:'Mdvob_SZtZW43wIYqxERm',subcut:'qqA-hnsPQs-e0R6EwtGYw',iv:'DL9pAV0M5cWNFBYIf37h-',im:'gLVfDSwGWW1gdanhZ_AAD'};
+function medFreqCode(txt){
+  const s=String(txt||'').toLowerCase();
+  if(/2 wochen|every 2 weeks|zweiten tag|other day|zwei wochen/.test(s)) return HS_FREQ.biweekly;
+  if(/wöchentlich|weekly/.test(s))   return HS_FREQ.weekly;
+  if(/monatlich|monthly/.test(s))    return HS_FREQ.monthly;
+  if(/täglich|daily/.test(s))        return HS_FREQ.daily;
+  return '';
+}
+function medAdminCode(txt){
+  const s=String(txt||'').toLowerCase();
+  if(/subkutan|subcutaneous/.test(s))          return HS_ADMIN.subcut;
+  if(/intravenös|intravenous/.test(s))         return HS_ADMIN.iv;
+  if(/intramuskul|intramuscular/.test(s))      return HS_ADMIN.im;
+  if(/oral/.test(s))                           return HS_ADMIN.oral;
+  return '';
+}
 const MEDS={
   "Brinsupri (Brensocatib)":{de:{dose:"25 mg Filmtablette",frequency:"Eine Tablette täglich",administration:"Oral"},en:{dose:"25 mg film-coated tablet",frequency:"One tablet daily",administration:"Oral"}},
   "Revestive (Teduglutide)":{de:{dose:"0,05 mg/kg",frequency:"Einmal täglich",administration:"Subkutane Injektion (unter die Haut)"},en:{dose:"0.05 mg/kg",frequency:"Once daily",administration:"Subcutaneous (under the skin) injection"}},
@@ -1914,6 +1935,9 @@ function payloadRegistration(){
     put('patient_whatsapp',   phoneFull('patient_whatsapp'));
     put('patient_phone',      phoneFull('patient_phone'));
     put('patient_sms',        phoneFull('patient_sms'));
+    // HubSpot's standard phone fields, so they show on the contact record too
+    put('mobilephone',              phoneFull('patient_phone'));
+    put('hs_whatsapp_phone_number', phoneFull('patient_whatsapp'));
   }
   f.push(field('would_you_like_the_medication_reminders_to_be_sent_to_a_second_person_',radio('second_person')));
   if(radio('second_person')==='Yes' || isCg){
@@ -1947,8 +1971,12 @@ function payloadMedical(){
   const f=[];
   f.push(field('medicine',HS.med.medicine));
   f.push(field('medication_dose__open_field_',HS.med.dose));
-  f.push(field('medication_frequency',HS.med.frequency));
-  f.push(field('medication_administration',HS.med.administration));
+  const fq=medFreqCode(HS.med.frequency), ad=medAdminCode(HS.med.administration);
+  if(fq) f.push(field('medication_frequency',fq));
+  if(ad) f.push(field('medication_administration',ad));
+  // keep the exact wording too, since the dropdowns can't hold it
+  const instr=[HS.med.frequency,HS.med.administration].filter(Boolean).join(' · ');
+  if(instr) f.push(field('medication_instructions',instr));
   f.push(field('confirmation_medication___dosage_is_correct','true'));
   if(val('first_medication_date')) f.push(field('uhp_first_medication_date',toEpoch(val('first_medication_date'))));
   if(val('other_medication')) f.push(field('does_the_patient_take_any_other_medication_',val('other_medication')));
@@ -1973,13 +2001,14 @@ function payloadDelivery(){
   const deliveryConsent=(delivery||rx)&&consentGiven;
   f.push(field('delivery_consent_germany',(!at&&deliveryConsent)?'true':'false'));
   f.push(field('delivery_consent_austria',( at&&deliveryConsent)?'true':'false'));
-  f.push(field('hcp_consent',         (!at&&rx&&hcpGiven)?'true':'false'));
-  f.push(field('hcp_consent_austria', ( at&&rx&&hcpGiven)?'true':'false'));
+  /* delivery and prescription consent are given together, so they mirror each other */
+  f.push(field('hcp_consent',         (!at&&deliveryConsent)?'true':'false'));
+  f.push(field('hcp_consent_austria', ( at&&deliveryConsent)?'true':'false'));
   f.push(field('when_is_your_next_doctor_s_appointment_scheduled_',(checked('check_up_reminder_management')&&val('appointment_date'))?toEpoch(val('appointment_date')):((rx&&val('callback_date'))?toEpoch(val('callback_date')):'false')));
   /* Shared German/Austrian pharmacy-choice flow. */
   if((delivery||rx) && consentGiven){
     const ph=radio('pharmacy_choice');
-    if(ph) f.push(field('consent_for_h_pharmacy_germany', ph));   // 'yes' = H+ pharmacy · 'no' = own pharmacy
+    if(ph) f.push(field('consent_for_h_pharmacy_germany', ph==='yes'?'true':'false'));   // boolean property — 'yes'/'no' was being dropped
     if(ph==='no'){
       if(val('chosen_pharmacy_name'))     f.push(field('chosen_pharmacy_name',val('chosen_pharmacy_name')));
       if(val('chosen_pharmacy_street'))   f.push(field('chosen_pharmacy_street',val('chosen_pharmacy_street')));
@@ -1990,8 +2019,8 @@ function payloadDelivery(){
   if(rx){
     if(val('doctor_first'))    f.push(field('doctor_s_first_name',val('doctor_first')));
     if(val('doctor_last'))     f.push(field('doctor_s_last_name',val('doctor_last')));
-    if(val('doctor_street'))   f.push(field('doctor_s_street_address',val('doctor_street')));
-    if(val('doctor_street2'))  f.push(field('doctor_s_street_address_2',val('doctor_street2')));
+    if(val('doctor_street2'))  f.push(field('doctor_s_street_address',val('doctor_street2')));
+    if(val('doctor_street'))   f.push(field('doctor_s_street_address_2',val('doctor_street')));
     if(val('doctor_postcode')) f.push(field('doctor_s_post_code',val('doctor_postcode')));
     if(val('doctor_phone'))    f.push(field('doctor_s_phone_number',phoneFull('doctor_phone')));
     if(val('doctor_email'))    f.push(field('work_email',val('doctor_email')));

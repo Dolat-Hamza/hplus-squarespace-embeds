@@ -1253,6 +1253,27 @@ const t = k => {
   return str;
 };
 
+
+/* HubSpot stores frequency/administration as fixed dropdowns whose values are opaque
+   ids — sending the free-text label silently drops the value, so translate first. */
+const HS_FREQ={daily:'yBlm7BvXttYUhvShRqZIj',biweekly:'U_q0LrVi9JRJZctPgGroE',weekly:'Y4OlS4_uMdJG0Pm6d1HLk',bimonthly:'4DBjg_c1R4GPMVaz6I2Dy',monthly:'ejKAPrzm9Z1CPNgmg27El'};
+const HS_ADMIN={oral:'Mdvob_SZtZW43wIYqxERm',subcut:'qqA-hnsPQs-e0R6EwtGYw',iv:'DL9pAV0M5cWNFBYIf37h-',im:'gLVfDSwGWW1gdanhZ_AAD'};
+function medFreqCode(txt){
+  const s=String(txt||'').toLowerCase();
+  if(/2 wochen|every 2 weeks|zweiten tag|other day|zwei wochen/.test(s)) return HS_FREQ.biweekly;
+  if(/wöchentlich|weekly/.test(s))   return HS_FREQ.weekly;
+  if(/monatlich|monthly/.test(s))    return HS_FREQ.monthly;
+  if(/täglich|daily/.test(s))        return HS_FREQ.daily;
+  return '';
+}
+function medAdminCode(txt){
+  const s=String(txt||'').toLowerCase();
+  if(/subkutan|subcutaneous/.test(s))          return HS_ADMIN.subcut;
+  if(/intravenös|intravenous/.test(s))         return HS_ADMIN.iv;
+  if(/intramuskul|intramuscular/.test(s))      return HS_ADMIN.im;
+  if(/oral/.test(s))                           return HS_ADMIN.oral;
+  return '';
+}
 const MEDS={
   "Brinsupri (Brensocatib)":{de:{dose:"25 mg Filmtablette",frequency:"Eine Tablette täglich",administration:"Oral"},en:{dose:"25 mg film-coated tablet",frequency:"One tablet daily",administration:"Oral"}},
   "Revestive (Teduglutide)":{de:{dose:"0,05 mg/kg",frequency:"Einmal täglich",administration:"Subkutane Injektion (unter die Haut)"},en:{dose:"0.05 mg/kg",frequency:"Once daily",administration:"Subcutaneous (under the skin) injection"}},
@@ -1956,39 +1977,80 @@ async function submitOne(guid,payload){
 }
 const ACCOUNT_GUID='212bd920-e4ee-45ae-bf50-25d0e4d5a107';
 function payloadAccount(){
-  const f=[]; const rx=checked('prescription_management'), second=radio('second_person')==='Yes';
+  const f=[]; const put=(p,v)=>{ if(v) f.push(field(p,v)); };
+  const rx=checked('prescription_management'), second=radio('second_person')==='Yes';
+  const isCg=val('customer_type')==='Caregiver';
+
   f.push(field('firstname',val('firstname')));
   f.push(field('lastname',val('lastname')));
   f.push(field('email',val('email')));
   const comm=multi('#comm_prefs input'); if(comm) f.push(field('communication_preference',comm));
-  if(val('patient_whatsapp')) f.push(field('hs_whatsapp_phone_number',phoneFull('patient_whatsapp')));
-  if(val('patient_phone'))    f.push(field('phone',phoneFull('patient_phone')));
-  if(val('patient_sms'))      f.push(field('patient_sms',phoneFull('patient_sms')));
+
+  /* the patient's numbers, including HubSpot's standard phone fields */
+  put('patient_phone',            phoneFull('patient_phone'));
+  put('patient_whatsapp',         phoneFull('patient_whatsapp'));
+  put('patient_sms',              phoneFull('patient_sms'));
+  put('mobilephone',              phoneFull('patient_phone'));
+  put('hs_whatsapp_phone_number', phoneFull('patient_whatsapp'));
+  put('patient_first_name', val('firstname'));
+  put('patient_last_name',  val('lastname'));
+  put('patient_email',      val('email'));
+
   f.push(field('would_you_like_the_medication_reminders_to_be_sent_to_a_second_person_',radio('second_person')));
   if(second){
-    if(val('second_contact_person'))  f.push(field('second_contact_person',val('second_contact_person')));
-    if(val('second_contact_surname')) f.push(field('second_contact_surname',val('second_contact_surname')));
-    if(val('caregiver_relationship')) f.push(field('caregiver_relationship',val('caregiver_relationship')));
+    put('second_contact_person',  val('second_contact_person'));
+    put('second_contact_surname', val('second_contact_surname'));
+    put('caregiver_relationship', val('caregiver_relationship'));
     const cg=multi('#cg_comm_prefs input'); if(cg) f.push(field('caregiver_communication_preferences',cg));
-    if(val('second_contact_email'))    f.push(field('second_contact_email',val('second_contact_email')));
-    if(val('second_contact_whatsapp')) f.push(field('second_contact_whatsapp',phoneFull('second_contact_whatsapp')));
-    if(val('second_contact_phone'))    f.push(field('second_contact_phone',phoneFull('second_contact_phone')));
+    put('second_contact_email',    val('second_contact_email'));
+    put('second_contact_whatsapp', phoneFull('second_contact_whatsapp'));
+    put('second_contact_phone',    phoneFull('second_contact_phone'));
+    put('caregiver_sms',           phoneFull('caregiver_sms'));
   }
-  if(val('other_medication')) f.push(field('does_the_patient_take_any_other_medication_',val('other_medication')));
-  f.push(field('prescription_management___caregiver_',rx?'true':'false'));
-  f.push(field('check_up_reminder_management___caregiver_',checked('check_up_reminder_management')?'true':'false'));
-  f.push(field('i_don_t_want_hcp_support_right_now',checked('no_support')?'true':'false'));
-  if(checked('check_up_reminder_management')&&val('appointment_date')) f.push(field('when_is_your_next_doctor_s_appointment_scheduled_',toEpoch(val('appointment_date'))));
-  else if(val('callback_date')) f.push(field('when_is_your_next_doctor_s_appointment_scheduled_',toEpoch(val('callback_date'))));
-  if(rx){
-    if(val('doctor_first'))    f.push(field('doctor_s_first_name',val('doctor_first')));
-    if(val('doctor_last'))     f.push(field('doctor_s_last_name',val('doctor_last')));
-    if(val('doctor_street'))   f.push(field('doctor_s_street_address',val('doctor_street')));
-    if(val('doctor_postcode')) f.push(field('doctor_s_post_code',val('doctor_postcode')));
-    if(val('doctor_phone'))    f.push(field('doctor_s_phone_number',phoneFull('doctor_phone')));
-    if(val('doctor_email'))    f.push(field('work_email',val('doctor_email')));
-    if(val('doctor_fax'))      f.push(field('doctor_s_fax',phoneFull('doctor_fax')));
+
+  /* medication — the dropdowns need HubSpot's option ids, the wording goes to instructions */
+  put('medicine', HS.med.medicine);
+  put('medication_dose__open_field_', HS.med.dose);
+  put('medication_frequency', medFreqCode(HS.med.frequency));
+  put('medication_administration', medAdminCode(HS.med.administration));
+  const instr=[HS.med.frequency,HS.med.administration].filter(Boolean).join(' · ');
+  put('medication_instructions', instr);
+  put('does_the_patient_take_any_other_medication_', val('other_medication'));
+  if(radio('reminder_freq')) f.push(field('uhp_medication_reminder_preferences',radio('reminder_freq')));
+
+  /* services + consents */
+  const at=val('country')==='Österreich', delivery=checked('delivery_management');
+  const consentGiven=checked('delivery_consent');
+  const deliveryConsent=(delivery||rx)&&consentGiven;
+  put('h_country', val('country'));
+  f.push(field('delivery_management', delivery?'true':'false'));
+  f.push(field('prescription_management', rx?'true':'false'));
+  f.push(field('i_don_t_want_hcp_support_right_now', checked('no_support')?'true':'false'));
+  f.push(field('delivery_consent_germany',(!at&&deliveryConsent)?'true':'false'));
+  f.push(field('delivery_consent_austria',( at&&deliveryConsent)?'true':'false'));
+  f.push(field('hcp_consent',         (!at&&deliveryConsent)?'true':'false'));
+  f.push(field('hcp_consent_austria', ( at&&deliveryConsent)?'true':'false'));
+  const ph=radio('pharmacy_choice');
+  if(ph) f.push(field('consent_for_h_pharmacy_germany', ph==='yes'?'true':'false'));
+  if(ph==='no'){
+    put('chosen_pharmacy_name',val('chosen_pharmacy_name'));
+    put('chosen_pharmacy_street',val('chosen_pharmacy_street'));
+    put('chosen_pharmacy_city',val('chosen_pharmacy_city'));
+    put('chosen_pharmacy_post_code',val('chosen_pharmacy_postcode'));
   }
+
+  /* doctor — practice name first, street second (matches HubSpot's layout) */
+  put('doctor_s_first_name', val('doctor_first'));
+  put('doctor_s_last_name',  val('doctor_last'));
+  put('doctor_s_street_address',   val('doctor_street2'));
+  put('doctor_s_street_address_2', val('doctor_street'));
+  put('doctor_s_post_code',  val('doctor_postcode'));
+  put('doctor_s_phone_number', val('doctor_phone')?phoneFull('doctor_phone'):'');
+  put('doctor_s_fax',          val('doctor_fax')?phoneFull('doctor_fax'):'');
+  put('work_email', val('doctor_email'));
+  put('doctors_country_brinsupri', val('country'));
+
+  f.push(field('customer_type', val('customer_type')||'Patient'));
   return {fields:f, context:context()};
 }
 
