@@ -2024,6 +2024,11 @@ function payloadDelivery(){
       if(val('chosen_pharmacy_postcode')) f.push(field('chosen_pharmacy_post_code',val('chosen_pharmacy_postcode')));
     }
   }
+  /* delivery address */
+  if(val('delivery_street'))   f.push(field('delivery_address',val('delivery_street')));
+  if(val('delivery_street2'))  f.push(field('delivery_address_street_2',val('delivery_street2')));
+  if(val('delivery_postcode')) f.push(field('delivery_address__post_code',val('delivery_postcode')));
+  if(val('delivery_city'))     f.push(field('delivery_address__city__region',val('delivery_city')));
   if(rx){
     if(val('doctor_first'))    f.push(field('doctor_s_first_name',val('doctor_first')));
     if(val('doctor_last'))     f.push(field('doctor_s_last_name',val('doctor_last')));

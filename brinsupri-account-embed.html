@@ -2044,6 +2044,12 @@ function payloadAccount(){
     put('chosen_pharmacy_post_code',val('chosen_pharmacy_postcode'));
   }
 
+  /* delivery address */
+  put('delivery_address',                val('delivery_street'));
+  put('delivery_address_street_2',       val('delivery_street2'));
+  put('delivery_address__post_code',     val('delivery_postcode'));
+  put('delivery_address__city__region',  val('delivery_city'));
+
   /* doctor — practice name first, street second (matches HubSpot's layout) */
   put('doctor_s_first_name', val('doctor_first'));
   put('doctor_s_last_name',  val('doctor_last'));

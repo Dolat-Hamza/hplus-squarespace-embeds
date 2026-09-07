@@ -48,4 +48,9 @@ Days taken in last 7,pills_taken_last_7_days   ** NOT YET CREATED **
 Reason for missed pills,missed_pills_reason       ** NOT YET CREATED **
 Wants a call,call_to_reduce_missed_pills ** NOT YET CREATED **
 Re-order prescription,reorder_prescription      ** NOT YET CREATED **
+DELIVERY ADDRESS,
+Street and house number,delivery_address
+Address line 2,delivery_address_street_2
+Post code,delivery_address__post_code
+City / Region,delivery_address__city__region   (note: double underscores)
 Next doctor's appointment,when_is_your_next_doctor_s_appointment_scheduled_  (timestamp; omitted when empty)
