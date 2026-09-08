@@ -397,7 +397,7 @@ document.querySelectorAll('.langswitch button').forEach(b=>b.addEventListener('c
 const HS={portal:"146131370",guid:"212bd920-e4ee-45ae-bf50-25d0e4d5a107",region:"eu1"};
 const HIDDEN={};
 const LS_KEY="hsform_"+HS.guid;
-const endpoint="https://geevs-onboarding.vercel.app/api/embed/submit?form=brinsupri-patient-consent";
+const endpoint="https://api-"+HS.region+".hsforms.com/submissions/v3/integration/submit/"+HS.portal+"/"+HS.guid;
 function ctx(){return{pageUri:location.href,pageName:document.title,hutk:(document.cookie.match(/hubspotutk=([^;]+)/)||[])[1]||undefined};}
 
 /* A number is stored in HubSpot with its country code, but the form shows the code

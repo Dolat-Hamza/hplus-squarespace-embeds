@@ -402,7 +402,7 @@ document.querySelectorAll('.langswitch button').forEach(b=>b.addEventListener('c
 const HS={portal:"146131370",guid:"77757347-17fb-43b5-829a-cfd2664bbd7a",region:"eu1"};
 const HIDDEN={"hs_lead_status": "Registered", "medication_instructions": "Medical PIL Details", "medicine": "UHP Demo Medicine", "patient_email": ""};
 const LS_KEY="hsform_"+HS.guid;
-const endpoint="https://geevs-onboarding.vercel.app/api/embed/submit?form=brinsupri-caregiver-consent";
+const endpoint="https://api-"+HS.region+".hsforms.com/submissions/v3/integration/submit/"+HS.portal+"/"+HS.guid;
 function ctx(){return{pageUri:location.href,pageName:document.title,hutk:(document.cookie.match(/hubspotutk=([^;]+)/)||[])[1]||undefined};}
 
 /* A number is stored in HubSpot with its country code, but the form shows the code
