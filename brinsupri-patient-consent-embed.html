@@ -396,7 +396,7 @@ document.querySelectorAll('.langswitch button').forEach(b=>b.addEventListener('c
 
 const HS={portal:"146131370",guid:"212bd920-e4ee-45ae-bf50-25d0e4d5a107",region:"eu1"};
 const HIDDEN={};
-const LS_KEY="hsform_"+HS.guid;
+const LS_KEY="hsform_v2_"+HS.guid;
 const endpoint="https://api-"+HS.region+".hsforms.com/submissions/v3/integration/submit/"+HS.portal+"/"+HS.guid;
 function ctx(){return{pageUri:location.href,pageName:document.title,hutk:(document.cookie.match(/hubspotutk=([^;]+)/)||[])[1]||undefined};}
 
@@ -429,8 +429,11 @@ document.querySelectorAll('input[data-multi]').forEach(c=>c.addEventListener('ch
 document.querySelectorAll('.choice input').forEach(inp=>{const paint=()=>{const c=inp.closest('.choice');if(inp.type==='radio'){document.querySelectorAll('input[name="'+inp.name+'"]').forEach(o=>o.closest('.choice').classList.remove('selected'));}c.classList.toggle('selected',inp.checked);};inp.addEventListener('change',paint);});
 
 const ctrls=()=>[...document.querySelectorAll('#f input,#f select')];
-function save(){try{const s={};ctrls().forEach((e,i)=>{if(e.type==='checkbox'||e.type==='radio'){if(e.checked)s[i]=1;}else if(e.value!=='')s[i]=e.value;});localStorage.setItem(LS_KEY,JSON.stringify(s));}catch(e){}}
-function restore(){let s;try{s=JSON.parse(localStorage.getItem(LS_KEY)||'null');}catch(e){}if(!s)return;const cs=ctrls();Object.keys(s).forEach(k=>{const e=cs[+k];if(!e)return;if(e.type==='checkbox'||e.type==='radio')e.checked=!!s[k];else e.value=s[k];});document.querySelectorAll('input[data-reveal],.choice input').forEach(i=>i.dispatchEvent(new Event('change')));}
+function keyOf(e,i){return e.id||((e.name||'')+'#'+(e.value||'')) ||('idx'+i);}
+  /* keyed by field, not position — adding a field must never shift saved answers
+     into the wrong boxes (that produced wrong data and duplicate contacts) */
+  function save(){try{const s={};ctrls().forEach((e,i)=>{const k=keyOf(e,i);if(e.type==='checkbox'||e.type==='radio'){if(e.checked)s[k]=1;}else if(e.value!=='')s[k]=e.value;});localStorage.setItem(LS_KEY,JSON.stringify(s));}catch(e){}}
+function restore(){let s;try{s=JSON.parse(localStorage.getItem(LS_KEY)||'null');}catch(e){}if(!s)return;const cs=ctrls();const byKey={};cs.forEach((e,i)=>{byKey[keyOf(e,i)]=e;});Object.keys(s).forEach(k=>{const e=byKey[k];if(!e)return;if(e.type==='checkbox'||e.type==='radio')e.checked=!!s[k];else e.value=s[k];});document.querySelectorAll('input[data-reveal],.choice input').forEach(i=>i.dispatchEvent(new Event('change')));}
 applyLang(lang); restore(); syncShowif();
 $('f').addEventListener('input',save);$('f').addEventListener('change',save);
 $('resetBtn').addEventListener('click',()=>{try{localStorage.removeItem(LS_KEY);}catch(e){}location.reload();});
