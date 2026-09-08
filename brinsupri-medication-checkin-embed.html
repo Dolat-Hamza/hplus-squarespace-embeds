@@ -481,7 +481,7 @@
   document.querySelectorAll('#f input[type=checkbox]').forEach(c=>c.addEventListener('change',syncCheckGroups));
   document.querySelectorAll('.choice input').forEach(inp=>{const paint=()=>{const c=inp.closest('.choice');if(inp.type==='radio'){document.querySelectorAll('input[name="'+inp.name+'"]').forEach(o=>o.closest('.choice').classList.remove('selected'));}c.classList.toggle('selected',inp.checked);};inp.addEventListener('change',paint);});
 
-  const ctrls=()=>[...document.querySelectorAll('#f input,#f select')];
+  const ctrls=()=>[...document.querySelectorAll('#f input,#f select,#f textarea')];
   function keyOf(e,i){return e.id||((e.name||'')+'#'+(e.value||'')) ||('idx'+i);}
   /* keyed by field, not position — adding a field must never shift saved answers
      into the wrong boxes (that produced wrong data and duplicate contacts) */
@@ -501,7 +501,7 @@
   }
   function buildPayload(){
     const f=[];
-    document.querySelectorAll('#f input,#f select').forEach(el=>{
+    document.querySelectorAll('#f input,#f select,#f textarea').forEach(el=>{
       if(el.dataset.multi) return;
       if(el.type==='radio'){ if(el.checked) f.push(field(el.name,el.value)); return; }
       if(el.type==='checkbox'){ f.push(field(el.name, el.checked?'true':'false')); return; }

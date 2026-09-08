@@ -334,7 +334,7 @@ function syncShowif(){ document.querySelectorAll('[data-showif-name]').forEach(f
 document.querySelectorAll('input[data-multi]').forEach(c=>c.addEventListener('change',syncShowif));
 document.querySelectorAll('.choice input').forEach(inp=>{const paint=()=>{const c=inp.closest('.choice');if(inp.type==='radio'){document.querySelectorAll('input[name="'+inp.name+'"]').forEach(o=>o.closest('.choice').classList.remove('selected'));}c.classList.toggle('selected',inp.checked);};inp.addEventListener('change',paint);});
 
-const ctrls=()=>[...document.querySelectorAll('#f input,#f select')];
+const ctrls=()=>[...document.querySelectorAll('#f input,#f select,#f textarea')];
 function save(){try{const s={};ctrls().forEach((e,i)=>{if(e.type==='checkbox'||e.type==='radio'){if(e.checked)s[i]=1;}else if(e.value!=='')s[i]=e.value;});localStorage.setItem(LS_KEY,JSON.stringify(s));}catch(e){}}
 function restore(){let s;try{s=JSON.parse(localStorage.getItem(LS_KEY)||'null');}catch(e){}if(!s)return;const cs=ctrls();Object.keys(s).forEach(k=>{const e=cs[+k];if(!e)return;if(e.type==='checkbox'||e.type==='radio')e.checked=!!s[k];else e.value=s[k];});document.querySelectorAll('input[data-reveal],.choice input').forEach(i=>i.dispatchEvent(new Event('change')));}
 applyLang(lang); restore(); syncShowif();
@@ -350,7 +350,7 @@ function validate(){
 }
 function buildPayload(){
   const f=[];
-  document.querySelectorAll('#f input,#f select').forEach(el=>{
+  document.querySelectorAll('#f input,#f select,#f textarea').forEach(el=>{
     if(el.dataset.multi) return;
     if(el.type==='radio'){ if(el.checked) f.push(field(el.name,el.value)); return; }
     if(el.type==='checkbox'){ f.push(field(el.name, el.checked?'true':'false')); return; }
