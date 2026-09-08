@@ -455,8 +455,10 @@
 
   const HS={portal:"146131370",guid:"b08f2898-305f-4c36-b8be-600543ea7e12",region:"eu1"};
   const HIDDEN={"currently_compliant_to_medicine_protocols": "true", "hs_lead_status": "Currently Compliant"};
+  /* date the check-in was completed (midnight UTC, as HubSpot date properties expect) */
+  function todayEpoch(){ const n=new Date(); return String(Date.UTC(n.getFullYear(),n.getMonth(),n.getDate())); }
   const LS_KEY="hsform_"+HS.guid;
-  const endpoint="https://geevs-onboarding.vercel.app/api/embed/submit?form=brinsupri-medication-checkin";
+  const endpoint="https://api-"+HS.region+".hsforms.com/submissions/v3/integration/submit/"+HS.portal+"/"+HS.guid;
   function ctx(){return{pageUri:location.href,pageName:document.title,hutk:(document.cookie.match(/hubspotutk=([^;]+)/)||[])[1]||undefined};}
   const field=(n,v)=>({objectTypeId:"0-1",name:n,value:String(v)});
   const toEpoch=d=>{if(!d)return"";const[y,m,day]=d.split("-").map(Number);return String(Date.UTC(y,m-1,day));};
@@ -506,6 +508,7 @@
     const seen=new Set();
     document.querySelectorAll('input[data-multi]').forEach(c=>{const n=c.dataset.multi;if(seen.has(n))return;seen.add(n);const v=multiVals(n);if(v)f.push(field(n,v));});
     Object.keys(HIDDEN).forEach(n=>f.push(field(n,HIDDEN[n])));
+    f.push(field('last_medication_taken_update_date__uhp_', todayEpoch()));
     return {fields:f,context:ctx()};
   }
   $('f').addEventListener('submit',async e=>{
