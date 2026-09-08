@@ -454,7 +454,7 @@
   document.querySelectorAll('.langswitch button').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));
 
   const HS={portal:"146131370",guid:"b08f2898-305f-4c36-b8be-600543ea7e12",region:"eu1"};
-  const HIDDEN={"currently_compliant_to_medicine_protocols": "true", "hs_lead_status": "Currently Compliant"};
+  const HIDDEN={"currently_compliant_to_medicine_protocols": "true", "hs_lead_status": "Currently Compliant", "taken_medicine": "true"};
   /* date the check-in was completed (midnight UTC, as HubSpot date properties expect) */
   function todayEpoch(){ const n=new Date(); return String(Date.UTC(n.getFullYear(),n.getMonth(),n.getDate())); }
   const LS_KEY="hsform_"+HS.guid;
