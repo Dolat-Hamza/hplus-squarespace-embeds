@@ -324,7 +324,7 @@ document.querySelectorAll('.langswitch button').forEach(b=>b.addEventListener('c
 const HS={portal:"146131370",guid:"eebfde09-c51b-48ce-96b8-dd23c81a5eb8",region:"eu1"};
 const HIDDEN={"hs_lead_status": "Registered", "medication_instructions": "Medical PIL Details", "medicine": "Brinsupri (Brensocatib) Filmtablette - 25mg", "second_contact_email": ""};
 const LS_KEY="hsform_"+HS.guid;
-const endpoint="https://geevs-onboarding.vercel.app/api/embed/submit?form=brinsupri-patient-registration";
+const endpoint="https://api-"+HS.region+".hsforms.com/submissions/v3/integration/submit/"+HS.portal+"/"+HS.guid;
 function ctx(){return{pageUri:location.href,pageName:document.title,hutk:(document.cookie.match(/hubspotutk=([^;]+)/)||[])[1]||undefined};}
 const field=(n,v)=>({objectTypeId:"0-1",name:n,value:String(v)});
 const toEpoch=d=>{if(!d)return"";const[y,m,day]=d.split("-").map(Number);return String(Date.UTC(y,m-1,day));};
