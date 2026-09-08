@@ -305,6 +305,8 @@
   .uhp-header-right.show{display:flex}
   .acct-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--blue),var(--blue-3));color:#fff !important;font-family:var(--font-head),inherit;font-size:clamp(11px,.95vw,13.5px);font-weight:600;letter-spacing:.4px;line-height:1;text-transform:uppercase;text-decoration:none !important;padding:13px 20px;border-radius:999px;white-space:nowrap;box-shadow:0 12px 24px -12px rgba(0,126,198,.75);transition:opacity .2s ease,transform .2s ease,box-shadow .2s ease}
   .acct-btn:hover{transform:translateY(-1px);box-shadow:0 16px 30px -12px rgba(0,126,198,.8)}
+  .acct-btn-alt{background:#fff;color:var(--blue) !important;border:1.5px solid var(--blue);box-shadow:none}
+  .acct-btn-alt:hover{background:var(--blue-050);box-shadow:none}
   .uhp-avatar{width:42px;height:42px;display:block;object-fit:contain;border-radius:50%;box-shadow:0 4px 12px -6px rgba(6,50,76,.5)}
   
 /* ---- mobile polish (account form) ---- */
@@ -374,7 +376,7 @@
   <header class="uhp-header">
     <a href="/uhp" class="uhp-brand"><svg><use href="#ic-hlogo"/></svg><span class="bt"><b>United Pharma Partners</b><small>H+ Therapy Companion</small></span></a>
     <div class="uhp-header-right">
-      <a href="/brinsupri-account" class="acct-btn">Account Settings</a>
+      <a href="/brinsupri-medication-checkin" class="acct-btn acct-btn-alt">Check-in</a><a href="/brinsupri-account" class="acct-btn">Account Settings</a>
       <a href="/brinsupri-account" aria-label="Account"><img class="uhp-avatar" src="https://images.squarespace-cdn.com/content/69821059a09d4c3e86e6809d/1781090219744-48F9YQ7N12F087G7RLLF/UHP+User.png?content-type=image%2Fpng" alt="Account"></a>
     </div>
   </header>
@@ -444,7 +446,7 @@
           <div class="err-msg" data-i18n="err_comm"></div>
         </div>
 
-        <div class="field cond" id="c_whatsapp" style="display:none"><label data-i18n="whatsapp_label"></label><input type="tel" id="patient_whatsapp" placeholder="+49 176 1234567" inputmode="tel" autocomplete="tel" data-validate="phone-global" /></div>
+        <div class="field cond" id="c_whatsapp" style="display:none"><label data-i18n="whatsapp_label"></label><div class="phone-row"><select id="patient_whatsapp_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option><option value="+41">🇨🇭 +41</option><option value="+44">🇬🇧 +44</option><option value="+33">🇫🇷 +33</option><option value="+39">🇮🇹 +39</option><option value="+34">🇪🇸 +34</option><option value="+31">🇳🇱 +31</option><option value="+32">🇧🇪 +32</option><option value="+48">🇵🇱 +48</option><option value="+420">🇨🇿 +420</option><option value="+353">🇮🇪 +353</option><option value="+45">🇩🇰 +45</option><option value="+46">🇸🇪 +46</option><option value="+47">🇳🇴 +47</option><option value="+351">🇵🇹 +351</option><option value="+30">🇬🇷 +30</option><option value="+36">🇭🇺 +36</option><option value="+40">🇷🇴 +40</option><option value="+90">🇹🇷 +90</option><option value="+1">🇺🇸 +1</option></select><input type="tel" id="patient_whatsapp" placeholder="+49 176 1234567" inputmode="tel" autocomplete="tel" data-validate="phone-global" /></div></div>
         <div class="field cond" id="c_sms" style="display:none"><label data-i18n="sms_label"></label><div class="phone-row"><select id="patient_sms_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="patient_sms" placeholder="176 1234567" data-validate="phone" /></div></div>
 
 
@@ -500,7 +502,7 @@
             </div>
           </div>
           <div class="field cond" id="c_sc_email" style="display:none"><label data-i18n="sc_email"></label><input type="email" id="second_contact_email" data-validate="email" /></div>
-          <div class="field cond" id="c_sc_whatsapp" style="display:none"><label data-i18n="sc_whatsapp"></label><input type="tel" id="second_contact_whatsapp" placeholder="+44 7700 900123" inputmode="tel" data-validate="phone-global" /></div>
+          <div class="field cond" id="c_sc_whatsapp" style="display:none"><label data-i18n="sc_whatsapp"></label><div class="phone-row"><select id="second_contact_whatsapp_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option><option value="+41">🇨🇭 +41</option><option value="+44">🇬🇧 +44</option><option value="+33">🇫🇷 +33</option><option value="+39">🇮🇹 +39</option><option value="+34">🇪🇸 +34</option><option value="+31">🇳🇱 +31</option><option value="+32">🇧🇪 +32</option><option value="+48">🇵🇱 +48</option><option value="+420">🇨🇿 +420</option><option value="+353">🇮🇪 +353</option><option value="+45">🇩🇰 +45</option><option value="+46">🇸🇪 +46</option><option value="+47">🇳🇴 +47</option><option value="+351">🇵🇹 +351</option><option value="+30">🇬🇷 +30</option><option value="+36">🇭🇺 +36</option><option value="+40">🇷🇴 +40</option><option value="+90">🇹🇷 +90</option><option value="+1">🇺🇸 +1</option></select><input type="tel" id="second_contact_whatsapp" placeholder="+44 7700 900123" inputmode="tel" data-validate="phone-global" /></div></div>
           <div class="field cond" id="c_sc_phone" style="display:none"><label data-i18n="sc_phone"></label><div class="phone-row"><select id="second_contact_phone_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="second_contact_phone" placeholder="176 1234567" data-validate="phone" /></div></div>
           <div class="field cond" id="c_sc_sms" style="display:none"><label data-i18n="sc_sms"></label><div class="phone-row"><select id="caregiver_sms_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="caregiver_sms" placeholder="176 1234567" data-validate="phone" /></div></div>
           </div>
@@ -578,7 +580,7 @@
             <label class="choice"><input type="checkbox" value="SMS"><span class="ctxt" data-i18n="opt_sms"></span></label>
           </div>
           <div class="field cond" id="p2_email" style="display:none;margin-top:12px"><label data-i18n="email_label"></label><input type="email" id="prefs_email" data-validate="email"></div>
-          <div class="field cond" id="p2_whatsapp" style="display:none;margin-top:12px"><label data-i18n="whatsapp_label"></label><input type="tel" id="prefs_whatsapp" data-validate="phone-global"></div>
+          <div class="field cond" id="p2_whatsapp" style="display:none;margin-top:12px"><label data-i18n="whatsapp_label"></label><div class="phone-row"><select id="prefs_whatsapp_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option><option value="+41">🇨🇭 +41</option><option value="+44">🇬🇧 +44</option><option value="+33">🇫🇷 +33</option><option value="+39">🇮🇹 +39</option><option value="+34">🇪🇸 +34</option><option value="+31">🇳🇱 +31</option><option value="+32">🇧🇪 +32</option><option value="+48">🇵🇱 +48</option><option value="+420">🇨🇿 +420</option><option value="+353">🇮🇪 +353</option><option value="+45">🇩🇰 +45</option><option value="+46">🇸🇪 +46</option><option value="+47">🇳🇴 +47</option><option value="+351">🇵🇹 +351</option><option value="+30">🇬🇷 +30</option><option value="+36">🇭🇺 +36</option><option value="+40">🇷🇴 +40</option><option value="+90">🇹🇷 +90</option><option value="+1">🇺🇸 +1</option></select><input type="tel" id="prefs_whatsapp" data-validate="phone-global"></div></div>
           <div class="field cond" id="p2_phone" style="display:none;margin-top:12px"><label data-i18n="phone_label"></label><div class="phone-row"><select id="prefs_phone_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="prefs_phone" data-validate="phone"></div></div>
           <div class="field cond" id="p2_sms" style="display:none;margin-top:12px"><label data-i18n="sms_label"></label><div class="phone-row"><select id="prefs_sms_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="prefs_sms" data-validate="phone"></div></div>
         </div>
@@ -643,10 +645,10 @@
             <div class="field"><label data-i18n="doc_street"></label><input type="text" id="doctor_street"></div>
             <div class="field" style="max-width:220px"><label data-i18n="doc_postcode"></label><input type="text" id="doctor_postcode"></div>
             <div class="two-col">
-              <div class="field"><label data-i18n="doc_phone"></label><input type="tel" id="doctor_phone" placeholder="030 1234567" data-nocc="1" autocomplete="off"></div>
+              <div class="field"><label data-i18n="doc_phone"></label><div class="phone-row"><select id="doctor_phone_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="doctor_phone" placeholder="030 1234567" autocomplete="off"></div></div>
               <div class="field"><label data-i18n="doc_email"></label><input type="email" id="doctor_email" data-validate="email"></div>
             </div>
-            <div class="field"><label data-i18n="doc_fax"></label><input type="tel" id="doctor_fax" placeholder="030 1234567" data-nocc="1" autocomplete="off"></div>
+            <div class="field"><label data-i18n="doc_fax"></label><div class="phone-row"><select id="doctor_fax_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="doctor_fax" placeholder="030 1234567" autocomplete="off"></div></div>
           </div>
 
           <div class="err-msg" id="infoErr" data-i18n="err_need_info"></div>
@@ -1667,14 +1669,51 @@ function phoneOk(v,cc){
 }
 /* WhatsApp accepts any valid international E.164-style number. */
 function globalPhoneOk(v){ const compact=v.replace(/[\s().\-/]/g,''); return /^\+[1-9]\d{7,14}$/.test(compact); }
-function formatOk(inp){ const v=inp.value.trim(); return inp.dataset.validate==='email'?emailOk(v):inp.dataset.validate==='phone-global'?globalPhoneOk(v):phoneOk(v,ccOf(inp)); }
+function formatOk(inp){
+  const v=inp.value.trim();
+  if(inp.dataset.validate==='email') return emailOk(v);
+  /* with a country selector the box holds only the national part, so validate that
+     rather than expecting a full international number */
+  if(document.getElementById(inp.id+'_cc')){
+    if(inp.dataset.validate==='phone-global'){ const d=v.replace(/\D/g,''); return d.length>=6 && d.length<=14; }
+    return phoneOk(v,ccOf(inp));
+  }
+  return inp.dataset.validate==='phone-global'?globalPhoneOk(v):phoneOk(v,ccOf(inp));
+}
 function formatErrorKey(inp){ return inp.dataset.validate==='email'?'err_email_fmt':inp.dataset.validate==='phone-global'?'err_whatsapp_global':'err_phone'; }
 function ccOf(inp){ const sel=document.getElementById(inp.id+'_cc'); return sel?sel.value:'+49'; }
 /* compose the full number (country code + national number) for submission */
+
+/* A number is stored in HubSpot with its country code, but the form shows the code
+   in the selector and only the national part in the box — otherwise a saved
+   "+49 176..." comes back as "+49 +49 176...". */
+const CC_LIST=['+420','+353','+351','+49','+43','+41','+44','+33','+39','+34','+31','+32','+48','+45','+46','+47','+30','+36','+40','+90','+1'];
+function splitPhone(full){
+  let v=String(full||'').trim(); if(!v) return null;
+  v=v.replace(/[^\d+]/g,'');
+  if(v[0]!=='+') return {cc:'',nat:v};
+  const hit=CC_LIST.slice().sort((a,b)=>b.length-a.length).find(c=>v.startsWith(c));
+  return hit ? {cc:hit, nat:v.slice(hit.length)} : {cc:'', nat:v};
+}
+function setPhoneValue(id, full){
+  const inp=document.getElementById(id); if(!inp) return;
+  const sel=document.getElementById(id+'_cc');
+  const p=splitPhone(full);
+  if(!p){ inp.value=''; return; }
+  if(sel && p.cc && [...sel.options].some(o=>o.value===p.cc)){ sel.value=p.cc; inp.value=p.nat; }
+  else if(sel && !p.cc){ inp.value=p.nat; }
+  else { inp.value = p.cc ? (p.cc+p.nat) : p.nat; }
+}
 function phoneFull(id){
   const inp=$(id); if(!inp) return '';
   const v=inp.value.trim(); if(!v) return '';
   if(inp.dataset.nocc) return v;                                  // no country code — send exactly as typed
+  const sel=document.getElementById(id+'_cc');
+  if(sel){ // strip a country code the user may have typed in as well
+    let nat=v.replace(/^\+?\d{1,3}[\s-]?/, m=>v.startsWith(sel.value)?'':m).replace(/^0+/,'');
+    if(v.startsWith(sel.value)) nat=v.slice(sel.value.length).replace(/^[\s-]+/,'').replace(/^0+/,'');
+    return (sel.value+' '+nat.replace(/\D/g,'')).trim();
+  }
   if(inp.dataset.validate==='phone-global') return '+'+v.replace(/\D/g,'');
   return (ccOf(inp)+' '+v.replace(/^0+/,'')).trim();
 }
@@ -2222,7 +2261,11 @@ $('hplusForm').addEventListener('change',saveState);
   function apply(data){
     Object.keys(data).forEach(function(id){
       var it=data[id]; if(!it) return; var k=it.kind, v=it.value;
-      if(k==='text'||k==='date'||k==='select') setVal(id,v);
+      if(k==='text'||k==='date'||k==='select'){
+        // phone fields arrive with their country code — put the code in the selector
+        if(document.getElementById(id+'_cc') && typeof setPhoneValue==='function') setPhoneValue(id,v);
+        else setVal(id,v);
+      }
       else if(k==='check') setCheck(id, v==='true');
       else if(k==='radio') setRadio(id, v);
       else if(k==='multi') setMulti(id, v);

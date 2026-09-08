@@ -355,9 +355,9 @@
 <div class="two-col"><div class="field" data-name="firstname"><label for="firstname" data-i18n="c10">Vorname</label><input type="text" id="firstname" name="firstname"><div class="err-msg" data-i18n="c11">Bitte ausfüllen.</div></div><div class="field" data-name="lastname"><label for="lastname" data-i18n="c12">Nachname</label><input type="text" id="lastname" name="lastname"><div class="err-msg" data-i18n="c13">Bitte ausfüllen.</div></div></div>
 <div class="field" data-name="communication_preference"><label class="group-label" data-i18n="c14">Bitte bestätigen Sie, wie wir Sie für Erinnerungsdienste kontaktieren sollen.</label><div class="pill-row"><label class="choice"><input type="checkbox" data-multi="communication_preference" value="Email"><span class="ctxt" data-i18n="c15">Email</span></label><label class="choice"><input type="checkbox" data-multi="communication_preference" value="Whatsapp"><span class="ctxt" data-i18n="c16">WhatsApp</span></label><label class="choice"><input type="checkbox" data-multi="communication_preference" value="Phone"><span class="ctxt" data-i18n="c17">Phone call</span></label><label class="choice"><input type="checkbox" data-multi="communication_preference" value="SMS"><span class="ctxt" data-i18n="c18">SMS</span></label></div><div class="err-msg" data-i18n="c19">Bitte auswählen.</div></div>
 <div class="field" data-name="email" data-showif-name="communication_preference" data-showif-value="Email" style="display:none"><label for="email" data-i18n="c20">Email</label><input type="email" id="email" name="email" data-req="1"><div class="err-msg" data-i18n="c21">Bitte ausfüllen.</div></div>
-<div class="field" data-name="hs_whatsapp_phone_number" data-showif-name="communication_preference" data-showif-value="Whatsapp" style="display:none"><label for="hs_whatsapp_phone_number" data-i18n="c22">WhatsApp-Nummer</label><input type="tel" id="hs_whatsapp_phone_number" name="hs_whatsapp_phone_number"><div class="err-msg" data-i18n="c23">Bitte ausfüllen.</div></div>
-<div class="field" data-name="phone" data-showif-name="communication_preference" data-showif-value="Phone" style="display:none"><label for="phone" data-i18n="c24">Telefonnummer</label><input type="tel" id="phone" name="phone"><div class="err-msg" data-i18n="c25">Bitte ausfüllen.</div></div>
-<div class="field" data-name="mobilephone" data-showif-name="communication_preference" data-showif-value="SMS" style="display:none"><label for="mobilephone" data-i18n="c26">SMS-Nummer</label><input type="tel" id="mobilephone" name="mobilephone"><div class="err-msg" data-i18n="c27">Bitte ausfüllen.</div></div>
+<div class="field" data-name="hs_whatsapp_phone_number" data-showif-name="communication_preference" data-showif-value="Whatsapp" style="display:none"><label for="hs_whatsapp_phone_number" data-i18n="c22">WhatsApp-Nummer</label><div class="phone-row"><select id="hs_whatsapp_phone_number_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option><option value="+41">🇨🇭 +41</option><option value="+44">🇬🇧 +44</option><option value="+33">🇫🇷 +33</option><option value="+39">🇮🇹 +39</option><option value="+34">🇪🇸 +34</option><option value="+31">🇳🇱 +31</option><option value="+32">🇧🇪 +32</option><option value="+48">🇵🇱 +48</option><option value="+420">🇨🇿 +420</option><option value="+353">🇮🇪 +353</option><option value="+45">🇩🇰 +45</option><option value="+46">🇸🇪 +46</option><option value="+47">🇳🇴 +47</option><option value="+351">🇵🇹 +351</option><option value="+30">🇬🇷 +30</option><option value="+36">🇭🇺 +36</option><option value="+40">🇷🇴 +40</option><option value="+90">🇹🇷 +90</option><option value="+1">🇺🇸 +1</option></select><input type="tel" id="hs_whatsapp_phone_number" name="hs_whatsapp_phone_number"></div><div class="err-msg" data-i18n="c23">Bitte ausfüllen.</div></div>
+<div class="field" data-name="phone" data-showif-name="communication_preference" data-showif-value="Phone" style="display:none"><label for="phone" data-i18n="c24">Telefonnummer</label><div class="phone-row"><select id="phone_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="phone" name="phone"></div><div class="err-msg" data-i18n="c25">Bitte ausfüllen.</div></div>
+<div class="field" data-name="mobilephone" data-showif-name="communication_preference" data-showif-value="SMS" style="display:none"><label for="mobilephone" data-i18n="c26">SMS-Nummer</label><div class="phone-row"><select id="mobilephone_cc" class="cc-select"><option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option></select><input type="tel" id="mobilephone" name="mobilephone"></div><div class="err-msg" data-i18n="c27">Bitte ausfüllen.</div></div>
 <div class="section-head" data-i18n="c28">Konto</div>
 <div class="info" data-i18n-html="c29">Wir empfehlen Ihnen, ein Konto bei uns einzurichten, um von allen unseren Diensten zu profitieren.</div>
 <div class="field" data-name="create_an_account"><label class="choice"><input type="checkbox" id="create_an_account" name="create_an_account"><span class="ctxt" data-i18n="c30">Konto erstellen</span></label><div class="err-msg" data-i18n="c31">Erforderlich.</div></div>
@@ -404,6 +404,27 @@ const HIDDEN={"hs_lead_status": "Registered", "medication_instructions": "Medica
 const LS_KEY="hsform_"+HS.guid;
 const endpoint="https://geevs-onboarding.vercel.app/api/embed/submit?form=brinsupri-caregiver-consent";
 function ctx(){return{pageUri:location.href,pageName:document.title,hutk:(document.cookie.match(/hubspotutk=([^;]+)/)||[])[1]||undefined};}
+
+/* A number is stored in HubSpot with its country code, but the form shows the code
+   in the selector and only the national part in the box — otherwise a saved
+   "+49 176..." comes back as "+49 +49 176...". */
+const CC_LIST=['+420','+353','+351','+49','+43','+41','+44','+33','+39','+34','+31','+32','+48','+45','+46','+47','+30','+36','+40','+90','+1'];
+function splitPhone(full){
+  let v=String(full||'').trim(); if(!v) return null;
+  v=v.replace(/[^\d+]/g,'');
+  if(v[0]!=='+') return {cc:'',nat:v};
+  const hit=CC_LIST.slice().sort((a,b)=>b.length-a.length).find(c=>v.startsWith(c));
+  return hit ? {cc:hit, nat:v.slice(hit.length)} : {cc:'', nat:v};
+}
+function setPhoneValue(id, full){
+  const inp=document.getElementById(id); if(!inp) return;
+  const sel=document.getElementById(id+'_cc');
+  const p=splitPhone(full);
+  if(!p){ inp.value=''; return; }
+  if(sel && p.cc && [...sel.options].some(o=>o.value===p.cc)){ sel.value=p.cc; inp.value=p.nat; }
+  else if(sel && !p.cc){ inp.value=p.nat; }
+  else { inp.value = p.cc ? (p.cc+p.nat) : p.nat; }
+}
 const field=(n,v)=>({objectTypeId:"0-1",name:n,value:String(v)});
 const toEpoch=d=>{if(!d)return"";const[y,m,day]=d.split("-").map(Number);return String(Date.UTC(y,m-1,day));};
 
