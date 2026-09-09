@@ -453,10 +453,21 @@ function buildPayload(){
   const f=[];
   document.querySelectorAll('#f input,#f select,#f textarea').forEach(el=>{
     if(el.dataset.multi) return;
+    if(el.classList.contains('cc-select')) return;          // the code is merged into its number below
+    if(!el.name) return;                                     // no property to write to
     if(el.type==='radio'){ if(el.checked) f.push(field(el.name,el.value)); return; }
     if(el.type==='checkbox'){ f.push(field(el.name, el.checked?'true':'false')); return; }
     if(el.type==='date'){ if(el.value) f.push(field(el.name,toEpoch(el.value))); return; }
-    if(el.value.trim()!=='') f.push(field(el.name,el.value.trim()));
+    if(el.value.trim()==='') return;
+    /* numbers must reach HubSpot with their country code, or messages can't be sent */
+    const cc=document.getElementById(el.id+'_cc');
+    if(cc && el.type==='tel'){
+      let nat=el.value.trim();
+      if(nat.startsWith(cc.value)) nat=nat.slice(cc.value.length);
+      nat=nat.replace(/^[\s-]+/,'').replace(/^0+/,'').replace(/\D/g,'');
+      f.push(field(el.name,(cc.value+' '+nat).trim())); return;
+    }
+    f.push(field(el.name,el.value.trim()));
   });
   const seen=new Set();
   document.querySelectorAll('input[data-multi]').forEach(c=>{const n=c.dataset.multi;if(seen.has(n))return;seen.add(n);const v=multiVals(n);if(v)f.push(field(n,v));});
