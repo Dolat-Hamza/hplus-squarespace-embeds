@@ -354,7 +354,7 @@
   @media(max-width:767px){.acct-btn{font-size:12px;padding:11px 16px}.uhp-avatar{width:36px;height:36px}.uhp-brand svg{height:28px;width:48px}.uhp-brand .bt b{font-size:15px}}
   </style>
   <header class="uhp-header">
-    <a href="/uhp" class="uhp-brand"><svg><use href="#ic-hlogo"/></svg><span class="bt"><b>United Pharma Partners</b><small>H+ Therapy Companion</small></span></a>
+    <a href="/uhp" class="uhp-brand"><svg><use href="#ic-hlogo"/></svg><span class="bt"><b class="brand-entity">Healthcare Deutschland</b><small>H+ Therapy Companion</small></span></a>
     <div class="uhp-header-right">
       <a href="/brinsupri-account" class="acct-btn">Account Settings</a>
       <a href="/brinsupri-account" aria-label="Account"><img class="uhp-avatar" src="https://images.squarespace-cdn.com/content/69821059a09d4c3e86e6809d/1781090219744-48F9YQ7N12F087G7RLLF/UHP+User.png?content-type=image%2Fpng" alt="Account"></a>
@@ -800,14 +800,14 @@
   </style>
   <footer class="uhp-footer">
     <div class="uhp-footer-top">
-      <div class="uhp-footer-brand"><svg><use href="#ic-hlogo"/></svg><span>United Pharma Partners</span></div>
+      <div class="uhp-footer-brand"><svg><use href="#ic-hlogo"/></svg><span class="brand-entity">Healthcare Deutschland</span></div>
       <nav class="uhp-footer-links">
         <a href="/therapy-companion/privacy-policy" target="_blank" rel="noopener">Datenschutz</a>
         <a href="/therapy-companion/terms-and-conditions" target="_blank" rel="noopener">AGB</a>
         <a href="/uhp/contact">Kontakt</a>
       </nav>
     </div>
-    <div class="uhp-footer-bottom">© 2026 United Pharma Partners · Ihr digitaler Begleiter für Ihre Therapie</div>
+    <div class="uhp-footer-bottom">© 2026 <span class="brand-entity">Healthcare Deutschland</span> · Ihr digitaler Begleiter für Ihre Therapie</div>
   </footer>
 </div>
 
@@ -929,7 +929,7 @@ const I18N = {
     nxt2_t:"Wir organisieren alles für Sie", nxt2_d:"Sofern Sie die erforderlichen Angaben gemacht haben, klärt das H+ Team alles direkt mit Ihrem Arzt und Ihrer Apotheke. Sobald alle Details bestätigt sind, melden wir uns bei Ihnen und erklären die nächsten Schritte.", nxt2_pill:"Dauer: bis zu 48 Stunden",
     nxt3_t:"Sie erhalten Benachrichtigungen von uns", nxt3_d:"In der Zwischenzeit erhalten Sie weiterhin Benachrichtigungen – ganz nach den von Ihnen gewählten Einstellungen.",
     trust1:"✓ Kostenlos nutzbar", trust2:"✓ DSGVO-konform", trust3:"✓ Jederzeit kündbar", trust4:"✓ Expertenbetreuung",
-    step1_name:"Über Sie", step2_name:"Ihre Therapie", step3_name:"Ihre Unterstützung", step4_name:"Geschafft",
+    step1_name:"Anmelden", step2_name:"Ihre Medikation einrichten", step3_name:"Leistungen auswählen", step4_name:"Auswahl bestätigen",
     s1_title:"Willkommen{name} 👋", s1_sub:"Richten wir Ihren Therapy Companion ein – in nur ~2 Minuten kümmern wir uns um Erinnerungen, Nachschub und Lieferung.",
     role_label:"Zuerst: Machen Sie das für sich selbst oder für jemanden, den Sie betreuen?", opt_select:"Bitte auswählen…", opt_patient:"Patient", opt_caregiver:"Betreuer",
     firstname_label:"Vorname", lastname_label:"Nachname", email_label:"E-Mail-Adresse",
@@ -955,7 +955,7 @@ const I18N = {
     med_q:"Welches Medikament nehmen Sie?", med_h:"Medikationsdetails", med_name_l:"Name", med_dose_l:"Dosis", med_dose_v:"25 mg Filmtablette", med_freq_l:"Häufigkeit", med_freq_v:"Eine Tablette täglich", med_admin_l:"Verabreichung", med_admin_v:"Oral",
     confirm_med:"Ich bestätige, dass mir die oben genannten Medikamente in diesen Dosierungen verschrieben wurden.", err_confirm:"Bitte bestätigen Sie Ihre Verschreibung.",
     firstdate_label:"Wann war das Datum der ersten Einnahme?", firstdate_will:"Wann werden Sie Ihre erste Dosis einnehmen?", err_date:"Bitte geben Sie ein Datum an.", received_med_q:"Haben Sie Ihr Medikament bereits erhalten?", rxlow_q:"Möchten Sie Erinnerungen erhalten, wenn Ihr Medikamentenvorrat zur Neige geht?", prefs_q:"Welche Präferenzen haben Sie für diese automatisierten Dienste?",
-    other_med_label_html:'Nimmt der Patient noch andere Medikamente ein? <span style="font-weight:400;color:#71777C">(Bitte geben Sie Details an)</span>',
+    other_med_label_html:'Nehmen Sie noch andere Medikamente ein? <span style="font-weight:400;color:#71777C">(Bitte geben Sie Details an)</span>',
     other_med_ph:"z. B. Name, Dosis … oder „keine“",
     freq_label:"Wie oft möchten Sie, dass wir uns bei Ihnen melden?",
     freq_h:"Regelmäßige Check-ins",
@@ -1075,7 +1075,7 @@ const I18N = {
     nxt2_t:"We arrange everything for you", nxt2_d:"If you have provided the necessary details, the H+ team will arrange everything directly with your doctor and pharmacy. Once all the details are confirmed, we'll be in touch to explain the next steps.", nxt2_pill:"Takes up to 48 hours",
     nxt3_t:"You will receive notifications from us", nxt3_d:"In the meantime, you'll keep receiving notifications — based on the preferences you selected.",
     trust1:"✓ Free to use", trust2:"✓ GDPR-compliant", trust3:"✓ Can be cancelled at any time", trust4:"✓ Expert support",
-    step1_name:"About you", step2_name:"Your therapy", step3_name:"Your support", step4_name:"All set",
+    step1_name:"Sign up", step2_name:"Get started with your medication", step3_name:"Pick & choose your services", step4_name:"Confirm your choices",
     s1_title:"Welcome{name} 👋", s1_sub:"Let’s set up your Therapy Companion – in ~2 minutes we’ll handle reminders, refills and delivery for you.",
     role_label:"First up – is this for you, or for someone you care for?", opt_select:"Please select…", opt_patient:"Patient", opt_caregiver:"Caregiver",
     firstname_label:"First name", lastname_label:"Last name", email_label:"Email address",
@@ -1101,7 +1101,7 @@ const I18N = {
     med_q:"Which medicine are you taking?", med_h:"Medication details", med_name_l:"Name", med_dose_l:"Dose", med_dose_v:"25 mg film-coated tablet", med_freq_l:"Frequency", med_freq_v:"One tablet daily", med_admin_l:"Administration", med_admin_v:"Oral",
     confirm_med:"I confirm that the above medication was prescribed to me at these doses.", err_confirm:"Please confirm your prescription.",
     firstdate_label:"When was your first dose taken?", firstdate_will:"When will you take your first dose?", err_date:"Please provide a date.", received_med_q:"Have you already received your medication?", rxlow_q:"Would you like to receive prescription reminders when you are low on medication?", prefs_q:"What are your preferences for these automated services?",
-    other_med_label_html:'Does the patient take any other medication? <span style="font-weight:400;color:#71777C">(please provide details)</span>',
+    other_med_label_html:'Do you take any other medication? <span style="font-weight:400;color:#71777C">(please provide details)</span>',
     other_med_ph:"e.g. name, dose … or “none”",
     freq_label:"How often would you like us to check in?",
     freq_h:"Regular check-ins",
@@ -1195,7 +1195,19 @@ const I18N = {
   }
 };
 
-let currentLang = (function(){ try{ return localStorage.getItem('hplus_lang')||'de'; }catch(e){ return 'de'; } })();
+let currentLang = (function(){
+  /* Follow the website's own language when it says one (/en/ path, ?lang=en, or the
+     page's lang attribute); otherwise fall back to the visitor's last choice. */
+  try{
+    var p=(location.pathname+location.search+location.hash).toLowerCase();
+    if(/(^|[\/\-_?&=])en([\/\-_?&=]|$)/.test(p) || /[?&](lang|hl|locale)=en/.test(p)) return 'en';
+    if(/(^|[\/\-_?&=])de([\/\-_?&=]|$)/.test(p) || /[?&](lang|hl|locale)=de/.test(p)) return 'de';
+    var htmlLang=(document.documentElement.getAttribute('lang')||'').toLowerCase();
+    if(htmlLang.indexOf('en')===0) return 'en';
+    if(htmlLang.indexOf('de')===0) return 'de';
+  }catch(e){}
+  try{ return localStorage.getItem('hplus_lang')||'de'; }catch(e){ return 'de'; }
+})();
 /* Caregiver perspective: the registrant is "you"; questions about the patient are
    rephrased in the third person. Only keys that differ are listed. */
 const CG = {
@@ -1211,7 +1223,8 @@ const CG = {
     rxlow_q:"Möchten Sie Erinnerungen erhalten, wenn der Medikamentenvorrat des Patienten zur Neige geht?",
     freq_label:"Wie oft sollen wir uns bei Ihnen zur Therapie des Patienten melden?",
     s3_title:"So machen wir Ihnen und dem Patienten den Alltag leichter",
-    med_h:"Medikationsdetails des Patienten"
+    med_h:"Medikationsdetails des Patienten",
+    other_med_label_html:'Nimmt der Patient noch andere Medikamente ein? <span style="font-weight:400;color:#71777C">(Bitte geben Sie Details an)</span>'
   },
   en:{
     step2_name:"The therapy",
@@ -1225,7 +1238,8 @@ const CG = {
     rxlow_q:"Would you like reminders when the patient is low on medication?",
     freq_label:"How often should we check in with you about the patient's therapy?",
     s3_title:"Let's make things easier for you and the patient",
-    med_h:"The patient's medication details"
+    med_h:"The patient's medication details",
+    other_med_label_html:'Does the patient take any other medication? <span style="font-weight:400;color:#71777C">(please provide details)</span>'
   }
 };
 const t = k => {
@@ -2223,5 +2237,26 @@ applyRoleWording();   // reflect a restored role in the wording
 $('hplusForm').addEventListener('input',saveState);        // persist as the patient types
 $('hplusForm').addEventListener('change',saveState);
 
+})();
+</script>
+
+<script>
+/* The public-facing entity is Healthcare Deutschland or Healthcare Austria depending
+   on the market — never the wholesale or holding company. */
+(function(){
+  function entity(){
+    var path=(location.pathname+location.search+location.hash).toLowerCase();
+    var sel=document.getElementById('country');
+    var at = (sel && sel.value==='\u00d6sterreich') || /(^|[\/\-_?&=])at([\/\-_?&=]|$)/.test(path);
+    return at ? 'Healthcare Austria' : 'Healthcare Deutschland';
+  }
+  function paint(){
+    var name=entity();
+    document.querySelectorAll('.brand-entity').forEach(function(el){ el.textContent=name; });
+  }
+  paint();
+  var sel=document.getElementById('country');
+  if(sel) sel.addEventListener('change',paint);
+  document.addEventListener('DOMContentLoaded',paint);
 })();
 </script>
