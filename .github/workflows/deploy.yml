@@ -1,0 +1,49 @@
+name: Deploy to server
+
+# Every push to main goes live automatically. Run it by hand from the Actions tab
+# when you need to re-publish without a code change.
+on:
+  push:
+    branches: [main]
+    paths: ['*.html', '.github/workflows/deploy.yml']
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the pages are well-formed before publishing
+        run: |
+          fail=0
+          for f in *.html; do
+            [ -s "$f" ] || { echo "::error::$f is empty"; fail=1; }
+            grep -qi '<meta charset' "$f" || echo "::warning::$f has no charset tag"
+          done
+          exit $fail
+
+      - name: Load the deploy key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -p "${{ secrets.DEPLOY_PORT || 22 }}" -H "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Publish
+        run: |
+          rsync -avz --delete \
+            --include='*.html' --exclude='*' \
+            -e "ssh -p ${{ secrets.DEPLOY_PORT || 22 }} -i ~/.ssh/id_ed25519" \
+            ./ "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}/"
+
+      - name: Confirm the site responds
+        if: ${{ secrets.HEALTHCHECK_URL != '' }}
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "${{ secrets.HEALTHCHECK_URL }}")
+          echo "Site returned $code"
+          [ "$code" = "200" ] || { echo "::error::Site did not return 200"; exit 1; }
