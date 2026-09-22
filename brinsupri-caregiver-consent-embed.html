@@ -578,14 +578,35 @@ $('f').addEventListener('submit',async e=>{
   var host=document.querySelector('.hplus-root')||document.querySelector('.hplus-wrap');
   if(host && !host.contains(ov)) host.appendChild(ov);
   var box=document.getElementById('legalDoc'), title=document.getElementById('legalTitle');
+
+  /* A document is shown in the interface language when a translation exists,
+     otherwise in the language it was written in. Legal particulars - the
+     Impressum, company name and address - stay German by law. */
+  var DOCS_I18N = { de:{}, en:{} };
+  function docLang(){
+    var l=(document.documentElement.lang||'de').toLowerCase();
+    return l.indexOf('en')===0 ? 'en' : 'de';
+  }
+  function pickDoc(key){
+    var m=DOCS_I18N[docLang()]||{};
+    return (m[key]!=null) ? m[key] : DOCS[key];
+  }
   function open(key,label){
-    var html=DOCS[key]; if(html==null) return false;
+    var html=pickDoc(key); if(html==null) return false;
     title.textContent=label||''; box.innerHTML=html; box.scrollTop=0;
     ov.querySelector('.legal-body').scrollTop=0;
     ov.classList.add('open'); return true;
   }
   function close(){ ov.classList.remove('open'); box.innerHTML=''; }
   document.getElementById('legalClose').addEventListener('click',close);
+  /* language can change while a document is open */
+  try{
+    var _lastKey=null, _open=open;
+    open=function(k,l){ _lastKey=k; return _open(k,l); };
+    new MutationObserver(function(){
+      if(_lastKey && ov.classList.contains('open')) box.innerHTML=pickDoc(_lastKey);
+    }).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+  }catch(e){}
   document.getElementById('legalDone').addEventListener('click',close);
   ov.addEventListener('click',function(e){ if(e.target===ov) close(); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&ov.classList.contains('open')) close(); });
