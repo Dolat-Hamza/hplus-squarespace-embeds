@@ -1922,7 +1922,8 @@ function validateSub3(n){
       // all doctor practice details are required to progress
       $('addressFields').style.display='block';
       let complete=true;
-      ['doctor_first','doctor_last','doctor_street2','doctor_street','doctor_postcode','doctor_phone','doctor_fax'].forEach(id=>{
+      /* the fax is genuinely optional here, as its label says */
+      ['doctor_first','doctor_last','doctor_street2','doctor_street','doctor_postcode','doctor_phone'].forEach(id=>{
         if(val(id)===''){ const f=$(id).closest('.field'); if(f){ f.classList.add('invalid'); ensureFmtErr(f,t('err_required')); } complete=false; }
       });
       if(!complete){ showErr('infoErr',true); ok=false; $('infoErr').scrollIntoView({behavior:'smooth',block:'center'}); }
@@ -2492,7 +2493,17 @@ $('hplusForm').addEventListener('change',saveState);
     var l=(document.documentElement.lang||'de').toLowerCase();
     return l.indexOf('en')===0 ? 'en' : 'de';
   }
+  /* The site link table may repoint a document link at wherever that page lives
+     on the live site. The dialog still has to recognise it, so a rewritten path
+     is mapped back to the key the documents are stored under. */
+  function originalKey(key){
+    if(DOCS[key]!=null) return key;
+    var M=window.HPLUS_LINKS||{};
+    for(var k in M){ if(M[k]===key && DOCS[k]!=null) return k; }
+    return key;
+  }
   function pickDoc(key){
+    key=originalKey(key);
     var m=DOCS_I18N[docLang()]||{};
     return (m[key]!=null) ? m[key] : DOCS[key];
   }
