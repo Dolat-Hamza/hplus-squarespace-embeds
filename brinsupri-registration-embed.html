@@ -653,10 +653,10 @@
             <div class="field"><label data-i18n="doc_street"></label><input type="text" id="doctor_street"></div>
             <div class="field" style="max-width:220px"><label data-i18n="doc_postcode"></label><input type="text" id="doctor_postcode"></div>
             <div class="two-col">
-              <div class="field"><label data-i18n="doc_phone"></label><div class="phone-row"><select id="doctor_phone_cc" class="cc-select"><option value="+49">&#x1F1E9;&#x1F1EA; +49</option><option value="+43">&#x1F1E6;&#x1F1F9; +43</option></select><input type="tel" id="doctor_phone" placeholder="030 1234567" autocomplete="off"></div></div>
+              <div class="field"><label data-i18n="doc_phone"></label><div class="phone-row"><select id="doctor_phone_cc" class="cc-select"><option value="+49">&#x1F1E9;&#x1F1EA; +49</option><option value="+43">&#x1F1E6;&#x1F1F9; +43</option></select><input type="tel" id="doctor_phone" placeholder="030 1234567" autocomplete="off" data-validate="phone"></div></div>
               <div class="field"><label data-i18n="doc_email"></label><input type="email" id="doctor_email" data-validate="email"></div>
             </div>
-            <div class="field"><label data-i18n="doc_fax"></label><div class="phone-row"><select id="doctor_fax_cc" class="cc-select"><option value="+49">&#x1F1E9;&#x1F1EA; +49</option><option value="+43">&#x1F1E6;&#x1F1F9; +43</option></select><input type="tel" id="doctor_fax" placeholder="030 1234567" autocomplete="off"></div></div>
+            <div class="field"><label data-i18n="doc_fax"></label><div class="phone-row"><select id="doctor_fax_cc" class="cc-select"><option value="+49">&#x1F1E9;&#x1F1EA; +49</option><option value="+43">&#x1F1E6;&#x1F1F9; +43</option></select><input type="tel" id="doctor_fax" placeholder="030 1234567" autocomplete="off" data-validate="phone"></div></div>
           </div>
 
           <div class="err-msg" id="infoErr" data-i18n="err_need_info"></div>
@@ -1406,7 +1406,22 @@ function placeRelationshipField(isCg){
 }
 document.querySelectorAll('.langswitch button').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));
 /* ---- Step 2: received-medication date label + prescription-reminder preferences ---- */
-function syncFirstDateLabel(){ var el=document.getElementById('firstDateLabel'); if(!el) return; var r=radio('received_medication'); el.textContent=t(r==='No'?'firstdate_will':'firstdate_label'); }
+/* The question flips between "when did you take your first dose" and "when will
+   you", so the allowed range has to flip with it - a past date is meaningless for
+   one and a future date for the other. */
+function syncFirstDateBounds(fd, today, maxDose){
+  fd=fd||$('first_medication_date'); if(!fd) return;
+  today=today||new Date();
+  if(!maxDose){ maxDose=new Date(today); maxDose.setMonth(maxDose.getMonth()+3); }
+  if(radio('received_medication')==='No'){   // not yet taken - only the future
+    fd.min=ymd(today); fd.max=ymd(maxDose);
+  }else{                                      // already taken - only the past
+    fd.min='2026-07-02'; fd.max=ymd(today);
+  }
+  const v=fd.value;
+  if(v && (v<fd.min || v>fd.max)){ fd.value=''; }   // a date that no longer fits is cleared rather than silently submitted
+}
+function syncFirstDateLabel(){ var el=document.getElementById('firstDateLabel'); if(el){ var r=radio('received_medication'); el.textContent=t(r==='No'?'firstdate_will':'firstdate_label'); } syncFirstDateBounds(); }
 function syncMedPrefs(){
   var show = radio('reminder_freq')!=='' || radio('prescription_reminders_low')==='Yes';
   var cp=document.getElementById('card_prefs'); if(cp) cp.style.display=show?'block':'none';
@@ -1546,7 +1561,7 @@ const ymd=d=>{const z=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+z(
 function setupDates(){
   const today=new Date();
   const fd=$('first_medication_date'); const maxDose=new Date(today); maxDose.setMonth(maxDose.getMonth()+3);
-  fd.min='2026-07-02'; fd.max=ymd(maxDose);
+  syncFirstDateBounds(fd, today, maxDose);
   const ap=$('appointment_date'); if(ap){ ap.min=ymd(today); }
   const cb=$('callback_date'); const minCb=new Date(today); minCb.setDate(minCb.getDate()+2); const maxCb=new Date(today); maxCb.setDate(maxCb.getDate()+7);
   cb.min=ymd(minCb); cb.max=ymd(maxCb);
@@ -2044,10 +2059,12 @@ function payloadRegistration(){
     put('patient_whatsapp',   phoneFull('patient_whatsapp'));
     put('patient_phone',      phoneFull('patient_phone'));
     put('patient_sms',        phoneFull('patient_sms'));
-    // HubSpot's standard phone fields, so they show on the contact record too
-    put('mobilephone',              phoneFull('patient_phone'));
-    put('hs_whatsapp_phone_number', phoneFull('patient_whatsapp'));
   }
+  /* HubSpot's own phone fields belong to the contact record itself, so they are
+     written whoever is registering - they were previously only set for a patient,
+     leaving every caregiver contact without a phone number. */
+  put('mobilephone',              phoneFull('patient_phone'));
+  put('hs_whatsapp_phone_number', phoneFull('patient_whatsapp'));
   f.push(field('would_you_like_the_medication_reminders_to_be_sent_to_a_second_person_',radio('second_person')));
   if(radio('second_person')==='Yes' || isCg){
     if(isCg){
