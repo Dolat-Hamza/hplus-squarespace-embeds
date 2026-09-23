@@ -1773,10 +1773,22 @@ function phoneFull(id){
   const v=inp.value.trim(); if(!v) return '';
   if(inp.dataset.nocc) return v;                                  // no country code \u2014 send exactly as typed
   const sel=document.getElementById(id+'_cc');
-  if(sel){ // strip a country code the user may have typed in as well
-    let nat=v.replace(/^\+?\d{1,3}[\s-]?/, m=>v.startsWith(sel.value)?'':m).replace(/^0+/,'');
-    if(v.startsWith(sel.value)) nat=v.slice(sel.value.length).replace(/^[\s-]+/,'').replace(/^0+/,'');
-    return (sel.value+' '+nat.replace(/\D/g,'')).trim();
+  if(sel){
+    /* A value that already begins with + carries its own country code - typed that
+       way, or restored from a stored number whose code is not in this selector.
+       Prefixing the selector's code as well produced numbers like "+44 4975333". */
+    const intl=v.match(/^\+\s*(\d[\d\s\-().\/]*)$/);
+    if(intl){
+      const digits=intl[1].replace(/\D/g,'');
+      let best='';
+      [].slice.call(sel.options).forEach(function(o){
+        const code=String(o.value||'').replace(/\D/g,'');
+        if(code && digits.indexOf(code)===0 && code.length>best.length) best=code;
+      });
+      return best ? ('+'+best+' '+digits.slice(best.length)) : ('+'+digits);
+    }
+    const nat=v.replace(/^0+/,'').replace(/\D/g,'');
+    return (sel.value+' '+nat).trim();
   }
   if(inp.dataset.validate==='phone-global') return '+'+v.replace(/\D/g,'');
   return (ccOf(inp)+' '+v.replace(/^0+/,'')).trim();
