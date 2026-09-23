@@ -1457,7 +1457,14 @@ function syncCommFields(){
 document.querySelectorAll('#comm_prefs input').forEach(c=>c.addEventListener('change',syncCommFields));
 /* caregiver contact fields \u2014 same pattern as the patient's: only show the ones selected */
 function syncCgCommFields(){
-  $('c_sc_email').style.display=document.querySelector('#cg_comm_prefs input[value=Email]').checked?'block':'none';
+  /* When a caregiver registers, the patient is the contact, so the patient's email
+     is needed whether or not email is one of their chosen contact methods -
+     without it HubSpot has nothing to create the contact against. */
+  var cgReg = val('customer_type')==='Caregiver';
+  var emailPicked = document.querySelector('#cg_comm_prefs input[value=Email]').checked;
+  var ef=$('c_sc_email');
+  ef.style.display = (cgReg || emailPicked) ? 'block' : 'none';
+  if(cgReg){ ef.setAttribute('data-required',''); } else { ef.removeAttribute('data-required'); }
   $('c_sc_whatsapp').style.display=document.querySelector('#cg_comm_prefs input[value=Whatsapp]').checked?'block':'none';
   $('c_sc_phone').style.display=document.querySelector('#cg_comm_prefs input[value=Phone]').checked?'block':'none';
   $('c_sc_sms').style.display=document.querySelector('#cg_comm_prefs input[value=SMS]').checked?'block':'none';
@@ -1471,7 +1478,7 @@ function syncSecondPerson(){
   const cc=$('cgContactBlock'); if(cc) cc.style.display = (isCg && !yes) ? 'none' : 'block';
 }
 document.querySelectorAll('input[name=second_person]').forEach(r=>r.addEventListener('change',syncSecondPerson));
-$('customer_type').addEventListener('change',function(){ syncSecondPerson(); applyLang(currentLang); });
+$('customer_type').addEventListener('change',function(){ syncSecondPerson(); applyLang(currentLang); try{ syncCgCommFields(); }catch(e){} });
 document.querySelectorAll('.choice input').forEach(inp=>{
   const paint=()=>{ const c=inp.closest('.choice'); if(inp.type==='radio'){document.querySelectorAll(`input[name="${inp.name}"]`).forEach(o=>o.closest('.choice').classList.remove('selected'));} c.classList.toggle('selected',inp.checked); };
   inp.addEventListener('change',paint); paint();
@@ -2031,9 +2038,19 @@ function context(){ return { pageUri:location.href, pageName:document.title, hut
 function payloadRegistration(){
   const f=[];
   f.push(field('customer_type',val('customer_type')));
-  f.push(field('firstname',val('firstname')));
-  f.push(field('lastname',val('lastname')));
-  f.push(field('email',val('email')));
+  /* The contact is always the patient, as it is on the account page. When a
+     caregiver registers they fill the first block with their own details and the
+     second with the patient's, so the identity fields are read from whichever
+     block holds the patient - never from the registrant. */
+  const cgReg = val('customer_type')==='Caregiver';
+  const pFirst = cgReg ? val('second_contact_person')  : val('firstname');
+  const pLast  = cgReg ? val('second_contact_surname') : val('lastname');
+  const pEmail = cgReg ? val('second_contact_email')   : val('email');
+  const pPhone = cgReg ? phoneFull('second_contact_phone')    : phoneFull('patient_phone');
+  const pWa    = cgReg ? phoneFull('second_contact_whatsapp') : phoneFull('patient_whatsapp');
+  f.push(field('firstname',pFirst));
+  f.push(field('lastname',pLast));
+  f.push(field('email',pEmail));
   /* Role-aware mapping: the first block is always the registrant, the second block the
      other person. A caregiver registrant therefore writes their own details to the
      caregiver properties and the patient's to the patient properties (and vice versa). */
@@ -2060,11 +2077,9 @@ function payloadRegistration(){
     put('patient_phone',      phoneFull('patient_phone'));
     put('patient_sms',        phoneFull('patient_sms'));
   }
-  /* HubSpot's own phone fields belong to the contact record itself, so they are
-     written whoever is registering - they were previously only set for a patient,
-     leaving every caregiver contact without a phone number. */
-  put('mobilephone',              phoneFull('patient_phone'));
-  put('hs_whatsapp_phone_number', phoneFull('patient_whatsapp'));
+  /* HubSpot's own phone fields describe the contact, which is the patient. */
+  put('mobilephone',              pPhone);
+  put('hs_whatsapp_phone_number', pWa);
   f.push(field('would_you_like_the_medication_reminders_to_be_sent_to_a_second_person_',radio('second_person')));
   if(radio('second_person')==='Yes' || isCg){
     if(isCg){
@@ -2088,6 +2103,7 @@ function payloadRegistration(){
       put('caregiver_sms',          phoneFull('caregiver_sms'));
     }
   }
+  /* the account belongs to whoever registered, which for a caregiver is not the patient */
   if(checked('create_an_account')){ f.push(field('create_an_account','true')); f.push(field('account_email',val('email'))); }
   f.push(field('agree_to_terms','true'));
   /* Only mapped medicines can be written to the HubSpot picklist. Sending nothing
