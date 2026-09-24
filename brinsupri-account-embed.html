@@ -2203,7 +2203,9 @@ function countryName(){
   if(v==='Deutschland') return 'Germany';
   return '';
 }
-  f.push(field('customer_type','Patient'));
+  /* keep the type the record already has - a caregiver's own record must not be
+     relabelled a patient just because they edited it */
+  f.push(field('customer_type', window.__acctType || 'Patient'));
   { const c=countryName(); if(c) f.push(field('country',c));
     const cc=countryCode(); if(cc){ f.push(field('country_region_code',cc)); f.push(field('hs_country_region_code',cc)); } }
   return {fields:f, context:context()};
@@ -2411,6 +2413,7 @@ $('hplusForm').addEventListener('change',saveState);
       }
       else if(k==='check') setCheck(id, v==='true');
       else if(k==='radio') setRadio(id, radioValue(id, v));
+      if(id==='customer_type' && v) { window.__acctType = v; }   // keep whoever this record belongs to
       else if(k==='multi') setMulti(id, v);
     });
     var note=document.getElementById('acctPrefillNote');
@@ -2693,5 +2696,38 @@ $('hplusForm').addEventListener('change',saveState);
     if(h) new MutationObserver(paint).observe(h,{subtree:true,childList:true,characterData:true});
     if(f) new MutationObserver(paint).observe(f,{subtree:true,childList:true,characterData:true});
   }catch(e){ setTimeout(paint,400); setTimeout(paint,1200); }
+})();
+</script>
+
+<script>
+/* The account page is opened by patients and by caregivers. The first block is
+   always this contact's own details, so it has to be labelled for whoever they
+   are, and the second block for the other person. */
+(function(){
+  var L = {
+    de:{ own_caregiver:"Betreuung", own_patient:"Patient",
+         h_caregiver:"Angaben zur Betreuungsperson", h_patient:"Patientendaten",
+         other_patient:"Angaben zum Patienten", other_caregiver:"Angaben zur Betreuungsperson" },
+    en:{ own_caregiver:"Caregiver", own_patient:"Patient",
+         h_caregiver:"Caregiver Details", h_patient:"Patient Details",
+         other_patient:"Patient details", other_caregiver:"Caregiver details" }
+  };
+  function paint(){
+    var isCg = (window.__acctType || '') === 'Caregiver';
+    if(!isCg) return;                      // a patient's record already reads correctly
+    var l = (document.documentElement.lang||'de').toLowerCase().indexOf('en')===0 ? 'en' : 'de';
+    var d = L[l] || L.de;
+    var set = function(sel, txt){ document.querySelectorAll(sel).forEach(function(el){ if(txt) el.textContent = txt; }); };
+    set('[data-i18n="step1_name"]', d.own_caregiver);
+    set('[data-i18n="step2_name"]', d.own_patient);
+    set('[data-i18n="patient_details_h"]', d.h_caregiver);
+    set('[data-i18n="s1_title"]', d.h_caregiver);
+    set('[data-i18n="s2cg_title"]', d.h_patient);
+    set('[data-i18n="rv_your_details"]', d.h_caregiver);
+    set('[data-i18n="rv_other_person"]', d.other_patient);
+  }
+  var t = setInterval(paint, 800);
+  setTimeout(function(){ clearInterval(t); }, 20000);
+  try{ new MutationObserver(paint).observe(document.documentElement,{attributes:true,attributeFilter:['lang']}); }catch(e){}
 })();
 </script>
