@@ -2068,6 +2068,13 @@ function context(){ return { pageUri:location.href, pageName:document.title, hut
 function contactEmail(){
   return (val('customer_type')==='Caregiver' ? val('second_contact_email') : val('email')) || val('email');
 }
+/* HubSpot's Country/Region Code is the two-letter ISO code, and WhatsApp and SMS
+   routing keys off it. Sent under both the plain and the hs_ prefixed name so the
+   one the portal actually uses is populated. */
+function countryCode(){
+  var n=countryName();
+  return n==='Austria' ? 'AT' : n==='Germany' ? 'DE' : '';
+}
 function countryName(){
   var path=(location.pathname+location.search+location.hash).toLowerCase();
   if(/(^|[\/\-_?&=])at([\/\-_?&=]|$)/.test(path)) return 'Austria';
@@ -2083,7 +2090,8 @@ function payloadRegistration(){
      is always the patient, so it is always Patient - the HubSpot workflow reads
      this to decide which counterpart contact to create. */
   f.push(field('customer_type','Patient'));
-  { const c=countryName(); if(c) f.push(field('country',c)); }   // set from step 1 onwards
+  { const c=countryName(); if(c) f.push(field('country',c));
+    const cc=countryCode(); if(cc){ f.push(field('country_region_code',cc)); f.push(field('hs_country_region_code',cc)); } }
   /* The contact is always the patient, as it is on the account page. When a
      caregiver registers they fill the first block with their own details and the
      second with the patient's, so the identity fields are read from whichever
@@ -2189,7 +2197,8 @@ function payloadDelivery(){
   const at=val('country')==='\u00d6sterreich', delivery=checked('delivery_management'), rx=checked('prescription_management');
   const consentGiven=checked('delivery_consent'), hcpGiven=checked('hcp_consent');
   f.push(field('h_country',val('country')));
-  { const c=countryName(); if(c) f.push(field('country',c)); }
+  { const c=countryName(); if(c) f.push(field('country',c));
+    const cc=countryCode(); if(cc){ f.push(field('country_region_code',cc)); f.push(field('hs_country_region_code',cc)); } }
   /* Keep the new shared country property while also satisfying the delivery
      form's required legacy country field. Both receive the identical value. */
   f.push(field('doctors_country_brinsupri',val('country')));
