@@ -2198,7 +2198,8 @@ function payloadAccount(){
   put('work_email', val('doctor_email'));
   put('doctors_country_brinsupri', val('country'));
 
-  f.push(field('customer_type', val('customer_type')||'Patient'));
+  /* the contact is the patient here too */
+  f.push(field('customer_type','Patient'));
   return {fields:f, context:context()};
 }
 

@@ -2061,7 +2061,10 @@ function buildReview(){
 function context(){ return { pageUri:location.href, pageName:document.title, hutk:(document.cookie.match(/hubspotutk=([^;]+)/)||[])[1]||undefined }; }
 function payloadRegistration(){
   const f=[];
-  f.push(field('customer_type',val('customer_type')));
+  /* customer_type describes the contact, not who filled the form in. The contact
+     is always the patient, so it is always Patient - the HubSpot workflow reads
+     this to decide which counterpart contact to create. */
+  f.push(field('customer_type','Patient'));
   /* The contact is always the patient, as it is on the account page. When a
      caregiver registers they fill the first block with their own details and the
      second with the patient's, so the identity fields are read from whichever
