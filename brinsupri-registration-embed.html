@@ -2317,6 +2317,20 @@ function saveState(){
       else if(el.value!==''){ s[k]=el.value; }
     });
     localStorage.setItem(LS_KEY,JSON.stringify(s));
+    /* The account page needs to know whose account to open: the person who filled
+       the form in, not simply the patient. Their own address and the patient's are
+       both kept, so the account page can fall back to shared details while a
+       caregiver's own record is still being created. */
+    try{
+      var isCg = val('customer_type')==='Caregiver';
+      var self  = val('email');
+      var pat   = isCg ? val('second_contact_email') : val('email');
+      if(self){
+        localStorage.setItem('hplus_registrant', JSON.stringify({
+          role: isCg ? 'Caregiver' : 'Patient', self: self, patient: pat || self
+        }));
+      }
+    }catch(e){}
   }catch(e){}
 }
 function restoreState(){

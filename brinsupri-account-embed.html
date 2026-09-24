@@ -2454,6 +2454,8 @@ $('hplusForm').addEventListener('change',saveState);
         if(notYet && PREFILL_TRIES < PREFILL_MAX){
           PREFILL_TRIES++;
           showSettingUp();
+          /* show what can be shared from the patient in the meantime */
+          if(PREFILL_TRIES===1 && window.__acctPatientEmail) prefillSharedFromPatient(window.__acctPatientEmail);
           setTimeout(function(){ prefill(qs); }, 30000);
           return;
         }
@@ -2493,16 +2495,52 @@ $('hplusForm').addEventListener('change',saveState);
     });
   }
 
+  /* Fields that describe the therapy rather than the person. While a caregiver's
+     own record is still being created, these can be shown from the patient's
+     record; anything identifying them cannot. */
+  var SHARED_WITH_PATIENT = ['med_select','md_name_in','md_dose_in','md_freq_in','md_admin_in',
+    'first_medication_date','other_medication','reminder_freq','prescription_reminders_low',
+    'country','delivery_management','prescription_management','pharmacy_choice',
+    'chosen_pharmacy_name','chosen_pharmacy_street','chosen_pharmacy_city','chosen_pharmacy_postcode',
+    'doctor_first','doctor_last','doctor_street','doctor_street2','doctor_postcode','doctor_phone','doctor_email','doctor_fax',
+    'delivery_street','delivery_street2','delivery_postcode','delivery_city'];
+
+  function prefillSharedFromPatient(patientEmail){
+    fetch(ACCOUNT_API+'/api/account/prefill?email='+encodeURIComponent(patientEmail))
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        if(!(j && j.ok && j.data)) return;
+        var subset={};
+        SHARED_WITH_PATIENT.forEach(function(k){ if(j.data[k]!=null) subset[k]=j.data[k]; });
+        if(Object.keys(subset).length) apply(subset);
+      })
+      .catch(function(){});
+  }
+
+  function registrant(){
+    try{ return JSON.parse(localStorage.getItem('hplus_registrant')||'null'); }catch(e){ return null; }
+  }
+
   function boot(){
     var p=new URLSearchParams(location.search);
     /* a HubSpot mailing can link here with any of these; the signed token is the
        safest, a contact id next, a plain email last */
     var token=p.get('token'), email=p.get('email'),
         cid=p.get('contactId')||p.get('hs_object_id')||p.get('vid');
-    if(token) prefill('token='+encodeURIComponent(token));
-    else if(cid) prefill('contactId='+encodeURIComponent(cid));
-    else if(email) prefill('email='+encodeURIComponent(email));
-    else showGate('');
+    if(token) { prefill('token='+encodeURIComponent(token)); return; }
+    if(cid)   { prefill('contactId='+encodeURIComponent(cid)); return; }
+    if(email) { prefill('email='+encodeURIComponent(email)); return; }
+
+    /* arriving straight from the form: open the account of whoever filled it in */
+    var reg = registrant();
+    if(reg && reg.self){
+      if(reg.role==='Caregiver' && reg.patient && reg.patient!==reg.self){
+        window.__acctPatientEmail = reg.patient;
+      }
+      prefill('email='+encodeURIComponent(reg.self));
+      return;
+    }
+    showGate('');
   }
   if(document.readyState!=='loading') boot(); else document.addEventListener('DOMContentLoaded', boot);
 })();
