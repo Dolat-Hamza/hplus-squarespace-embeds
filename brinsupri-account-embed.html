@@ -2442,7 +2442,10 @@ $('hplusForm').addEventListener('change',saveState);
       '<input type="email" id="acctEmail" placeholder="you@email.com" autocomplete="email">'+
       '<button type="button" id="acctSend">Link senden / Send link</button>'+
       '<span class="g-msg" id="acctMsg"></span>';
-    root.insertBefore(g, root.firstChild);
+    /* the sign-in prompt belongs under the header, not above it */
+  var hdr = root.querySelector('.uhp-header');
+  if (hdr) root.insertBefore(g, hdr.nextSibling);
+  else root.insertBefore(g, root.firstChild);
     if(msg){ document.getElementById('acctMsg').textContent=msg; }
     document.getElementById('acctSend').addEventListener('click',function(){
       var em=(document.getElementById('acctEmail').value||'').trim();
