@@ -2062,6 +2062,12 @@ function context(){ return { pageUri:location.href, pageName:document.title, hut
 /* The country drives HubSpot workflows, so it must be set on the very first
    submission and in English. It comes from the URL (a de or at segment) and
    falls back to the dropdown when the URL does not say. */
+/* Every submission must carry the same identifying e-mail, or HubSpot keys the
+   later steps to a different contact. The contact is the patient, so this is the
+   patient's address whoever filled the form in. */
+function contactEmail(){
+  return (val('customer_type')==='Caregiver' ? val('second_contact_email') : val('email')) || val('email');
+}
 function countryName(){
   var path=(location.pathname+location.search+location.hash).toLowerCase();
   if(/(^|[\/\-_?&=])at([\/\-_?&=]|$)/.test(path)) return 'Austria';
@@ -2090,7 +2096,7 @@ function payloadRegistration(){
   const pWa    = cgReg ? phoneFull('second_contact_whatsapp') : phoneFull('patient_whatsapp');
   f.push(field('firstname',pFirst));
   f.push(field('lastname',pLast));
-  f.push(field('email',pEmail));
+  f.push(field('email',contactEmail()));
   /* Role-aware mapping: the first block is always the registrant, the second block the
      other person. A caregiver registrant therefore writes their own details to the
      caregiver properties and the patient's to the patient properties (and vice versa). */
@@ -2175,7 +2181,7 @@ function payloadMedical(){
   if(val('first_medication_date')) f.push(field('uhp_first_medication_date',toEpoch(val('first_medication_date'))));
   if(val('other_medication')) f.push(field('does_the_patient_take_any_other_medication_',val('other_medication')));
   if(radio('reminder_freq')) f.push(field('uhp_medication_reminder_preferences',radio('reminder_freq')));
-  f.push(field('email',val('email')));
+  f.push(field('email',contactEmail()));
   return {fields:f, context:context()};
 }
 function payloadDelivery(){
@@ -2230,7 +2236,7 @@ function payloadDelivery(){
     if(val('doctor_email'))    f.push(field('work_email',val('doctor_email')));
     if(val('doctor_fax'))      f.push(field('doctor_s_fax',phoneFull('doctor_fax')));
   }
-  f.push(field('email',val('email')));
+  f.push(field('email',contactEmail()));
   return {fields:f, context:context()};
 }
 async function submitOne(guid,payload){
