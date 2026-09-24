@@ -2199,7 +2199,21 @@ function payloadAccount(){
   put('doctors_country_brinsupri', val('country'));
 
   /* the contact is the patient here too */
+
+/* The country drives HubSpot workflows, so it must be set on the very first
+   submission and in English. It comes from the URL (a de or at segment) and
+   falls back to the dropdown when the URL does not say. */
+function countryName(){
+  var path=(location.pathname+location.search+location.hash).toLowerCase();
+  if(/(^|[\/\-_?&=])at([\/\-_?&=]|$)/.test(path)) return 'Austria';
+  if(/(^|[\/\-_?&=])de([\/\-_?&=]|$)/.test(path)) return 'Germany';
+  var v=val('country');
+  if(v==='\u00d6sterreich') return 'Austria';
+  if(v==='Deutschland') return 'Germany';
+  return '';
+}
   f.push(field('customer_type','Patient'));
+  { const c=countryName(); if(c) f.push(field('country',c)); }
   return {fields:f, context:context()};
 }
 

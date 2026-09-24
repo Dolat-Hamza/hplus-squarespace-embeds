@@ -2059,12 +2059,25 @@ function buildReview(){
    BUILD 3 PAYLOADS + SUBMIT
    ============================================================ */
 function context(){ return { pageUri:location.href, pageName:document.title, hutk:(document.cookie.match(/hubspotutk=([^;]+)/)||[])[1]||undefined }; }
+/* The country drives HubSpot workflows, so it must be set on the very first
+   submission and in English. It comes from the URL (a de or at segment) and
+   falls back to the dropdown when the URL does not say. */
+function countryName(){
+  var path=(location.pathname+location.search+location.hash).toLowerCase();
+  if(/(^|[\/\-_?&=])at([\/\-_?&=]|$)/.test(path)) return 'Austria';
+  if(/(^|[\/\-_?&=])de([\/\-_?&=]|$)/.test(path)) return 'Germany';
+  var v=val('country');
+  if(v==='\u00d6sterreich') return 'Austria';
+  if(v==='Deutschland') return 'Germany';
+  return '';
+}
 function payloadRegistration(){
   const f=[];
   /* customer_type describes the contact, not who filled the form in. The contact
      is always the patient, so it is always Patient - the HubSpot workflow reads
      this to decide which counterpart contact to create. */
   f.push(field('customer_type','Patient'));
+  { const c=countryName(); if(c) f.push(field('country',c)); }   // set from step 1 onwards
   /* The contact is always the patient, as it is on the account page. When a
      caregiver registers they fill the first block with their own details and the
      second with the patient's, so the identity fields are read from whichever
@@ -2170,6 +2183,7 @@ function payloadDelivery(){
   const at=val('country')==='\u00d6sterreich', delivery=checked('delivery_management'), rx=checked('prescription_management');
   const consentGiven=checked('delivery_consent'), hcpGiven=checked('hcp_consent');
   f.push(field('h_country',val('country')));
+  { const c=countryName(); if(c) f.push(field('country',c)); }
   /* Keep the new shared country property while also satisfying the delivery
      form's required legacy country field. Both receive the identical value. */
   f.push(field('doctors_country_brinsupri',val('country')));
