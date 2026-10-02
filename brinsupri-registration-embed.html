@@ -849,7 +849,7 @@
       <div class="hplus-usp__free-text">
         <div class="hplus-usp__free-head" data-uspi="free_head">Wer wir sind</div>
         <p class="hplus-usp__free-sub" data-uspi="free_sub">
-          Der H+ Therapy Companion ist ein kostenloses Serviceangebot der Healthcare Deutschland GmbH (H+). H+ hat sich als spezialisierter Heimtherapieanbieter zur Aufgabe gemacht, die Lebensqualit&#228;t f&#252;r PatientInnen mit seltenen, chronischen Erkrankungen zu verbessern &ndash; melde dich einfach an und gestalten du deine Therapie aktiv mit.
+          Der H+ Therapy Companion ist ein kostenloses Serviceangebot der Healthcare Deutschland GmbH (H+). H+ hat sich als spezialisierter Heimtherapieanbieter zur Aufgabe gemacht, die Lebensqualit&#228;t f&#252;r Patientinnen und Patienten mit seltenen, chronischen Erkrankungen zu verbessern &ndash; melde dich einfach an und gestalte deine Therapie aktiv mit.
         </p>
       </div>
     </div>
@@ -1404,8 +1404,8 @@
   <div class="modal" role="dialog" aria-modal="true">
     <h3 data-i18n="pharma_list_title"></h3>
     <div style="text-align:left;margin:14px 0">
-      <div style="padding:12px 0;border-bottom:1px solid var(--hair)"><b style="font-family:var(--font-head);color:var(--ink-head)">Apotheke an der Bergstra&#xDF;e</b><br><span style="color:var(--muted);font-size:13.5px">Bergstra&#xDF;e 31, 69469 Weinheim, Germany</span></div>
-      <div style="padding:12px 0"><b style="font-family:var(--font-head);color:var(--ink-head)">International Specialty Pharmacy (ISP)</b><br><span style="color:var(--muted);font-size:13.5px">Paul-Henri Spaaklaan 3B, 6229 EN Maastricht, Netherlands</span></div>
+      <div style="padding:12px 0;border-bottom:1px solid var(--hair)"><b style="font-family:var(--font-head);color:var(--ink-head)">Apotheke an der Bergstra&#xDF;e</b><br><span data-i18n="pharm_addr1" style="color:var(--muted);font-size:13.5px"></span></div>
+      <div style="padding:12px 0"><b style="font-family:var(--font-head);color:var(--ink-head)">International Specialty Pharmacy (ISP)</b><br><span data-i18n="pharm_addr2" style="color:var(--muted);font-size:13.5px"></span></div>
     </div>
     <div class="modal-actions"><button type="button" class="btn-outline" id="pharmListClose" data-i18n="close_btn"></button></div>
   </div>
@@ -1482,7 +1482,7 @@ const I18N = {
     hero_c1:"\u2713 Keine Zahlungsdaten \u2013 der Companion ist kostenlos",
     hero_c2:"\u2713 Keine Gesundheitsdaten f\u00fcr die Registrierung n\u00f6tig",
     hero_c3:"\u2713 Konto jederzeit k\u00fcndbar oder l\u00f6schbar",
-    hero_tie:"Du hast die Brosch\u00fcre zusammen mit deinem Medikament erh\u00e4ltst? Schlie\u00dfe hier in wenigen Minuten deine kostenlose Anmeldung ab.",
+    hero_tie:"Du hast die Brosch\u00fcre zusammen mit deinem Medikament erhalten? Schlie\u00dfe hier in wenigen Minuten deine kostenlose Anmeldung ab.",
     hero_cta:"Jetzt kostenlos anmelden \u2192",
     benefits_title:"Deine Vorteile im \u00dcberblick",
     ben_rem_t:"Erinnerungsservice", ben_rem_d:"Personalisierbare Erinnerungen rund um deine Therapie.",
@@ -1500,7 +1500,7 @@ const I18N = {
     nxt3_t:"Du erh\u00e4ltst Benachrichtigungen von uns", nxt3_d:"In der Zwischenzeit erh\u00e4ltst du weiterhin Benachrichtigungen \u2013 ganz nach den von dir gew\u00e4hlten Einstellungen.",
     trust1:"\u2713 Kostenlos nutzbar", trust2:"\u2713 DSGVO-konform", trust3:"\u2713 Jederzeit k\u00fcndbar", trust4:"\u2713 Expertenbetreuung",
     step1_name:"Anmelden", step2_name:"Deine Medikation einrichten", step3_name:"Leistungen ausw\u00e4hlen", step4_name:"Auswahl best\u00e4tigen",
-    s1_title:"Willkommen{name} \ud83d\udc4b", s1_sub:"Richten wir deinen Therapy Companion ein \u2013 in nur ~2 Minuten k\u00fcmmern wir uns um Erinnerungen, Nachschub und Lieferung.",
+    s1_title:"Willkommen{name} \ud83d\udc4b", s1_sub:"Richten wir deinen Therapy Companion ein \u2013 in nur rund 2 Minuten k\u00fcmmern wir uns um Erinnerungen, Nachschub und Lieferung.",
     role_label:"Zuerst: Machst du das f\u00fcr dich selbst oder f\u00fcr jemanden, den du betreust?", opt_select:"Bitte ausw\u00e4hlen\u2026", opt_patient:"Patient", opt_caregiver:"Betreuer",
     firstname_label:"Vorname", lastname_label:"Nachname", email_label:"E-Mail-Adresse",
     email_reassure:"Wir nutzen deine E-Mail nur f\u00fcr deinen H+ Therapy Companion \u2013 niemals f\u00fcr Werbung Dritter.",
@@ -1522,15 +1522,15 @@ const I18N = {
     err_select:"Bitte triff eine Auswahl.", err_first:"Bitte gib einen Vornamen ein.", err_last:"Bitte gib einen Nachnamen ein.",
     err_email:"Bitte gib eine g\u00fcltige E-Mail-Adresse ein.", err_comm:"Bitte w\u00e4hle mindestens eine Kontaktart.", err_terms:"Bitte stimme den Bedingungen zu, um fortzufahren.",
     s2_title:"Kurz zu deinem Medikament", s2_sub:"Bitte pr\u00fcfe die Angaben zu deinem Rezept.",
-    med_q:"Welches Medikament nehmen du?", med_h:"Medikationsdetails", med_name_l:"Name", med_dose_l:"Dosis", med_dose_v:"25 mg Filmtablette", med_freq_l:"H\u00e4ufigkeit", med_freq_v:"Eine Tablette t\u00e4glich", med_admin_l:"Verabreichung", med_admin_v:"Oral",
-    confirm_med:"Ich best\u00e4tige, dass mir die oben genannten Medikamente in diesen Dosierungen verschrieben wurden.", err_confirm:"Bitte best\u00e4tige deine Verschreibung.",
-    firstdate_label:"Wann war das Datum der ersten Einnahme?", firstdate_will:"Wann wirst du deine erste Dosis einnimmst?", err_date:"Bitte gib ein Datum an.", received_med_q:"Hast du dein Medikament bereits erhalten?", rxlow_q:"M\u00f6chtest du Erinnerungen erh\u00e4ltst, wenn dein Medikamentenvorrat zur Neige geht?", prefs_q:"Welche Pr\u00e4ferenzen hast du f\u00fcr diese automatisierten Dienste?",
-    other_med_label_html:'Nehmen du noch andere Medikamente ein? <span style="font-weight:400;color:#71777C">(Bitte gib Details an)</span>',
+    med_q:"Welches Medikament nimmst du?", med_h:"Medikationsdetails", med_name_l:"Name", med_dose_l:"Dosis", med_dose_v:"25 mg Filmtablette", med_freq_l:"H\u00e4ufigkeit", med_freq_v:"Eine Tablette t\u00e4glich", med_admin_l:"Verabreichung", med_admin_v:"Oral",
+    confirm_med:"Ich best\u00e4tige, dass mir das oben genannte Medikament in der genannten Dosierung verschrieben wurde.", err_confirm:"Bitte best\u00e4tige deine Verschreibung.",
+    firstdate_label:"Wann war das Datum der ersten Einnahme?", firstdate_will:"Wann wirst du deine erste Dosis einnimmst?", err_date:"Bitte gib ein Datum an.", received_med_q:"Hast du dein Medikament bereits erhalten?", rxlow_q:"M\u00f6chtest du Erinnerungen erhalten, wenn dein Medikamentenvorrat zur Neige geht?", prefs_q:"Welche Pr\u00e4ferenzen hast du f\u00fcr diese automatisierten Dienste?",
+    other_med_label_html:'Nimmst du noch andere Medikamente ein? <span style="font-weight:400;color:#71777C">(Bitte gib Details an)</span>',
     other_med_ph:"z. B. Name, Dosis \u2026 oder \u201ekeine\u201c",
     freq_label:"Wie oft m\u00f6chtest du, dass wir uns bei dir melden?",
     freq_h:"Regelm\u00e4\u00dfige Check-ins",
     freq_para:"Wir senden dir von Zeit zu Zeit deine Erinnerungen \u2013 dabei kannst du uns auch mitteilen, wie es dir geht:",
-    freq_weekly:"W\u00f6chentlich (zu Beginn empfohlen)", freq_weekly_sub:"Besonders zu Beginn empfohlen", freq_2w:"2-w\u00f6chentlich", freq_monthly:"Monatlich", err_freq:"Bitte w\u00e4hle eine H\u00e4ufigkeit.",
+    freq_weekly:"W\u00f6chentlich (zu Beginn empfohlen)", freq_weekly_sub:"Besonders zu Beginn empfohlen", freq_2w:"2-w\u00f6chentlich", freq_monthly:"Alle 4 Wochen", err_freq:"Bitte w\u00e4hle eine H\u00e4ufigkeit.",
     next_delivery:"Weiter zur Lieferung \u2192", back:"\u2190 Zur\u00fcck", next_generic:"Weiter \u2192", to_review:"Zur \u00dcbersicht \u2192", or_word:"oder",
     /* 3.1 */
     sub_of:"Schritt %s von 3",
@@ -1566,10 +1566,10 @@ const I18N = {
     consent_hcp_austria:'Ich beauftrage und erm\u00e4chtige [PFLEGEDIENST] (nachfolgend \u201eder Pflegedienst"), f\u00fcr mich bei meiner/meinem behandelnden \u00c4rztin/Arzt <strong>Folge- bzw. Dauerverordnungen (e-Rezept) f\u00fcr meine Dauermedikation</strong> anzufordern und die Ausstellung zu veranlassen.<br><br>Zu diesem Zweck willige ich ein, dass der Pflegedienst die erforderlichen Daten verarbeitet und an die Ordination \u00fcbermittelt, insbesondere: Vor- und Nachname, Geburtsdatum, Anschrift, Sozialversicherungsnummer, Angaben zur ben\u00f6tigten Medikation sowie die Kontaktdaten der Ordination.<br><br>Soweit erforderlich, <strong>entbinde ich die genannte \u00c4rztin/den genannten Arzt gegen\u00fcber dem Pflegedienst von der \u00e4rztlichen Verschwiegenheitspflicht (\u00a7 54 \u00c4rzteG 1998)</strong>, beschr\u00e4nkt auf den Zweck der Anforderung und Abwicklung von Folgeverordnungen.<br><br>Diese Einwilligung ist freiwillig und jederzeit mit Wirkung f\u00fcr die Zukunft widerruflich, ohne dass mir Nachteile entstehen; meine pflegerische Versorgung bleibt unber\u00fchrt. Die Rechtm\u00e4\u00dfigkeit der bis zum Widerruf erfolgten Verarbeitung bleibt unber\u00fchrt.<br><br><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a i. V. m. Art. 9 Abs. 2 lit. a DSGVO.',
     consent_delivery_austria:'In \u00d6sterreich ist der Versand rezeptpflichtiger Arzneimittel verboten (\u00a7 59 Abs. 8 AMG). Damit ich meine Medikamente dennoch bequem erhalte, <strong>beauftrage und bevollm\u00e4chtige ich den Pflegedienst, meine Medikamente in der von mir gew\u00e4hlten Apotheke vor Ort abzuholen und mir zu \u00fcberbringen</strong>. Es handelt sich um eine Abholung durch eine von mir bevollm\u00e4chtigte Person (Botendienst) \u2013 nicht um einen Versand durch die Apotheke; die Abgabe erfolgt wie \u00fcblich in der Apotheke.',
     freechoice_h:"Freie Apothekenwahl",
-    freechoice_p:"Du hast das Recht, deine Apotheke frei zu w\u00e4hlen (\u00a7 31 Abs. 1 SGB V). Die unten genannte Partnerapotheke ist lediglich ein unverbindliches Angebot. Du bist nicht verpflichtet, diese zu nutzt, und k\u00f6nnen jederzeit eine andere Apotheke benennen oder die Apotheke wechseln \u2013 ohne Nachteile.",
+    freechoice_p:"Du hast das Recht, deine Apotheke frei zu w\u00e4hlen (\u00a7 31 Abs. 1 SGB V). Die unten genannte Partnerapotheke ist lediglich ein unverbindliches Angebot. Du bist nicht verpflichtet, diese zu nutzen, und kannst jederzeit eine andere Apotheke benennen oder die Apotheke wechseln \u2013 ohne Nachteile.",
     freechoice_h_at:"Freie Apothekenwahl in \u00d6sterreich",
     freechoice_p_at:"Du kannst deine Apotheke frei w\u00e4hlst. Die unten genannte Partnerapotheke ist ein unverbindliches Angebot. Du kannst jederzeit eine andere Apotheke f\u00fcr den Abhol- und Lieferservice angeben \u2013 ohne Nachteile.",
-    pharmacy_q:"Ich bitte darum, dass mein Rezept zur Abgabe an eine der H+ Partnerapotheken weitergeleitet wird bzw. eine solche Weiterleitung veranlasst wird.", pharmacy_hplus_generic:"H+ Partnerapotheke \u2013 Abhol- und Lieferservice", stock_tmpl:"%m auf Lager", pharma_list_link:"Hier finden du eine Liste der Partnerapotheken.", pharma_list_title:"Unsere Partnerapotheken", close_btn:"Schlie\u00dfen", delivery_prefs_h:"Lieferadresse", dp_street:"Stra\u00dfe und Hausnummer", dp_street2:"Adresszusatz (optional)", dp_postcode:"Postleitzahl", dp_city:"Ort", fc_agree:"Ich verstehe und m\u00f6chte fortfahren.", fc_continue:"Weiter",
+    pharmacy_q:"Ich bitte darum, dass mein Rezept zur Abgabe an eine der H+ Partnerapotheken weitergeleitet wird bzw. eine solche Weiterleitung veranlasst wird.", pharmacy_hplus_generic:"H+ Partnerapotheke \u2013 Abhol- und Lieferservice", stock_tmpl:"%m auf Lager", pharma_list_link:"Hier findest du eine Liste der Partnerapotheken.", pharma_list_title:"Unsere Partnerapotheken", pharm_addr1:"Bergstra\u00dfe 31, 69469 Weinheim, Deutschland", pharm_addr2:"Paul-Henri Spaaklaan 3B, 6229 EN Maastricht, Niederlande", close_btn:"Schlie\u00dfen", delivery_prefs_h:"Lieferadresse", dp_street:"Stra\u00dfe und Hausnummer", dp_street2:"Adresszusatz (optional)", dp_postcode:"Postleitzahl", dp_city:"Ort", fc_agree:"Ich verstehe und m\u00f6chte fortfahren.", fc_continue:"Weiter",
     pharmacy_hplus:"H+ Apotheke \u2013 Abhol- und Lieferservice",
     pharma_badge:"Empfohlen",
     pharma_feat_delivery:"Abhol- und Lieferservice innerhalb von 48 Stunden",
@@ -1588,11 +1588,11 @@ const I18N = {
     appt_when:"Wann ist dein n\u00e4chster Arzttermin?", err_appt:"Bitte gib deinen n\u00e4chsten Termin an.", err_delivery_consent:"Diese Zustimmung ist f\u00fcr die Lieferung erforderlich.", err_hcp_consent:"Diese Zustimmung ist f\u00fcr die Rezeptverwaltung erforderlich.",
     gdpr_note:'<b>Datenschutz:</b> deine Daten \u2013 einschlie\u00dflich Gesundheitsdaten (Art. 9 Abs. 2 lit. a DSGVO) \u2013 werden ausschlie\u00dflich zur Erbringung des H+ Therapy Companion verarbeitet und niemals zu Werbezwecken an Dritte weitergegeben. Verantwortlicher: Healthcare Deutschland GmbH, Bergstra\u00dfe 31, 69469 Weinheim. Widerruf jederzeit m\u00f6glich unter info@united-healthcare.eu.',
     /* 3.3 */
-    s3c_title:"Nur noch ein paar Angaben", s3c_sub_rx:"Um deine Folge-Rezepte zu organisieren und deine Lieferung zu planen, m\u00fcssen wir deine \u00c4rztin bzw. Deinen Arzt kontaktieren \u2013 daf\u00fcr ben\u00f6tigen wir deren Kontaktdaten.",
+    s3c_title:"Nur noch ein paar Angaben", s3c_sub_rx:"Um deine Folge-Rezepte zu organisieren und deine Lieferung zu planen, m\u00fcssen wir deine \u00c4rztin bzw. deinen Arzt kontaktieren \u2013 daf\u00fcr ben\u00f6tigen wir deren Kontaktdaten.",
     doc_first:"Vorname", doc_last:"Nachname", doc_practice:"Name der Praxis", doc_street:"Stra\u00dfe und Hausnummer", doc_street2:"Adresszusatz (optional)", doc_postcode:"Postleitzahl",
     doc_phone:"Telefonnummer des Arztes", doc_email:"E-Mail des Arztes", doc_fax:"Faxnummer (optional)",
     callback_prompt_h:"Angaben gerade nicht zur Hand?", callback_prompt_p:"Kein Problem. Vereinbare einen kostenlosen R\u00fcckruf \u2013 ein Betreuer geht dann in Ruhe alles mit dir durch.",
-    callback_toggle:"Ja, bitte rufen du mich an", callback_when:"Wann sollen wir dich anrufen?",
+    callback_toggle:"Ja, bitte ruf mich an", callback_when:"Wann sollen wir dich anrufen?",
     err_need_info:"Bitte gib die Kontaktdaten deines Arztes an \u2013 oder vereinbare unten einen R\u00fcckruf.",
     /* new: page headings, dates, practice search, modal */
     patient_details_h:"Patientendaten", second_details_h:"Angaben zum Betreuer", doctor_details_h:"Angaben zum Arzt",
@@ -1604,7 +1604,7 @@ const I18N = {
     practice_search_err:"Die Praxissuche ist derzeit nicht verf\u00fcgbar. Bitte gib die Adresse unten manuell ein.",
     cant_find_btn:"Angaben deines Arztes nicht gefunden?",
     err_callback_range:"Bitte w\u00e4hle einen Termin zwischen 48 Stunden und 7 Tagen ab heute.",
-    ns_title:"Bist du sicher?", ns_body:"Ohne Anmeldung verzichten du auf wertvolle, kostenlose Unterst\u00fctzung, die deine Behandlung deutlich einfacher macht:",
+    ns_title:"Bist du sicher?", ns_body:"Ohne Anmeldung verzichtest du auf wertvolle, kostenlose Unterst\u00fctzung, die deine Behandlung deutlich einfacher macht:",
     ns_b1:"Kostenlose Lieferung deiner Medikamente direkt nach Hause.", ns_b2:"Automatische Erinnerungen, damit dir nie das Medikament ausgeht oder du einen Termin verpasst.", ns_b3:"Wir k\u00fcmmern uns um Folge-Rezepte und die Abstimmung mit deinem Arzt.",
     ns_tail:"Alle Leistungen sind kostenlos und jederzeit k\u00fcndbar. M\u00f6chtest du wirklich verzichten?",
     ns_reconsider:"Leistungen ansehen", ns_confirm:"Nein danke, ohne Unterst\u00fctzung fortfahren",
@@ -1669,14 +1669,14 @@ const I18N = {
     err_email:"Please enter a valid email address.", err_comm:"Please select at least one contact method.", err_terms:"Please agree to the terms to continue.",
     s2_title:"A quick check on your medicine", s2_sub:"Please check the details of your prescription.",
     med_q:"Which medicine are you taking?", med_h:"Medication details", med_name_l:"Name", med_dose_l:"Dose", med_dose_v:"25 mg film-coated tablet", med_freq_l:"Frequency", med_freq_v:"One tablet daily", med_admin_l:"Administration", med_admin_v:"Oral",
-    confirm_med:"I confirm that the above medication was prescribed to me at these doses.", err_confirm:"Please confirm your prescription.",
+    confirm_med:"I confirm that the above medication was prescribed to me at the dose shown.", err_confirm:"Please confirm your prescription.",
     firstdate_label:"When was your first dose taken?", firstdate_will:"When will you take your first dose?", err_date:"Please provide a date.", received_med_q:"Have you already received your medication?", rxlow_q:"Would you like to receive prescription reminders when you are low on medication?", prefs_q:"What are your preferences for these automated services?",
     other_med_label_html:'Do you take any other medication? <span style="font-weight:400;color:#71777C">(please provide details)</span>',
     other_med_ph:"e.g. name, dose \u2026 or \u201cnone\u201d",
     freq_label:"How often would you like us to check in?",
     freq_h:"Regular check-ins",
     freq_para:"We offer to send your reminders from time to time - There you can let us also know how it's going:",
-    freq_weekly:"Weekly (recommended in the beginning)", freq_weekly_sub:"Recommended especially at the start", freq_2w:"Every two weeks", freq_monthly:"Monthly", err_freq:"Please choose a frequency.",
+    freq_weekly:"Weekly (recommended in the beginning)", freq_weekly_sub:"Recommended especially at the start", freq_2w:"Every two weeks", freq_monthly:"Every four weeks", err_freq:"Please choose a frequency.",
     next_delivery:"Next: your delivery \u2192", back:"\u2190 Back", next_generic:"Continue \u2192", to_review:"Continue to summary \u2192", or_word:"or",
     sub_of:"Step %s of 3",
     s3_title:"Let\u2019s make your day-to-day easier", s3_sub:"Below, you can select the modules from our range of services that will make your day-to-day life with your treatment easier.",
@@ -1713,7 +1713,7 @@ const I18N = {
     freechoice_p:"You have the right to choose your pharmacy freely (\u00a7 31 (1) SGB V). The partner pharmacy named below is merely a non-binding offer. You are not obliged to use it and may name a different pharmacy or switch pharmacies at any time \u2013 without any disadvantage.",
     freechoice_h_at:"Free choice of pharmacy in Austria",
     freechoice_p_at:"You may choose your pharmacy freely. The partner pharmacy below is a non-binding option. You may select a different pharmacy for the Pick Up and Delivery Service at any time, without disadvantage.",
-    pharmacy_q:"I request that my prescription be forwarded to one of the H+ partner pharmacies for dispensing, or that such forwarding be arranged.", pharmacy_hplus_generic:"H+ Partner Pharmacy \u2013 Pick Up & Delivery Service", stock_tmpl:"%m in stock", pharma_list_link:"Here is a list of the partner pharmacies.", pharma_list_title:"Our partner pharmacies", close_btn:"Close", delivery_prefs_h:"Delivery address", dp_street:"Street and house number", dp_street2:"Address line 2 (optional)", dp_postcode:"Post code", dp_city:"City", fc_agree:"I understand and want to continue.", fc_continue:"Continue",
+    pharmacy_q:"I request that my prescription be forwarded to one of the H+ partner pharmacies for dispensing, or that such forwarding be arranged.", pharmacy_hplus_generic:"H+ Partner Pharmacy \u2013 Pick Up & Delivery Service", stock_tmpl:"%m in stock", pharma_list_link:"Here is a list of the partner pharmacies.", pharma_list_title:"Our partner pharmacies", pharm_addr1:"Bergstra\u00dfe 31, 69469 Weinheim, Germany", pharm_addr2:"Paul-Henri Spaaklaan 3B, 6229 EN Maastricht, Netherlands", close_btn:"Close", delivery_prefs_h:"Delivery address", dp_street:"Street and house number", dp_street2:"Address line 2 (optional)", dp_postcode:"Post code", dp_city:"City", fc_agree:"I understand and want to continue.", fc_continue:"Continue",
     pharmacy_hplus:"H+ pharmacy \u2013 Pick Up and Delivery Service",
     pharma_badge:"Recommended",
     pharma_feat_delivery:"Pick Up and Delivery Service within 48 hours",
@@ -1786,11 +1786,11 @@ const CG = {
     s2_title:"Kurz zum Medikament des Patienten",
     s2_sub:"Bitte pr\u00fcfe die Angaben zum Rezept des Patienten.",
     med_q:"Welches Medikament nimmt der Patient?",
-    confirm_med:"Ich best\u00e4tige, dass dem Patienten die oben genannten Medikamente in diesen Dosierungen verschrieben wurden.",
+    confirm_med:"Ich best\u00e4tige, dass dem Patienten das oben genannte Medikament in der genannten Dosierung verschrieben wurde.",
     received_med_q:"Hat der Patient sein Medikament bereits erhalten?",
     firstdate_label:"Wann hat der Patient die erste Dosis eingenommen?",
     firstdate_will:"Wann wird der Patient die erste Dosis einnehmen?",
-    rxlow_q:"M\u00f6chtest du Erinnerungen erh\u00e4ltst, wenn der Medikamentenvorrat des Patienten zur Neige geht?",
+    rxlow_q:"M\u00f6chtest du Erinnerungen erhalten, wenn der Medikamentenvorrat des Patienten zur Neige geht?",
     freq_label:"Wie oft sollen wir uns bei dir zur Therapie des Patienten melden?",
     s3_title:"So machen wir dir und dem Patienten den Alltag leichter",
     med_h:"Medikationsdetails des Patienten",
@@ -1801,7 +1801,7 @@ const CG = {
     s2_title:"A quick check on the patient's medicine",
     s2_sub:"Please check the details of the patient's prescription.",
     med_q:"Which medicine is the patient taking?",
-    confirm_med:"I confirm that the above medication was prescribed to the patient at these doses.",
+    confirm_med:"I confirm that the above medication was prescribed to the patient at the dose shown.",
     received_med_q:"Has the patient already received their medication?",
     firstdate_label:"When did the patient take their first dose?",
     firstdate_will:"When will the patient take their first dose?",
