@@ -43,7 +43,7 @@ PATHS = [
 ]
 # folder-per-URL copies: source page -> url folders
 ROUTES = {
-    "pages/registration.html":      ["registration"],
+    "pages/registration.html":      ["", "registration"],
     "pages/account.html":           ["account"],
     "pages/checkin.html":           ["checkin"],
     "pages/consent-patient.html":   ["-consent-patient"],
