@@ -348,7 +348,7 @@
   .uhp-header-right > a{ font-size:12px !important; padding:9px 14px !important; }
 }
 </style>
-<!-- ICON SPRITE &#x2014; line-art recreated in the style of the H+ Brinsupri leaflet -->
+<!-- ICON SPRITE &#x2013; line-art recreated in the style of the H+ Brinsupri leaflet -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
     <symbol id="ic-reminder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 4.5 1.8 5.7 2.2 6.6a.6.6 0 0 1-.55.9H4.35a.6.6 0 0 1-.55-.9C4.2 14.7 6 13.5 6 9Z"/><path d="M9.8 20a2.3 2.3 0 0 0 4.4 0"/><path d="M12 3.2V2"/></symbol>
@@ -447,7 +447,7 @@
   /* long option labels (e.g. "Weekly (recommended in the beginning)") need the full width */
   .hplus-root #card_freq .pill-row{grid-template-columns:1fr}
 
-  /* progress: five sections don't fit across a phone - scroll them instead of clipping */
+  /* progress: five sections don&#x2019;t fit across a phone - scroll them instead of clipping */
   /* five sections across a phone: let the longest label wrap rather than clip */
   .hplus-root .progress-steps{display:flex;flex-wrap:nowrap;justify-content:space-between;
     align-items:flex-start;gap:4px;overflow:visible}
@@ -742,7 +742,7 @@
 
           <div class="err-msg" id="infoErr" data-i18n="err_need_info"></div>
 
-          <!-- can't find the practice &#x2192; reveal callback -->
+          <!-- can&#x2019;t find the practice &#x2192; reveal callback -->
           <button type="button" class="linkbtn" id="cantFindBtn" data-i18n="cant_find_btn"></button>
 
           <div class="callback-box" id="callbackBox" style="display:none">
@@ -773,7 +773,7 @@
             <label class="choice"><input type="checkbox" id="delivery_consent"><span class="ctxt" data-i18n="agree_delivery"></span></label>
             <div class="err-msg" data-i18n="err_delivery_consent"></div>
           </div>
-          <!-- Pharmacy choice &#x2014; shared by the German and Austrian flows -->
+          <!-- Pharmacy choice &#x2013; shared by the German and Austrian flows -->
           <div id="pharmacyBlock" style="display:none">
             <p class="group-label" data-i18n="pharmacy_q"></p>
 
@@ -981,12 +981,12 @@ const HS = {
 };
 const endpoint = g => `https://api-${HS.region}.hsforms.com/submissions/v3/integration/submit/${HS.portalId}/${g}`;
 
-/* Google Maps API key for the "find my doctor's practice" search.
-   Project: cybernetic-pact-449121-h3 (123356130118) \u2014 needs Maps JavaScript API
-   + Places API (New) enabled, billing active, and this domain in the key's referrer restrictions. */
+/* Google Maps API key for the "find my doctor\u2019s practice" search.
+   Project: cybernetic-pact-449121-h3 (123356130118) \u2013 needs Maps JavaScript API
+   + Places API (New) enabled, billing active, and this domain in the key\u2019s referrer restrictions. */
 const GOOGLE_MAPS_API_KEY = 'AIzaSyDrh2aK005Nxjhz_r-f02q-ycS73PsWuZA';
 
-/* Legal template placeholders \u2014 set the real values before going live. */
+/* Legal template placeholders \u2013 set the real values before going live. */
 const CARE_SERVICE = 'Healthcare Deutschland GmbH';
 /* Country-routed partner pharmacy: Germany = Apotheke an der Bergstra\u00dfe (delivery),
    Austria = International Specialty Pharmacy / ISP (pick-up). Title is language-aware. */
@@ -1159,7 +1159,7 @@ const I18N = {
     hero_eyebrow:"H+ Therapy Companion",
     hero_h1:"Your personal, digital companion for your treatment.",
     hero_p:"We deliver your medication free of charge straight to your door, remind you of every upcoming dose and keep track of your doctor\u2019s appointments for you \u2013 so you can focus entirely on your health.",
-    hero_c1:"\u2713 No payment details \u2014 the Companion is free",
+    hero_c1:"\u2713 No payment details \u2013 the Companion is free",
     hero_c2:"\u2713 No health data required to register",
     hero_c3:"\u2713 Cancel or delete your account at any time",
     hero_tie:"Did you receive the leaflet with your medication? Complete your free registration here in just a few minutes.",
@@ -1171,19 +1171,19 @@ const I18N = {
     ben_hot_t:"Patient hotline", ben_hot_d:"Support with any general questions about your treatment.",
     ben_info_t:"Educational material", ben_info_d:"Helpful learning content about your therapy.",
     ben_hub_t:"Everything in one place", ben_hub_d:"Your personal service area, available whenever you need it.",
-    contact_h:"Questions? We're here for you.", contact_hours:" \u00b7 Mon\u2013Fri, 08:00\u201318:00",
+    contact_h:"Questions? We\u2019re here for you.", contact_hours:" \u00b7 Mon\u2013Fri, 08:00\u201318:00",
     disclaimer:"The H+ Therapy Companion is a voluntary, free support service from Healthcare Deutschland GmbH and does not replace advice from your doctor or pharmacist. Taking part has no effect on your medical treatment.",
     err_phone:"Please enter a valid German or Austrian phone number.", err_whatsapp_global:"Please enter a valid international WhatsApp number including its country code.", err_email_fmt:"Please enter a valid email address.", err_email_same:"The caregiver and the patient must use different email addresses.", err_required:"Please complete this field.",
     next_title:"What happens next",
-    nxt1_t:"Confirmation by email", nxt1_d:"You'll shortly receive an email confirming all the details you provided.",
-    nxt2_t:"We arrange everything for you", nxt2_d:"If you have provided the necessary details, the H+ team will arrange everything directly with your doctor and pharmacy. Once all the details are confirmed, we'll be in touch to explain the next steps.", nxt2_pill:"Takes up to 48 hours",
-    nxt3_t:"You will receive notifications from us", nxt3_d:"In the meantime, you'll keep receiving notifications \u2014 based on the preferences you selected.",
+    nxt1_t:"Confirmation by email", nxt1_d:"You\u2019ll shortly receive an email confirming all the details you provided.",
+    nxt2_t:"We arrange everything for you", nxt2_d:"If you have provided the necessary details, the H+ team will arrange everything directly with your doctor and pharmacy. Once all the details are confirmed, we\u2019ll be in touch to explain the next steps.", nxt2_pill:"Takes up to 48 hours",
+    nxt3_t:"You will receive notifications from us", nxt3_d:"In the meantime, you\u2019ll keep receiving notifications \u2013 based on the preferences you selected.",
     trust1:"\u2713 Free to use", trust2:"\u2713 GDPR-compliant", trust3:"\u2713 Can be cancelled at any time", trust4:"\u2713 Expert support",
     step1_name:"Patient", step2_name:"Caregiver", step3_name:"Medication", step4_name:"Check-in", step5_name:"Prescription & Delivery",
-    s1_title:"Patient Details", s1_sub:"The patient's contact details.",
+    s1_title:"Patient Details", s1_sub:"The patient\u2019s contact details.",
     role_label:"First up \u2013 is this for you, or for someone you care for?", opt_select:"Please select\u2026", opt_patient:"Patient", opt_caregiver:"Caregiver",
     firstname_label:"First name", lastname_label:"Last name", email_label:"Email address",
-    email_reassure:"We use your email only for your H+ Therapy Companion \u2014 never for third-party marketing.",
+    email_reassure:"We use your email only for your H+ Therapy Companion \u2013 never for third-party marketing.",
     comm_label:"Contact Preference",
     opt_email:"Email", opt_whatsapp:"WhatsApp", opt_phone:"Phone call", opt_sms:"SMS",
     whatsapp_label:"WhatsApp number", phone_label:"Phone number", sms_label:"SMS number",
@@ -1192,7 +1192,7 @@ const I18N = {
     your_details_h:"Your details", other_details_pt:"Patient details", rel_label_pt:"What is your relationship to the patient?",
     opt_yes:"Yes", opt_no:"No",
     sc_first:"First name", sc_last:"Last Name",
-    rel_label:"What is this person's relationship to you?",
+    rel_label:"What is this person\u2019s relationship to you?",
     rel_parent:"Parent", rel_grand:"Grandparent", rel_sib:"Sibling", rel_partner:"Partner / Spouse", rel_friend:"Friend", rel_prof:"Professional caregiver",
     cg_comm_label:"How should we reach this person?",
     sc_email:"Email", sc_whatsapp:"WhatsApp number", sc_phone:"Phone number", sc_sms:"SMS number",
@@ -1202,20 +1202,20 @@ const I18N = {
     err_select:"Please make a selection.", err_first:"Please enter a first name.", err_last:"Please enter a last name.",
     err_email:"Please enter a valid email address.", err_comm:"Please select at least one contact method.", err_terms:"Please agree to the terms to continue.",
     s2_title:"Medication Details", s2_sub:"Please check the details of your prescription.",
-    med_q:"Which medicine are you taking?", med_h:"Medication details", med_name_l:"Name", med_dose_l:"Dose", med_dose_v:"25 mg film-coated tablet", med_freq_l:"Frequency", med_freq_v:"One tablet daily", med_admin_l:"Administration", med_admin_v:"Oral",
+    med_q:"Which medication are you taking?", med_h:"Medication details", med_name_l:"Name", med_dose_l:"Dose", med_dose_v:"25 mg film-coated tablet", med_freq_l:"Frequency", med_freq_v:"One tablet daily", med_admin_l:"Administration", med_admin_v:"Oral",
     confirm_med:"I confirm that the above medication was prescribed to me at the dose shown.", err_confirm:"Please confirm your prescription.",
     firstdate_label:"When was your first dose taken?", firstdate_will:"When will you take your first dose?", err_date:"Please provide a date.", received_med_q:"Have you already received your medication?", rxlow_q:"Would you like to receive prescription reminders when you are low on medication?", prefs_q:"What are your preferences for these automated services?",
     other_med_label_html:'Do you take any other medication? <span style="font-weight:400;color:#71777C">(please provide details)</span>',
     other_med_ph:"e.g. name, dose \u2026 or \u201cnone\u201d",
     freq_label:"How often would you like us to check in?",
     freq_h:"Regular check-ins",
-    freq_para:"We offer to send your reminders from time to time - There you can let us also know how it's going:",
+    freq_para:"We\u2019ll send you reminders from time to time \u2013 and you can let us know how you\u2019re doing:",
     freq_weekly:"Weekly (recommended in the beginning)", freq_weekly_sub:"Recommended especially at the start", freq_2w:"Every two weeks", freq_monthly:"Every four weeks", err_freq:"Please choose a frequency.",
     next_delivery:"Next: your delivery \u2192", back:"\u2190 Back", next_generic:"Continue \u2192", to_review:"Continue to summary \u2192", to_overview:"Back to overview \u2192", or_word:"or",
     sub_of:"Step %s of 3",
     s3_title:"Prescription & Delivery", s3_sub:"Below, you can select the modules from our range of services that will make your day-to-day life with your treatment easier.",
     country_label:"Which country do you live in?", country_de:"Germany", country_at:"Austria", err_country:"Please select your country.",
-    support_label:"How can we help you?", service_h:"Prescription Coordination & Pick Up and Delivery Service", service_para:"We source your medication and deliver it straight to your door, and coordinate every repeat prescription with your doctor so your therapy is never interrupted. One simple opt-in covers both \u2014 with zero admin for you.", service_opt:"Yes, I'd like the free Pick Up and Delivery Service including prescription coordination.",
+    support_label:"How can we help you?", service_h:"Prescription Coordination & Pick Up and Delivery Service", service_para:"We source your medication and deliver it straight to your door, and coordinate every repeat prescription with your doctor so your therapy is never interrupted. One simple opt-in covers both \u2013 with zero admin for you.", service_opt:"Yes, I\u2019d like the free Pick Up and Delivery Service including prescription coordination.",
     delivery_h:"Pick Up and Delivery Service",
     delivery_para:"We handle sourcing and deliver reliably to your door \u2013 right time, right amount, ready when you need it.",
     delivery_opt:"Yes, I would like to use the free Pick Up and Delivery Service",
@@ -1227,22 +1227,22 @@ const I18N = {
     checkup_opt:"Yes, please remind me of my appointments",
     delivery_notice:"To ensure the Pick Up and Delivery Service runs smoothly, we also need your consent to obtain your repeat prescription from your treating doctor. Please select the option below as well.",
     delivery_req_note:"If you would like to use our Pick Up and Delivery Service, you must also allow us to manage your prescription. Please select this option too.",
-    nosupport_t:"I don't need any support right now.",
+    nosupport_t:"I don\u2019t need any support right now.",
     err_options:"Please select at least one option.",
-    s3b_title:"Your consent", s3b_sub:"One click is all it takes \u2014 and you can withdraw your consent at any time.",
+    s3b_title:"Your consent", s3b_sub:"One click is all it takes \u2013 and you can withdraw your consent at any time.",
     consent_delivery:"I agree that H+ may process my personal data to source and deliver my medication.",
     consent_hcp:"I authorise H+ (Healthcare Deutschland GmbH) to contact my doctor to arrange my repeat prescriptions.",
     consent_page_h:"Consent",
     consent_page_intro:"In order for us to provide the services you have selected, we need your consent to the following.",
     consent_delivery_title:"Free Pick Up and Delivery Service",
-    consent_hcp_title:"Free Management and help with your Repeat Prescriptions",
+    consent_hcp_title:"Free management and help with your repeat prescriptions",
     consent_read_tc:"Please read the terms and conditions below.", consent_terms_link:"Read the Pick Up and Delivery Service terms", hcp_terms_link:"Read the prescription coordination terms",
     agree_delivery:"I have read and agree to the Pick Up and Delivery Service terms.",
     agree_hcp:"I have read and agree to the prescription consent above.",
-    consent_hcp_germany:'I commission and authorize [CARE SERVICE] (hereinafter \u201cthe care service\u201d) to request, on my behalf, <strong>follow-up or repeat prescriptions for my long-term medication</strong> from my treating physician(s) and to arrange for their issuance.<br><br>For this purpose, I consent to the care service processing the data required for this and transmitting it to the relevant doctor\u2019s practice, in particular: first and last name, date of birth, address, insurance data, details of the required medication (medication plan), and the contact details of the doctor\u2019s practice.<br><br>To the extent necessary, I <strong>release the named physicians from their duty of medical confidentiality</strong> vis-\u00e0-vis the care service, limited to the purpose of requesting and processing follow-up prescriptions.<br><br>This consent is voluntary. I may <strong>revoke it at any time with effect for the future</strong> without suffering any disadvantage as a result; my nursing care remains unaffected. The lawfulness of processing carried out up to the point of revocation remains unaffected.',
+    consent_hcp_germany:'I commission and authorise [CARE SERVICE] (hereinafter \u201cthe care service\u201d) to request, on my behalf, <strong>follow-up or repeat prescriptions for my long-term medication</strong> from my treating physician(s) and to arrange for their issuance.<br><br>For this purpose, I consent to the care service processing the data required for this and transmitting it to the relevant doctor\u2019s practice, in particular: first and last name, date of birth, address, insurance data, details of the required medication (medication plan), and the contact details of the doctor\u2019s practice.<br><br>To the extent necessary, I <strong>release the named physicians from their duty of medical confidentiality</strong> vis-\u00e0-vis the care service, limited to the purpose of requesting and processing follow-up prescriptions.<br><br>This consent is voluntary. I may <strong>revoke it at any time with effect for the future</strong> without suffering any disadvantage as a result; my nursing care remains unaffected. The lawfulness of processing carried out up to the point of revocation remains unaffected.',
     consent_delivery_germany:'For this purpose, I consent to the care service transmitting the required data to the pharmacy chosen by me, or arranging such transmission, in particular: name, delivery address, prescription details, and, where applicable, contact details for queries and delivery.<br><br><strong>Note on the e-prescription:</strong> For electronic prescriptions, assignment to the chosen pharmacy is primarily carried out by me myself (e.g. via the e-prescription app, the electronic health card, or a paper printout with prescription code). The care service does not transmit access data for e-prescriptions (\u201ctokens\u201d) via insecure channels.<br><br>I agree that the chosen pharmacy may deliver the medicines to my delivery address, provided it offers a corresponding courier/delivery service.<br><br>This consent is voluntary and may be revoked at any time with effect for the future; no disadvantages arise as a result.',
-    consent_hcp_austria:'I commission and authorize [CARE SERVICE] (hereinafter \u201cthe care service\u201d) to request, on my behalf, <strong>follow-up or long-term prescriptions (e-prescription) for my long-term medication</strong> from my treating physician and to arrange for their issuance.<br><br>For this purpose, I consent to the care service processing the required data and transmitting it to the doctor\u2019s practice, in particular: first and last name, date of birth, address, social insurance number, details of the required medication, and the contact details of the practice.<br><br>To the extent necessary, I <strong>release the named physician from the duty of medical confidentiality (\u00a7 54 \u00c4rzteG 1998)</strong> vis-\u00e0-vis the care service, limited to the purpose of requesting and processing follow-up prescriptions.<br><br>This consent is voluntary and may be revoked at any time with effect for the future, without any disadvantage to me; my nursing care remains unaffected. The lawfulness of processing carried out up to the point of revocation remains unaffected.',
-    consent_delivery_austria:'In Austria, shipping prescription-only medicines is prohibited (\u00a7 59 (8) AMG). So that I can nevertheless receive my medications conveniently, I <strong>commission and authorize the care service to collect my medications at the local pharmacy chosen by me and deliver them to me</strong>. This is a collection by a person authorized by me (courier service) \u2013 not shipping by the pharmacy; dispensing takes place, as usual, at the pharmacy.',
+    consent_hcp_austria:'I commission and authorise [CARE SERVICE] (hereinafter \u201cthe care service\u201d) to request, on my behalf, <strong>follow-up or long-term prescriptions (e-prescription) for my long-term medication</strong> from my treating physician and to arrange for their issuance.<br><br>For this purpose, I consent to the care service processing the required data and transmitting it to the doctor\u2019s practice, in particular: first and last name, date of birth, address, social insurance number, details of the required medication, and the contact details of the practice.<br><br>To the extent necessary, I <strong>release the named physician from the duty of medical confidentiality (\u00a7 54 \u00c4rzteG 1998)</strong> vis-\u00e0-vis the care service, limited to the purpose of requesting and processing follow-up prescriptions.<br><br>This consent is voluntary and may be revoked at any time with effect for the future, without any disadvantage to me; my nursing care remains unaffected. The lawfulness of processing carried out up to the point of revocation remains unaffected.',
+    consent_delivery_austria:'In Austria, shipping prescription-only medicines is prohibited (\u00a7 59 (8) AMG). So that I can nevertheless receive my medications conveniently, I <strong>commission and authorise the care service to collect my medications at the local pharmacy chosen by me and deliver them to me</strong>. This is a collection by a person authorised by me (courier service) \u2013 not shipping by the pharmacy; dispensing takes place, as usual, at the pharmacy.',
     freechoice_h:"Free choice of pharmacy",
     freechoice_p:"You have the right to choose your pharmacy freely (\u00a7 31 (1) SGB V). The partner pharmacy named below is merely a non-binding offer. You are not obliged to use it and may name a different pharmacy or switch pharmacies at any time \u2013 without any disadvantage.",
     freechoice_h_at:"Free choice of pharmacy in Austria",
@@ -1252,8 +1252,8 @@ const I18N = {
     pharma_badge:"Recommended",
     pharma_feat_delivery:"Pick Up and Delivery Service within 48 hours",
     pharma_feat_stock:"Brinsupri in stock",
-    altpm_title:"Your preferred pharmacy isn't a partner yet",
-    altpm_intro:"We're happy to contact your preferred pharmacy and check whether we can add it to our partner programme. In principle we work with any pharmacy, as long as it meets our processes and quality standards \u2014 so we can keep delivering our service at the usual high quality.", altpm_note:"Please note: the review and onboarding process can take several weeks.", altpm_contact:"Yes, please contact my preferred pharmacy.",
+    altpm_title:"Your preferred pharmacy isn\u2019t a partner yet",
+    altpm_intro:"We\u2019re happy to contact your preferred pharmacy and check whether we can add it to our partner programme. In principle we work with any pharmacy, as long as it meets our processes and quality standards \u2013 so we can keep delivering our service at the usual high quality.", altpm_note:"Please note: the review and onboarding process can take several weeks.", altpm_contact:"Yes, please contact my preferred pharmacy.",
     altpm_li1:"Deliver the medication to your door",
     altpm_li2:"Manage your repeat prescriptions",
     altpm_q:"Would you like us to start this process for you?",
@@ -1264,25 +1264,25 @@ const I18N = {
     alt_pharmacy_h:"Alternative pharmacy details",
     pharm_name:"Pharmacy name", pharm_street:"Pharmacy street", pharm_city:"Pharmacy city", pharm_postcode:"Pharmacy post code",
     appt_when:"When is your next doctor\u2019s appointment?", err_appt:"Please provide your next appointment date.", err_delivery_consent:"This consent is required for delivery.", err_hcp_consent:"This consent is required for prescription management.",
-    gdpr_note:'<b>Data protection:</b> Your data \u2014 including health data (Art. 9(2)(a) GDPR) \u2014 is processed solely to provide the H+ Therapy Companion and is never shared with third parties for marketing. Controller: Healthcare Deutschland GmbH, Bergstra\u00dfe 31, 69469 Weinheim. You can withdraw at any time at info@united-healthcare.eu.',
-    s3c_title:"Just a few more details", s3c_sub_rx:"In order to arrange your repeat prescriptions and schedule your delivery, we need to contact your doctor \u2014 so we need their contact details.",
+    gdpr_note:'<b>Data protection:</b> Your data \u2013 including health data (Art. 9(2)(a) GDPR) \u2013 is processed solely to provide the H+ Therapy Companion and is never shared with third parties for marketing. Controller: Healthcare Deutschland GmbH, Bergstra\u00dfe 31, 69469 Weinheim. You can withdraw at any time at info@united-healthcare.eu.',
+    s3c_title:"Just a few more details", s3c_sub_rx:"In order to arrange your repeat prescriptions and schedule your delivery, we need to contact your doctor \u2013 so we need their contact details.",
     doc_first:"First name", doc_last:"Last Name", doc_practice:"Practice name", doc_street:"Street and house number", doc_street2:"Address line 2 (optional)", doc_postcode:"Post code",
-    doc_phone:"Doctor's phone number", doc_email:"Doctor's email", doc_fax:"Fax number (optional)",
-    callback_prompt_h:"Don't have the details to hand?", callback_prompt_p:"No problem. Arrange a free callback and a support agent will go through everything with you.",
+    doc_phone:"Doctor\u2019s phone number", doc_email:"Doctor\u2019s email", doc_fax:"Fax number (optional)",
+    callback_prompt_h:"Don\u2019t have the details to hand?", callback_prompt_p:"No problem. Arrange a free callback and a support agent will go through everything with you.",
     callback_toggle:"Yes, please call me", callback_when:"When should we call you?",
-    err_need_info:"Please provide your doctor's contact details \u2014 or arrange a callback below.",
+    err_need_info:"Please provide your doctor\u2019s contact details \u2013 or arrange a callback below.",
     /* new: page headings, dates, practice search, modal */
     patient_details_h:"Patient Details", caregiver_details_h:"Caregiver Details", second_details_h:"Caregiver details", doctor_details_h:"Doctor details",
     freq_2w_sub:"Recommended especially at the start",
     err_date_range:"Please choose a date between 2 July and 3 months from today.",
-    practice_search_btn:"Search for my doctor's practice", practice_search_ph:"Enter practice name or address\u2026",
+    practice_search_btn:"Search for my doctor\u2019s practice", practice_search_ph:"Enter practice name or address\u2026",
     delivery_search_btn:"Search for my delivery address", delivery_search_ph:"Enter address\u2026",
-    practice_search_hint:"Select your practice and we'll fill in the address for you.",
+    practice_search_hint:"Select your practice and we\u2019ll fill in the address for you.",
     practice_search_err:"Practice search is currently unavailable. Please enter the address manually below.",
-    cant_find_btn:"Can't find your doctor's details?",
+    cant_find_btn:"Can\u2019t find your doctor\u2019s details?",
     err_callback_range:"Please choose a time between 48 hours and 7 days from today.",
-    ns_title:"Are you sure?", ns_body:"Without registering, you'll miss out on valuable free support that makes your treatment much easier:",
-    ns_b1:"Free delivery of your medication straight to your door.", ns_b2:"Automatic reminders so you never run out of medicine or miss an appointment.", ns_b3:"We handle repeat prescriptions and coordinate with your doctor.",
+    ns_title:"Are you sure?", ns_body:"Without registering, you\u2019ll miss out on valuable free support that makes your treatment much easier:",
+    ns_b1:"Free delivery of your medication straight to your door.", ns_b2:"Automatic reminders so you never run out of medication or miss an appointment.", ns_b3:"We handle repeat prescriptions and coordinate with your doctor.",
     ns_tail:"Every service is free and you can cancel anytime. Are you sure you want to opt out?",
     ns_reconsider:"Show me the services", ns_confirm:"No thanks, continue without support",
     s4_title:"Your H+ Therapy Companion account", s4_sub:"Here are all your details. Tap \u201cEdit\u201d to change any section.",
@@ -1300,8 +1300,8 @@ const I18N = {
 };
 
 let currentLang = (function(){
-  /* Follow the website's own language when it says one (/en/ path, ?lang=en, or the
-     page's lang attribute); otherwise fall back to the visitor's last choice. */
+  /* Follow the website\u2019s own language when it says one (/en/ path, ?lang=en, or the
+     page\u2019s lang attribute); otherwise fall back to the visitor\u2019s last choice. */
   try{
     var p=(location.pathname+location.search+location.hash).toLowerCase();
     if(/(^|[\/\-_?&=])en([\/\-_?&=]|$)/.test(p) || /[?&](lang|hl|locale)=en/.test(p)) return 'en';
@@ -1330,17 +1330,17 @@ const CG = {
     other_med_label_html:'Nimmt der Patient noch andere Medikamente ein? <span style="font-weight:400;color:#71777C">(Bitte gib Details an)</span>'
   },
   en:{
-    s2_title:"A quick check on the patient's medicine",
-    s2_sub:"Please check the details of the patient's prescription.",
-    med_q:"Which medicine is the patient taking?",
+    s2_title:"A quick check on the patient\u2019s medication",
+    s2_sub:"Please check the details of the patient\u2019s prescription.",
+    med_q:"Which medication is the patient taking?",
     confirm_med:"I confirm that the above medication was prescribed to the patient at the dose shown.",
     received_med_q:"Has the patient already received their medication?",
     firstdate_label:"When did the patient take their first dose?",
     firstdate_will:"When will the patient take their first dose?",
     rxlow_q:"Would you like reminders when the patient is low on medication?",
-    freq_label:"How often should we check in with you about the patient's therapy?",
-    s3_title:"Let's make things easier for you and the patient",
-    med_h:"The patient's medication details",
+    freq_label:"How often should we check in with you about the patient\u2019s therapy?",
+    s3_title:"Let\u2019s make things easier for you and the patient",
+    med_h:"The patient\u2019s medication details",
     other_med_label_html:'Does the patient take any other medication? <span style="font-weight:400;color:#71777C">(please provide details)</span>'
   }
 };
@@ -1357,7 +1357,7 @@ const t = k => {
 
 
 /* HubSpot stores frequency/administration as fixed dropdowns whose values are opaque
-   ids \u2014 sending the free-text label silently drops the value, so translate first. */
+   ids \u2013 sending the free-text label silently drops the value, so translate first. */
 const HS_FREQ={daily:'yBlm7BvXttYUhvShRqZIj',bimonthly:'4DBjg_c1R4GPMVaz6I2Dy',everyotherday:'Every other day',weekly:'Once Weekly'};
 /* frequency follows from the medicine, so map it directly rather than parsing prose */
 const HS_FREQ_BY_MED={'Brinsupri (Brensocatib)':HS_FREQ.daily,'Revestive (Teduglutide)':HS_FREQ.daily,'Zilbrysq (Zilucoplan)':HS_FREQ.daily,'Takhzyro (Lanadelumab)':HS_FREQ.bimonthly,'Galafold (Migalastat)':HS_FREQ.everyotherday,'Vyvgart (Efgartigimod alfa)':HS_FREQ.weekly};
@@ -1382,7 +1382,7 @@ function medAdminCode(txt,med){
   return '';
 }
 
-/* HubSpot's Medicine dropdown uses its own exact wording \u2014 sending our shorter
+/* HubSpot\u2019s Medicine dropdown uses its own exact wording \u2013 sending our shorter
    name silently leaves the field empty. */
 const HS_MEDICINE={'Brinsupri (Brensocatib)':'Brinsupri (Brensocatib) Filmtablette - 25mg','Revestive (Teduglutide)':'Revestive (Teduglutide)','Takhzyro (Lanadelumab)':'Takhzyro (Lanadelumab)','Galafold (Migalastat)':'Galafold (Migalastat)','Vyvgart (Efgartigimod alfa)':'Vyvgart (Efgartigimod alfa)','Zilbrysq (Zilucoplan)':'Zilbrysq (Zilucoplan)'};
 function medicineOption(name){ return HS_MEDICINE[name]||''; }
@@ -1452,15 +1452,15 @@ function applyRoleWording(){
   try{ placeSecondPersonQuestion(isCg); placeRelationshipField(isCg); }catch(e){}
 }
 window.__hplusApplyRoleWording = applyRoleWording;
-/* For a caregiver the question belongs under the patient's name; for a patient it
+/* For a caregiver the question belongs under the patient\u2019s name; for a patient it
    stays in their own section. */
 function placeSecondPersonQuestion(isCg){
   var fld=$('secondPersonField'); if(!fld) return;
   var slot = isCg ? $('secondSlotPatient') : $('secondSlotYou');
   if(slot && fld.previousElementSibling!==slot){ slot.parentNode.insertBefore(fld, slot.nextSibling); }
 }
-/* A caregiver's relationship is a fact about them, so it belongs in "Your details";
-   for a patient it stays with the other person's details. */
+/* A caregiver\u2019s relationship is a fact about them, so it belongs in "Your details";
+   for a patient it stays with the other person\u2019s details. */
 function placeRelationshipField(isCg){
   var fld=$('relField'); if(!fld) return;
   var slot = isCg ? $('relSlotYou') : $('relSlotOther');
@@ -1475,7 +1475,7 @@ function syncMedPrefs(){
   var comm=function(v){var e=document.querySelector('#comm_prefs input[value='+v+']');return !!(e&&e.checked);};
   var pref=function(v){var e=document.querySelector('#prefs_prefs input[value="'+v+'"]');return !!(e&&e.checked);};
   var setf=function(id,on){var e=document.getElementById(id); if(e) e.style.display=on?'block':'none';};
-  setf('p2_email', false);   /* email address is always collected in step 1 (mandatory) \u2014 never ask again */
+  setf('p2_email', false);   /* email address is always collected in step 1 (mandatory) \u2013 never ask again */
   setf('p2_whatsapp', show&&pref('Whatsapp')&&!comm('Whatsapp'));
   setf('p2_phone', show&&pref('Phone')&&!comm('Phone'));
   setf('p2_sms', show&&pref('SMS')&&!comm('SMS'));
@@ -1496,13 +1496,13 @@ const radio = name => (document.querySelector(`input[name="${name}"]:checked`)||
 const toEpoch = d => { if(!d) return ''; const [y,m,day]=d.split('-').map(Number); return String(Date.UTC(y,m-1,day)); };
 const field = (name,value)=>({objectTypeId:'0-1',name,value:String(value)});
 
-/* conditional UI \u2014 step 1 */
+/* conditional UI \u2013 step 1 */
 function syncCommFields(){
   $('c_whatsapp').style.display=document.querySelector('#comm_prefs input[value=Whatsapp]').checked?'block':'none';
   $('c_sms').style.display=document.querySelector('#comm_prefs input[value=SMS]').checked?'block':'none';
 }
 document.querySelectorAll('#comm_prefs input').forEach(c=>c.addEventListener('change',syncCommFields));
-/* caregiver contact fields \u2014 same pattern as the patient's: only show the ones selected */
+/* caregiver contact fields \u2013 same pattern as the patient\u2019s: only show the ones selected */
 function syncCgCommFields(){
   $('c_sc_email').style.display=document.querySelector('#cg_comm_prefs input[value=Email]').checked?'block':'none';
   $('c_sc_whatsapp').style.display=document.querySelector('#cg_comm_prefs input[value=Whatsapp]').checked?'block':'none';
@@ -1525,13 +1525,13 @@ document.querySelectorAll('.choice input').forEach(inp=>{
   inp.addEventListener('change',paint); paint();
 });
 
-/* check-in frequency: fully optional \u2014 no option selected by default; click a selected
+/* check-in frequency: fully optional \u2013 no option selected by default; click a selected
    option to turn it off again. State is read live per-click (via mousedown snapshot) so it
    stays correct even after the radios are cleared programmatically (e.g. "no support"). */
 (function(){
   document.querySelectorAll('input[name="reminder_freq"]').forEach(r=>{
     // Snapshot on the LABEL press so it fires for a click anywhere in the row
-    // (the radio dot is only ~20px of the hit area \u2014 most clicks land on the label text).
+    // (the radio dot is only ~20px of the hit area \u2013 most clicks land on the label text).
     const label=r.closest('label')||r;
     label.addEventListener('mousedown',()=>{ r._wasChecked=r.checked; });
     label.addEventListener('touchstart',()=>{ r._wasChecked=r.checked; },{passive:true});
@@ -1542,7 +1542,7 @@ document.querySelectorAll('.choice input').forEach(inp=>{
   });
 })();
 
-/* conditional UI \u2014 step 3 options + consent visibility */
+/* conditional UI \u2013 step 3 options + consent visibility */
 function syncOptions(){
   ['delivery','rx','checkup'].forEach(k=>{});
   $('card_service').classList.toggle('selected',checked('delivery_management'));
@@ -1615,9 +1615,9 @@ function setupDates(){
   cb.min=ymd(minCb); cb.max=ymd(maxCb);
 }
 
-/* ---- doctor practice search (Google Places UI Kit \u2014 PlaceAutocompleteElement) ---- */
+/* ---- doctor practice search (Google Places UI Kit \u2013 PlaceAutocompleteElement) ---- */
 let placesLoaded=false, placesInited=false;
-/* Official Google dynamic-library bootstrap loader \u2014 required for PlaceAutocompleteElement. */
+/* Official Google dynamic-library bootstrap loader \u2013 required for PlaceAutocompleteElement. */
 function loadPlaces(cb){
   if(placesLoaded){ cb(); return; }
   if(!GOOGLE_MAPS_API_KEY){ cb('nokey'); return; }
@@ -1669,16 +1669,16 @@ async function initAutocomplete(){
       }catch(e){ placesFailed('fetchFields error: '+e.message); }
     });
     pac.addEventListener('gmp-error', ()=>placesFailed('PlaceAutocompleteElement error event'));
-  }catch(e){ placesFailed('init failed \u2014 enable "Places API (New)" for the key. '+e.message); }
+  }catch(e){ placesFailed('init failed \u2013 enable "Places API (New)" for the key. '+e.message); }
 }
 $('practiceSearchBtn').addEventListener('click',()=>{
   $('practiceSearchBox').style.display='block';
   $('addressFields').style.display='block';   // reveal the practice details once the user starts searching
   loadPlaces(err=>{ if(err==='nokey'){ $('practiceSearchBox').style.display='none'; } else initAutocomplete().then(syncPlacesRegion); });
 });
-/* can't find details \u2192 reveal callback option (button stays available) */
+/* can\u2019t find details \u2192 reveal callback option (button stays available) */
 $('cantFindBtn').addEventListener('click',()=>{ $('addressFields').style.display='block'; $('callbackBox').style.display='block'; $('addressFields').scrollIntoView({behavior:'smooth',block:'start'}); });
-/* Practice details stay hidden until the user presses Search (or "can't find"),
+/* Practice details stay hidden until the user presses Search (or "can\u2019t find"),
    per the requested flow. */
 
 /* ---- Delivery address: optional Google Places search (mirrors the practice search) ---- */
@@ -1756,7 +1756,7 @@ function showStep(n){
   document.querySelectorAll('.step').forEach(s=>s.classList.toggle('active',+s.dataset.step===n));
   $('progressLine').style.width=(Math.min(n,totalSteps)/totalSteps*100)+'%';
   document.querySelectorAll('#progressSteps li').forEach(li=>{const s=+li.dataset.s;li.classList.toggle('active',s===n);li.classList.toggle('done',s<n);});
-  // narrow screens: make sure the section you're on is visible in the strip
+  // narrow screens: make sure the section you\u2019re on is visible in the strip
   const activeLi=document.querySelector('#progressSteps li.active');
   if(activeLi && activeLi.scrollIntoView) activeLi.scrollIntoView({block:'nearest',inline:'center'});
   if(n===5) showSub3(1);
@@ -1795,7 +1795,7 @@ function ccOf(inp){ const sel=document.getElementById(inp.id+'_cc'); return sel?
 /* compose the full number (country code + national number) for submission */
 
 /* A number is stored in HubSpot with its country code, but the form shows the code
-   in the selector and only the national part in the box \u2014 otherwise a saved
+   in the selector and only the national part in the box \u2013 otherwise a saved
    "+49 176..." comes back as "+49 +49 176...". */
 const CC_LIST=['+420','+353','+351','+49','+43','+41','+44','+33','+39','+34','+31','+32','+48','+45','+46','+47','+30','+36','+40','+90','+1'];
 function splitPhone(full){
@@ -1817,12 +1817,12 @@ function setPhoneValue(id, full){
 function phoneFull(id){
   const inp=$(id); if(!inp) return '';
   const v=inp.value.trim(); if(!v) return '';
-  if(inp.dataset.nocc) return v;                                  // no country code \u2014 send exactly as typed
+  if(inp.dataset.nocc) return v;                                  // no country code \u2013 send exactly as typed
   const sel=document.getElementById(id+'_cc');
   if(sel){
     /* A value that already begins with + carries its own country code - typed that
        way, or restored from a stored number whose code is not in this selector.
-       Prefixing the selector's code as well produced numbers like "+44 4975333". */
+       Prefixing the selector\u2019s code as well produced numbers like "+44 4975333". */
     const intl=v.match(/^\+\s*(\d[\d\s\-().\/]*)$/);
     if(intl){
       const digits=intl[1].replace(/\D/g,'');
@@ -1903,7 +1903,7 @@ function validateStep(n){
       const cb=f.querySelector('input[type=checkbox]');
       if(radios.length){ bad=![...radios].some(r=>r.checked); }
       else if(cb && !input){ bad=!cb.checked; }
-      else if(input){ bad=input.value.trim()===''; }   // format (email/phone) is validated exclusively by validateFormats() below \u2014 avoids duplicate error messages
+      else if(input){ bad=input.value.trim()===''; }   // format (email/phone) is validated exclusively by validateFormats() below \u2013 avoids duplicate error messages
     }
     markInvalid(f,bad);
     if(bad){
@@ -2006,7 +2006,7 @@ function validateSub3(n){
   step3Log(ok?'Validation passed':'Validation blocked Continue',{section:n});
   return ok;
 }
-/* routing within step 3 (conditional 4-page sub-flow) \u2014 delivery form is sent on completion */
+/* routing within step 3 (conditional 4-page sub-flow) \u2013 delivery form is sent on completion */
 /* Do not hold the interface on step 3 while the progressive save is in flight.
    The save still starts immediately and is awaited by the caller, but the user
    receives instant visual feedback by moving to the review step first. */
@@ -2072,7 +2072,7 @@ function setBackToSummaryBar(on){
       b.textContent=t('save_back');
       b.addEventListener('click',()=>{
         if(validateStep(current)) { backToSummary(); return; }
-        // don't fail silently \u2014 take the user to the field that needs answering
+        // don\u2019t fail silently \u2013 take the user to the field that needs answering
         const bad=document.querySelector('.step.active .field.invalid, .step.active .err-msg.show');
         if(bad) bad.scrollIntoView({behavior:'smooth',block:'center'});
       });
@@ -2091,7 +2091,7 @@ function buildReview(){
   const phoneIf=(l,id)=>val(id)?row(l,esc(phoneFull(id))):'';
   const relText=()=>{const el=$('caregiver_relationship');return el&&el.selectedOptions[0]?el.selectedOptions[0].text:'';};
 
-  /* 1 \u2014 the patient, with every number they gave us */
+  /* 1 \u2013 the patient, with every number they gave us */
   const cgRecord = (window.__acctType||'')==='Caregiver';
   const patient = row(t('rv_name'), esc([val('firstname'),val('lastname')].filter(Boolean).join(' ')))
     + (cgRecord ? rowIf(t('rel_label_short'), relText()) : '')   /* the relationship describes the caregiver */
@@ -2101,7 +2101,7 @@ function buildReview(){
     + phoneIf(t('sms_label'),'patient_sms')
     + row(t('rv_contact'), esc(commOf('#comm_prefs input')));
 
-  /* 2 \u2014 the caregiver */
+  /* 2 \u2013 the caregiver */
   const cgName=[val('second_contact_person'),val('second_contact_surname')].filter(Boolean).join(' ');
   const caregiver = cgName
     ? row(t('rv_name'), esc(cgName))
@@ -2113,19 +2113,19 @@ function buildReview(){
       + row(t('rv_contact'), esc(commOf('#cg_comm_prefs input')))
     : row(t('rv_second'), t('rv_no'));
 
-  /* 3 \u2014 the medication, in full */
+  /* 3 \u2013 the medication, in full */
   const medication = row(t('med_name_l'), esc(HS.med.medicine))
     + row(t('med_dose_l'), esc(HS.med.dose))
     + row(t('med_freq_l'), esc(HS.med.frequency))
     + row(t('med_admin_l'), esc(HS.med.administration))
     + rowIf(t('other_med_label'), val('other_medication'));
 
-  /* 4 \u2014 check-ins */
+  /* 4 \u2013 check-ins */
   const checkin = row(t('freq_h'), freqLabels[radio('reminder_freq')]||t('rv_dash'))
     + row(t('rxlow_q_short'), radio('prescription_reminders_low')==='Yes'?t('opt_yes'):radio('prescription_reminders_low')==='No'?t('opt_no'):t('rv_dash'))
     + row(t('rv_contact'), esc(commOf('#pref_prefs input'))||esc(commOf('#comm_prefs input')));
 
-  /* 5 \u2014 prescription & delivery: services, pharmacy, doctor, delivery address */
+  /* 5 \u2013 prescription & delivery: services, pharmacy, doctor, delivery address */
   const tick=on=>`<span class="svc-mark ${on?'on':'off'}">${on?'\u2713':'\u2013'}</span>`;
   const svc=(on,label)=>`<div class="row svc-row">${tick(on)}<span class="svc-label">${label}</span></div>`;
   const presc = svc(checked('delivery_management'), t('sup_delivery'))
@@ -2157,7 +2157,7 @@ function buildReview(){
     </div>`;
 
   const secTitle = n => t((window.__acctType||'')==='Caregiver'
-    ? (n===1?'step2_name':'step1_name')   // caregiver's own record: their details come first
+    ? (n===1?'step2_name':'step1_name')   // caregiver\u2019s own record: their details come first
     : (n===1?'step1_name':'step2_name'));
   $('reviewArea').innerHTML =
       block(secTitle(1),1,patient)
@@ -2190,7 +2190,7 @@ function payloadAccount(){
   f.push(field('patient_email',val('email')));   // same address, second property the workflow reads
   const comm=multi('#comm_prefs input'); if(comm) f.push(field('communication_preference',comm));
 
-  /* the patient's numbers, including HubSpot's standard phone fields */
+  /* the patient\u2019s numbers, including HubSpot\u2019s standard phone fields */
   put('patient_phone',            phoneFull('patient_phone'));
   put('patient_whatsapp',         phoneFull('patient_whatsapp'));
   put('patient_sms',              phoneFull('patient_sms'));
@@ -2212,7 +2212,7 @@ function payloadAccount(){
     put('caregiver_sms',           phoneFull('caregiver_sms'));
   }
 
-  /* medication \u2014 the dropdowns need HubSpot's option ids, the wording goes to instructions */
+  /* medication \u2013 the dropdowns need HubSpot\u2019s option ids, the wording goes to instructions */
   /* put() skips empty values, which would leave a previously-stored medicine
      in place. An unmapped choice must clear the field instead. */
   { const chosen=HS.med.medicine, mo=medicineOption(chosen);
@@ -2254,7 +2254,7 @@ function payloadAccount(){
   put('delivery_address__post_code',     val('delivery_postcode'));
   put('delivery_address__city__region',  val('delivery_city'));
 
-  /* doctor \u2014 practice name first, street second (matches HubSpot's layout) */
+  /* doctor \u2013 practice name first, street second (matches HubSpot\u2019s layout) */
   put('doctor_s_first_name', val('doctor_first'));
   put('doctor_s_last_name',  val('doctor_last'));
   put('doctor_s_street_address',   val('doctor_street2'));
@@ -2270,7 +2270,7 @@ function payloadAccount(){
 /* The country drives HubSpot workflows, so it must be set on the very first
    submission and in English. It comes from the URL (a de or at segment) and
    falls back to the dropdown when the URL does not say. */
-/* HubSpot's Country/Region Code is the two-letter ISO code, and WhatsApp and SMS
+/* HubSpot\u2019s Country/Region Code is the two-letter ISO code, and WhatsApp and SMS
    routing keys off it. Sent under both the plain and the hs_ prefixed name so the
    one the portal actually uses is populated. */
 function countryCode(){
@@ -2288,7 +2288,7 @@ function countryName(){
   if(v==='Deutschland') return 'Germany';
   return '';
 }
-  /* keep the type the record already has - a caregiver's own record must not be
+  /* keep the type the record already has - a caregiver\u2019s own record must not be
      relabelled a patient just because they edited it */
   f.push(field('customer_type', window.__acctType || 'Patient'));
   { const c=countryName(); if(c) f.push(field('country',c));
@@ -2338,12 +2338,12 @@ document.querySelectorAll('.cc-select').forEach(sel=>sel.addEventListener('chang
 }));
 
 /* ============================================================
-   PERSISTENCE \u2014 autofill on return + drop-out capture
+   PERSISTENCE \u2013 autofill on return + drop-out capture
    Field values are saved to THIS browser only (localStorage).
-   Nothing leaves the device until a step's HubSpot form submits.
+   Nothing leaves the device until a step\u2019s HubSpot form submits.
    (Same-device autofill; not cross-device known-contact prefill.)
    ============================================================ */
-const LS_KEY='hplus_form_v4'   // bumped: saved state is positional, and the field list changed;   // bumped: control set changed (removed doctor phone/fax country-code selects) \u2014 old index-keyed state is invalid
+const LS_KEY='hplus_form_v4'   // bumped: saved state is positional, and the field list changed;   // bumped: control set changed (removed doctor phone/fax country-code selects) \u2013 old index-keyed state is invalid
 const _ctrls=()=>[...document.querySelectorAll('#hplusForm input,#hplusForm select,#hplusForm textarea')];
 /* Keyed by field identity, never by position: the registration and account forms
    hold different controls in a different order, so an index-keyed state restored
@@ -2397,9 +2397,9 @@ function beaconStep(key){
 }
 
 /* ---- F1: clear removed values ----
-   buildPayload() wraps a step's payload so any field that was sent earlier but
+   buildPayload() wraps a step\u2019s payload so any field that was sent earlier but
    is now emptied is explicitly re-sent as '' to clear it in the backend.
-   (An edited email intentionally creates a new contact \u2014 no email lock.)
+   (An edited email intentionally creates a new contact \u2013 no email lock.)
    Backend-only; no UI change. */
 const sentFields={registration:new Set(),medical:new Set(),delivery:new Set()};
 function withClears(key,p){
@@ -2475,7 +2475,7 @@ $('hplusForm').addEventListener('change',saveState);
     Object.keys(data).forEach(function(id){
       var it=data[id]; if(!it) return; var k=it.kind, v=it.value;
       if(k==='text'||k==='date'||k==='select'){
-        // phone fields arrive with their country code \u2014 put the code in the selector
+        // phone fields arrive with their country code \u2013 put the code in the selector
         var ccSel=document.getElementById(id+'_cc');
         if(ccSel && typeof window.__hplusSetPhone==='function') window.__hplusSetPhone(id,v);
         else if(ccSel){
@@ -2494,14 +2494,14 @@ $('hplusForm').addEventListener('change',saveState);
       else if(k==='multi') setMulti(id, v);
     });
     var note=document.getElementById('acctPrefillNote');
-    if(note){ note.style.display='block'; note.textContent='Deine gespeicherten Angaben wurden geladen. Bitte pr\u00fcfe und aktualisiere sie unten. \u00b7 Your saved details were loaded \u2014 review and update them below.'; }
+    if(note){ note.style.display='block'; note.textContent='Deine gespeicherten Angaben wurden geladen. Bitte pr\u00fcfe und aktualisiere sie unten. \u00b7 Your saved details were loaded \u2013 review and update them below.'; }
     // the record type is only known now, so re-place the role-dependent fields
     try{ if(window.__hplusApplyRoleWording) window.__hplusApplyRoleWording(); }catch(e){}
     // re-sync the summary page now that the saved data has populated the fields
     try{ if(window.__accShowStep) window.__accShowStep(6); else if(window.__accBuildReview) window.__accBuildReview(); }catch(e){}
   }
 
-  /* A caregiver's own record is created by a HubSpot workflow a few minutes after
+  /* A caregiver\u2019s own record is created by a HubSpot workflow a few minutes after
      they register, so the first visit can legitimately find nothing. That is a
      different situation from a bad link, and it is worth saying so and retrying
      rather than telling them the link is broken. */
@@ -2569,14 +2569,14 @@ $('hplusForm').addEventListener('change',saveState);
       if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){ document.getElementById('acctMsg').textContent='Bitte g\u00fcltige E-Mail eingeben. \u00b7 Please enter a valid email.'; return; }
       this.disabled=true; this.textContent='\u2026';
       fetch(ACCOUNT_API+'/api/account/request-link',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em})})
-        .then(function(){ document.getElementById('acctMsg').textContent='Wenn diese E-Mail registriert ist, haben wir dir einen Link gesendet. Bitte schau in dein Postfach. \u00b7 If that email is registered, we sent you a link \u2014 check your inbox.'; })
+        .then(function(){ document.getElementById('acctMsg').textContent='Wenn diese E-Mail registriert ist, haben wir dir einen Link gesendet. Bitte schau in dein Postfach. \u00b7 If that email is registered, we sent you a link \u2013 check your inbox.'; })
         .catch(function(){ document.getElementById('acctMsg').textContent='Etwas ist schiefgelaufen. Bitte erneut versuchen. \u00b7 Something went wrong, please try again.'; })
         .finally(function(){ var b=document.getElementById('acctSend'); b.disabled=false; b.textContent='Link senden / Send link'; });
     });
   }
 
-  /* Fields that describe the therapy rather than the person. While a caregiver's
-     own record is still being created, these can be shown from the patient's
+  /* Fields that describe the therapy rather than the person. While a caregiver\u2019s
+     own record is still being created, these can be shown from the patient\u2019s
      record; anything identifying them cannot. */
   var SHARED_WITH_PATIENT = ['med_select','md_name_in','md_dose_in','md_freq_in','md_admin_in',
     'first_medication_date','other_medication','reminder_freq','prescription_reminders_low',
@@ -2628,7 +2628,7 @@ $('hplusForm').addEventListener('change',saveState);
 
 <script>
 /* The public-facing entity is Healthcare Deutschland or Healthcare Austria depending
-   on the market \u2014 never the wholesale or holding company. */
+   on the market \u2013 never the wholesale or holding company. */
 (function(){
   function entity(){
     var sel=document.getElementById('country');
@@ -2722,7 +2722,7 @@ var _LI1="<h1>Privacy Policy</h1>\n<h2>1. Data protection at a glance</h2>\n<h3>
 <script>
 /* hplus-lang-sync: the page can carry more than one language switch (this form,
    the landing block above it, the footer). Keep them in step so the patient sees
-   one language everywhere. The site's own top navigation is left alone. */
+   one language everywhere. The site\u2019s own top navigation is left alone. */
 (function(){
   var busy=false;
   function currentLang(){ try{ return localStorage.getItem('hplus_lang')||'de'; }catch(e){ return 'de'; } }
@@ -2769,7 +2769,7 @@ var _LI1="<h1>Privacy Policy</h1>\n<h2>1. Data protection at a glance</h2>\n<h3>
 </script>
 <script>
 /* hplus-lang-dedupe: if the page already carries an H+ language switch from
-   another block, hide this form's own so only one is shown. The remaining
+   another block, hide this form\u2019s own so only one is shown. The remaining
    switch still drives the form through hplus-lang-sync. Pages where the form
    is the only block keep their switch. */
 (function(){
@@ -2820,7 +2820,7 @@ var _LI1="<h1>Privacy Policy</h1>\n<h2>1. Data protection at a glance</h2>\n<h3>
 
 <script>
 /* The account page is opened by patients and by caregivers. The first block is
-   always this contact's own details, so it has to be labelled for whoever they
+   always this contact\u2019s own details, so it has to be labelled for whoever they
    are, and the second block for the other person. */
 (function(){
   var L = {
@@ -2835,7 +2835,7 @@ var _LI1="<h1>Privacy Policy</h1>\n<h2>1. Data protection at a glance</h2>\n<h3>
   };
   function paint(){
     var isCg = (window.__acctType || '') === 'Caregiver';
-    if(!isCg) return;                      // a patient's record already reads correctly
+    if(!isCg) return;                      // a patient\u2019s record already reads correctly
     var l = (document.documentElement.lang||'de').toLowerCase().indexOf('en')===0 ? 'en' : 'de';
     var d = L[l] || L.de;
     var set = function(sel, txt){ document.querySelectorAll(sel).forEach(function(el){ if(txt) el.textContent = txt; }); };
