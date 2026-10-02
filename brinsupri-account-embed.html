@@ -898,7 +898,7 @@
         <a href="/impressum" data-i18n="foot_imprint">Impressum</a>
       </nav>
     </div>
-    <div class="uhp-footer-bottom">&#xA9; 2026 <span class="brand-entity-legal">Healthcare</span> &#xB7; <span data-i18n="foot_tagline">Ihr digitaler Begleiter f&#xFC;r Ihre Therapie</span></div>
+    <div class="uhp-footer-bottom">&#xA9; 2026 <span class="brand-entity-legal">Healthcare</span> &#xB7; <span data-i18n="foot_tagline">Dein digitaler Begleiter f&#xFC;r deine Therapie</span></div>
   </footer>
 </div>
 
@@ -2494,7 +2494,7 @@ $('hplusForm').addEventListener('change',saveState);
       else if(k==='multi') setMulti(id, v);
     });
     var note=document.getElementById('acctPrefillNote');
-    if(note){ note.style.display='block'; note.textContent='Ihre gespeicherten Angaben wurden geladen. Bitte pr\u00fcfen und aktualisieren Sie sie unten. \u00b7 Your saved details were loaded \u2014 review and update them below.'; }
+    if(note){ note.style.display='block'; note.textContent='Deine gespeicherten Angaben wurden geladen. Bitte pr\u00fcfe und aktualisiere sie unten. \u00b7 Your saved details were loaded \u2014 review and update them below.'; }
     // the record type is only known now, so re-place the role-dependent fields
     try{ if(window.__hplusApplyRoleWording) window.__hplusApplyRoleWording(); }catch(e){}
     // re-sync the summary page now that the saved data has populated the fields
@@ -2517,7 +2517,7 @@ $('hplusForm').addEventListener('change',saveState);
       var hdr = root.querySelector('.uhp-header');
       if(hdr) root.insertBefore(el, hdr.nextSibling); else root.insertBefore(el, root.firstChild);
     }
-    el.innerHTML = '<strong>Ihr Konto wird gerade eingerichtet.</strong> Das dauert in der Regel ein bis zwei '
+    el.innerHTML = '<strong>Dein Konto wird gerade eingerichtet.</strong> Das dauert in der Regel ein bis zwei '
       + 'Minuten. Diese Seite aktualisiert sich automatisch.<br><strong>Your account is being set up.</strong> '
       + 'This usually takes a minute or two - the page will refresh itself.';
     el.style.display = 'block';
@@ -2542,7 +2542,7 @@ $('hplusForm').addEventListener('change',saveState);
         if(notYet){
           showSettingUp();
           var el=document.getElementById('acctSettingUp');
-          if(el) el.innerHTML = '<strong>Ihr Konto ist noch nicht bereit.</strong> Bitte versuchen Sie es in ein '
+          if(el) el.innerHTML = '<strong>Dein Konto ist noch nicht bereit.</strong> Bitte versuch es in ein '
             + 'paar Minuten noch einmal.<br><strong>Your account is not ready yet.</strong> Please try again in a few minutes.';
           return;
         }
@@ -2569,7 +2569,7 @@ $('hplusForm').addEventListener('change',saveState);
       if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){ document.getElementById('acctMsg').textContent='Bitte g\u00fcltige E-Mail eingeben. \u00b7 Please enter a valid email.'; return; }
       this.disabled=true; this.textContent='\u2026';
       fetch(ACCOUNT_API+'/api/account/request-link',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em})})
-        .then(function(){ document.getElementById('acctMsg').textContent='Wenn diese E-Mail registriert ist, haben wir Ihnen einen Link gesendet. Bitte pr\u00fcfen Sie Ihr Postfach. \u00b7 If that email is registered, we sent you a link \u2014 check your inbox.'; })
+        .then(function(){ document.getElementById('acctMsg').textContent='Wenn diese E-Mail registriert ist, haben wir dir einen Link gesendet. Bitte schau in dein Postfach. \u00b7 If that email is registered, we sent you a link \u2014 check your inbox.'; })
         .catch(function(){ document.getElementById('acctMsg').textContent='Etwas ist schiefgelaufen. Bitte erneut versuchen. \u00b7 Something went wrong, please try again.'; })
         .finally(function(){ var b=document.getElementById('acctSend'); b.disabled=false; b.textContent='Link senden / Send link'; });
     });
