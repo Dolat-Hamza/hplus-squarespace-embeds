@@ -72,10 +72,12 @@ class Check(HTMLParser):
                     s.errs += [("unclosed",x) for x in s.stack[i+1:]]; del s.stack[i:]; break
             else: s.errs.append(("stray-close",t))
 
+_PATH_MAP = dict(PATHS)
+_PATH_RE  = re.compile("|".join(re.escape(o) for o,_ in sorted(PATHS, key=lambda p: -len(p[0]))))
 def rewrite(text):
-    for old,new in PATHS:
-        text = text.replace(old, new)
-    return text
+    """One pass, longest match first - replacing in sequence turned
+       /therapy-companion/terms-and-conditions into /legal/legal/..."""
+    return _PATH_RE.sub(lambda m: _PATH_MAP[m.group(0)], text)
 
 def verify(path, text):
     problems=[]
