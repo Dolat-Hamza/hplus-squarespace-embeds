@@ -171,6 +171,13 @@
 .hplus-root .searchbtn svg{width:18px;height:18px}
 .hplus-root .pac-container{z-index:100000!important}
 .hplus-root gmp-place-autocomplete{width:100%;display:block;margin-bottom:6px;color-scheme:light;background:#fff}
+/* our own prediction list, in place of Google's full-screen panel */
+.hp-pac{position:absolute;left:0;right:0;top:100%;z-index:60;margin:4px 0 0;padding:0;list-style:none;background:#fff;border:1px solid var(--hair);border-radius:12px;box-shadow:0 14px 34px -14px rgba(6,50,76,.45);overflow:hidden;max-height:min(46vh,320px);overflow-y:auto}
+.hp-pac li{padding:11px 14px;font-size:15px;line-height:1.35;color:var(--ink);cursor:pointer;border-top:1px solid #eef2f5}
+.hp-pac li:first-child{border-top:0}
+.hp-pac li:hover,.hp-pac li.is-active{background:var(--blue-050)}
+.hp-pac .hp-pac-credit{cursor:default;font-size:11px;color:var(--muted);text-align:right;padding:6px 12px;background:#fafcfd;position:sticky;bottom:0}
+.hp-pac .hp-pac-credit:hover{background:#fafcfd}
 .hplus-root gmp-place-autocomplete::part(input){background:#fff;color:#24272A;width:100%;max-width:100%;box-sizing:border-box}
 /* the Places widget has to stay inside the card on a narrow screen */
 #practiceSearchBox,#deliverySearchBox{position:relative;min-width:0;max-width:100%}
@@ -2161,29 +2168,82 @@ function placesFailed(msg){
   $('addressFields').style.display='block';           // let the patient enter the address manually
   const box=$('practiceSearchBox'); if(box){ box.style.display='block'; box.querySelector('.reassure span').textContent = t('practice_search_err'); }
 }
+/* Google's autocomplete widget renders its own full-screen panel on a phone and
+   nothing outside its shadow root can resize it, so the predictions are drawn
+   here instead, on top of the field the page already styles. */
+function placeListFor(box){
+  var list=box.querySelector('.hp-pac');
+  if(!list){ list=document.createElement('ul'); list.className='hp-pac'; list.setAttribute('role','listbox'); list.hidden=true; box.appendChild(list); }
+  return list;
+}
+async function attachPlaceSearch(inputId, boxId, fields, onPlace, onFail){
+  const places = await google.maps.importLibrary('places');
+  const AutocompleteSuggestion = places.AutocompleteSuggestion;
+  const AutocompleteSessionToken = places.AutocompleteSessionToken;
+  const input=$(inputId), box=$(boxId);
+  if(!input||!box) return;
+  input.style.display='block';
+  box.style.position='relative';
+  const list=placeListFor(box);
+  let token=new AutocompleteSessionToken(), timer=null, items=[], active=-1;
+  function close(){ list.hidden=true; list.textContent=''; items=[]; active=-1; }
+  function paint(){
+    list.textContent='';
+    items.forEach(function(s,i){
+      const li=document.createElement('li');
+      li.setAttribute('role','option');
+      li.textContent=String(s.placePrediction.text);
+      if(i===active) li.className='is-active';
+      li.addEventListener('mousedown',function(e){ e.preventDefault(); pick(i); });
+      list.appendChild(li);
+    });
+    const c=document.createElement('li');
+    c.className='hp-pac-credit'; c.textContent='Powered by Google'; c.setAttribute('aria-hidden','true');
+    list.appendChild(c);
+    list.hidden = items.length===0;
+  }
+  async function pick(i){
+    const s=items[i]; if(!s) return;
+    input.value=String(s.placePrediction.text);
+    close();
+    try{
+      const place=s.placePrediction.toPlace();
+      await place.fetchFields({ fields:fields });
+      const comps={}; (place.addressComponents||[]).forEach(function(c){ (c.types||[]).forEach(function(ty){ comps[ty]=c.longText; }); });
+      onPlace(comps, place);
+      token=new AutocompleteSessionToken();   // a pick ends the billing session
+    }catch(e){ if(onFail) onFail(e); }
+  }
+  async function query(){
+    const v=input.value.trim();
+    if(v.length<3){ close(); return; }
+    try{
+      const res=await AutocompleteSuggestion.fetchAutocompleteSuggestions({
+        input:v, sessionToken:token, includedRegionCodes:['de','at'],
+        language:(document.documentElement.lang||'de')
+      });
+      items=(res.suggestions||[]).filter(function(s){ return s.placePrediction; }).slice(0,5);
+      active=-1; paint();
+    }catch(e){ close(); if(onFail) onFail(e); }
+  }
+  input.addEventListener('input',function(){ clearTimeout(timer); timer=setTimeout(query,250); });
+  input.addEventListener('keydown',function(e){
+    if(list.hidden) return;
+    if(e.key==='ArrowDown'){ e.preventDefault(); active=Math.min(active+1,items.length-1); paint(); }
+    else if(e.key==='ArrowUp'){ e.preventDefault(); active=Math.max(active-1,0); paint(); }
+    else if(e.key==='Enter'&&active>=0){ e.preventDefault(); pick(active); }
+    else if(e.key==='Escape'){ close(); }
+  });
+  input.addEventListener('blur',function(){ setTimeout(close,150); });
+}
 async function initAutocomplete(){
   if(placesInited) return; placesInited=true;
-  const at=val('country')==='\u00d6sterreich';
   try{
-    const { PlaceAutocompleteElement } = await google.maps.importLibrary('places');
-    const pac = new PlaceAutocompleteElement({ includedRegionCodes:['de','at'] });
-    window.__practicePac = pac;
-    pac.style.width='100%';
-    const box=$('practiceSearchBox');
-    $('practiceSearch').style.display='none';
-    box.insertBefore(pac, box.firstChild);
-    // user picks a prediction \u2192 fetch details \u2192 fill address fields
-    pac.addEventListener('gmp-select', async (ev)=>{
-      try{
-        const pred = ev.placePrediction || (ev.detail && ev.detail.placePrediction);
-        const place = pred.toPlace();
-        await place.fetchFields({ fields:['displayName','addressComponents','internationalPhoneNumber'] });
-        const comps={}; (place.addressComponents||[]).forEach(c=>(c.types||[]).forEach(ty=>comps[ty]=c.longText));
-        fillFromComponents(comps, place.displayName, place.internationalPhoneNumber);
-      }catch(e){ placesFailed('fetchFields error: '+e.message); }
-    });
-    pac.addEventListener('gmp-error', ()=>placesFailed('PlaceAutocompleteElement error event'));
-  }catch(e){ placesFailed('init failed \u2013 enable "Places API (New)" for the key. '+e.message); }
+    await attachPlaceSearch('practiceSearch','practiceSearchBox',
+      ['displayName','addressComponents','internationalPhoneNumber'],
+      function(comps,place){ fillFromComponents(comps, place.displayName, place.internationalPhoneNumber); },
+      function(e){ placesFailed('places error: '+(e&&e.message)); });
+  }catch(e){ placesFailed('init failed - enable "Places API (New)" for the key. '+e.message); }
 }
 $('practiceSearchBtn').addEventListener('click',()=>{
   $('practiceSearchBox').style.display='block';
@@ -2205,35 +2265,15 @@ function fillDeliveryFromComponents(comps){
 }
 async function initDeliveryAutocomplete(){
   if(delivPacInited) return; delivPacInited=true;
-  const at=val('country')==='\u00d6sterreich';
   try{
-    const { PlaceAutocompleteElement } = await google.maps.importLibrary('places');
-    const pac=new PlaceAutocompleteElement({ includedRegionCodes:['de','at'] });
-    window.__deliveryPac = pac;
-    pac.style.width='100%';
-    const box=$('deliverySearchBox'); $('deliverySearch').style.display='none';
-    box.insertBefore(pac, box.firstChild);
-    pac.addEventListener('gmp-select', async (ev)=>{
-      try{
-        const pred=ev.placePrediction||(ev.detail&&ev.detail.placePrediction);
-        const place=pred.toPlace();
-        await place.fetchFields({ fields:['addressComponents'] });
-        const comps={}; (place.addressComponents||[]).forEach(c=>(c.types||[]).forEach(ty=>comps[ty]=c.longText));
-        fillDeliveryFromComponents(comps);
-      }catch(e){ $('deliverySearch').style.display='block'; }
-    });
-    pac.addEventListener('gmp-error', ()=>{ $('deliverySearch').style.display='block'; });
+    await attachPlaceSearch('deliverySearch','deliverySearchBox',['addressComponents'],
+      function(comps){ fillDeliveryFromComponents(comps); },
+      function(){ $('deliverySearch').style.display='block'; });
   }catch(e){ $('deliverySearch').style.display='block'; }
 }
 /* The address searches are created once; keep their region in step with the
    country (Austria was previously stuck on the German region). */
-function syncPlacesRegion(){
-  const codes=['de','at'];
-  [window.__practicePac, window.__deliveryPac].forEach(pac=>{
-    if(!pac) return;
-    try{ pac.includedRegionCodes=codes; }catch(e){}
-  });
-}
+function syncPlacesRegion(){ /* both searches already ask for de and at */ }
 $('country').addEventListener('change',syncPlacesRegion);
 
 $('deliverySearchBtn').addEventListener('click',()=>{
