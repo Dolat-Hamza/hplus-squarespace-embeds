@@ -171,7 +171,16 @@
 .hplus-root .searchbtn svg{width:18px;height:18px}
 .hplus-root .pac-container{z-index:100000!important}
 .hplus-root gmp-place-autocomplete{width:100%;display:block;margin-bottom:6px;color-scheme:light;background:#fff}
-.hplus-root gmp-place-autocomplete::part(input){background:#fff;color:#24272A}
+.hplus-root gmp-place-autocomplete::part(input){background:#fff;color:#24272A;width:100%;max-width:100%;box-sizing:border-box}
+/* the Places widget has to stay inside the card on a narrow screen */
+#practiceSearchBox,#deliverySearchBox{position:relative;min-width:0;max-width:100%}
+gmp-place-autocomplete{max-width:100%;min-width:0;box-sizing:border-box}
+gmp-place-autocomplete::part(prediction-list){width:100%;max-width:100%;box-sizing:border-box;left:0;right:auto}
+@media(max-width:767px){
+  /* the shadow DOM is out of reach of the rule that does this for every other field */
+  gmp-place-autocomplete::part(input){font-size:16px}
+  gmp-place-autocomplete::part(prediction-list){max-width:calc(100vw - 32px)}
+}
 .hplus-root .opt-card{border:1px solid var(--hair);border-radius:16px;padding:20px 22px;margin-bottom:16px;transition:.15s;background:#fff}
 .hplus-root .opt-card:hover{border-color:var(--blue)}
 .hplus-root .opt-card.selected{}
@@ -1137,7 +1146,7 @@ const I18N = {
     practice_search_hint:"W\u00e4hle deine Praxis aus \u2013 wir f\u00fcllen die Adresse automatisch aus.",
     practice_search_err:"Die Praxissuche ist derzeit nicht verf\u00fcgbar. Bitte gib die Adresse unten manuell ein.",
     cant_find_btn:"Angaben deines Arztes nicht gefunden?",
-    err_callback_range:"Bitte w\u00e4hle einen Termin zwischen 48 Stunden und 7 Tagen ab heute.",
+    err_callback_range:"Bitte w\u00e4hle einen Termin zwischen 48 Stunden und 7 Tagen ab heute.", err_callback_weekend:"R\u00fcckrufe sind nur von Montag bis Freitag m\u00f6glich. Bitte w\u00e4hle einen Wochentag.",
     ns_title:"Bist du sicher?", ns_body:"Ohne Anmeldung verzichtest du auf wertvolle, kostenlose Unterst\u00fctzung, die deine Behandlung deutlich einfacher macht:",
     ns_b1:"Kostenlose Lieferung deiner Medikamente direkt nach Hause.", ns_b2:"Automatische Erinnerungen, damit dir nie das Medikament ausgeht oder du einen Termin verpasst.", ns_b3:"Wir k\u00fcmmern uns um Folge-Rezepte und die Abstimmung mit deinem Arzt.",
     ns_tail:"Alle Leistungen sind kostenlos und jederzeit k\u00fcndbar. M\u00f6chtest du wirklich verzichten?",
@@ -1280,7 +1289,7 @@ const I18N = {
     practice_search_hint:"Select your practice and we\u2019ll fill in the address for you.",
     practice_search_err:"Practice search is currently unavailable. Please enter the address manually below.",
     cant_find_btn:"Can\u2019t find your doctor\u2019s details?",
-    err_callback_range:"Please choose a time between 48 hours and 7 days from today.",
+    err_callback_range:"Please choose a time between 48 hours and 7 days from today.", err_callback_weekend:"Callbacks are only possible Monday to Friday. Please choose a weekday.",
     ns_title:"Are you sure?", ns_body:"Without registering, you\u2019ll miss out on valuable free support that makes your treatment much easier:",
     ns_b1:"Free delivery of your medication straight to your door.", ns_b2:"Automatic reminders so you never run out of medication or miss an appointment.", ns_b3:"We handle repeat prescriptions and coordinate with your doctor.",
     ns_tail:"Every service is free and you can cancel anytime. Are you sure you want to opt out?",
@@ -1605,14 +1614,29 @@ $('no_support').addEventListener('change',()=>{ if(checked('no_support')){['deli
 $('arrange_call').addEventListener('change',()=>{ $('callbackWhen').style.display=checked('arrange_call')?'block':'none'; });
 
 /* ---- date bounds: first dose (2 Jul \u2192 +3 months) \u00b7 callback (+48h \u2192 +7 days) ---- */
+const isWeekend=d=>{const n=d.getDay();return n===0||n===6;};
+const isWeekendYmd=v=>{if(!v) return false;const p=v.split('-');return isWeekend(new Date(+p[0],+p[1]-1,+p[2]));};
 const ymd=d=>{const z=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+z(d.getMonth()+1)+'-'+z(d.getDate());};
 function setupDates(){
   const today=new Date();
   const fd=$('first_medication_date');
   if(fd){ const maxDose=new Date(today); maxDose.setMonth(maxDose.getMonth()+3); fd.min='2026-07-02'; fd.max=ymd(maxDose); }
   const ap=$('appointment_date'); if(ap){ ap.min=ymd(today); }
+  /* callbacks are staffed Monday to Friday, so the window skips weekends */
   const cb=$('callback_date'); const minCb=new Date(today); minCb.setDate(minCb.getDate()+2); const maxCb=new Date(today); maxCb.setDate(maxCb.getDate()+7);
+  while(isWeekend(minCb)) minCb.setDate(minCb.getDate()+1);
+  while(isWeekend(maxCb)) maxCb.setDate(maxCb.getDate()-1);
   cb.min=ymd(minCb); cb.max=ymd(maxCb);
+  /* a date input cannot grey out weekends, so reject one as soon as it is picked */
+  if(!cb.dataset.wkBound){ cb.dataset.wkBound='1';
+    cb.addEventListener('change',function(){
+      const wrap=$('callbackWhen'), err=$('callbackErr');
+      if(isWeekendYmd(cb.value)){
+        cb.value=''; if(wrap) wrap.classList.add('invalid');
+        if(err){ err.textContent=t('err_callback_weekend'); err.classList.add('show'); }
+      } else { if(wrap) wrap.classList.remove('invalid'); if(err) err.classList.remove('show'); }
+    });
+  }
 }
 
 /* ---- doctor practice search (Google Places UI Kit \u2013 PlaceAutocompleteElement) ---- */
@@ -1988,6 +2012,7 @@ function validateSub3(n){
     if(checked('arrange_call')){
       const cv=val('callback_date'), cbEl=$('callback_date');
       if(cv===''){ markInvalid($('callbackWhen'),true); $('callbackErr').textContent=t('err_required'); $('callbackErr').classList.add('show'); ok=false; }
+      else if(isWeekendYmd(cv)){ $('callbackWhen').classList.add('invalid'); $('callbackErr').textContent=t('err_callback_weekend'); $('callbackErr').classList.add('show'); ok=false; }
       else if((cbEl.min && cv<cbEl.min) || (cbEl.max && cv>cbEl.max)){ $('callbackWhen').classList.add('invalid'); $('callbackErr').textContent=t('err_callback_range'); $('callbackErr').classList.add('show'); ok=false; }
       showErr('infoErr',false);
     } else {
