@@ -15,7 +15,7 @@
 .hplus-root *{box-sizing:border-box}
 .hplus-root{font-family:var(--font-body);color:var(--ink);background:var(--page);
   padding:24px 16px 48px;line-height:1.5;-webkit-font-smoothing:antialiased;color-scheme:light;}
-.hplus-root .hplus-wrap{max-width:820px;margin:0 auto}
+.hplus-root .hplus-wrap{max-width:1120px;margin:0 auto}
 .hplus-root h1, .hplus-root h2, .hplus-root h3, .hplus-root h4, .hplus-root .font-head{font-family:var(--font-head)}
 .hplus-root .langswitch{display:flex;justify-content:flex-end;margin-bottom:12px;position:relative;z-index:40}
 .hplus-root .hero .hero-cta{margin-top:20px;width:100%;font-size:16px;padding:15px 22px}
@@ -336,7 +336,8 @@ gmp-place-autocomplete::part(prediction-list){width:100%;max-width:100%;box-sizi
   /* short answers (Yes/No, 0-1, 2-3 ...) sit two per row instead of one long strip */
   .hplus-root .pill-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .hplus-root .pill-row .choice{margin-bottom:0;min-height:52px;padding:12px 12px}
-  .hplus-root .pill-row .choice .ctxt{font-size:14px}
+  .hplus-root .pill-row .choice .ctxt{font-size:14px;white-space:normal;overflow-wrap:anywhere;line-height:1.25}
+  .pill-row .choice{align-items:flex-start;height:auto}
   .hplus-root .langswitch{margin:0 0 12px;display:flex;justify-content:flex-end}
   .hplus-root .trust{font-size:11.5px;padding:10px 12px}
   .hplus-root .uhp-header{padding-bottom:12px;margin-bottom:14px}
@@ -1964,7 +1965,7 @@ function syncFirstDateBounds(fd, today, maxDose){
   if(radio('received_medication')==='No'){   // not yet taken - only the future
     fd.min=ymd(today); fd.max=ymd(maxDose);
   }else{                                      // already taken - only the past
-    fd.min='2026-07-02'; fd.max=ymd(today);
+    fd.removeAttribute('min'); fd.max=ymd(today);
   }
   const v=fd.value;
   if(v && (v<fd.min || v>fd.max)){ fd.value=''; }   // a date that no longer fits is cleared rather than silently submitted
@@ -2163,6 +2164,7 @@ function fillFromComponents(comps, name, phone){
     } else { $('doctor_phone').value=p; }
   }
   $('addressFields').style.display='block';
+  clearFilled(['doctor_street2','doctor_street','doctor_postcode','doctor_city','doctor_phone']);
 }
 function placesFailed(msg){
   console.error('[Places] '+msg);
@@ -2255,11 +2257,19 @@ $('practiceSearchBtn').addEventListener('click',()=>{
 
 /* ---- Delivery address: optional Google Places search (mirrors the practice search) ---- */
 let delivPacInited=false;
+function clearFilled(ids){
+  ids.forEach(function(id){ var el=document.getElementById(id); if(!el||!el.value) return;
+    var f=el.closest('.field'); if(!f) return;
+    f.classList.remove('invalid');
+    var e=f.querySelector('.err-msg'); if(e) e.classList.remove('show');
+  });
+}
 function fillDeliveryFromComponents(comps){
   const street=[comps.route, comps.street_number].filter(Boolean).join(' ');
   if(street) $('delivery_street').value=street;
   if(comps.postal_code) $('delivery_postcode').value=comps.postal_code;
   if(comps.locality) $('delivery_city').value=comps.locality;
+  clearFilled(['delivery_street','delivery_postcode','delivery_city']);
 }
 async function initDeliveryAutocomplete(){
   if(delivPacInited) return; delivPacInited=true;
@@ -2520,7 +2530,9 @@ function validateSub3(n){
         });
       } else if(ph==='no'){
         ['chosen_pharmacy_name','chosen_pharmacy_street','chosen_pharmacy_city','chosen_pharmacy_postcode',
-         'delivery_street','delivery_postcode','delivery_city'].forEach(id=>{
+         'delivery_street','delivery_postcode','delivery_city']
+         /* the search fills these in; only chase the ones it could not */
+         .forEach(id=>{
           if(val(id)===''){ const f=$(id).closest('.field'); f.classList.add('invalid'); ensureFmtErr(f,t('err_required')); ok=false; }
         });
       }
@@ -2620,7 +2632,8 @@ function buildReview(){
   if(checked('no_support'))support.push(t('sup_none'));
   if(checked('arrange_call')&&val('callback_date'))support.push(t('sup_callback'));
   const countryLabel=val('country')==='Deutschland'?t('country_de'):val('country')==='\u00d6sterreich'?t('country_at'):'';
-  const deliveryAddr = radio('pharmacy_choice')==='yes'
+  const wantsServiceEarly = checked('delivery_management')||checked('prescription_management')||checked('check_up_reminder_management');
+  const deliveryAddr = !wantsServiceEarly ? '' : radio('pharmacy_choice')==='yes'
     ? [val('delivery_street'),val('delivery_street2'),[val('delivery_postcode'),val('delivery_city')].filter(Boolean).join(' ')].filter(Boolean).join(', ')
     : '';
   /* doctor details entered by the user (collected when prescription management is chosen) */
@@ -2634,6 +2647,9 @@ function buildReview(){
   addDoc(t('doc_email'),val('doctor_email'));
   addDoc(t('doc_fax'),val('doctor_fax')?phoneFull('doctor_fax'):'');
   if(checked('arrange_call')&&val('callback_date')) addDoc(t('callback_when'),val('callback_date'));
+  /* nothing that needs a doctor or an address is selected, so neither belongs here */
+  const wantsService = checked('delivery_management')||checked('prescription_management')||checked('check_up_reminder_management');
+  if(!wantsService){ docRows.length=0; }
   const docBlock = docRows.length ? `
     <div class="review-block">
       <h4>${t('doctor_details_h')} <a data-goto="3">${t('rv_edit')}</a></h4>

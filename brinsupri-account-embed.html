@@ -15,7 +15,7 @@
 .hplus-root *{box-sizing:border-box}
 .hplus-root{font-family:var(--font-body);color:var(--ink);background:var(--page);
   padding:24px 16px 48px;line-height:1.5;-webkit-font-smoothing:antialiased;color-scheme:light;}
-.hplus-root .hplus-wrap{max-width:820px;margin:0 auto}
+.hplus-root .hplus-wrap{max-width:1120px;margin:0 auto}
 .hplus-root h1, .hplus-root h2, .hplus-root h3, .hplus-root h4, .hplus-root .font-head{font-family:var(--font-head)}
 .hplus-root .langswitch{display:flex;justify-content:flex-end;margin-bottom:12px;position:relative;z-index:40}
 .hplus-root .hero .hero-cta{margin-top:20px;width:100%;font-size:16px;padding:15px 22px}
@@ -1627,7 +1627,7 @@ const ymd=d=>{const z=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+z(
 function setupDates(){
   const today=new Date();
   const fd=$('first_medication_date');
-  if(fd){ const maxDose=new Date(today); maxDose.setMonth(maxDose.getMonth()+3); fd.min='2026-07-02'; fd.max=ymd(maxDose); }
+  if(fd){ const maxDose=new Date(today); maxDose.setMonth(maxDose.getMonth()+3); fd.removeAttribute('min'); fd.max=ymd(maxDose); }
   const ap=$('appointment_date'); if(ap){ ap.min=ymd(today); }
   /* callbacks are staffed Monday to Friday, so the window skips weekends */
   const cb=$('callback_date'); const minCb=new Date(today); minCb.setDate(minCb.getDate()+2); const maxCb=new Date(today); maxCb.setDate(maxCb.getDate()+7);
@@ -1672,6 +1672,7 @@ function fillFromComponents(comps, name, phone){
     } else { $('doctor_phone').value=p; }
   }
   $('addressFields').style.display='block';
+  clearFilled(['doctor_street2','doctor_street','doctor_postcode','doctor_city','doctor_phone']);
 }
 function placesFailed(msg){
   console.error('[Places] '+msg);
@@ -1764,11 +1765,19 @@ $('practiceSearchBtn').addEventListener('click',()=>{
 
 /* ---- Delivery address: optional Google Places search (mirrors the practice search) ---- */
 let delivPacInited=false;
+function clearFilled(ids){
+  ids.forEach(function(id){ var el=document.getElementById(id); if(!el||!el.value) return;
+    var f=el.closest('.field'); if(!f) return;
+    f.classList.remove('invalid');
+    var e=f.querySelector('.err-msg'); if(e) e.classList.remove('show');
+  });
+}
 function fillDeliveryFromComponents(comps){
   const street=[comps.route, comps.street_number].filter(Boolean).join(' ');
   if(street) $('delivery_street').value=street;
   if(comps.postal_code) $('delivery_postcode').value=comps.postal_code;
   if(comps.locality) $('delivery_city').value=comps.locality;
+  clearFilled(['delivery_street','delivery_postcode','delivery_city']);
 }
 async function initDeliveryAutocomplete(){
   if(delivPacInited) return; delivPacInited=true;
@@ -2034,7 +2043,9 @@ function validateSub3(n){
         });
       } else if(ph==='no'){
         ['chosen_pharmacy_name','chosen_pharmacy_street','chosen_pharmacy_city','chosen_pharmacy_postcode',
-         'delivery_street','delivery_postcode','delivery_city'].forEach(id=>{
+         'delivery_street','delivery_postcode','delivery_city']
+         /* the search fills these in; only chase the ones it could not */
+         .forEach(id=>{
           if(val(id)===''){ const f=$(id).closest('.field'); f.classList.add('invalid'); ensureFmtErr(f,t('err_required')); ok=false; }
         });
       }
@@ -2617,9 +2628,10 @@ $('hplusForm').addEventListener('change',saveState);
     if(document.getElementById('acctGate')) { if(msg){var m=document.querySelector('#acctGate .g-msg'); if(m)m.textContent=msg;} return; }
     var root=document.querySelector('.hplus-wrap')||document.body;
     var g=document.createElement('div'); g.id='acctGate';
-    g.innerHTML='<span class="g-lbl">Bereits registriert? Gib deine E-Mail ein, um deine gespeicherten Angaben zu bearbeiten. \u00b7 Already registered? Enter your email to edit your saved details.</span>'+
+    var _de=(document.documentElement.lang||'de').toLowerCase().indexOf('en')!==0;
+    g.innerHTML='<span class="g-lbl">'+(_de?'Bereits registriert? Gib deine E-Mail ein, um deine gespeicherten Angaben zu bearbeiten.':'Already registered? Enter your email to edit your saved details.')+'</span>'+
       '<input type="email" id="acctEmail" placeholder="you@email.com" autocomplete="email">'+
-      '<button type="button" id="acctSend">Link senden / Send link</button>'+
+      '<button type="button" id="acctSend">'+(_de?'Link senden':'Send link')+'</button>'+
       '<span class="g-msg" id="acctMsg"></span>';
     /* the sign-in prompt belongs under the header, not above it */
   var hdr = root.querySelector('.uhp-header');
