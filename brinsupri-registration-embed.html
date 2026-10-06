@@ -2631,6 +2631,8 @@ document.querySelectorAll('[data-prev]').forEach(b=>b.addEventListener('click',(
    REVIEW
    ============================================================ */
 function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+/* dates are shown the way they were typed, not as yyyy-mm-dd */
+function dmyText(v){ return (v && window.__hplusDMY) ? window.__hplusDMY(v) : (v||''); }
 function buildReview(){
   const commLabels={Email:t('opt_email'),Whatsapp:'WhatsApp',Phone:t('opt_phone'),SMS:'SMS'};
   const comm=multi('#comm_prefs input').split(';').filter(Boolean).map(v=>commLabels[v]).join(', ');
@@ -2656,7 +2658,7 @@ function buildReview(){
   addDoc(t('doc_phone'),val('doctor_phone')?phoneFull('doctor_phone'):'');
   addDoc(t('doc_email'),val('doctor_email'));
   addDoc(t('doc_fax'),val('doctor_fax')?phoneFull('doctor_fax'):'');
-  if(checked('arrange_call')&&val('callback_date')) addDoc(t('callback_when'),val('callback_date'));
+  if(checked('arrange_call')&&val('callback_date')) addDoc(t('callback_when'),dmyText(val('callback_date')));
   /* nothing that needs a doctor or an address is selected, so neither belongs here */
   const wantsService = checked('delivery_management')||checked('prescription_management')||checked('check_up_reminder_management');
   if(!wantsService){ docRows.length=0; }
@@ -2677,7 +2679,7 @@ function buildReview(){
     <div class="review-block">
       <h4>${t('rv_med')} <a data-goto="2">${t('rv_edit')}</a></h4>
       <div class="row"><span>${t('rv_medication')}</span><span>${HS.med.medicine}, ${HS.med.dose}</span></div>
-      <div class="row"><span>${t('rv_firstdose')}</span><span>${esc(val('first_medication_date'))||t('rv_dash')}</span></div>
+      <div class="row"><span>${t('rv_firstdose')}</span><span>${esc(dmyText(val('first_medication_date')))||t('rv_dash')}</span></div>
       <div class="row"><span>${t('rv_freq')}</span><span>${freqLabels[radio('reminder_freq')]||t('rv_dash')}</span></div>
     </div>
     <div class="review-block">
@@ -3320,6 +3322,7 @@ var _LI1="<h1>Privacy Policy</h1>\n<h2>1. Data protection at a glance</h2>\n<h3>
     txt.addEventListener('blur', paint);
     try{ new MutationObserver(paint).observe(document.documentElement,{attributes:true,attributeFilter:['lang']}); }catch(e){}
   }
+  window.__hplusDMY = fmt;   /* the overview prints dates too */
   function run(){ document.querySelectorAll('input[type=date]').forEach(upgrade); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run); else run();
   setTimeout(run,1200);   /* fields that appear later */
