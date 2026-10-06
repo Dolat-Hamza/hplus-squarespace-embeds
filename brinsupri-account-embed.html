@@ -363,6 +363,16 @@ gmp-place-autocomplete::part(prediction-list){width:100%;max-width:100%;box-sizi
   .uhp-header .langswitch button{ padding:6px 13px !important; font-size:12px !important; }
   .uhp-header-right > a{ font-size:12px !important; padding:9px 14px !important; }
 }
+
+/* Dates: the browser draws a date input in its own locale, so a visitor on a US
+   machine saw mm/dd/yyyy. The visible field is ours; the native one keeps the value. */
+.dmy-wrap{position:relative;display:block}
+.dmy-wrap .dmy-text{width:100%;padding-right:44px}
+.dmy-wrap input[type=date].dmy-native{position:absolute;top:0;right:0;width:44px;height:100%;
+  opacity:0;border:0;padding:0;margin:0;cursor:pointer;z-index:2}
+.dmy-wrap .dmy-ico{position:absolute;right:13px;top:50%;transform:translateY(-50%);
+  width:18px;height:18px;pointer-events:none;opacity:.55;z-index:1;
+  background:no-repeat center/18px url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2306324C' stroke-width='2' stroke-linecap='round'><rect x='3' y='5' width='18' height='16' rx='2'/><path d='M8 3v4M16 3v4M3 10h18'/></svg>")}
 </style>
 <!-- ICON SPRITE &#x2013; line-art recreated in the style of the H+ Brinsupri leaflet -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -2928,4 +2938,59 @@ var _LI1="<h1>Privacy Policy</h1>\n<h2>1. Data protection at a glance</h2>\n<h3>
   setTimeout(function(){ clearInterval(t); }, 20000);
   try{ new MutationObserver(paint).observe(document.documentElement,{attributes:true,attributeFilter:['lang']}); }catch(e){}
 })();
+
+/* ---- date fields shown as dd.mm.yyyy (dd/mm/yyyy in English) ----
+   HubSpot is sent epoch milliseconds by toEpoch(), so this is display only:
+   the native input underneath still holds yyyy-mm-dd and every existing
+   validation, min/max and payload path reads that unchanged. */
+(function(){
+  function lang(){ return (document.documentElement.lang||'de').toLowerCase().indexOf('en')===0?'en':'de'; }
+  function sep(){ return lang()==='en' ? '/' : '.'; }
+  function fmt(iso){
+    if(!iso) return '';
+    var p=iso.split('-'); if(p.length!==3) return '';
+    return p[2]+sep()+p[1]+sep()+p[0];
+  }
+  function parse(txt){
+    var m=String(txt).trim().match(/^(\d{1,2})\s*[.\/\-]\s*(\d{1,2})\s*[.\/\-]\s*(\d{2,4})$/);
+    if(!m) return '';
+    var d=+m[1], mo=+m[2], y=+m[3];
+    if(y<100) y+=2000;
+    if(mo<1||mo>12||d<1||d>31||y<1900||y>2999) return '';
+    var dt=new Date(Date.UTC(y,mo-1,d));
+    if(dt.getUTCMonth()!==mo-1||dt.getUTCDate()!==d) return '';
+    var z=function(n){ return (n<10?'0':'')+n; };
+    return y+'-'+z(mo)+'-'+z(d);
+  }
+  function upgrade(nat){
+    if(nat.dataset.dmy) return; nat.dataset.dmy='1';
+    var wrap=document.createElement('div'); wrap.className='dmy-wrap';
+    nat.parentNode.insertBefore(wrap, nat);
+    var txt=document.createElement('input');
+    txt.type='text'; txt.className='dmy-text'; txt.setAttribute('inputmode','numeric');
+    txt.autocomplete='off';
+    if(nat.id) txt.setAttribute('aria-labelledby', nat.id+'-lbl');
+    var ico=document.createElement('span'); ico.className='dmy-ico'; ico.setAttribute('aria-hidden','true');
+    wrap.appendChild(txt); wrap.appendChild(ico); wrap.appendChild(nat);
+    nat.classList.add('dmy-native'); nat.setAttribute('tabindex','-1'); nat.setAttribute('aria-hidden','true');
+    function paint(){
+      txt.value=fmt(nat.value);
+      txt.placeholder = lang()==='en' ? 'dd/mm/yyyy' : 'tt.mm.jjjj';
+    }
+    paint();
+    nat.addEventListener('change', paint);
+    nat.addEventListener('input', paint);
+    txt.addEventListener('input', function(){
+      var iso=parse(txt.value);
+      if(iso && nat.value!==iso){ nat.value=iso; nat.dispatchEvent(new Event('change',{bubbles:true})); }
+      else if(txt.value.trim()==='' && nat.value!==''){ nat.value=''; nat.dispatchEvent(new Event('change',{bubbles:true})); }
+    });
+    txt.addEventListener('blur', paint);
+    try{ new MutationObserver(paint).observe(document.documentElement,{attributes:true,attributeFilter:['lang']}); }catch(e){}
+  }
+  function run(){ document.querySelectorAll('input[type=date]').forEach(upgrade); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run); else run();
+  setTimeout(run,1200);   /* fields that appear later */
+})();
+
 </script>
