@@ -2592,7 +2592,7 @@ $('hplusForm').addEventListener('change',saveState);
       else if(k==='multi') setMulti(id, v);
     });
     var note=document.getElementById('acctPrefillNote');
-    if(note){ note.style.display='block'; note.textContent='Deine gespeicherten Angaben wurden geladen. Bitte pr\u00fcfe und aktualisiere sie unten. \u00b7 Your saved details were loaded \u2013 review and update them below.'; }
+    if(note){ note.style.display='block'; note.textContent=_msg('Deine gespeicherten Angaben wurden geladen. Bitte pr\u00fcfe und aktualisiere sie unten.','Your saved details were loaded \u2013 review and update them below.'); }
     // the record type is only known now, so re-place the role-dependent fields
     try{ if(window.__hplusApplyRoleWording) window.__hplusApplyRoleWording(); }catch(e){}
     // re-sync the summary page now that the saved data has populated the fields
@@ -2615,9 +2615,8 @@ $('hplusForm').addEventListener('change',saveState);
       var hdr = root.querySelector('.uhp-header');
       if(hdr) root.insertBefore(el, hdr.nextSibling); else root.insertBefore(el, root.firstChild);
     }
-    el.innerHTML = '<strong>Dein Konto wird gerade eingerichtet.</strong> Das dauert in der Regel ein bis zwei '
-      + 'Minuten. Diese Seite aktualisiert sich automatisch.<br><strong>Your account is being set up.</strong> '
-      + 'This usually takes a minute or two - the page will refresh itself.';
+    el.innerHTML = _msg('<strong>Dein Konto wird gerade eingerichtet.</strong> Das dauert in der Regel ein bis zwei Minuten. Diese Seite aktualisiert sich automatisch.',
+      '<strong>Your account is being set up.</strong> This usually takes a minute or two - the page will refresh itself.');
     el.style.display = 'block';
     if(!el.dataset.seen){ el.dataset.seen='1'; try{ el.scrollIntoView({behavior:'smooth',block:'center'}); }catch(e){} }
   }
@@ -2640,15 +2639,16 @@ $('hplusForm').addEventListener('change',saveState);
         if(notYet){
           showSettingUp();
           var el=document.getElementById('acctSettingUp');
-          if(el) el.innerHTML = '<strong>Dein Konto ist noch nicht bereit.</strong> Bitte versuch es in ein '
-            + 'paar Minuten noch einmal.<br><strong>Your account is not ready yet.</strong> Please try again in a few minutes.';
+          if(el) el.innerHTML = _msg('<strong>Dein Konto ist noch nicht bereit.</strong> Bitte versuch es in ein paar Minuten noch einmal.',
+            '<strong>Your account is not ready yet.</strong> Please try again in a few minutes.');
           return;
         }
-        showGate('Dieser Link ist ung\u00fcltig oder abgelaufen. \u00b7 This link is invalid or expired.');
+        showGate(_msg('Dieser Link ist ung\u00fcltig oder abgelaufen.','This link is invalid or expired.'));
       })
-      .catch(function(){ showGate('Angaben konnten nicht geladen werden. \u00b7 Could not load your details.'); });
+      .catch(function(){ showGate(_msg('Angaben konnten nicht geladen werden.','Could not load your details.')); });
   }
 
+  function _msg(de,en){ return ((document.documentElement.lang||'de').toLowerCase().indexOf('en')===0)?en:de; }
   function showGate(msg){
     if(document.getElementById('acctGate')) { if(msg){var m=document.querySelector('#acctGate .g-msg'); if(m)m.textContent=msg;} return; }
     var root=document.querySelector('.hplus-wrap')||document.body;
@@ -2665,11 +2665,11 @@ $('hplusForm').addEventListener('change',saveState);
     if(msg){ document.getElementById('acctMsg').textContent=msg; }
     document.getElementById('acctSend').addEventListener('click',function(){
       var em=(document.getElementById('acctEmail').value||'').trim();
-      if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){ document.getElementById('acctMsg').textContent='Bitte g\u00fcltige E-Mail eingeben. \u00b7 Please enter a valid email.'; return; }
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){ document.getElementById('acctMsg').textContent=_msg('Bitte g\u00fcltige E-Mail eingeben.','Please enter a valid email.'); return; }
       this.disabled=true; this.textContent='\u2026';
       fetch(ACCOUNT_API+'/api/account/request-link',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em})})
-        .then(function(){ document.getElementById('acctMsg').textContent='Wenn diese E-Mail registriert ist, haben wir dir einen Link gesendet. Bitte schau in dein Postfach. \u00b7 If that email is registered, we sent you a link \u2013 check your inbox.'; })
-        .catch(function(){ document.getElementById('acctMsg').textContent='Etwas ist schiefgelaufen. Bitte erneut versuchen. \u00b7 Something went wrong, please try again.'; })
+        .then(function(){ document.getElementById('acctMsg').textContent=_msg('Wenn diese E-Mail registriert ist, haben wir dir einen Link gesendet. Bitte schau in dein Postfach.','If that email is registered, we sent you a link \u2013 check your inbox.'); })
+        .catch(function(){ document.getElementById('acctMsg').textContent=_msg('Etwas ist schiefgelaufen. Bitte erneut versuchen.','Something went wrong, please try again.'); })
         .finally(function(){ var b=document.getElementById('acctSend'); b.disabled=false; b.textContent='Link senden / Send link'; });
     });
   }
