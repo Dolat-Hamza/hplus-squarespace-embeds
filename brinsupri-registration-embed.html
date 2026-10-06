@@ -964,6 +964,18 @@ gmp-place-autocomplete::part(prediction-list){width:100%;max-width:100%;box-sizi
         <h3 class="step-title" data-i18n="s1_title"></h3>
         <p class="step-sub" data-i18n="s1_sub"></p>
 
+        <!-- country decides the medication list, the consents and the documents,
+             so it is settled before anything else -->
+        <div class="field" data-required>
+          <label data-i18n="country_label"></label>
+          <select id="country">
+            <option value="" data-i18n="opt_select"></option>
+            <option value="Deutschland" data-i18n="country_de"></option>
+            <option value="&#xD6;sterreich" data-i18n="country_at"></option>
+          </select>
+          <div class="err-msg" data-i18n="err_country"></div>
+        </div>
+
         <div class="field" data-required>
           <label data-i18n="role_label"></label>
           <select id="customer_type">
@@ -1152,17 +1164,6 @@ gmp-place-autocomplete::part(prediction-list){width:100%;max-width:100%;box-sizi
         <div class="sub3 active" id="sub31">
           <h3 class="step-title" data-i18n="s3_title"></h3>
           <p class="step-sub" data-i18n="s3_sub"></p>
-
-          <div class="field" data-required>
-            <label data-i18n="country_label"></label>
-            <select id="country">
-              <option value="" data-i18n="opt_select"></option>
-              <option value="Deutschland" data-i18n="country_de"></option>
-              <option value="&#xD6;sterreich" data-i18n="country_at"></option>
-            </select>
-            <div class="err-msg" data-i18n="err_country"></div>
-          </div>
-
 
           <p class="group-label" data-i18n="support_label"></p>
 
@@ -2497,8 +2498,6 @@ function validateSub3(n){
     noSupport:checked('no_support')
   });
   if(n===1){
-    const cf=$('country').closest('.field'); const countryBad=val('country')==='';
-    markInvalid(cf,countryBad); if(countryBad){ ok=false; }
     /* A check-in frequency is itself a valid service choice. Previously the UI let
        patients select one, but validation still treated the page as unanswered. */
     const anyOpt=checked('delivery_management')||checked('prescription_management')||checked('check_up_reminder_management')||checked('no_support');
