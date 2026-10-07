@@ -425,6 +425,22 @@ gmp-place-autocomplete::part(prediction-list){width:100%;max-width:100%;box-sizi
 /* once you are in the form the button has done its job */
 .hplus-root[data-stage="form"] #hplusStickyCta,
 body:has(.hplus-root[data-stage="form"]) #hplusStickyCta{display:none !important}
+
+/* the sign-up button sits beside the opening paragraph, in the space the artwork leaves */
+.hplus-usp__lead{display:flex;align-items:center;gap:clamp(20px,4vw,52px)}
+.hplus-usp__lead .hplus-usp__desc{flex:1 1 auto;margin:0 !important}
+.hplus-usp .hplus-usp__lead .hplus-usp__cta{
+  flex:0 0 auto !important;display:inline-flex !important;align-items:center;gap:8px;cursor:pointer;border:none !important;
+  font-family:'Poppins',sans-serif !important;font-weight:600 !important;font-size:16px !important;line-height:1 !important;white-space:nowrap;
+  padding:16px 28px !important;margin:0 !important;border-radius:999px !important;
+  background:var(--blue,#007EC6) !important;color:#fff !important;
+  box-shadow:0 14px 28px -14px rgba(0,126,198,.85);transition:background .18s,transform .18s}
+.hplus-usp .hplus-usp__cta:hover{background:var(--blue-2,#0069a8) !important;transform:translateY(-1px)}
+.hplus-usp__cta:focus-visible{outline:3px solid var(--teal,#0FB5A5);outline-offset:3px}
+@media(max-width:860px){
+  .hplus-usp .hplus-usp__lead{display:block}
+  .hplus-usp .hplus-usp__lead .hplus-usp__cta{width:100% !important;justify-content:center;margin-top:20px !important}
+}
 </style>
 <!-- ICON SPRITE &#x2013; line-art recreated in the style of the H+ Brinsupri leaflet -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -821,7 +837,16 @@ body:has(.hplus-root[data-stage="form"]) #hplusStickyCta{display:none !important
 
     <h2 class="hplus-usp__heading" id="hplus-usp-title" data-uspihtml="heading">Flexible Unterst&#252;tzung <span>f&#252;r deine Therapie</span></h2>
 
-    <p class="hplus-usp__desc" data-uspihtml="desc"><strong>Der H+ Therapy Companion hilft dir, deine Therapie zu koordinieren</strong> &#8211; damit du dich auf dein Wohlbefinden konzentrieren kannst. H+ unterst&#252;tzt Menschen in ganz Europa, die mit seltenen und komplexen Erkrankungen leben. Erfahrene Pflegefachkr&#228;fte und ein spezialisiertes Team, das t&#228;glich mit Therapien wie deiner arbeitet, begleiten dich auf deinem Weg.</p>
+    <div class="hplus-usp__lead">
+
+
+      <p class="hplus-usp__desc" data-uspihtml="desc"><strong>Der H+ Therapy Companion hilft dir, deine Therapie zu koordinieren</strong> &#8211; damit du dich auf dein Wohlbefinden konzentrieren kannst. H+ unterst&#252;tzt Menschen in ganz Europa, die mit seltenen und komplexen Erkrankungen leben. Erfahrene Pflegefachkr&#228;fte und ein spezialisiertes Team, das t&#228;glich mit Therapien wie deiner arbeitet, begleiten dich auf deinem Weg.</p>
+
+
+      <button type="button" class="hplus-usp__cta" data-i18n="hero_cta"></button>
+
+
+    </div>
 
     <nav class="hplus-usp__path" aria-label="So unterst\u00fctzt dich der H+ Therapy Companion">
       <ol class="hplus-usp__stages">
@@ -3284,6 +3309,10 @@ var _LI1="<h1>Privacy Policy</h1>\n<h2>1. Data protection at a glance</h2>\n<h3>
   function sync(){
     var r=form.getBoundingClientRect();
     var formOnScreen = r.top < window.innerHeight*0.72 && r.bottom > 0;
+    /* while the hero button is in view there is no reason to float a second one */
+    var hero=document.querySelector('.hplus-usp__cta');
+    if(hero){ var h=hero.getBoundingClientRect();
+      if(h.bottom>0 && h.top<window.innerHeight){ b.classList.remove('show'); return; } }
     /* visible from the moment the page opens - it only steps aside for the form */
     b.classList.toggle('show', !formOnScreen);
   }
