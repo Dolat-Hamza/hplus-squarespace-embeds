@@ -1010,17 +1010,6 @@ body:has(.hplus-root[data-stage="form"]) #hplusStickyCta{display:none !important
         <h3 class="step-title" data-i18n="s1_title"></h3>
         <p class="step-sub" data-i18n="s1_sub"></p>
 
-        <!-- country decides the medication list, the consents and the documents,
-             so it is settled before anything else -->
-        <div class="field" data-required>
-          <label data-i18n="country_label"></label>
-          <select id="country">
-            <option value="" data-i18n="opt_select"></option>
-            <option value="Deutschland" data-i18n="country_de"></option>
-            <option value="&#xD6;sterreich" data-i18n="country_at"></option>
-          </select>
-          <div class="err-msg" data-i18n="err_country"></div>
-        </div>
 
         <div class="field" data-required>
           <label data-i18n="role_label"></label>
@@ -1107,6 +1096,18 @@ body:has(.hplus-root[data-stage="form"]) #hplusStickyCta{display:none !important
           <div class="field cond" id="c_sc_whatsapp" style="display:none"><label data-i18n="sc_whatsapp"></label><div class="phone-row"><select id="second_contact_whatsapp_cc" class="cc-select"><option value="+49">&#x1F1E9;&#x1F1EA; +49</option><option value="+43">&#x1F1E6;&#x1F1F9; +43</option><option value="+41">&#x1F1E8;&#x1F1ED; +41</option><option value="+44">&#x1F1EC;&#x1F1E7; +44</option><option value="+33">&#x1F1EB;&#x1F1F7; +33</option><option value="+39">&#x1F1EE;&#x1F1F9; +39</option><option value="+34">&#x1F1EA;&#x1F1F8; +34</option><option value="+31">&#x1F1F3;&#x1F1F1; +31</option><option value="+32">&#x1F1E7;&#x1F1EA; +32</option><option value="+48">&#x1F1F5;&#x1F1F1; +48</option><option value="+420">&#x1F1E8;&#x1F1FF; +420</option><option value="+353">&#x1F1EE;&#x1F1EA; +353</option><option value="+45">&#x1F1E9;&#x1F1F0; +45</option><option value="+46">&#x1F1F8;&#x1F1EA; +46</option><option value="+47">&#x1F1F3;&#x1F1F4; +47</option><option value="+351">&#x1F1F5;&#x1F1F9; +351</option><option value="+30">&#x1F1EC;&#x1F1F7; +30</option><option value="+36">&#x1F1ED;&#x1F1FA; +36</option><option value="+40">&#x1F1F7;&#x1F1F4; +40</option><option value="+90">&#x1F1F9;&#x1F1F7; +90</option><option value="+1">&#x1F1FA;&#x1F1F8; +1</option></select><input type="tel" id="second_contact_whatsapp" placeholder="+44 7700 900123" inputmode="tel" data-validate="phone-global" /></div></div>
           <div class="field cond" id="c_sc_sms" style="display:none"><label data-i18n="sc_sms"></label><div class="phone-row"><select id="caregiver_sms_cc" class="cc-select"><option value="+49">&#x1F1E9;&#x1F1EA; +49</option><option value="+43">&#x1F1E6;&#x1F1F9; +43</option></select><input type="tel" id="caregiver_sms" placeholder="176 1234567" data-validate="phone" /></div></div>
           </div>
+        </div>
+
+        <!-- asked last on this page, but still before the medication and the consents,
+             which both differ by country -->
+        <div class="field" data-required>
+          <label data-i18n="country_label"></label>
+          <select id="country">
+            <option value="" data-i18n="opt_select"></option>
+            <option value="Deutschland" data-i18n="country_de"></option>
+            <option value="&#xD6;sterreich" data-i18n="country_at"></option>
+          </select>
+          <div class="err-msg" data-i18n="err_country"></div>
         </div>
 
         <div class="field" data-required style="margin-top:6px">
