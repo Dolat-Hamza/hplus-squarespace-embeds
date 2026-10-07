@@ -2607,7 +2607,7 @@ function validateSub3(n){
       // all doctor practice details are required to progress
       $('addressFields').style.display='block';
       let complete=true;
-      ['doctor_first','doctor_last','doctor_street2','doctor_street','doctor_postcode','doctor_phone'].forEach(id=>{
+      ['doctor_first','doctor_last','doctor_street2','doctor_street','doctor_postcode'].forEach(id=>{   /* the phone number is optional */
         if(val(id)===''){ const f=$(id).closest('.field'); if(f){ f.classList.add('invalid'); ensureFmtErr(f,t('err_required')); } complete=false; }
       });
       if(!complete){ showErr('infoErr',true); ok=false;  }
