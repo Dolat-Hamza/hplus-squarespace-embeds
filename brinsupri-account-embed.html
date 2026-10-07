@@ -1773,13 +1773,7 @@ $('practiceSearchBtn').addEventListener('click',()=>{
     if(err==='nokey'){ $('practiceSearchBox').style.display='none'; return; }
     initAutocomplete().then(()=>{
       syncPlacesRegion();
-      /* the doctor's name is already on the form, so start the search with it */
-      var seed=[val('doctor_first'),val('doctor_last')].filter(Boolean).join(' ').trim();
       var inp=$('practiceSearch');
-      if(inp && seed && !inp.value.trim()){
-        inp.value=seed;
-        inp.dispatchEvent(new Event('input',{bubbles:true}));
-      }
       if(inp) try{ inp.focus(); }catch(e){}
     });
   });
